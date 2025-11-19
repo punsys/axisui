@@ -1,0 +1,176 @@
+// =============================================================================
+// DIRECTION UTILITIES
+// AxisUI Framework - RTL/LTR Support & Logical Properties
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/breakpoints' as *;
+
+// Container-scoped direction utilities
+.axis-ui {
+  
+  // =============================================================================
+  // TEXT DIRECTION UTILITIES
+  // =============================================================================
+  
+  .dir-ltr {
+    direction: ltr !important;
+  }
+  
+  .dir-rtl {
+    direction: rtl !important;
+  }
+  
+  .dir-auto {
+    direction: auto !important;
+  }
+
+  // =============================================================================
+  // LOGICAL SPACING UTILITIES (RTL/LTR Aware)
+  // =============================================================================
+  // NOTE: Margin/padding inline-start/end utilities (.ms-, .me-, .ps-, .pe-)
+  // are now generated in _spacing.scss using the $ax-spacing-scale map.
+  // This provides a comprehensive set of 45 values instead of the limited 12 here.
+  // Only positioning utilities (.start-*, .end-*) remain in this file.
+
+  // =============================================================================
+  // LOGICAL POSITIONING (RTL/LTR Aware)  
+  // =============================================================================
+  
+  // Inline Start (left in LTR, right in RTL)
+  .start-0 { inset-inline-start: 0 !important; }
+  .start-1 { inset-inline-start: 0.25rem !important; }
+  .start-2 { inset-inline-start: 0.5rem !important; }
+  .start-3 { inset-inline-start: 0.75rem !important; }
+  .start-4 { inset-inline-start: 1rem !important; }
+  .start-auto { inset-inline-start: auto !important; }
+  .start-1\/2 { inset-inline-start: 50% !important; }
+  .start-full { inset-inline-start: 100% !important; }
+
+  // Inline End (right in LTR, left in RTL)
+  .end-0 { inset-inline-end: 0 !important; }
+  .end-1 { inset-inline-end: 0.25rem !important; }
+  .end-2 { inset-inline-end: 0.5rem !important; }
+  .end-3 { inset-inline-end: 0.75rem !important; }
+  .end-4 { inset-inline-end: 1rem !important; }
+  .end-auto { inset-inline-end: auto !important; }
+  .end-1\/2 { inset-inline-end: 50% !important; }
+  .end-full { inset-inline-end: 100% !important; }
+
+  // =============================================================================
+  // LOGICAL BORDER RADIUS (RTL/LTR Aware)
+  // =============================================================================
+  
+  // Border Radius Start (left side in LTR, right side in RTL)
+  .rounded-s-none {
+    border-start-start-radius: 0 !important;
+    border-end-start-radius: 0 !important;
+  }
+  .rounded-s-sm {
+    border-start-start-radius: 0.125rem !important;
+    border-end-start-radius: 0.125rem !important;
+  }
+  .rounded-s {
+    border-start-start-radius: 0.25rem !important;
+    border-end-start-radius: 0.25rem !important;
+  }
+  .rounded-s-md {
+    border-start-start-radius: 0.375rem !important;
+    border-end-start-radius: 0.375rem !important;
+  }
+  .rounded-s-lg {
+    border-start-start-radius: 0.5rem !important;
+    border-end-start-radius: 0.5rem !important;
+  }
+  .rounded-s-full {
+    border-start-start-radius: 9999px !important;
+    border-end-start-radius: 9999px !important;
+  }
+
+  // Border Radius End (right side in LTR, left side in RTL)
+  .rounded-e-none {
+    border-start-end-radius: 0 !important;
+    border-end-end-radius: 0 !important;
+  }
+  .rounded-e-sm {
+    border-start-end-radius: 0.125rem !important;
+    border-end-end-radius: 0.125rem !important;
+  }
+  .rounded-e {
+    border-start-end-radius: 0.25rem !important;
+    border-end-end-radius: 0.25rem !important;
+  }
+  .rounded-e-md {
+    border-start-end-radius: 0.375rem !important;
+    border-end-end-radius: 0.375rem !important;
+  }
+  .rounded-e-lg {
+    border-start-end-radius: 0.5rem !important;
+    border-end-end-radius: 0.5rem !important;
+  }
+  .rounded-e-full {
+    border-start-end-radius: 9999px !important;
+    border-end-end-radius: 9999px !important;
+  }
+
+  // =============================================================================
+  // LOGICAL BORDERS (RTL/LTR Aware)
+  // =============================================================================
+  
+  // Border Start (left in LTR, right in RTL)
+  .border-s { border-inline-start: 1px solid currentColor !important; }
+  .border-s-0 { border-inline-start: 0 !important; }
+  .border-s-2 { border-inline-start: 2px solid currentColor !important; }
+  .border-s-4 { border-inline-start: 4px solid currentColor !important; }
+  .border-s-8 { border-inline-start: 8px solid currentColor !important; }
+
+  // Border End (right in LTR, left in RTL)
+  .border-e { border-inline-end: 1px solid currentColor !important; }
+  .border-e-0 { border-inline-end: 0 !important; }
+  .border-e-2 { border-inline-end: 2px solid currentColor !important; }
+  .border-e-4 { border-inline-end: 4px solid currentColor !important; }
+  .border-e-8 { border-inline-end: 8px solid currentColor !important; }
+
+  // =============================================================================
+  // TEXT ALIGNMENT (RTL/LTR Aware)
+  // =============================================================================
+  
+  .text-start { text-align: start !important; }
+  .text-end { text-align: end !important; }
+
+  // =============================================================================
+  // RESPONSIVE DIRECTION UTILITIES - Using framework breakpoint mixins
+  // =============================================================================
+  
+  // Small screens and up
+  @include ax-media-up(sm) {
+    .dir-sm-ltr { direction: ltr !important; }
+    .dir-sm-rtl { direction: rtl !important; }
+    .text-sm-start { text-align: start !important; }
+    .text-sm-end { text-align: end !important; }
+  }
+
+  // Medium screens and up
+  @include ax-media-up(md) {
+    .dir-md-ltr { direction: ltr !important; }
+    .dir-md-rtl { direction: rtl !important; }
+    .text-md-start { text-align: start !important; }
+    .text-md-end { text-align: end !important; }
+  }
+
+  // Large screens and up
+  @include ax-media-up(lg) {
+    .dir-lg-ltr { direction: ltr !important; }
+    .dir-lg-rtl { direction: rtl !important; }
+    .text-lg-start { text-align: start !important; }
+    .text-lg-end { text-align: end !important; }
+  }
+
+  // Extra large screens and up
+  @include ax-media-up(xl) {
+    .dir-xl-ltr { direction: ltr !important; }
+    .dir-xl-rtl { direction: rtl !important; }
+    .text-xl-start { text-align: start !important; }
+    .text-xl-end { text-align: end !important; }
+  }
+}

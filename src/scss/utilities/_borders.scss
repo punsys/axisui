@@ -1,0 +1,88 @@
+// =============================================================================
+// BORDER UTILITIES - AxisUI Framework
+// Pure CSS border system with container scoping
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/colors' as *;
+@use '../abstracts/functions' as *;
+
+.axis-ui {
+  // =============================================================================
+  // BORDER WIDTH - Using border-widths map
+  // =============================================================================
+  @each $name, $width in $ax-border-widths {
+    .border-#{$name} { border-width: $width !important; }
+  }
+
+  // Directional border widths
+  .border-t-0 { border-top-width: 0 !important; }
+  .border-t { border-top-width: 1px !important; }
+  .border-t-2 { border-top-width: 2px !important; }
+  .border-t-4 { border-top-width: 4px !important; }
+
+  .border-r-0 { border-right-width: 0 !important; }
+  .border-r { border-right-width: 1px !important; }
+  .border-r-2 { border-right-width: 2px !important; }
+  .border-r-4 { border-right-width: 4px !important; }
+
+  .border-b-0 { border-bottom-width: 0 !important; }
+  .border-b { border-bottom-width: 1px !important; }
+  .border-b-2 { border-bottom-width: 2px !important; }
+  .border-b-4 { border-bottom-width: 4px !important; }
+
+  .border-l-0 { border-left-width: 0 !important; }
+  .border-l { border-left-width: 1px !important; }
+  .border-l-2 { border-left-width: 2px !important; }
+  .border-l-4 { border-left-width: 4px !important; }
+
+  // =============================================================================
+  // BORDER STYLE
+  // =============================================================================
+  .border-solid { border-style: solid !important; }
+  .border-dashed { border-style: dashed !important; }
+  .border-dotted { border-style: dotted !important; }
+  .border-double { border-style: double !important; }
+  .border-none { border-style: none !important; }
+
+  // =============================================================================
+  // BORDER COLORS - Generated from color map (Optimized)
+  // Automatically generates all color variants: blue, blue-light, blue-dark, etc.
+  // =============================================================================
+  
+  // Generate all border colors from color map (replaces 27 manual lines)
+  @each $name, $color in $ax-colors {
+    .border-#{$name} { border-color: $color !important; }
+  }
+  
+  // Special border colors
+  .border-transparent { border-color: transparent !important; }
+
+  // =============================================================================
+  // BORDER RADIUS
+  // =============================================================================
+  .rounded-none { border-radius: 0 !important; }
+  .rounded-sm { border-radius: $ax-radius-sm !important; }
+  .rounded { border-radius: $ax-radius-base !important; }
+  .rounded-md { border-radius: $ax-radius-md !important; }
+  .rounded-lg { border-radius: $ax-radius-lg !important; }
+  .rounded-xl { border-radius: $ax-radius-xl !important; }
+  .rounded-full { border-radius: 50% !important; }
+
+  // Individual corner radius
+  .rounded-t-none { border-top-left-radius: 0 !important; border-top-right-radius: 0 !important; }
+  .rounded-t { border-top-left-radius: $ax-radius-base !important; border-top-right-radius: $ax-radius-base !important; }
+  .rounded-t-lg { border-top-left-radius: $ax-radius-lg !important; border-top-right-radius: $ax-radius-lg !important; }
+
+  .rounded-r-none { border-top-right-radius: 0 !important; border-bottom-right-radius: 0 !important; }
+  .rounded-r { border-top-right-radius: $ax-radius-base !important; border-bottom-right-radius: $ax-radius-base !important; }
+  .rounded-r-lg { border-top-right-radius: $ax-radius-lg !important; border-bottom-right-radius: $ax-radius-lg !important; }
+
+  .rounded-b-none { border-bottom-left-radius: 0 !important; border-bottom-right-radius: 0 !important; }
+  .rounded-b { border-bottom-left-radius: $ax-radius-base !important; border-bottom-right-radius: $ax-radius-base !important; }
+  .rounded-b-lg { border-bottom-left-radius: $ax-radius-lg !important; border-bottom-right-radius: $ax-radius-lg !important; }
+
+  .rounded-l-none { border-top-left-radius: 0 !important; border-bottom-left-radius: 0 !important; }
+  .rounded-l { border-top-left-radius: $ax-radius-base !important; border-bottom-left-radius: $ax-radius-base !important; }
+  .rounded-l-lg { border-top-left-radius: $ax-radius-lg !important; border-bottom-left-radius: $ax-radius-lg !important; }
+}

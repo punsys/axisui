@@ -1,0 +1,297 @@
+// =============================================================================
+// CONTAINERS - AxisUI Framework Comprehensive Container System
+// Pure CSS responsive containers with theme variants and modern patterns
+// Direct color naming with comprehensive variants
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
+@use 'sass:map';
+
+.axis-ui {
+  // =============================================================================
+  // BASE RESPONSIVE CONTAINERS
+  // =============================================================================
+  
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: ax-spacing(4);
+    padding-right: ax-spacing(4);
+    
+    @include ax-responsive(sm) {
+      max-width: map.get($ax-container-max-widths, sm);
+      padding-left: ax-spacing(6);
+      padding-right: ax-spacing(6);
+    }
+    
+    @include ax-responsive(md) {
+      max-width: map.get($ax-container-max-widths, md);
+    }
+    
+    @include ax-responsive(lg) {
+      max-width: map.get($ax-container-max-widths, lg);
+    }
+    
+    @include ax-responsive(xl) {
+      max-width: map.get($ax-container-max-widths, xl);
+    }
+    
+    @include ax-responsive(2xl) {
+      max-width: map.get($ax-container-max-widths, 2xl);
+    }
+  }
+
+  // =============================================================================
+  // FIXED-WIDTH CONTAINERS
+  // =============================================================================
+  
+  .container-xs {
+    width: 100%;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: ax-spacing(3);
+    padding-right: ax-spacing(3);
+    
+    @include ax-responsive(sm) {
+      padding-left: ax-spacing(4);
+      padding-right: ax-spacing(4);
+    }
+  }
+  
+  .container-sm {
+    width: 100%;
+    max-width: map.get($ax-container-max-widths, sm);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: ax-spacing(4);
+    padding-right: ax-spacing(4);
+    
+    @include ax-responsive(sm) {
+      padding-left: ax-spacing(6);
+      padding-right: ax-spacing(6);
+    }
+  }
+  
+  .container-md {
+    width: 100%;
+    max-width: map.get($ax-container-max-widths, md);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: ax-spacing(4);
+    padding-right: ax-spacing(4);
+    
+    @include ax-responsive(md) {
+      padding-left: ax-spacing(6);
+      padding-right: ax-spacing(6);
+    }
+  }
+  
+  .container-lg {
+    width: 100%;
+    max-width: map.get($ax-container-max-widths, lg);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: ax-spacing(4);
+    padding-right: ax-spacing(4);
+    
+    @include ax-responsive(lg) {
+      padding-left: ax-spacing(6);
+      padding-right: ax-spacing(6);
+    }
+  }
+  
+  .container-xl {
+    width: 100%;
+    max-width: map.get($ax-container-max-widths, xl);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: ax-spacing(4);
+    padding-right: ax-spacing(4);
+    
+    @include ax-responsive(xl) {
+      padding-left: ax-spacing(8);
+      padding-right: ax-spacing(8);
+    }
+  }
+  
+  .container-2xl {
+    width: 100%;
+    max-width: map.get($ax-container-max-widths, 2xl);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: ax-spacing(4);
+    padding-right: ax-spacing(4);
+    
+    @include ax-responsive(2xl) {
+      padding-left: ax-spacing(8);
+      padding-right: ax-spacing(8);
+    }
+  }
+
+  // =============================================================================
+  // FLUID AND SPECIAL CONTAINERS
+  // =============================================================================
+  
+  .container-fluid {
+    width: 100%;
+    padding-left: ax-spacing(4);
+    padding-right: ax-spacing(4);
+    
+    @include ax-responsive(sm) {
+      padding-left: ax-spacing(6);
+      padding-right: ax-spacing(6);
+    }
+    
+    @include ax-responsive(lg) {
+      padding-left: ax-spacing(8);
+      padding-right: ax-spacing(8);
+    }
+  }
+  
+  .container-full {
+    width: 100%;
+    max-width: none;
+    padding: 0;
+  }
+  
+  .container-narrow {
+    width: 100%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: ax-spacing(4);
+    padding-right: ax-spacing(4);
+  }
+  
+  .container-wide {
+    width: 100%;
+    max-width: 1800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: ax-spacing(4);
+    padding-right: ax-spacing(4);
+    
+    @include ax-responsive(2xl) {
+      padding-left: ax-spacing(12);
+      padding-right: ax-spacing(12);
+    }
+  }
+
+  // =============================================================================
+  // CONTAINER STYLE VARIANTS
+  // =============================================================================
+  
+  .container-card {
+    background-color: $ax-white;
+    border: 1px solid $ax-border-color;
+    border-radius: $ax-radius-lg;
+    box-shadow: $ax-shadow-sm;
+    
+    &:hover {
+      box-shadow: $ax-shadow-md;
+    }
+  }
+  
+  .container-elevated {
+    background-color: $ax-white;
+    border-radius: $ax-radius-lg;
+    box-shadow: $ax-shadow-lg;
+    
+    &:hover {
+      box-shadow: $ax-shadow-xl;
+      transform: translateY(-2px);
+    }
+    
+    transition: all $ax-transition-base;
+  }
+  
+  .container-outline {
+    background-color: transparent;
+    border: 2px solid $ax-border-color;
+    border-radius: $ax-radius-base;
+  }
+
+  // =============================================================================
+  // CONTAINER LAYOUTS
+  // =============================================================================
+  
+  .container-centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .container-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: ax-spacing(6);
+    
+    @include ax-responsive(md-down) {
+      grid-template-columns: 1fr;
+      gap: ax-spacing(4);
+    }
+  }
+  
+  .container-hero {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    
+    @include ax-responsive(md) {
+      min-height: 80vh;
+    }
+  }
+
+  // =============================================================================
+  // RESPONSIVE CONTAINER UTILITIES
+  // =============================================================================
+  
+  @include ax-responsive(xs-down) {
+    .container-split {
+      grid-template-columns: 1fr;
+      gap: ax-spacing(3);
+    }
+  }
+
+  // =============================================================================
+  // ACCESSIBILITY ENHANCEMENTS
+  // =============================================================================
+  
+  // Focus management for interactive containers
+  .container-interactive:focus-within {
+    outline: 2px solid $ax-blue;
+    outline-offset: 2px;
+  }
+  
+  // High contrast mode support
+  @media (prefers-contrast: high) {
+    .container-card,
+    .container-elevated,
+    .container-outline {
+      border-width: 2px;
+    }
+    
+    .container-elevated {
+      box-shadow: 0 0 0 1px $ax-border-color;
+    }
+  }
+  
+  // Reduced motion support
+  @include ax-prefers-reduced-motion {
+    .container-elevated {
+      transition: none;
+      
+      &:hover {
+        transform: none;
+      }
+    }
+  }
+
+}

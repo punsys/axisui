@@ -1,0 +1,171 @@
+/*!
+ * AxisUI Layout Patterns - Pure CSS Layout System
+ * Advanced layout patterns and component-agnostic utilities
+ * Note: Basic spacing utilities moved to _spacing.scss, component sizes moved to respective component files
+ */
+
+// =============================================================================
+// LAYOUT PATTERN UTILITIES SYSTEM
+// Container-scoped layout patterns for advanced UI layouts
+// Includes: generic size variants and layout helpers
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+
+// AxisUI Container Scope
+.axis-ui {
+
+  // =============================================================================
+  // GENERIC SIZE VARIANTS - General sizing patterns (not component-specific)
+  // =============================================================================
+
+  // Element sizing utilities (generic sizing that can apply to any element)
+  .size-xs {
+    padding: 0.125rem 0.375rem !important;
+    font-size: 0.75rem !important;
+    line-height: 1rem !important;
+  }
+
+  .size-sm {
+    padding: 0.25rem 0.5rem !important;
+    font-size: 0.75rem !important;
+    line-height: 1rem !important;
+  }
+
+  .size-md {
+    padding: 0.375rem 0.75rem !important;
+    font-size: 0.875rem !important;
+    line-height: 1.25rem !important;
+  }
+
+  .size-lg {
+    padding: 0.5rem 1rem !important;
+    font-size: 1rem !important;
+    line-height: 1.5rem !important;
+  }
+
+  .size-xl {
+    padding: 0.625rem 1.25rem !important;
+    font-size: 1.125rem !important;
+    line-height: 1.75rem !important;
+  }
+
+  .size-2xl {
+    padding: 0.75rem 1.5rem !important;
+    font-size: 1.25rem !important;
+    line-height: 1.75rem !important;
+  }
+
+  // Note: Component-specific sizes moved to their respective component files:
+  // - Badge sizes → components/_badges.scss  
+  // - Avatar sizes → components/_avatars.scss
+  // - Progress sizes → components/_progress.scss
+  // - Spinner sizes → components/_loaders.scss
+
+  // Note: Container utilities moved to layouts/_container.scss
+  // Note: Aspect ratio, object-fit, object-position, overflow utilities moved to layouts/_layout.scss
+
+  // =============================================================================
+  // LAYOUT COMPONENTS - Complex Layout Patterns
+  // =============================================================================
+
+  // Stack layout (vertical spacing)
+  .stack > * + * {
+    margin-top: 1rem !important;
+  }
+
+  .stack-xs > * + * {
+    margin-top: 0.25rem !important;
+  }
+
+  .stack-sm > * + * {
+    margin-top: 0.5rem !important;
+  }
+
+  .stack-lg > * + * {
+    margin-top: 1.5rem !important;
+  }
+
+  .stack-xl > * + * {
+    margin-top: 2rem !important;
+  }
+
+  // Cluster layout (horizontal spacing)
+  .cluster {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 1rem !important;
+  }
+
+  .cluster-xs {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 0.25rem !important;
+  }
+
+  .cluster-sm {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 0.5rem !important;
+  }
+
+  .cluster-lg {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 1.5rem !important;
+  }
+
+  .cluster-xl {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 2rem !important;
+  }
+
+  // Switcher layout (responsive columns)
+  .switcher {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 1rem !important;
+  }
+
+  .switcher > * {
+    flex-grow: 1 !important;
+    flex-basis: calc((30rem - 100%) * 999) !important;
+  }
+
+  // Center layout
+  .center {
+    box-sizing: content-box !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 60ch !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  // Cover layout (full height)
+  .cover {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100vh !important;
+  }
+
+  .cover > * {
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .cover > :first-child:not(.cover-centered) {
+    margin-top: 0 !important;
+  }
+
+  .cover > :last-child:not(.cover-centered) {
+    margin-bottom: 0 !important;
+  }
+
+  .cover > .cover-centered {
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+  }
+
+} // End .axis-ui container scope

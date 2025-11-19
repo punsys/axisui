@@ -1,0 +1,398 @@
+/*!
+ * AxisUI Background Utilities - Pure CSS Background System
+ * Background colors, gradients, and background properties
+ */
+
+// =============================================================================
+// BACKGROUND UTILITIES SYSTEM
+// Container-scoped background utilities with direct color naming
+// Includes: colors, gradients, images, positioning, and effects
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/colors' as *;
+
+// AxisUI Container Scope
+.axis-ui {
+
+  // =============================================================================
+  // BACKGROUND COLORS - Generated from color map (Optimized)
+  // Automatically generates all color variants: blue, blue-light, blue-dark, etc.
+  // =============================================================================
+  
+  // Special background colors
+  .bg-transparent { background-color: transparent !important; }
+  .bg-current { background-color: currentColor !important; }
+  
+  // Generate all background colors from color map (replaces 51 manual lines)
+  @each $name, $color in $ax-colors {
+    .bg-#{$name} { background-color: $color !important; }
+  }
+
+  // =============================================================================
+  // LINEAR GRADIENTS - Direct Color Combinations
+  // =============================================================================
+  
+  // Blue gradients
+  .bg-gradient-blue {
+    background: linear-gradient(135deg, #{$ax-blue} 0%, #{$ax-blue-dark} 100%) !important;
+  }
+  
+  .bg-gradient-blue-light {
+    background: linear-gradient(135deg, #{$ax-blue-light} 0%, #{$ax-blue} 100%) !important;
+  }
+  
+  .bg-gradient-blue-purple {
+    background: linear-gradient(135deg, #{$ax-blue} 0%, #{$ax-purple} 100%) !important;
+  }
+  
+  .bg-gradient-blue-teal {
+    background: linear-gradient(135deg, #{$ax-blue} 0%, #{$ax-teal} 100%) !important;
+  }
+  
+  .bg-gradient-blue-white {
+    background: linear-gradient(135deg, #{$ax-blue} 0%, #{$ax-white} 100%) !important;
+  }
+  
+  // Red gradients
+  .bg-gradient-red {
+    background: linear-gradient(135deg, #{$ax-red} 0%, #{$ax-red-dark} 100%) !important;
+  }
+  
+  .bg-gradient-red-light {
+    background: linear-gradient(135deg, #{$ax-red-light} 0%, #{$ax-red} 100%) !important;
+  }
+  
+  .bg-gradient-red-orange {
+    background: linear-gradient(135deg, #{$ax-red} 0%, #{$ax-orange} 100%) !important;
+  }
+  
+  .bg-gradient-red-pink {
+    background: linear-gradient(135deg, #{$ax-red} 0%, #{$ax-pink} 100%) !important;
+  }
+  
+  .bg-gradient-red-yellow {
+    background: linear-gradient(135deg, #{$ax-red} 0%, #{$ax-yellow} 100%) !important;
+  }
+  
+  // Green gradients
+  .bg-gradient-green {
+    background: linear-gradient(135deg, #{$ax-green} 0%, #{$ax-green-dark} 100%) !important;
+  }
+  
+  .bg-gradient-green-light {
+    background: linear-gradient(135deg, #{$ax-green-light} 0%, #{$ax-green} 100%) !important;
+  }
+  
+  .bg-gradient-green-teal {
+    background: linear-gradient(135deg, #{$ax-green} 0%, #{$ax-teal} 100%) !important;
+  }
+  
+  .bg-gradient-green-blue {
+    background: linear-gradient(135deg, #{$ax-green} 0%, #{$ax-blue} 100%) !important;
+  }
+  
+  .bg-gradient-green-yellow {
+    background: linear-gradient(135deg, #{$ax-green} 0%, #{$ax-yellow} 100%) !important;
+  }
+  
+  // Purple gradients
+  .bg-gradient-purple {
+    background: linear-gradient(135deg, #{$ax-purple} 0%, #{$ax-purple-dark} 100%) !important;
+  }
+  
+  .bg-gradient-purple-light {
+    background: linear-gradient(135deg, #{$ax-purple-light} 0%, #{$ax-purple} 100%) !important;
+  }
+  
+  .bg-gradient-purple-pink {
+    background: linear-gradient(135deg, #{$ax-purple} 0%, #{$ax-pink} 100%) !important;
+  }
+  
+  .bg-gradient-purple-blue {
+    background: linear-gradient(135deg, #{$ax-purple} 0%, #{$ax-blue} 100%) !important;
+  }
+  
+  // Orange gradients
+  .bg-gradient-orange {
+    background: linear-gradient(135deg, #{$ax-orange} 0%, #{$ax-orange-dark} 100%) !important;
+  }
+  
+  .bg-gradient-orange-light {
+    background: linear-gradient(135deg, #{$ax-orange-light} 0%, #{$ax-orange} 100%) !important;
+  }
+  
+  .bg-gradient-orange-red {
+    background: linear-gradient(135deg, #{$ax-orange} 0%, #{$ax-red} 100%) !important;
+  }
+  
+  .bg-gradient-orange-yellow {
+    background: linear-gradient(135deg, #{$ax-orange} 0%, #{$ax-yellow} 100%) !important;
+  }
+  
+  // Yellow gradients
+  .bg-gradient-yellow {
+    background: linear-gradient(135deg, #{$ax-yellow} 0%, #{$ax-yellow-dark} 100%) !important;
+  }
+  
+  .bg-gradient-yellow-light {
+    background: linear-gradient(135deg, #{$ax-yellow-light} 0%, #{$ax-yellow} 100%) !important;
+  }
+  
+  .bg-gradient-yellow-orange {
+    background: linear-gradient(135deg, #{$ax-yellow} 0%, #{$ax-orange} 100%) !important;
+  }
+  
+  .bg-gradient-yellow-green {
+    background: linear-gradient(135deg, #{$ax-yellow} 0%, #{$ax-green} 100%) !important;
+  }
+  
+  // Teal gradients
+  .bg-gradient-teal {
+    background: linear-gradient(135deg, #{$ax-teal} 0%, #{$ax-teal-dark} 100%) !important;
+  }
+  
+  .bg-gradient-teal-light {
+    background: linear-gradient(135deg, #{$ax-teal-light} 0%, #{$ax-teal} 100%) !important;
+  }
+  
+  .bg-gradient-teal-blue {
+    background: linear-gradient(135deg, #{$ax-teal} 0%, #{$ax-blue} 100%) !important;
+  }
+  
+  .bg-gradient-teal-green {
+    background: linear-gradient(135deg, #{$ax-teal} 0%, #{$ax-green} 100%) !important;
+  }
+  
+  // Pink gradients
+  .bg-gradient-pink {
+    background: linear-gradient(135deg, #{$ax-pink} 0%, #{$ax-pink-dark} 100%) !important;
+  }
+  
+  .bg-gradient-pink-light {
+    background: linear-gradient(135deg, #{$ax-pink-light} 0%, #{$ax-pink} 100%) !important;
+  }
+  
+  .bg-gradient-pink-purple {
+    background: linear-gradient(135deg, #{$ax-pink} 0%, #{$ax-purple} 100%) !important;
+  }
+  
+  .bg-gradient-pink-red {
+    background: linear-gradient(135deg, #{$ax-pink} 0%, #{$ax-red} 100%) !important;
+  }
+  
+  // Gray gradients
+  .bg-gradient-gray {
+    background: linear-gradient(135deg, #{$ax-gray} 0%, #{$ax-gray-dark} 100%) !important;
+  }
+  
+  .bg-gradient-gray-light {
+    background: linear-gradient(135deg, #{$ax-gray-light} 0%, #{$ax-gray} 100%) !important;
+  }
+  
+  .bg-gradient-black-gray {
+    background: linear-gradient(135deg, #{$ax-black} 0%, #{$ax-gray} 100%) !important;
+  }
+  
+  .bg-gradient-white-gray {
+    background: linear-gradient(135deg, #{$ax-white} 0%, #{$ax-gray-light} 100%) !important;
+  }
+
+  // =============================================================================
+  // RADIAL GRADIENTS
+  // =============================================================================
+  
+  .bg-radial-blue {
+    background: radial-gradient(circle, #{$ax-blue-light} 0%, #{$ax-blue-dark} 100%) !important;
+  }
+  
+  .bg-radial-red {
+    background: radial-gradient(circle, #{$ax-red-light} 0%, #{$ax-red-dark} 100%) !important;
+  }
+  
+  .bg-radial-green {
+    background: radial-gradient(circle, #{$ax-green-light} 0%, #{$ax-green-dark} 100%) !important;
+  }
+  
+  .bg-radial-purple {
+    background: radial-gradient(circle, #{$ax-purple-light} 0%, #{$ax-purple-dark} 100%) !important;
+  }
+  
+  .bg-radial-gray {
+    background: radial-gradient(circle, #{$ax-gray-light} 0%, #{$ax-gray-dark} 100%) !important;
+  }
+
+  // =============================================================================
+  // GRADIENT DIRECTIONS
+  // =============================================================================
+  
+  .bg-gradient-to-t {
+    background-image: linear-gradient(to top, var(--gradient-color-stops)) !important;
+  }
+  
+  .bg-gradient-to-tr {
+    background-image: linear-gradient(to top right, var(--gradient-color-stops)) !important;
+  }
+  
+  .bg-gradient-to-r {
+    background-image: linear-gradient(to right, var(--gradient-color-stops)) !important;
+  }
+  
+  .bg-gradient-to-br {
+    background-image: linear-gradient(to bottom right, var(--gradient-color-stops)) !important;
+  }
+  
+  .bg-gradient-to-b {
+    background-image: linear-gradient(to bottom, var(--gradient-color-stops)) !important;
+  }
+  
+  .bg-gradient-to-bl {
+    background-image: linear-gradient(to bottom left, var(--gradient-color-stops)) !important;
+  }
+  
+  .bg-gradient-to-l {
+    background-image: linear-gradient(to left, var(--gradient-color-stops)) !important;
+  }
+  
+  .bg-gradient-to-tl {
+    background-image: linear-gradient(to top left, var(--gradient-color-stops)) !important;
+  }
+
+  // =============================================================================
+  // BACKGROUND ATTACHMENT
+  // =============================================================================
+  
+  .bg-fixed { background-attachment: fixed !important; }
+  .bg-local { background-attachment: local !important; }
+  .bg-scroll { background-attachment: scroll !important; }
+
+  // =============================================================================
+  // BACKGROUND POSITION
+  // =============================================================================
+  
+  .bg-bottom { background-position: bottom !important; }
+  .bg-center { background-position: center !important; }
+  .bg-left { background-position: left !important; }
+  .bg-left-bottom { background-position: left bottom !important; }
+  .bg-left-top { background-position: left top !important; }
+  .bg-right { background-position: right !important; }
+  .bg-right-bottom { background-position: right bottom !important; }
+  .bg-right-top { background-position: right top !important; }
+  .bg-top { background-position: top !important; }
+
+  // =============================================================================
+  // BACKGROUND REPEAT
+  // =============================================================================
+  
+  .bg-repeat { background-repeat: repeat !important; }
+  .bg-no-repeat { background-repeat: no-repeat !important; }
+  .bg-repeat-x { background-repeat: repeat-x !important; }
+  .bg-repeat-y { background-repeat: repeat-y !important; }
+  .bg-repeat-round { background-repeat: round !important; }
+  .bg-repeat-space { background-repeat: space !important; }
+
+  // =============================================================================
+  // BACKGROUND SIZE
+  // =============================================================================
+  
+  .bg-auto { background-size: auto !important; }
+  .bg-cover { background-size: cover !important; }
+  .bg-contain { background-size: contain !important; }
+
+  // =============================================================================
+  // BACKGROUND OPACITY
+  // =============================================================================
+  
+  .bg-opacity-0 { 
+    --ax-bg-opacity: 0;
+    background-color: rgba($ax-white, var(--ax-bg-opacity)) !important;
+  }
+  .bg-opacity-5 { 
+    --ax-bg-opacity: 0.05;
+    background-color: rgba($ax-white, var(--ax-bg-opacity)) !important;
+  }
+  .bg-opacity-10 { 
+    --ax-bg-opacity: 0.1;
+    background-color: rgba($ax-white, var(--ax-bg-opacity)) !important;
+  }
+  .bg-opacity-20 { 
+    --ax-bg-opacity: 0.2;
+    background-color: rgba($ax-white, var(--ax-bg-opacity)) !important;
+  }
+  .bg-opacity-25 { 
+    --ax-bg-opacity: 0.25;
+    background-color: rgba($ax-white, var(--ax-bg-opacity)) !important;
+  }
+  .bg-opacity-30 { 
+    --ax-bg-opacity: 0.3;
+    background-color: rgba($ax-white, var(--ax-bg-opacity)) !important;
+  }
+  .bg-opacity-40 { 
+    --ax-bg-opacity: 0.4;
+    background-color: rgba($ax-white, var(--ax-bg-opacity)) !important;
+  }
+  .bg-opacity-50 { 
+    --ax-bg-opacity: 0.5;
+    background-color: rgba($ax-white, var(--ax-bg-opacity)) !important;
+  }
+  .bg-opacity-60 { 
+    --ax-bg-opacity: 0.6;
+    background-color: rgba($ax-white, var(--ax-bg-opacity)) !important;
+  }
+  .bg-opacity-70 { 
+    --ax-bg-opacity: 0.7;
+    background-color: rgba($ax-white, var(--ax-bg-opacity)) !important;
+  }
+  .bg-opacity-75 { 
+    --ax-bg-opacity: 0.75;
+    background-color: rgba($ax-white, var(--ax-bg-opacity)) !important;
+  }
+  .bg-opacity-80 { 
+    --ax-bg-opacity: 0.8;
+    background-color: rgba($ax-white, var(--ax-bg-opacity)) !important;
+  }
+  .bg-opacity-90 { 
+    --ax-bg-opacity: 0.9;
+    background-color: rgba($ax-white, var(--ax-bg-opacity)) !important;
+  }
+  .bg-opacity-95 { 
+    --ax-bg-opacity: 0.95;
+    background-color: rgba($ax-white, var(--ax-bg-opacity)) !important;
+  }
+  .bg-opacity-100 { 
+    --ax-bg-opacity: 1;
+    background-color: rgba($ax-white, var(--ax-bg-opacity)) !important;
+  }
+
+  // =============================================================================
+  // BACKGROUND BLEND MODES
+  // =============================================================================
+  
+  .bg-blend-normal { background-blend-mode: normal !important; }
+  .bg-blend-multiply { background-blend-mode: multiply !important; }
+  .bg-blend-screen { background-blend-mode: screen !important; }
+  .bg-blend-overlay { background-blend-mode: overlay !important; }
+  .bg-blend-darken { background-blend-mode: darken !important; }
+  .bg-blend-lighten { background-blend-mode: lighten !important; }
+  .bg-blend-color-dodge { background-blend-mode: color-dodge !important; }
+  .bg-blend-color-burn { background-blend-mode: color-burn !important; }
+  .bg-blend-hard-light { background-blend-mode: hard-light !important; }
+  .bg-blend-soft-light { background-blend-mode: soft-light !important; }
+  .bg-blend-difference { background-blend-mode: difference !important; }
+  .bg-blend-exclusion { background-blend-mode: exclusion !important; }
+  .bg-blend-hue { background-blend-mode: hue !important; }
+  .bg-blend-saturation { background-blend-mode: saturation !important; }
+  .bg-blend-color { background-blend-mode: color !important; }
+  .bg-blend-luminosity { background-blend-mode: luminosity !important; }
+
+  
+  // =============================================================================
+  // SEMANTIC BACKGROUND UTILITIES - Uses CSS Custom Properties
+  // These automatically adapt to dark mode via --ax-bg-* variables
+  // =============================================================================
+  
+  .bg-body { background-color: var(--ax-bg-body) !important; }
+  .bg-surface { background-color: var(--ax-bg-surface) !important; }
+  .bg-card { background-color: var(--ax-bg-card) !important; }
+
+} // End .axis-ui container scope

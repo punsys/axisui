@@ -1,0 +1,347 @@
+// =============================================================================
+// LOADER ELEMENTS - AxisUI Framework Pure CSS Loading Indicators
+// Container-scoped loading elements with CSS animations only
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
+
+.axis-ui {
+  // =============================================================================
+  // BASE LOADER ELEMENT
+  // =============================================================================
+  
+  .loader {
+    display: inline-block;
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+  }
+
+  // =============================================================================
+  // SPINNER LOADERS - Pure CSS animations
+  // =============================================================================
+  
+  .spinner {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-left-color: $ax-blue;
+    border-radius: 50%;
+    animation: spinner-rotate 1s linear infinite;
+  }
+
+  @keyframes spinner-rotate {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  // Spinner color variants - 3-variant system
+  .spinner-blue { border-left-color: $ax-blue; }
+  .spinner-blue-light { border-left-color: $ax-blue-light; }
+  .spinner-blue-dark { border-left-color: $ax-blue-dark; }
+  
+  .spinner-red { border-left-color: $ax-red; }
+  .spinner-red-light { border-left-color: $ax-red-light; }
+  .spinner-red-dark { border-left-color: $ax-red-dark; }
+  
+  .spinner-green { border-left-color: $ax-green; }
+  .spinner-green-light { border-left-color: $ax-green-light; }
+  .spinner-green-dark { border-left-color: $ax-green-dark; }
+  
+  .spinner-yellow { border-left-color: $ax-yellow; }
+  .spinner-yellow-light { border-left-color: $ax-yellow-light; }
+  .spinner-yellow-dark { border-left-color: $ax-yellow-dark; }
+  
+  .spinner-gray { border-left-color: $ax-gray; }
+  .spinner-gray-light { border-left-color: $ax-gray-light; }
+  .spinner-gray-dark { border-left-color: $ax-gray-dark; }
+
+  // =============================================================================
+  // DOTS LOADERS - Pure CSS animations
+  // =============================================================================
+  
+  .dots {
+    display: inline-block;
+    position: relative;
+    width: 4rem;
+    height: 1rem;
+  }
+
+  .dots div {
+    position: absolute;
+    top: 50%;
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    background-color: $ax-blue;
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+    transform: translateY(-50%);
+  }
+
+  .dots div:nth-child(1) {
+    left: 0.5rem;
+    animation: dots1 0.6s infinite;
+  }
+
+  .dots div:nth-child(2) {
+    left: 0.5rem;
+    animation: dots2 0.6s infinite;
+  }
+
+  .dots div:nth-child(3) {
+    left: 2rem;
+    animation: dots2 0.6s infinite;
+  }
+
+  .dots div:nth-child(4) {
+    left: 3.5rem;
+    animation: dots3 0.6s infinite;
+  }
+
+  @keyframes dots1 {
+    0% { transform: scale(0) translateY(-50%); }
+    100% { transform: scale(1) translateY(-50%); }
+  }
+
+  @keyframes dots3 {
+    0% { transform: scale(1) translateY(-50%); }
+    100% { transform: scale(0) translateY(-50%); }
+  }
+
+  @keyframes dots2 {
+    0% { transform: translate(0, -50%); }
+    100% { transform: translate(1.5rem, -50%); }
+  }
+
+  // Dots color variants - 3-variant system
+  .dots-blue div { background-color: $ax-blue; }
+  .dots-blue-light div { background-color: $ax-blue-light; }
+  .dots-blue-dark div { background-color: $ax-blue-dark; }
+  
+  .dots-red div { background-color: $ax-red; }
+  .dots-red-light div { background-color: $ax-red-light; }  
+  .dots-red-dark div { background-color: $ax-red-dark; }
+  
+  .dots-green div { background-color: $ax-green; }
+  .dots-green-light div { background-color: $ax-green-light; }
+  .dots-green-dark div { background-color: $ax-green-dark; }
+  
+  .dots-yellow div { background-color: $ax-yellow; }
+  .dots-yellow-light div { background-color: $ax-yellow-light; }
+  .dots-yellow-dark div { background-color: $ax-yellow-dark; }
+  
+  .dots-gray div { background-color: $ax-gray; }
+  .dots-gray-light div { background-color: $ax-gray-light; }
+  .dots-gray-dark div { background-color: $ax-gray-dark; }
+
+  // =============================================================================
+  // PULSE LOADER - Pure CSS animation
+  // =============================================================================
+  
+  .pulse {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    background-color: $ax-blue;
+    border-radius: 50%;
+    animation: pulse-scale 1s ease-in-out infinite;
+  }
+
+  @keyframes pulse-scale {
+    0%, 100% {
+      transform: scale(0);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1);
+      opacity: 0.7;
+    }
+  }
+
+  // Pulse color variants - 3-variant system
+  .pulse-blue { background-color: $ax-blue; }
+  .pulse-blue-light { background-color: $ax-blue-light; }
+  .pulse-blue-dark { background-color: $ax-blue-dark; }
+  
+  .pulse-red { background-color: $ax-red; }
+  .pulse-red-light { background-color: $ax-red-light; }
+  .pulse-red-dark { background-color: $ax-red-dark; }
+  
+  .pulse-green { background-color: $ax-green; }
+  .pulse-green-light { background-color: $ax-green-light; }
+  .pulse-green-dark { background-color: $ax-green-dark; }
+  
+  .pulse-yellow { background-color: $ax-yellow; }
+  .pulse-yellow-light { background-color: $ax-yellow-light; }
+  .pulse-yellow-dark { background-color: $ax-yellow-dark; }
+  
+  .pulse-gray { background-color: $ax-gray; }
+  .pulse-gray-light { background-color: $ax-gray-light; }
+  .pulse-gray-dark { background-color: $ax-gray-dark; }
+
+  // =============================================================================
+  // WAVE LOADER - Pure CSS animation
+  // =============================================================================
+  
+  .wave {
+    display: inline-block;
+    width: 3rem;
+    height: 1rem;
+    position: relative;
+  }
+
+  .wave div {
+    display: inline-block;
+    width: 0.25rem;
+    height: 100%;
+    background-color: $ax-blue;
+    margin: 0 0.125rem;
+    animation: wave-scale 1.2s infinite ease-in-out;
+  }
+
+  .wave div:nth-child(1) { animation-delay: -1.1s; }
+  .wave div:nth-child(2) { animation-delay: -1.0s; }
+  .wave div:nth-child(3) { animation-delay: -0.9s; }
+  .wave div:nth-child(4) { animation-delay: -0.8s; }
+  .wave div:nth-child(5) { animation-delay: -0.7s; }
+
+  @keyframes wave-scale {
+    0%, 40%, 100% {
+      transform: scaleY(0.4);
+    }
+    20% {
+      transform: scaleY(1.0);
+    }
+  }
+
+  // Wave color variants - 3-variant system
+  .wave-blue div { background-color: $ax-blue; }
+  .wave-blue-light div { background-color: $ax-blue-light; }
+  .wave-blue-dark div { background-color: $ax-blue-dark; }
+  
+  .wave-red div { background-color: $ax-red; }
+  .wave-red-light div { background-color: $ax-red-light; }
+  .wave-red-dark div { background-color: $ax-red-dark; }
+  
+  .wave-green div { background-color: $ax-green; }
+  .wave-green-light div { background-color: $ax-green-light; }
+  .wave-green-dark div { background-color: $ax-green-dark; }
+  
+  .wave-yellow div { background-color: $ax-yellow; }
+  .wave-yellow-light div { background-color: $ax-yellow-light; }
+  .wave-yellow-dark div { background-color: $ax-yellow-dark; }
+  
+  .wave-gray div { background-color: $ax-gray; }
+  .wave-gray-light div { background-color: $ax-gray-light; }
+  .wave-gray-dark div { background-color: $ax-gray-dark; }
+
+  // =============================================================================
+  // LOADER SIZES
+  // =============================================================================
+  
+  .loader-xs,
+  .spinner-xs,
+  .pulse-xs {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .loader-sm,
+  .spinner-sm,
+  .pulse-sm {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .loader-lg,
+  .spinner-lg,
+  .pulse-lg {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .loader-xl,
+  .spinner-xl,
+  .pulse-xl {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  // Adjust spinner border width for sizes
+  .spinner-xs { border-width: 2px; }
+  .spinner-sm { border-width: 2px; }
+  .spinner-lg { border-width: 4px; }
+  .spinner-xl { border-width: 5px; }
+
+  // =============================================================================
+  // UTILITY SPINNER SIZE VARIANTS - Standalone sizing utilities  
+  // =============================================================================
+  
+  .spinner-xs {
+    width: 1rem !important;
+    height: 1rem !important;
+  }
+
+  .spinner-sm {
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+  }
+
+  .spinner-md {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+  }
+
+  .spinner-lg {
+    width: 2rem !important;
+    height: 2rem !important;
+  }
+
+  .spinner-xl {
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+  }
+
+  .spinner-2xl {
+    width: 3rem !important;
+    height: 3rem !important;
+  }
+
+  // =============================================================================
+  // LOADER OVERLAY - For full-screen loading
+  // =============================================================================
+  
+  .loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    @include ax-flex-center;
+    z-index: 9999;
+  }
+
+  .loading-overlay-dark {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  // =============================================================================
+  // INLINE LOADERS - For buttons and small spaces
+  // =============================================================================
+  
+  .loader-inline {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: ax-spacing(2);
+  }
+
+  .btn .loader-inline {
+    width: 1rem;
+    height: 1rem;
+  }
+}

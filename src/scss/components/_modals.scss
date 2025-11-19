@@ -1,0 +1,276 @@
+﻿/*!
+ * AxisUI Modal Component - Pure CSS Modal System
+ * Professional modal dialogs using CSS-only approach with :target pseudo-class
+ */
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+
+
+// AxisUI Container Scope
+.axis-ui {
+
+  // =============================================================================
+  // MODAL OVERLAY & BACKDROP
+  // =============================================================================
+  
+  .modal {
+    @include ax-full-viewport; // Use viewport positioning mixin
+    @include ax-flex-center; // Use centralized flexbox pattern
+    background: rgba(0, 0, 0, 0.5);
+    z-index: $ax-z-popover;
+    padding: 1rem;
+    
+    // Hidden by default
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    
+    // Show when targeted
+    &:target {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  // Modal backdrop click to close
+  .modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+
+  // =============================================================================
+  // MODAL DIALOG CONTAINER
+  // =============================================================================
+  
+  .modal-dialog {
+    position: relative;
+    background: var(--ax-card-bg);
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    overflow: hidden;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+  }
+
+  .modal:target .modal-dialog {
+    transform: scale(1);
+  }
+
+  // =============================================================================
+  // MODAL HEADER
+  // =============================================================================
+  
+  .modal-header {
+    @include ax-flex-between; // Use centralized flexbox pattern
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--ax-border-color);
+    background: var(--ax-bg-surface);
+  }
+
+  .modal-title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: $ax-gray-dark;
+  }
+
+  .modal-close {
+    @include ax-close-button; // Use centralized close button pattern
+    padding: 0.25rem;
+  }
+
+  // =============================================================================
+  // MODAL BODY
+  // =============================================================================
+  
+  .modal-body {
+    padding: 1.5rem;
+    background: var(--ax-card-bg);
+    overflow-y: auto;
+    max-height: 60vh;
+  }
+
+  .modal-body p {
+    margin: 0 0 1rem 0;
+    line-height: 1.6;
+  }
+
+  .modal-body p:last-child {
+    margin-bottom: 0;
+  }
+
+  // =============================================================================
+  // MODAL FOOTER  
+  // =============================================================================
+  
+  .modal-footer {
+    @include ax-flex-end; // Use centralized flexbox pattern
+    gap: 0.75rem;
+    padding: 1.5rem;
+    border-top: 1px solid var(--ax-border-color);
+    background: var(--ax-bg-surface);
+  }
+
+  // =============================================================================
+  // MODAL SIZE VARIANTS
+  // =============================================================================
+
+  // Small modal
+  .modal-sm .modal-dialog {
+    max-width: 300px;
+  }
+
+  // Large modal  
+  .modal-lg .modal-dialog {
+    max-width: 800px;
+  }
+
+  // Extra large modal
+  .modal-xl .modal-dialog {
+    max-width: 1140px;
+  }
+
+  // Full width modal
+  .modal-fullscreen .modal-dialog {
+    max-width: 95vw;
+    max-height: 95vh;
+    width: 95vw;
+    height: 95vh;
+  }
+
+  // =============================================================================
+  // MODAL COLOR VARIANTS - Direct Color Naming
+  // =============================================================================
+
+  // Blue modal
+  .modal-blue {
+    .modal-header {
+      background: $ax-blue;
+      border-bottom-color: $ax-blue-dark;
+    }
+
+    .modal-title {
+      color: $ax-white;
+    }
+
+    .modal-close {
+      color: $ax-white;
+
+      &:hover {
+        color: $ax-blue-light;
+      }
+    }
+  }
+
+  // Red modal
+  .modal-red {
+    .modal-header {
+      background: $ax-red;
+      border-bottom-color: $ax-red-dark;
+    }
+
+    .modal-title {
+      color: $ax-white;
+    }
+
+    .modal-close {
+      color: $ax-white;
+
+      &:hover {
+        color: $ax-red-light;
+      }
+    }
+  }
+
+  // Green modal
+  .modal-green {
+    .modal-header {
+      background: $ax-green;
+      border-bottom-color: $ax-green-dark;
+    }
+
+    .modal-title {
+      color: $ax-white;
+    }
+
+    .modal-close {
+      color: $ax-white;
+
+      &:hover {
+        color: $ax-green-light;
+      }
+    }
+  }
+
+  // Yellow modal
+  .modal-yellow {
+    .modal-header {
+      background: $ax-yellow;
+      border-bottom-color: $ax-yellow-dark;
+    }
+
+    .modal-title {
+      color: $ax-gray-dark;
+    }
+
+    .modal-close {
+      color: $ax-gray-dark;
+
+      &:hover {
+        color: $ax-yellow-dark;
+      }
+    }
+  }
+
+  // =============================================================================
+  // RESPONSIVE BEHAVIOR
+  // =============================================================================
+
+  @media (max-width: 639px) {
+    .modal {
+      padding: 0.5rem;
+    }
+
+    .modal-dialog {
+      max-width: 95vw;
+      width: 95vw;
+    }
+
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+      padding: 1rem;
+    }
+
+    .modal-footer {
+      flex-direction: column;
+      
+      .btn {
+        width: 100%;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .modal-header {
+      padding: 0.75rem;
+    }
+
+    .modal-body {
+      padding: 0.75rem;
+    }
+
+    .modal-footer {
+      padding: 0.75rem;
+    }
+  }
+}

@@ -1,0 +1,1039 @@
+// =============================================================================
+// MIXINS - AxisUI Framework Core Mixins
+// Comprehensive pure CSS mixins for all components
+// =============================================================================
+
+@use 'sass:map';
+@use 'variables' as *;
+@use 'functions' as *;
+@use 'dark-mode' as *;
+@use 'breakpoints' as *;
+@forward 'breakpoints';
+
+// =============================================================================
+// CORE LAYOUT MIXINS
+// =============================================================================
+
+// Core positioning mixins
+@mixin ax-center-absolute { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+@mixin ax-center-flex { display: flex; align-items: center; justify-content: center; }
+@mixin ax-full-viewport { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; }
+@mixin ax-sticky($top: 0) { position: sticky; top: $top; z-index: $ax-z-sticky; }
+@mixin ax-clearfix { &::after { content: ''; display: table; clear: both; } }
+
+// Aspect ratio and overlay mixins
+@mixin ax-aspect-ratio($ratio: 16/9) {
+  position: relative; width: 100%; padding-bottom: percentage(1 / $ratio);
+  > * { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+}
+@mixin ax-overlay($z-index: $ax-z-fixed) {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+  background-color: rgba(0, 0, 0, 0.5); z-index: $z-index;
+}
+
+// Corner pinning with optimized conditionals
+@mixin ax-pin-corner($corner: 'top-left', $offset: ax-spacing(4)) {
+  position: absolute;
+  @if $corner == 'top-left' { top: $offset; left: $offset; }
+  @else if $corner == 'top-right' { top: $offset; right: $offset; }
+  @else if $corner == 'bottom-left' { bottom: $offset; left: $offset; }
+  @else if $corner == 'bottom-right' { bottom: $offset; right: $offset; }
+}
+
+// Accessibility and container mixins
+@mixin ax-sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+@mixin ax-container($max-width: 1280px) {
+  width: 100%; max-width: $max-width; margin: 0 auto; 
+  padding-left: ax-spacing(4); padding-right: ax-spacing(4);
+}
+
+// =============================================================================
+// CONTAINER & COMPONENT MIXINS
+// =============================================================================
+
+// Base container with CSS custom properties
+@mixin ax-container-base {
+  position: relative; background-color: var(--ax-bg-card, #{$ax-white});
+  border-radius: var(--ax-radius-base, #{$ax-radius-base});
+  border: 1px solid var(--ax-border-color, #{$ax-gray-light});
+  @include ax-dark-mode { background-color: var(--ax-bg-card); border-color: var(--ax-border-color); }
+}
+
+// Enhanced card containers
+@mixin ax-card-container($hover: false) {
+  @include ax-container-base;
+  padding: ax-spacing(6); box-shadow: $ax-shadow-base;
+  @if $hover {
+    transition: transform $ax-transition-base, box-shadow $ax-transition-base;
+    &:hover { transform: translateY(-2px); box-shadow: $ax-shadow-lg; }
+  }
+}
+@mixin ax-card { background-color: var(--ax-card-bg); border-radius: $ax-radius-lg; box-shadow: $ax-shadow-base; overflow: hidden; border: 1px solid var(--ax-card-border); }
+
+// Specialized containers
+@mixin ax-message-container($dismissible: false) {
+  @include ax-container-base;
+  display: flex; align-items: flex-start; padding: ax-spacing(4);
+  @if $dismissible { padding-right: ax-spacing(10); }
+}
+
+@mixin ax-dropdown-container {
+  @include ax-container-base;
+  position: absolute; background-color: var(--ax-bg-card, #{$ax-white});
+  box-shadow: $ax-shadow-lg; padding: ax-spacing(2) 0; min-width: 12rem; z-index: $ax-z-dropdown;  
+}
+
+// Tooltip with arrow positioning
+@mixin ax-tooltip-container {
+  position: absolute; background-color: var(--ax-gray-dark, #{$ax-gray-dark}); color: var(--ax-white, #{$ax-white});
+  padding: ax-spacing(2) ax-spacing(3); border-radius: var(--ax-radius-base, #{$ax-radius-base});
+  font-size: $ax-text-sm; white-space: nowrap; z-index: $ax-z-tooltip;
+  &::before { content: ''; position: absolute; width: 0; height: 0; border-style: solid; }
+  &.tooltip-top::before {
+    top: 100%; left: 50%; transform: translateX(-50%); border-width: 4px 4px 0 4px;
+    border-color: var(--ax-gray-dark, #{$ax-gray-dark}) transparent transparent transparent;
+  }
+  &.tooltip-bottom::before {
+    bottom: 100%; left: 50%; transform: translateX(-50%); border-width: 0 4px 4px 4px;
+    border-color: transparent transparent var(--ax-gray-dark, #{$ax-gray-dark}) transparent;
+  }
+}
+
+// =============================================================================
+// INTERACTIVE MIXINS
+// =============================================================================
+
+// Overlay container for dropdowns and similar components
+@mixin ax-overlay-container($z-index: $ax-z-fixed) {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: $z-index;
+  
+  // Pure CSS show/hide using :target
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity $ax-transition-base, visibility $ax-transition-base;
+  
+  &:target {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+// Floating element (pure CSS tooltips, popovers, dropdowns)
+@mixin ax-floating-element {
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: scale(0.9);
+  transition: opacity $ax-transition-base, 
+              visibility $ax-transition-base, 
+              transform $ax-transition-base;
+}
+
+// Show floating element on hover (pure CSS)
+@mixin ax-show-on-hover {
+  &:hover .floating-element,
+  &:focus-within .floating-element {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: scale(1);
+  }
+}
+
+// Standard elevation shadows for pure CSS components
+@mixin ax-elevation-shadow($level: 'medium') {
+  @if $level == 'light' {
+    box-shadow: $ax-shadow-sm;
+  } @else if $level == 'medium' {
+    box-shadow: $ax-shadow-md;
+  } @else if $level == 'strong' {
+    box-shadow: $ax-shadow-lg;
+  } @else {
+    box-shadow: $ax-shadow-xl;
+  }
+}
+
+// Interactive states for clickable elements (pure CSS)
+@mixin ax-interactive-states($bg-color: var(--ax-bg-surface, #{$ax-gray-light})) {
+  cursor: pointer;
+  transition: background-color $ax-transition-base, 
+              color $ax-transition-base, 
+              transform $ax-transition-fast;
+  
+  &:hover {
+    background-color: $bg-color;
+  }
+  
+  &:active {
+    transform: scale(0.98);
+  }
+  
+  &:focus {
+    outline: 2px solid var(--ax-blue, #{$ax-blue});
+    outline-offset: 2px;
+  }
+}
+
+// Pure CSS accordion functionality using checkbox
+@mixin ax-accordion-toggle {
+  .accordion-toggle {
+    display: none;
+  }
+  
+  .accordion-header {
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+  }
+  
+  .accordion-toggle:checked + .accordion-header + .accordion-content {
+    max-height: 1000px; // Large enough value
+  }
+}
+
+// Pure CSS dropdown using :focus-within
+@mixin ax-dropdown-toggle {
+  position: relative;
+  
+  .dropdown-menu {
+    @include ax-floating-element;
+    
+    top: 100%;
+    left: 0;
+    margin-top: ax-spacing(1);
+  }
+  
+  &:focus-within .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: scale(1);
+  }
+}
+
+// =============================================================================
+// BUTTON MIXINS
+// =============================================================================
+
+@mixin ax-btn-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: $ax-radius-base;
+  font-weight: $ax-font-medium;
+  text-decoration: none;
+  cursor: pointer;
+  transition: $ax-transition-base;
+  
+  &:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+@mixin ax-btn-size($size) {
+  @if $size == sm {
+    padding: ax-spacing(2) ax-spacing(3);
+    font-size: $ax-text-sm;
+  } @else if $size == base {
+    padding: ax-spacing(2) ax-spacing(4);
+    font-size: $ax-text-base;
+  } @else if $size == lg {
+    padding: ax-spacing(3) ax-spacing(6);
+    font-size: $ax-text-lg;
+  }
+}
+
+// =============================================================================
+// LIST & LINK MIXINS
+// =============================================================================
+
+// Base list reset for structured lists
+@mixin ax-reset-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+// Base link styling with consistent hover effects
+@mixin ax-link($color: var(--ax-gray, #{$ax-gray}), $hover-color: var(--ax-blue, #{$ax-blue})) {
+  display: inline-flex;
+  align-items: center;
+  color: $color;
+  text-decoration: none;
+  transition: color $ax-transition-base;
+  
+  &:hover {
+    color: $hover-color;
+  }
+}
+
+// =============================================================================
+// COMPREHENSIVE UTILITY MIXINS
+// =============================================================================
+
+// Apply color with all variants (light, normal, dark)
+// Pure CSS Color Variant Mixin - No class generation, variables only
+@mixin ax-color-variant($property, $color-name) {
+  @if map-has-key($ax-colors, $color-name) {
+    #{$property}: ax-color($color-name);
+    
+    // Generate utility classes for all variants if light/dark versions exist
+    @if map-has-key($ax-colors, '#{$color-name}-light') {
+      &.#{$color-name}-light {
+        #{$property}: ax-color('#{$color-name}-light');
+      }
+    }
+    
+    @if map-has-key($ax-colors, '#{$color-name}-dark') {
+      &.#{$color-name}-dark {
+        #{$property}: ax-color('#{$color-name}-dark');
+      }
+    }
+  }
+}
+
+// Generate comprehensive spacing utilities
+@mixin ax-spacing-utilities($property, $prefix) {
+  @each $key, $value in $ax-spacing {
+    .#{$prefix}-#{$key} {
+      #{$property}: $value !important;
+    }
+  }
+}
+
+// Focus ring utility for accessibility
+@mixin ax-focus-ring($color: $ax-blue, $width: 2px, $offset: 2px) {
+  &:focus {
+    outline: $width solid $color;
+    outline-offset: $offset;
+  }
+  
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+// Truncate text with ellipsis
+@mixin ax-truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+// Multi-line text truncation
+@mixin ax-line-clamp($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// Interactive element base styles
+@mixin ax-interactive {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all $ax-transition-base;
+  border: none;
+  background: none;
+  text-decoration: none;
+  
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+// Container query mixin for modern layout patterns
+@mixin ax-container-query($breakpoint, $type: 'inline-size') {
+  @container (#{$type}: #{ax-breakpoint($breakpoint)}) {
+    @content;
+  }
+}
+
+// =============================================================================
+// REUSABILITY MIXINS - Eliminate Repetitive Patterns
+// =============================================================================
+
+// Reset button patterns (found 40+ instances)
+@mixin ax-reset-button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+// Close button pattern (modals, overlays, etc)
+@mixin ax-close-button {
+  @include ax-reset-button;
+  font-size: 1.5rem;
+  color: $ax-gray;
+  line-height: 1;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  
+  &:hover {
+    color: $ax-gray-dark;
+  }
+}
+
+// Common flexbox patterns (found 50+ instances)
+@mixin ax-flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin ax-flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin ax-flex-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+@mixin ax-flex-end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+@mixin ax-flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin ax-flex-column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+// Transition patterns (found 30+ variations)
+@mixin ax-transition-fast($property: all) {
+  transition: #{$property} 0.2s ease;
+}
+
+@mixin ax-transition-base($property: all) {
+  transition: #{$property} 0.3s ease;
+}
+
+@mixin ax-transition-slow($property: all) {
+  transition: #{$property} 0.4s ease;
+}
+
+// Typography line-height patterns
+@mixin ax-line-height-tight {
+  line-height: 1;
+}
+
+@mixin ax-line-height-normal {
+  line-height: 1.25;
+}
+
+@mixin ax-line-height-relaxed {
+  line-height: 1.6;
+}
+
+// Interactive hover states
+@mixin ax-hover-scale($scale: 1.05) {
+  &:hover {
+    transform: scale($scale);
+  }
+}
+
+// =============================================================================
+// COMPONENT PADDING MIXINS - Eliminate Repetitive 0.75rem 1.5rem Pattern
+// =============================================================================
+
+@mixin ax-component-padding($size: 'base') {
+  @if $size == 'xs' {
+    padding: var(--ax-btn-padding-xs);
+  } @else if $size == 'sm' {
+    padding: var(--ax-btn-padding-sm);
+  } @else if $size == 'base' {
+    padding: var(--ax-component-padding);
+  } @else if $size == 'lg' {
+    padding: var(--ax-btn-padding-lg);
+  } @else if $size == 'xl' {
+    padding: var(--ax-btn-padding-xl);
+  } @else {
+    padding: $size;
+  }
+}
+
+// Button color variants with hover states
+@mixin ax-btn-color($color-name) {
+  background-color: var(--ax-#{$color-name});
+  color: var(--ax-white);
+  border-color: var(--ax-#{$color-name});
+  
+  &:hover:not(:disabled) {
+    background-color: var(--ax-#{$color-name}-dark);
+    border-color: var(--ax-#{$color-name}-dark);
+  }
+  
+  &:active:not(:disabled) {
+    background-color: var(--ax-#{$color-name}-dark);
+    transform: translateY(1px);
+  }
+}
+
+// Outline button color variants
+@mixin ax-btn-outline($color-name) {
+  background-color: transparent;
+  color: var(--ax-#{$color-name});
+  border-color: var(--ax-#{$color-name});
+  
+  &:hover:not(:disabled) {
+    background-color: var(--ax-#{$color-name});
+    color: var(--ax-white);
+  }
+}
+
+// Standard card padding pattern
+@mixin ax-card-padding($size: 'base') {
+  @if $size == 'sm' {
+    padding: var(--ax-card-padding-sm);
+  } @else if $size == 'lg' {
+    padding: var(--ax-card-padding-lg);
+  } @else {
+    padding: var(--ax-card-padding);
+  }
+}
+
+// =============================================================================
+// FORMS MIXINS - Consolidated from forms/_mixins.scss
+// Professional form components with direct color naming
+// =============================================================================
+
+// Base form control mixin
+@mixin ax-form-base {
+  display: block;
+  width: 100%;
+  padding: ax-spacing(2) ax-spacing(3);
+  font-size: $ax-text-base;
+  font-weight: $ax-font-normal;
+  line-height: $ax-leading-normal;
+  color: var(--ax-input-text);
+  background-color: var(--ax-input-bg);
+  background-clip: padding-box;
+  border: $ax-border-width solid var(--ax-input-border);
+  border-radius: $ax-radius-base;
+  appearance: none;
+  transition: border-color $ax-transition-base, box-shadow $ax-transition-base;
+
+  &::placeholder {
+    color: var(--ax-input-placeholder);
+    opacity: 1;
+  }
+
+  &:focus {
+    color: var(--ax-input-text);
+    background-color: var(--ax-input-bg);
+    border-color: $ax-blue;
+    outline: 0;
+    box-shadow: 0 0 0 2px rgba($ax-blue, 0.25);
+  }
+
+  &:disabled,
+  &[readonly] {
+    background-color: var(--ax-bg-surface);
+    color: $ax-gray;
+    opacity: 1;
+    cursor: not-allowed;
+  }
+
+  &[readonly]:focus {
+    border-color: $ax-border-color;
+    box-shadow: none;
+  }
+}
+
+// Form control size variants
+@mixin ax-form-xs {
+  padding: ax-spacing(1) ax-spacing(2);
+  font-size: $ax-text-xs;
+}
+
+@mixin ax-form-sm {
+  padding: ax-spacing(1.5) ax-spacing(2);
+  font-size: $ax-text-sm;
+}
+
+@mixin ax-form-lg {
+  padding: ax-spacing(3) ax-spacing(4);
+  font-size: $ax-text-lg;
+}
+
+@mixin ax-form-xl {
+  padding: ax-spacing(4) ax-spacing(5);
+  font-size: $ax-text-xl;
+}
+
+// Validation state base mixin
+@mixin ax-validation-state-base($color, $icon) {
+  border-color: $color !important;
+  background-image: $icon;
+  background-repeat: no-repeat;
+  background-position: right ax-spacing(3) center;
+  background-size: ax-spacing(4) ax-spacing(4);
+  padding-right: ax-spacing(10) !important;
+
+  &:focus {
+    border-color: $color !important;
+    box-shadow: 0 0 0 2px rgba($color, 0.25);
+  }
+}
+
+@mixin ax-validation-feedback($color) {
+  display: block;
+  width: 100%;
+  margin-top: ax-spacing(1);
+  font-size: $ax-text-xs;
+  color: $color;
+}
+
+// Validation states using direct color naming
+@mixin ax-form-valid {
+  @include ax-validation-state-base($ax-green, url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%232e7d32' d='m6.564.75-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e"));
+}
+
+@mixin ax-form-invalid {
+  @include ax-validation-state-base($ax-red, url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath d='m5.5 5.5 1 1m0-1-1 1'/%3e%3c/svg%3e"));
+}
+
+@mixin ax-form-warning {
+  @include ax-validation-state-base($ax-orange, url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23f57c00' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e"));
+}
+
+@mixin ax-form-info {
+  @include ax-validation-state-base($ax-blue, url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%231e88e5' d='M3 0C1.338 0 0 1.338 0 3s1.338 3 3 3 3-1.338 3-3-1.338-3-3-3zM3.5 2.5h-1V1.5h1V2.5zM2.5 3.5h1v1.5h-1V3.5z'/%3e%3c/svg%3e"));
+}
+
+// Form label mixin
+@mixin ax-form-label-base {
+  display: inline-block;
+  margin-bottom: ax-spacing(1);
+  font-weight: $ax-font-medium;
+  font-size: $ax-text-sm;
+  color: $ax-gray-dark;
+  line-height: $ax-leading-tight;
+
+  &.required::after {
+    content: " *";
+    color: $ax-red;
+  }
+
+  &.optional::after {
+    content: " (optional)";
+    color: $ax-gray;
+    font-weight: $ax-font-normal;
+  }
+}
+
+// Select dropdown mixin
+@mixin ax-form-select-base {
+  @include ax-form-base;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right ax-spacing(2) center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: ax-spacing(8);
+
+  &:focus {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%231e88e5' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  }
+}
+
+// Checkbox and radio button mixins
+@mixin ax-form-check-base {
+  position: relative;
+  display: block;
+  padding-left: ax-spacing(6);
+
+  .form-check-input {
+    position: absolute;
+    margin-top: ax-spacing(1);
+    margin-left: -(ax-spacing(6));
+  }
+
+  .form-check-label {
+    margin-bottom: 0;
+    cursor: pointer;
+  }
+}
+
+@mixin ax-form-check-input-base {
+  width: ax-spacing(4);
+  height: ax-spacing(4);
+  margin-top: (($ax-leading-normal * 1em) - ax-spacing(4)) / 2;
+  vertical-align: top;
+  background-color: $ax-white;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border: $ax-border-width solid $ax-border-color;
+  appearance: none;
+  color-adjust: exact;
+  transition: background-color $ax-transition-base, background-position $ax-transition-base, border-color $ax-transition-base, box-shadow $ax-transition-base;
+
+  &[type="checkbox"] {
+    border-radius: $ax-radius-sm;
+  }
+
+  &[type="radio"] {
+    border-radius: 50%;
+  }
+
+  &:active {
+    filter: brightness(90%);
+  }
+
+  &:focus {
+    border-color: $ax-blue;
+    outline: 0;
+    box-shadow: 0 0 0 2px rgba($ax-blue, 0.25);
+  }
+
+  &:checked {
+    background-color: $ax-blue;
+    border-color: $ax-blue;
+  }
+
+  &:checked[type="checkbox"] {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='white'%3e%3cpath fill-rule='evenodd' d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' clip-rule='evenodd'/%3e%3c/svg%3e");
+  }
+
+  &:checked[type="radio"] {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='white'/%3e%3c/svg%3e");
+  }
+
+  &[type="checkbox"]:indeterminate {
+    background-color: $ax-blue;
+    border-color: $ax-blue;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='white'%3e%3cpath fill-rule='evenodd' d='M4 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H4.75A.75.75 0 014 10z' clip-rule='evenodd'/%3e%3c/svg%3e");
+  }
+
+  &:disabled {
+    pointer-events: none;
+    filter: none;
+    opacity: 0.5;
+  }
+}
+
+// Input group addon mixin
+@mixin ax-input-group-addon-base {
+  display: flex;
+  align-items: center;
+  padding: ax-spacing(2) ax-spacing(3);
+  font-size: $ax-text-base;
+  font-weight: $ax-font-normal;
+  line-height: $ax-leading-normal;
+  color: $ax-gray-dark;
+  text-align: center;
+  background-color: $ax-gray-light;
+  border: $ax-border-width solid $ax-border-color;
+  border-radius: $ax-radius-base;
+  white-space: nowrap;
+}
+
+// Form grid mixin with responsive behavior
+@mixin ax-form-grid-base($columns: 2) {
+  display: grid;
+  gap: ax-spacing(4);
+  margin-bottom: ax-spacing(4);
+  grid-template-columns: repeat($columns, 1fr);
+
+  // Responsive behavior
+  @media (max-width: #{$ax-breakpoint-lg - 1px}) {
+    @if $columns > 2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: #{$ax-breakpoint-md - 1px}) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Mask overlay mixin for input masking
+@mixin ax-mask-overlay-base {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  padding: ax-spacing(2) ax-spacing(3);
+  font-size: $ax-text-base;
+  line-height: $ax-leading-normal;
+  color: $ax-gray;
+  background: transparent;
+  border: $ax-border-width solid transparent;
+  border-radius: $ax-radius-base;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+// Form button mixin (extends ax-btn-base)
+@mixin ax-form-btn-base {
+  @include ax-btn-base;
+  // Form-specific button overrides
+  padding: ax-spacing(2) ax-spacing(4);
+  font-size: $ax-text-base;
+  
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 2px rgba($ax-blue, 0.25);
+  }
+}
+
+// =============================================================================
+// COLOR VARIANT GENERATOR MIXIN
+// Generates color variants for buttons, badges, alerts, cards, etc.
+// Follows direct color naming (blue, blue-light, blue-dark)
+// =============================================================================
+
+@mixin ax-color-variants($prefix, $property: 'background-color', $text-color: $ax-white, $include-border: true) {
+  // List of best 15 colors (12 colors: base + extended)
+  $base-colors: ('blue', 'red', 'green', 'orange', 'yellow', 'gray', 'purple', 'pink', 'teal', 'cyan', 'brown', 'navy');
+  
+  @each $color-name in $base-colors {
+    // Determine text color for yellow and gray-light (need dark text)
+    $computed-text-color: $text-color;
+    @if $color-name == 'yellow' {
+      $computed-text-color: $ax-gray-dark;
+    }
+    
+    // Normal variant (e.g., btn-blue)
+    .#{$prefix}-#{$color-name} {
+      #{$property}: map.get($ax-colors, $color-name);
+      @if $include-border {
+        border-color: map.get($ax-colors, $color-name);
+      }
+      @if $property == 'background-color' or $property == 'background' {
+        color: $computed-text-color;
+      }
+      
+      &:hover:not(:disabled) {
+        @if map.has-key($ax-colors, '#{$color-name}-dark') {
+          #{$property}: map.get($ax-colors, '#{$color-name}-dark');
+          @if $include-border {
+            border-color: map.get($ax-colors, '#{$color-name}-dark');
+          }
+          // Yellow-dark needs white text on hover
+          @if $color-name == 'yellow' {
+            color: $ax-white;
+          }
+        }
+      }
+      
+      &:active {
+        @if map.has-key($ax-colors, '#{$color-name}-dark') {
+          #{$property}: map.get($ax-colors, '#{$color-name}-dark');
+        }
+      }
+    }
+    
+    // Light variant (e.g., btn-blue-light)
+    @if map.has-key($ax-colors, '#{$color-name}-light') {
+      .#{$prefix}-#{$color-name}-light {
+        #{$property}: map.get($ax-colors, '#{$color-name}-light');
+        @if $include-border {
+          border-color: map.get($ax-colors, '#{$color-name}-light');
+        }
+        @if $property == 'background-color' or $property == 'background' {
+          color: $computed-text-color;
+        }
+        
+        &:hover:not(:disabled) {
+          #{$property}: map.get($ax-colors, $color-name);
+          @if $include-border {
+            border-color: map.get($ax-colors, $color-name);
+          }
+        }
+      }
+    }
+    
+    // Dark variant (e.g., btn-blue-dark)
+    @if map.has-key($ax-colors, '#{$color-name}-dark') {
+      .#{$prefix}-#{$color-name}-dark {
+        #{$property}: map.get($ax-colors, '#{$color-name}-dark');
+        @if $include-border {
+          border-color: map.get($ax-colors, '#{$color-name}-dark');
+        }
+        @if $property == 'background-color' or $property == 'background' {
+          color: $ax-white; // Dark variants always use white text
+        }
+        
+        &:hover:not(:disabled) {
+          #{$property}: map.get($ax-colors, '#{$color-name}-dark');
+          @if $include-border {
+            border-color: map.get($ax-colors, '#{$color-name}-dark');
+          }
+          filter: brightness(0.9);
+        }
+      }
+    }
+  }
+}
+
+// =============================================================================
+// INTERACTIVE ELEMENT BASE MIXIN
+// Common styles for buttons, badges, tags, and other interactive elements
+// =============================================================================
+
+@mixin ax-interactive-base($padding: ax-spacing(2) ax-spacing(4)) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: $ax-radius-base;
+  cursor: pointer;
+  transition: all $ax-transition-base;
+  padding: $padding;
+  font-weight: $ax-font-medium;
+  text-decoration: none;
+  
+  &:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+  
+  &:disabled,
+  &[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+// =============================================================================
+// ELEVATION MIXIN (Box Shadow with Hover)
+// =============================================================================
+
+@mixin ax-elevation($base: 'sm', $hover: 'lg') {
+  @if $base == 'none' {
+    box-shadow: none;
+  } @else if $base == 'sm' {
+    box-shadow: $ax-shadow-sm;
+  } @else if $base == 'base' {
+    box-shadow: $ax-shadow-base;
+  } @else if $base == 'lg' {
+    box-shadow: $ax-shadow-lg;
+  } @else if $base == 'xl' {
+    box-shadow: $ax-shadow-xl;
+  }
+  
+  @if $hover {
+    transition: box-shadow $ax-transition-base;
+    &:hover {
+      @if $hover == 'sm' {
+        box-shadow: $ax-shadow-sm;
+      } @else if $hover == 'base' {
+        box-shadow: $ax-shadow-base;
+      } @else if $hover == 'lg' {
+        box-shadow: $ax-shadow-lg;
+      } @else if $hover == 'xl' {
+        box-shadow: $ax-shadow-xl;
+      }
+    }
+  }
+}
+
+// =============================================================================
+// RESPONSIVE GAP MIXIN
+// =============================================================================
+
+@mixin ax-responsive-gap($desktop: 1rem, $mobile: 0.5rem) {
+  gap: $desktop;
+  
+  @include ax-media-down(md) {
+    gap: $mobile;
+  }
+}
+
+// =============================================================================
+// BORDER UTILITY MIXIN
+// =============================================================================
+
+@mixin ax-border($side: 'all', $width: 1px, $color: $ax-border-color) {
+  @if $side == 'all' {
+    border: $width solid $color;
+  } @else {
+    border-#{$side}: $width solid $color;
+  }
+}
+
+// =============================================================================
+// DISABLED STATE MIXIN
+// =============================================================================
+
+@mixin ax-disabled-state($opacity: 0.6) {
+  &:disabled,
+  &[disabled] {
+    opacity: $opacity;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+// =============================================================================
+// BACKWARD COMPATIBILITY ALIASES
+// For existing forms that import forms/_mixins.scss
+// =============================================================================
+
+// Provide non-prefixed aliases for backward compatibility
+@mixin form-base { @include ax-form-base; }
+@mixin form-xs { @include ax-form-xs; }
+@mixin form-sm { @include ax-form-sm; }
+@mixin form-lg { @include ax-form-lg; }
+@mixin form-xl { @include ax-form-xl; }
+@mixin validation-state-base($color, $icon) { @include ax-validation-state-base($color, $icon); }
+@mixin validation-feedback($color) { @include ax-validation-feedback($color); }
+@mixin form-valid { @include ax-form-valid; }
+@mixin form-invalid { @include ax-form-invalid; }
+@mixin form-warning { @include ax-form-warning; }
+@mixin form-info { @include ax-form-info; }
+@mixin form-label-base { @include ax-form-label-base; }
+@mixin form-select-base { @include ax-form-select-base; }
+@mixin form-check-base { @include ax-form-check-base; }
+@mixin form-check-input-base { @include ax-form-check-input-base; }
+@mixin input-group-addon-base { @include ax-input-group-addon-base; }
+@mixin form-grid-base($columns: 2) { @include ax-form-grid-base($columns); }
+@mixin mask-overlay-base { @include ax-mask-overlay-base; }
+@mixin form-btn-base { @include ax-form-btn-base; }

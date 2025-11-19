@@ -1,0 +1,434 @@
+// =============================================================================
+// BREADCRUMBS - AxisUI Framework Comprehensive Breadcrumb Navigation
+// Direct color naming with comprehensive variants and separators
+// No ax- class prefixes, container scoped
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
+
+.axis-ui {
+  // =============================================================================
+  // BASE BREADCRUMB STYLES
+  // =============================================================================
+  
+  .breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: ax-spacing(2) 0;
+    font-size: $ax-text-sm;
+    line-height: $ax-leading-relaxed;
+    
+    // Reset default list styles when applied to ul or ol elements
+    &.ul,
+    &.ol {
+      padding-left: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  // =============================================================================
+  // BREADCRUMB ITEMS
+  // =============================================================================
+  
+  .breadcrumb-item {
+    @include ax-flex-start;
+    color: $ax-gray;
+    
+    // Separator between items
+    &:not(:last-child)::after {
+      content: '/';
+      margin: 0 ax-spacing(2);
+      color: $ax-gray;
+      font-weight: $ax-font-normal;
+      opacity: 0.6;
+    }
+    
+    // Active (current) item
+    &.active {
+      color: $ax-gray-dark;
+      font-weight: $ax-font-semibold;
+      cursor: default;
+      
+      a {
+        color: inherit;
+        text-decoration: none;
+        pointer-events: none;
+      }
+    }
+    
+    // Links within breadcrumb items
+    a {
+      color: $ax-blue;
+      text-decoration: none;
+      transition: color $ax-transition-fast;
+      
+      &:hover {
+        color: $ax-blue-dark;
+        text-decoration: underline;
+      }
+      
+      &:focus {
+        @include ax-focus-ring();
+        border-radius: $ax-radius-sm;
+      }
+    }
+  }
+
+  // =============================================================================
+  // SIZE VARIANTS
+  // =============================================================================
+  
+  .breadcrumb.breadcrumb-sm {
+    font-size: $ax-text-xs;
+    padding: ax-spacing(1) 0;
+    
+    .breadcrumb-item:not(:last-child)::after {
+      margin: 0 ax-spacing(1.5);
+    }
+  }
+  
+  .breadcrumb.breadcrumb-lg {
+    font-size: $ax-text-base;
+    padding: ax-spacing(3) 0;
+    
+    .breadcrumb-item:not(:last-child)::after {
+      margin: 0 ax-spacing(3);
+    }
+  }
+  
+  .breadcrumb.breadcrumb-xl {
+    font-size: $ax-text-lg;
+    padding: ax-spacing(4) 0;
+    
+    .breadcrumb-item:not(:last-child)::after {
+      margin: 0 ax-spacing(4);
+    }
+  }
+
+  // =============================================================================
+  // COLOR VARIANTS - Direct Color Naming
+  // =============================================================================
+  
+  .breadcrumb.breadcrumb-blue {
+    .breadcrumb-item {
+      a {
+        color: $ax-blue;
+        
+        &:hover {
+          color: $ax-blue-dark;
+        }
+      }
+      
+      &:not(:last-child)::after {
+        color: rgba($ax-blue, 0.6);
+      }
+    }
+  }
+  
+  .breadcrumb.breadcrumb-red {
+    .breadcrumb-item {
+      a {
+        color: $ax-red;
+        
+        &:hover {
+          color: $ax-red-dark;
+        }
+      }
+      
+      &:not(:last-child)::after {
+        color: rgba($ax-red, 0.6);
+      }
+    }
+  }
+  
+  .breadcrumb.breadcrumb-green {
+    .breadcrumb-item {
+      a {
+        color: $ax-green;
+        
+        &:hover {
+          color: $ax-green-dark;
+        }
+      }
+      
+      &:not(:last-child)::after {
+        color: rgba($ax-green, 0.6);
+      }
+    }
+  }
+  
+  .breadcrumb.breadcrumb-purple {
+    .breadcrumb-item {
+      a {
+        color: $ax-purple;
+        
+        &:hover {
+          color: $ax-purple-dark;
+        }
+      }
+      
+      &:not(:last-child)::after {
+        color: rgba($ax-purple, 0.6);
+      }
+    }
+  }
+  
+  .breadcrumb.breadcrumb-gray {
+    .breadcrumb-item {
+      a {
+        color: $ax-gray-dark;
+        
+        &:hover {
+          color: $ax-black;
+        }
+      }
+      
+      &:not(:last-child)::after {
+        color: $ax-gray;
+      }
+    }
+  }
+
+  // =============================================================================
+  // SEPARATOR VARIANTS
+  // =============================================================================
+  
+  .breadcrumb.breadcrumb-arrow {
+    .breadcrumb-item:not(:last-child)::after {
+      content: '→';
+      font-size: 0.875em;
+    }
+  }
+  
+  .breadcrumb.breadcrumb-chevron {
+    .breadcrumb-item:not(:last-child)::after {
+      content: '›';
+      font-size: 1.25em;
+      font-weight: $ax-font-bold;
+    }
+  }
+  
+  .breadcrumb.breadcrumb-dot {
+    .breadcrumb-item:not(:last-child)::after {
+      content: '•';
+      font-size: 1.1em;
+    }
+  }
+  
+  .breadcrumb.breadcrumb-pipe {
+    .breadcrumb-item:not(:last-child)::after {
+      content: '|';
+      font-weight: $ax-font-light;
+    }
+  }
+  
+  .breadcrumb.breadcrumb-dash {
+    .breadcrumb-item:not(:last-child)::after {
+      content: '—';
+      font-size: 0.75em;
+    }
+  }
+
+  // =============================================================================
+  // STYLE VARIANTS
+  // =============================================================================
+  
+  .breadcrumb.breadcrumb-background {
+    background-color: $ax-gray-light;
+    padding: ax-spacing(2) ax-spacing(3);
+    border-radius: $ax-radius-base;
+    border: 1px solid $ax-border-color;
+  }
+  
+  .breadcrumb.breadcrumb-card {
+    background-color: $ax-white;
+    padding: ax-spacing(3) ax-spacing(4);
+    border-radius: $ax-radius-lg;
+    box-shadow: $ax-shadow-sm;
+    border: 1px solid $ax-border-color;
+  }
+  
+  .breadcrumb.breadcrumb-underline {
+    border-bottom: 1px solid $ax-border-color;
+    padding-bottom: ax-spacing(2);
+  }
+
+  // =============================================================================
+  // BREADCRUMB WITH ICONS
+  // =============================================================================
+  
+  .breadcrumb-item {
+    .breadcrumb-icon {
+      margin-right: ax-spacing(1);
+      font-size: 0.875em;
+      vertical-align: middle;
+    }
+    
+    &.breadcrumb-home {
+      .breadcrumb-icon {
+        font-size: 1em;
+      }
+    }
+  }
+
+  // =============================================================================
+  // COLLAPSIBLE BREADCRUMBS (for long paths)
+  // =============================================================================
+  
+  .breadcrumb.breadcrumb-collapsible {
+    .breadcrumb-item.breadcrumb-ellipsis {
+      cursor: pointer;
+      color: $ax-gray;
+      
+      &:hover {
+        color: $ax-gray-dark;
+      }
+      
+      &::after {
+        content: '...';
+        font-weight: $ax-font-bold;
+        margin: 0 ax-spacing(2);
+      }
+      
+      &:not(:last-child)::after {
+        content: '...';
+      }
+    }
+    
+    // Hidden items (controlled by JavaScript)
+    .breadcrumb-item.breadcrumb-hidden {
+      display: none;
+    }
+    
+    &.breadcrumb-expanded {
+      .breadcrumb-item.breadcrumb-hidden {
+        display: flex;
+      }
+      
+      .breadcrumb-item.breadcrumb-ellipsis {
+        display: none;
+      }
+    }
+  }
+
+  // =============================================================================
+  // RESPONSIVE BEHAVIOR
+  // =============================================================================
+  
+  @include ax-responsive(sm-down) {
+    .breadcrumb {
+      font-size: $ax-text-xs;
+      
+      .breadcrumb-item:not(:last-child)::after {
+        margin: 0 ax-spacing(1.5);
+      }
+      
+      // Hide middle items on small screens
+      &.breadcrumb-responsive {
+        .breadcrumb-item:not(:first-child):not(:last-child):not(.breadcrumb-ellipsis) {
+          display: none;
+        }
+        
+        .breadcrumb-item.breadcrumb-ellipsis {
+          display: flex;
+        }
+      }
+    }
+  }
+
+  // =============================================================================
+  // BREADCRUMB NAVIGATION WRAPPER
+  // =============================================================================
+  
+  .breadcrumb-nav {
+    margin-bottom: ax-spacing(6);
+    
+    .breadcrumb-title {
+      font-size: $ax-text-lg;
+      font-weight: $ax-font-semibold;
+      color: $ax-gray-dark;
+      margin-bottom: ax-spacing(2);
+    }
+    
+    .breadcrumb-description {
+      font-size: $ax-text-sm;
+      color: $ax-gray;
+      margin-bottom: ax-spacing(3);
+    }
+  }
+
+  // =============================================================================
+  // ACCESSIBILITY ENHANCEMENTS
+  // =============================================================================
+  
+  .breadcrumb {
+    // Screen reader support for current page
+    .breadcrumb-item.active[aria-current="page"] {
+      // Enhance visual indication for accessibility
+      position: relative;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        height: 2px;
+        background-color: currentColor;
+        opacity: 0.3;
+        border-radius: 1px;
+      }
+    }
+    
+    // Keyboard navigation
+    a:focus-visible {
+      @include ax-focus-ring();
+    }
+    
+    // Reduced motion support
+    @include ax-prefers-reduced-motion {
+      a {
+        transition: none;
+      }
+    }
+  }
+
+  // =============================================================================
+  // BREADCRUMB UTILITIES
+  // =============================================================================
+  
+  .breadcrumb-divider {
+    color: $ax-gray;
+    margin: 0 ax-spacing(2);
+    opacity: 0.6;
+  }
+  
+  .breadcrumb-back {
+    display: inline-flex;
+    align-items: center;
+    color: $ax-blue;
+    text-decoration: none;
+    font-size: $ax-text-sm;
+    margin-bottom: ax-spacing(2);
+    
+    &::before {
+      content: '←';
+      margin-right: ax-spacing(1);
+    }
+    
+    &:hover {
+      color: $ax-blue-dark;
+      text-decoration: underline;
+    }
+    
+    &:focus {
+      @include ax-focus-ring();
+      border-radius: $ax-radius-sm;
+    }
+  }
+}

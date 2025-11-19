@@ -1,0 +1,112 @@
+// =============================================================================
+// POSITIONING UTILITIES - AxisUI Framework
+// Container-scoped positioning utilities
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+
+.axis-ui {
+  // =============================================================================
+  // POSITION
+  // =============================================================================
+  .static { position: static !important; }
+  .fixed { position: fixed !important; }
+  .absolute { position: absolute !important; }
+  .relative { position: relative !important; }
+  .sticky { position: sticky !important; }
+  
+  // =============================================================================
+  // INSET POSITIONING
+  // =============================================================================
+  .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+  .inset-auto { top: auto; right: auto; bottom: auto; left: auto; }
+  .inset-px { top: 1px; right: 1px; bottom: 1px; left: 1px; }
+  .inset-1 { top: ax-spacing(1); right: ax-spacing(1); bottom: ax-spacing(1); left: ax-spacing(1); }
+  .inset-2 { top: ax-spacing(2); right: ax-spacing(2); bottom: ax-spacing(2); left: ax-spacing(2); }
+  .inset-4 { top: ax-spacing(4); right: ax-spacing(4); bottom: ax-spacing(4); left: ax-spacing(4); }
+  
+  // =============================================================================
+  // TOP POSITIONING
+  // =============================================================================
+  .top-0 { top: 0; }
+  .top-px { top: 1px; }
+  .top-1 { top: ax-spacing(1); }
+  .top-2 { top: ax-spacing(2); }
+  .top-3 { top: ax-spacing(3); }
+  .top-4 { top: ax-spacing(4); }
+  .top-6 { top: ax-spacing(6); }
+  .top-8 { top: ax-spacing(8); }
+  .top-12 { top: ax-spacing(12); }
+  .top-16 { top: ax-spacing(16); }
+  .top-auto { top: auto; }
+  .top-half { top: 50%; }
+  .top-full { top: 100%; }
+  
+  // =============================================================================
+  // RIGHT POSITIONING
+  // =============================================================================
+  .right-0 { right: 0; }
+  .right-px { right: 1px; }
+  .right-1 { right: ax-spacing(1); }
+  .right-2 { right: ax-spacing(2); }
+  .right-3 { right: ax-spacing(3); }
+  .right-4 { right: ax-spacing(4); }
+  .right-6 { right: ax-spacing(6); }
+  .right-8 { right: ax-spacing(8); }
+  .right-12 { right: ax-spacing(12); }
+  .right-16 { right: ax-spacing(16); }
+  .right-auto { right: auto; }
+  .right-half { right: 50%; }
+  .right-full { right: 100%; }
+  
+  // =============================================================================
+  // BOTTOM POSITIONING
+  // =============================================================================
+  .bottom-0 { bottom: 0; }
+  .bottom-px { bottom: 1px; }
+  .bottom-1 { bottom: ax-spacing(1); }
+  .bottom-2 { bottom: ax-spacing(2); }
+  .bottom-3 { bottom: ax-spacing(3); }
+  .bottom-4 { bottom: ax-spacing(4); }
+  .bottom-6 { bottom: ax-spacing(6); }
+  .bottom-8 { bottom: ax-spacing(8); }
+  .bottom-12 { bottom: ax-spacing(12); }
+  .bottom-16 { bottom: ax-spacing(16); }
+  .bottom-auto { bottom: auto; }
+  .bottom-half { bottom: 50%; }
+  .bottom-full { bottom: 100%; }
+  
+  // =============================================================================
+  // LEFT POSITIONING
+  // =============================================================================
+  .left-0 { left: 0; }
+  .left-px { left: 1px; }
+  .left-1 { left: ax-spacing(1); }
+  .left-2 { left: ax-spacing(2); }
+  .left-3 { left: ax-spacing(3); }
+  .left-4 { left: ax-spacing(4); }
+  .left-6 { left: ax-spacing(6); }
+  .left-8 { left: ax-spacing(8); }
+  .left-12 { left: ax-spacing(12); }
+  .left-16 { left: ax-spacing(16); }
+  .left-auto { left: auto; }
+  .left-half { left: 50%; }
+  .left-full { left: 100%; }
+  
+  // =============================================================================
+  // Z-INDEX - Comprehensive Layering
+  // =============================================================================
+  .z-0 { z-index: 0; }
+  .z-10 { z-index: 10; }
+  .z-20 { z-index: 20; }
+  .z-30 { z-index: 30; }
+  .z-40 { z-index: 40; }
+  .z-50 { z-index: 50; }
+  .z-auto { z-index: auto; }
+  .z-negative { z-index: -1; }
+  .z-dropdown { z-index: $ax-z-dropdown; }
+  .z-sticky { z-index: $ax-z-sticky; }
+  .z-fixed { z-index: $ax-z-fixed; }
+  .z-popover { z-index: $ax-z-popover; }
+  .z-tooltip { z-index: $ax-z-tooltip; }
+}

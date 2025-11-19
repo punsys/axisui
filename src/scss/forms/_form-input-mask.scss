@@ -1,0 +1,330 @@
+// AxisUI Input Mask Styles
+// Container-scoped input mask utilities with responsive and professional design
+// Direct color naming, only ax- prefix for variables, no ax- class prefixes
+// All colors: blue, blue-light, blue-dark, red, red-light, red-dark, green, green-light, green-dark, etc.
+// Professional, simple structure. No unnecessary complexity.
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
+
+.axis-ui {
+  // =============================================================================
+  // BASE INPUT MASK STYLES
+  // =============================================================================
+
+  .input-mask {
+    position: relative;
+    font-family: $ax-font-mono;
+    letter-spacing: 0.05em;
+    transition: all $ax-transition-base;
+
+    &::placeholder {
+      color: $ax-gray;
+      opacity: 0.6;
+    }
+
+    &:focus {
+      &::placeholder {
+        opacity: 0.4;
+      }
+    }
+  }
+
+  // =============================================================================
+  // MASK TYPE SPECIFIC STYLES
+  // =============================================================================
+
+  // Phone number mask
+  .input-mask-phone {
+    &::before {
+      content: '📞';
+      position: absolute;
+      left: ax-spacing(3);
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: $ax-text-sm;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    input {
+      padding-left: ax-spacing(8);
+    }
+  }
+
+  // Date mask
+  .input-mask-date {
+    &::before {
+      content: '📅';
+      position: absolute;
+      left: ax-spacing(3);
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: $ax-text-sm;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    input {
+      padding-left: ax-spacing(8);
+    }
+  }
+
+  // Credit card mask
+  .input-mask-credit {
+    &::before {
+      content: '💳';
+      position: absolute;
+      left: ax-spacing(3);
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: $ax-text-sm;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    input {
+      padding-left: ax-spacing(8);
+    }
+  }
+
+  // Currency mask
+  .input-mask-currency {
+    &::before {
+      content: '💰';
+      position: absolute;
+      left: ax-spacing(3);
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: $ax-text-sm;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    input {
+      padding-left: ax-spacing(8);
+      text-align: right;
+    }
+  }
+
+  // Time mask
+  .input-mask-time {
+    &::before {
+      content: '🕐';
+      position: absolute;
+      left: ax-spacing(3);
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: $ax-text-sm;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    input {
+      padding-left: ax-spacing(8);
+    }
+  }
+
+  // SSN mask
+  .input-mask-ssn {
+    &::before {
+      content: '🔒';
+      position: absolute;
+      left: ax-spacing(3);
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: $ax-text-sm;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    input {
+      padding-left: ax-spacing(8);
+      letter-spacing: 0.1em;
+    }
+  }
+
+  // ZIP code mask
+  .input-mask-zip {
+    &::before {
+      content: '📮';
+      position: absolute;
+      left: ax-spacing(3);
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: $ax-text-sm;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    input {
+      padding-left: ax-spacing(8);
+    }
+  }
+
+  // =============================================================================
+  // VALIDATION STATES FOR MASKED INPUTS
+  // =============================================================================
+
+  .input-mask.valid {
+    border-color: $ax-green;
+    background-color: rgba($ax-green, 0.05);
+
+    &:focus {
+      border-color: $ax-green-dark;
+      box-shadow: 0 0 0 2px rgba($ax-green, 0.25);
+    }
+  }
+
+  .input-mask.invalid {
+    border-color: $ax-red;
+    background-color: rgba($ax-red, 0.05);
+
+    &:focus {
+      border-color: $ax-red-dark;
+      box-shadow: 0 0 0 2px rgba($ax-red, 0.25);
+    }
+  }
+
+  .input-mask.warning {
+    border-color: $ax-orange;
+    background-color: rgba($ax-orange, 0.05);
+
+    &:focus {
+      border-color: $ax-orange-dark;
+      box-shadow: 0 0 0 2px rgba($ax-orange, 0.25);
+    }
+  }
+
+  // =============================================================================
+  // MASK HELPER TEXT AND FEEDBACK
+  // =============================================================================
+
+  .mask-helper {
+    display: block;
+    margin-top: ax-spacing(1);
+    font-size: $ax-text-xs;
+    color: $ax-gray;
+    font-family: $ax-font-mono;
+
+    &.mask-helper-success {
+      color: $ax-green-dark;
+    }
+
+    &.mask-helper-error {
+      color: $ax-red-dark;
+    }
+
+    &.mask-helper-warning {
+      color: $ax-orange-dark;
+    }
+  }
+
+  // =============================================================================
+  // MASK FORMAT PREVIEW
+  // =============================================================================
+
+  .mask-format-preview {
+    position: absolute;
+    right: ax-spacing(3);
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: $ax-text-xs;
+    color: $ax-gray;
+    font-family: $ax-font-mono;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity $ax-transition-base;
+
+    &.show {
+      opacity: 1;
+    }
+  }
+
+  // =============================================================================
+  // RESPONSIVE MASK INPUTS
+  // =============================================================================
+
+  @media (max-width: #{$ax-breakpoint-md - 1px}) {
+    .input-mask {
+      font-size: $ax-text-sm;
+      padding: ax-spacing(2.5) ax-spacing(3);
+    }
+
+    .input-mask-phone,
+    .input-mask-date,
+    .input-mask-credit,
+    .input-mask-currency,
+    .input-mask-time,
+    .input-mask-ssn,
+    .input-mask-zip {
+      &::before {
+        font-size: $ax-text-xs;
+      }
+
+      input {
+        padding-left: ax-spacing(7);
+      }
+    }
+  }
+
+  // =============================================================================
+  // DISABLED AND READONLY STATES
+  // =============================================================================
+
+  .input-mask:disabled,
+  .input-mask[readonly] {
+    background-color: $ax-gray-light;
+    color: $ax-gray;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  // =============================================================================
+  // SIZE VARIANTS
+  // =============================================================================
+
+  .input-mask-sm {
+    padding: ax-spacing(1.5) ax-spacing(2.5);
+    font-size: $ax-text-sm;
+
+    &::placeholder {
+      font-size: $ax-text-xs;
+    }
+  }
+
+  .input-mask-lg {
+    padding: ax-spacing(3.5) ax-spacing(4);
+    font-size: $ax-text-lg;
+
+    &::placeholder {
+      font-size: $ax-text-base;
+    }
+  }
+
+  // =============================================================================
+  // DARK MODE SUPPORT (if applicable)
+  // =============================================================================
+
+  .dark-mode {
+    .input-mask {
+      background-color: $ax-gray-dark;
+      color: $ax-white;
+      border-color: $ax-gray;
+
+      &::placeholder {
+        color: $ax-gray-light;
+      }
+
+      &:focus {
+        border-color: $ax-blue-light;
+        box-shadow: 0 0 0 2px rgba($ax-blue-light, 0.25);
+      }
+    }
+
+    .mask-helper {
+      color: $ax-gray-light;
+    }
+  }
+}

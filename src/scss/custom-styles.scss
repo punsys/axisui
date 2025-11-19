@@ -1,0 +1,114 @@
+/*!
+ * AxisUI Custom Showcase Styles
+ * Minimal custom styles for documentation/showcase pages
+ * Most styling uses framework utilities (backgrounds, borders, spacing, etc.)
+ */
+
+@use 'sass:map';
+@use 'abstracts/variables' as *;
+@use 'abstracts/colors' as *;
+@use 'abstracts/breakpoints' as *;
+
+.axis-ui {
+    // ===================================
+    // SIDEBAR DEMO PAGE - THEME VARIANTS
+    // Complex color schemes specific to sidebar-samples.html demos
+    // Common sidebar styles are in components/_sidebar.scss
+    // ===================================
+
+    // Dashboard layout adjustments
+    .dashboard-content {
+        margin-top: var(--ax-navbar-height, 60px); /* Account for fixed navbar - uses CSS variable with fallback */
+        overflow-x: hidden; /* Prevent horizontal scroll */
+        min-height: calc(100vh - var(--ax-navbar-height, 60px)); /* Full height minus navbar */
+    }
+    // Navbar Theme Containers (demo-specific heights)
+
+     .navbar-demo-container {
+        position: relative;
+        min-height: 60px;
+    }
+            
+    .navbar-demo-container-lg {
+        position: relative;
+        min-height: 120px;
+    }
+
+    // Sidebar Theme Variants (demo-specific color schemes)
+    .sidebar-design-1 {
+        background: linear-gradient(180deg, $ax-blue-dark 0%, $ax-purple-dark 100%);
+        .sidebar-nav .item.active { background: rgba($ax-blue-light, 0.2); border-left: 3px solid $ax-blue-light; }
+    }
+
+    .sidebar-design-2 {
+        background: $ax-gray-dark;
+        .sidebar-header { background: $ax-black; }
+        .sidebar-nav .item.active { background: $ax-green-dark; }
+    }
+
+    .sidebar-design-3 {
+        background: $ax-white;
+        .sidebar-header { background: $ax-blue-light; }
+        .sidebar-nav .item.active { background: $ax-blue; }
+    }
+
+    .sidebar-design-4 {
+        background: linear-gradient(180deg, $ax-purple-dark 0%, $ax-pink-dark 100%);
+        .sidebar-nav .item.active { 
+            background: linear-gradient(90deg, rgba($ax-pink-light, 0.3) 0%, rgba($ax-purple-light, 0.3) 100%); 
+            border-left: 4px solid $ax-pink-light; 
+        }
+    }
+
+    .sidebar-design-5 {
+        background: rgba($ax-white, 0.95);
+        backdrop-filter: blur(10px);
+        .sidebar-nav .item.active { background: $ax-orange; }
+    }
+
+    // ===================================
+    // RESPONSIVE BREAKPOINTS
+    // Note: Most responsive utilities now use framework classes:
+    // - .grid-responsive uses: grid-responsive (framework class)
+    // - .flex-responsive uses: flex-col-md (framework class)
+    // ===================================
+
+    @include ax-responsive(md-down) {
+        .desktop-nav-items {
+            display: none !important;
+        }
+
+        .sidebar-desktop {
+            display: none !important;
+        }
+
+        .main-content-responsive {
+            margin-left: 0 !important;
+            padding: 1.5rem !important;
+        }
+    }
+
+    @include ax-responsive(sm-down) {
+        h1 {
+            font-size: $ax-text-2xl !important;
+        }
+    }
+
+    // ===================================
+    // GRADIENT UTILITIES
+    // Note: Most gradient backgrounds now use framework utilities:
+    // - .gradient-avatar uses: bg-gradient-purple-pink
+    // - .gradient-icon-* uses: bg-gradient-* (framework classes)
+    // - .gradient-button uses: bg-gradient-blue-purple hover-lift transition
+    // ===================================
+
+    // Custom navbar brand styling (framework .navbar-brand exists but needs gradient text)
+    .navbar-brand {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: 700;
+    }
+}
+

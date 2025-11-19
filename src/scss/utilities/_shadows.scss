@@ -1,0 +1,81 @@
+// =============================================================================
+// SHADOW UTILITIES - AxisUI Framework
+// Pure CSS shadow system with container scoping
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+
+.axis-ui {
+  // =============================================================================
+  // BOX SHADOWS - Using shadows map
+  // =============================================================================
+  @each $name, $shadow in $ax-shadows {
+    @if $name == 'base' {
+      .shadow { box-shadow: $shadow !important; }
+    } @else {
+      .shadow-#{$name} { box-shadow: $shadow !important; }
+    }
+  }
+  .shadow-2xl { box-shadow: 0 25px 50px -12px rgba($ax-black, 0.25) !important; }
+  
+  // =============================================================================
+  // COLORED SHADOWS - 3-variant system
+  // =============================================================================
+  .shadow-blue { box-shadow: 0 4px 6px -1px rgba($ax-blue, 0.3), 0 2px 4px -1px rgba($ax-blue, 0.2) !important; }
+  .shadow-blue-light { box-shadow: 0 4px 6px -1px rgba($ax-blue-light, 0.3), 0 2px 4px -1px rgba($ax-blue-light, 0.2) !important; }
+  .shadow-blue-dark { box-shadow: 0 4px 6px -1px rgba($ax-blue-dark, 0.3), 0 2px 4px -1px rgba($ax-blue-dark, 0.2) !important; }
+  
+  .shadow-red { box-shadow: 0 4px 6px -1px rgba($ax-red, 0.3), 0 2px 4px -1px rgba($ax-red, 0.2) !important; }
+  .shadow-red-light { box-shadow: 0 4px 6px -1px rgba($ax-red-light, 0.3), 0 2px 4px -1px rgba($ax-red-light, 0.2) !important; }
+  .shadow-red-dark { box-shadow: 0 4px 6px -1px rgba($ax-red-dark, 0.3), 0 2px 4px -1px rgba($ax-red-dark, 0.2) !important; }
+  
+  .shadow-green { box-shadow: 0 4px 6px -1px rgba($ax-green, 0.3), 0 2px 4px -1px rgba($ax-green, 0.2) !important; }
+  .shadow-green-light { box-shadow: 0 4px 6px -1px rgba($ax-green-light, 0.1), 0 2px 4px -1px rgba($ax-green-light, 0.06) !important; }
+  .shadow-green-dark { box-shadow: 0 4px 6px -1px rgba($ax-green-dark, 0.1), 0 2px 4px -1px rgba($ax-green-dark, 0.06) !important; }
+  
+  .shadow-yellow { box-shadow: 0 4px 6px -1px rgba($ax-yellow, 0.1), 0 2px 4px -1px rgba($ax-yellow, 0.06) !important; }
+  .shadow-yellow-light { box-shadow: 0 4px 6px -1px rgba($ax-yellow-light, 0.1), 0 2px 4px -1px rgba($ax-yellow-light, 0.06) !important; }
+  .shadow-yellow-dark { box-shadow: 0 4px 6px -1px rgba($ax-yellow-dark, 0.1), 0 2px 4px -1px rgba($ax-yellow-dark, 0.06) !important; }
+  
+  .shadow-brown { box-shadow: 0 4px 6px -1px rgba($ax-brown, 0.1), 0 2px 4px -1px rgba($ax-brown, 0.06) !important; }
+  .shadow-brown-light { box-shadow: 0 4px 6px -1px rgba($ax-brown-light, 0.1), 0 2px 4px -1px rgba($ax-brown-light, 0.06) !important; }
+  .shadow-brown-dark { box-shadow: 0 4px 6px -1px rgba($ax-brown-dark, 0.1), 0 2px 4px -1px rgba($ax-brown-dark, 0.06) !important; }
+  
+  .shadow-navy { box-shadow: 0 4px 6px -1px rgba($ax-navy, 0.1), 0 2px 4px -1px rgba($ax-navy, 0.06) !important; }
+  .shadow-navy-light { box-shadow: 0 4px 6px -1px rgba($ax-navy-light, 0.1), 0 2px 4px -1px rgba($ax-navy-light, 0.06) !important; }
+  .shadow-navy-dark { box-shadow: 0 4px 6px -1px rgba($ax-navy-dark, 0.1), 0 2px 4px -1px rgba($ax-navy-dark, 0.06) !important; }
+  
+  .shadow-gray { box-shadow: 0 4px 6px -1px rgba($ax-gray, 0.1), 0 2px 4px -1px rgba($ax-gray, 0.06) !important; }
+  .shadow-gray-light { box-shadow: 0 4px 6px -1px rgba($ax-gray-light, 0.1), 0 2px 4px -1px rgba($ax-gray-light, 0.06) !important; }
+  .shadow-gray-dark { box-shadow: 0 4px 6px -1px rgba($ax-gray-dark, 0.1), 0 2px 4px -1px rgba($ax-gray-dark, 0.06) !important; }
+
+  // =============================================================================
+  // ENHANCED VISIBLE SHADOWS - Higher opacity for better visibility
+  // =============================================================================
+  .shadow-blue-strong { box-shadow: 0 4px 6px -1px rgba($ax-blue, 0.4), 0 2px 4px -1px rgba($ax-blue, 0.3) !important; }
+  .shadow-red-strong { box-shadow: 0 4px 6px -1px rgba($ax-red, 0.4), 0 2px 4px -1px rgba($ax-red, 0.3) !important; }
+  .shadow-green-strong { box-shadow: 0 4px 6px -1px rgba($ax-green, 0.4), 0 2px 4px -1px rgba($ax-green, 0.3) !important; }
+
+  // =============================================================================
+  // GLOW & INNER SHADOWS
+  // =============================================================================
+  .shadow-glow { 
+    box-shadow: 0 0 15px rgba($ax-blue, 0.6), 0 4px 6px rgba($ax-blue, 0.1) !important; 
+  }
+  .shadow-glow-blue { 
+    box-shadow: 0 0 15px rgba($ax-blue, 0.6), 0 4px 6px rgba($ax-blue, 0.1) !important; 
+  }
+  .shadow-glow-red { 
+    box-shadow: 0 0 15px rgba($ax-red, 0.6), 0 4px 6px rgba($ax-red, 0.1) !important; 
+  }
+  .shadow-glow-green { 
+    box-shadow: 0 0 15px rgba($ax-green, 0.6), 0 4px 6px rgba($ax-green, 0.1) !important; 
+  }
+
+  .shadow-inner { 
+    box-shadow: inset 0 2px 4px 0 rgba($ax-black, 0.15) !important; 
+  }
+  .shadow-inner-lg { 
+    box-shadow: inset 0 4px 8px 0 rgba($ax-black, 0.2) !important; 
+  }
+}

@@ -1,0 +1,45 @@
+// =============================================================================
+// FUNCTIONS - AxisUI Framework Helper Functions
+// =============================================================================
+
+@use 'sass:color';
+@use 'sass:map';
+@use 'sass:math';
+@use 'breakpoints' as *;
+@use 'variables' as *;
+
+// =============================================================================
+// CONVERSION FUNCTIONS
+// =============================================================================
+
+@function ax-rem($px, $base: 16px) { @return math.div($px, $base) * 1rem; }
+@function ax-em($px, $context: 16px) { @return math.div($px, $context) * 1em; }
+@function ax-strip-unit($value) { @return $value / ($value * 0 + 1); }
+
+// =============================================================================
+// MAP GETTER FUNCTIONS
+// =============================================================================
+
+@function ax-spacing($key) { @return if(map.has-key($ax-spacing, $key), map.get($ax-spacing, $key), null); }
+@function ax-breakpoint($key) { @return if(map.has-key($ax-breakpoints, $key), map.get($ax-breakpoints, $key), null); }
+@function ax-color($color-name) { @return map.get($ax-colors, $color-name); }
+
+// =============================================================================
+// COLOR MANIPULATION FUNCTIONS
+// =============================================================================
+
+@function ax-lighten-color($color, $amount: 10%) { @return color.scale($color, $lightness: $amount); }
+@function ax-darken-color($color, $amount: 10%) { @return color.scale($color, $lightness: - $amount); }
+@function ax-alpha($color, $opacity: 0.5) { @return color.change($color, $alpha: $opacity); }
+@function ax-space($size) { @return ax-spacing($size); } // Backward compatibility
+
+// =============================================================================
+// UTILITY GETTER FUNCTIONS
+// =============================================================================
+
+@function ax-shadow($name) { @return if(map.has-key($ax-shadows, $name), map.get($ax-shadows, $name), null); }
+@function ax-radius($name) { @return if(map.has-key($ax-border-radius, $name), map.get($ax-border-radius, $name), null); }
+@function ax-transition($name) { @return if(map.has-key($ax-transitions, $name), map.get($ax-transitions, $name), null); }
+@function ax-z($name) { @return if(map.has-key($ax-z-indexes, $name), map.get($ax-z-indexes, $name), null); }
+@function ax-font-size($name) { @return if(map.has-key($ax-font-sizes, $name), map.get($ax-font-sizes, $name), null); }
+@function ax-font-weight($name) { @return if(map.has-key($ax-font-weights, $name), map.get($ax-font-weights, $name), null); }

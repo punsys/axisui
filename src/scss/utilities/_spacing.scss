@@ -1,0 +1,177 @@
+// =============================================================================
+// EXTENDED SPACING UTILITIES - Complete spacing system (Optimized)
+// Advanced spacing generation with comprehensive scale
+// REPLACES: Multiple redundant spacing utilities from other files
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/functions' as *;
+
+// Complete spacing scale - covers all use cases (0-5 only)
+$ax-spacing-scale: (
+  0: 0,
+  1: 0.25rem,      // 4px
+  2: 0.5rem,       // 8px
+  3: 0.75rem,      // 12px
+  4: 1rem,         // 16px
+  5: 1.25rem,      // 20px
+  auto: auto
+);
+
+.axis-ui {
+  // =============================================================================
+  // MARGIN UTILITIES - Generated efficiently with loop
+  // =============================================================================
+  @each $key, $value in $ax-spacing-scale {
+    .m-#{$key} { margin: $value !important; }
+    .mx-#{$key} { margin-left: $value !important; margin-right: $value !important; }
+    .my-#{$key} { margin-top: $value !important; margin-bottom: $value !important; }
+    .mt-#{$key} { margin-top: $value !important; }
+    .mr-#{$key} { margin-right: $value !important; }
+    .mb-#{$key} { margin-bottom: $value !important; }
+    .ml-#{$key} { margin-left: $value !important; }
+    .ms-#{$key} { margin-inline-start: $value !important; }
+    .me-#{$key} { margin-inline-end: $value !important; }
+  }
+
+  // =============================================================================
+  // PADDING UTILITIES - Generated efficiently with loop
+  // =============================================================================
+  @each $key, $value in $ax-spacing-scale {
+    .p-#{$key} { padding: $value !important; }
+    .px-#{$key} { padding-left: $value !important; padding-right: $value !important; }
+    .py-#{$key} { padding-top: $value !important; padding-bottom: $value !important; }
+    .pt-#{$key} { padding-top: $value !important; }
+    .pr-#{$key} { padding-right: $value !important; }
+    .pb-#{$key} { padding-bottom: $value !important; }
+    .pl-#{$key} { padding-left: $value !important; }
+    .ps-#{$key} { padding-inline-start: $value !important; }
+    .pe-#{$key} { padding-inline-end: $value !important; }
+  }
+
+  // =============================================================================
+  // NEGATIVE MARGIN UTILITIES - For overlap effects
+  // =============================================================================
+  @each $key, $value in $ax-spacing-scale {
+    @if $key != auto and $key != 0 {
+      .-m-#{$key} { margin: -$value !important; }
+      .-mx-#{$key} { margin-left: -$value !important; margin-right: -$value !important; }
+      .-my-#{$key} { margin-top: -$value !important; margin-bottom: -$value !important; }
+      .-mt-#{$key} { margin-top: -$value !important; }
+      .-mr-#{$key} { margin-right: -$value !important; }
+      .-mb-#{$key} { margin-bottom: -$value !important; }
+      .-ml-#{$key} { margin-left: -$value !important; }
+      .-ms-#{$key} { margin-inline-start: -$value !important; }
+      .-me-#{$key} { margin-inline-end: -$value !important; }
+    }
+  }
+
+  // =============================================================================
+  // GAP UTILITIES - For flexbox and grid layouts
+  // =============================================================================
+  @each $key, $value in $ax-spacing-scale {
+    @if $key != auto {
+      .gap-#{$key} { gap: $value !important; }
+      .gap-x-#{$key} { column-gap: $value !important; }
+      .gap-y-#{$key} { row-gap: $value !important; }
+    }
+  }
+
+  // =============================================================================
+  // SPACE BETWEEN UTILITIES - Child element spacing
+  // =============================================================================
+  @each $key, $value in $ax-spacing-scale {
+    @if $key != auto and $key != 0 {
+      .space-x-#{$key} > :not([hidden]) ~ :not([hidden]) { 
+        --ax-space-x-reverse: 0;
+        margin-right: calc(#{$value} * var(--ax-space-x-reverse));
+        margin-left: calc(#{$value} * calc(1 - var(--ax-space-x-reverse)));
+      }
+      
+      .space-y-#{$key} > :not([hidden]) ~ :not([hidden]) { 
+        --ax-space-y-reverse: 0;
+        margin-top: calc(#{$value} * calc(1 - var(--ax-space-y-reverse)));
+        margin-bottom: calc(#{$value} * var(--ax-space-y-reverse));
+      }
+    }
+  }
+  
+  .space-x-reverse > :not([hidden]) ~ :not([hidden]) { --ax-space-x-reverse: 1; }
+  .space-y-reverse > :not([hidden]) ~ :not([hidden]) { --ax-space-y-reverse: 1; }
+
+  // =============================================================================
+  // DIVIDE UTILITIES - Borders between child elements
+  // =============================================================================
+  .divide-x-0 > :not([hidden]) ~ :not([hidden]) { border-right-width: 0; border-left-width: 0; }
+  .divide-x > :not([hidden]) ~ :not([hidden]) { 
+    --ax-divide-x-reverse: 0;
+    border-right-width: calc(1px * var(--ax-divide-x-reverse));
+    border-left-width: calc(1px * calc(1 - var(--ax-divide-x-reverse)));
+  }
+  .divide-x-2 > :not([hidden]) ~ :not([hidden]) { 
+    --ax-divide-x-reverse: 0;
+    border-right-width: calc(2px * var(--ax-divide-x-reverse));
+    border-left-width: calc(2px * calc(1 - var(--ax-divide-x-reverse)));
+  }
+  
+  .divide-y-0 > :not([hidden]) ~ :not([hidden]) { border-top-width: 0; border-bottom-width: 0; }
+  .divide-y > :not([hidden]) ~ :not([hidden]) { 
+    --ax-divide-y-reverse: 0;
+    border-top-width: calc(1px * calc(1 - var(--ax-divide-y-reverse)));
+    border-bottom-width: calc(1px * var(--ax-divide-y-reverse));
+  }
+  .divide-y-2 > :not([hidden]) ~ :not([hidden]) { 
+    --ax-divide-y-reverse: 0;
+    border-top-width: calc(2px * calc(1 - var(--ax-divide-y-reverse)));
+    border-bottom-width: calc(2px * var(--ax-divide-y-reverse));
+  }
+  
+  .divide-x-reverse > :not([hidden]) ~ :not([hidden]) { --ax-divide-x-reverse: 1; }
+  .divide-y-reverse > :not([hidden]) ~ :not([hidden]) { --ax-divide-y-reverse: 1; }
+
+  // =============================================================================
+  // SPACE BETWEEN UTILITIES - Automatic Element Spacing
+  // =============================================================================
+
+  // Space X - Horizontal spacing between children
+  .space-x-0 > * + * { margin-left: 0 !important; }
+  .space-x-1 > * + * { margin-left: 0.25rem !important; }
+  .space-x-2 > * + * { margin-left: 0.5rem !important; }
+  .space-x-3 > * + * { margin-left: 0.75rem !important; }
+  .space-x-4 > * + * { margin-left: 1rem !important; }
+  .space-x-5 > * + * { margin-left: 1.25rem !important; }
+  .space-x-6 > * + * { margin-left: 1.5rem !important; }
+  .space-x-8 > * + * { margin-left: 2rem !important; }
+  .space-x-10 > * + * { margin-left: 2.5rem !important; }
+  .space-x-12 > * + * { margin-left: 3rem !important; }
+  .space-x-16 > * + * { margin-left: 4rem !important; }
+  .space-x-20 > * + * { margin-left: 5rem !important; }
+  .space-x-24 > * + * { margin-left: 6rem !important; }
+
+  // Reverse space-x (for flex-row-reverse)
+  .space-x-reverse > * + * {
+    margin-left: 0 !important;
+    margin-right: var(--ax-space-x-amount, 1rem) !important;
+  }
+
+  // Space Y - Vertical spacing between children
+  .space-y-0 > * + * { margin-top: 0 !important; }
+  .space-y-1 > * + * { margin-top: 0.25rem !important; }
+  .space-y-2 > * + * { margin-top: 0.5rem !important; }
+  .space-y-3 > * + * { margin-top: 0.75rem !important; }
+  .space-y-4 > * + * { margin-top: 1rem !important; }
+  .space-y-5 > * + * { margin-top: 1.25rem !important; }
+  .space-y-6 > * + * { margin-top: 1.5rem !important; }
+  .space-y-8 > * + * { margin-top: 2rem !important; }
+  .space-y-10 > * + * { margin-top: 2.5rem !important; }
+  .space-y-12 > * + * { margin-top: 3rem !important; }
+  .space-y-16 > * + * { margin-top: 4rem !important; }
+  .space-y-20 > * + * { margin-top: 5rem !important; }
+  .space-y-24 > * + * { margin-top: 6rem !important; }
+
+  // Reverse space-y (for flex-col-reverse)
+  .space-y-reverse > * + * {
+    margin-top: 0 !important;
+    margin-bottom: var(--ax-space-y-amount, 1rem) !important;
+  }
+}

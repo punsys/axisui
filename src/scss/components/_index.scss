@@ -1,0 +1,46 @@
+/*!
+ * AxisUI Components - Pure CSS Components Index
+ * Container-scoped components wrapped in .axis-ui
+ * Zero JavaScript dependencies - Pure CSS functionality
+ */
+
+// =============================================================================
+// CORE COMPONENTS
+// Basic building blocks for interface design
+// =============================================================================
+
+@forward 'buttons';
+@forward 'tags';
+@forward 'loaders';
+@forward 'cards';
+@forward 'alerts';
+@forward 'avatars';
+@forward 'badges';
+@forward 'breadcrumbs';
+@forward 'hero-sections';     // Hero section patterns
+@forward 'pagination';
+@forward 'progress';
+@forward 'navbar';
+
+
+
+
+// =============================================================================
+// INTERACTIVE COMPONENTS
+// =============================================================================
+@forward 'dropdown';
+
+// =============================================================================
+// INTERACTIVE COMPONENTS
+// Components with CSS-only interactivity
+// =============================================================================
+@forward 'accordions';
+@forward 'tabs';
+@forward 'modals';
+@forward 'collapse';
+
+// =============================================================================
+// LAYOUT COMPONENTS
+// Structural and layout components
+// =============================================================================
+@forward 'sidebar';

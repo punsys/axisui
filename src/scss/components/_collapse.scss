@@ -1,0 +1,617 @@
+// =============================================================================
+// COLLAPSE - AxisUI Framework Comprehensive Pure CSS Collapse Component
+// Direct color naming with comprehensive variants and animations
+// Pure CSS implementation using checkbox technique, no ax- class prefixes
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
+
+.axis-ui {
+  // =============================================================================
+  // BASE COLLAPSE STRUCTURE
+  // =============================================================================
+  
+  .collapse {
+    position: relative;
+    margin-bottom: ax-spacing(2);
+    
+    // Hidden checkbox for state management
+    &-toggle {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+      
+      // Hidden but accessible for screen readers
+      &:focus + .collapse-trigger {
+        @include ax-focus-ring();
+      }
+    }
+
+    // Collapse trigger/button
+    &-trigger {
+      @include ax-btn-base; // Use centralized button foundation
+      @include ax-flex-between; // Use centralized flexbox pattern
+      gap: ax-spacing(2);
+      width: 100%;
+      padding: ax-spacing(3) ax-spacing(4);
+      background-color: $ax-blue;
+      color: $ax-white;
+      border: 1px solid $ax-blue;
+      border-radius: $ax-radius-base;
+      text-decoration: none;
+      transition: all $ax-transition-base;
+      user-select: none;
+      font-weight: $ax-font-medium;
+      font-size: $ax-text-base;
+      line-height: $ax-leading-normal;
+      text-align: left;
+
+      &:hover {
+        background-color: $ax-blue-dark;
+        border-color: $ax-blue-dark;
+        transform: translateY(-1px);
+        box-shadow: $ax-shadow-sm;
+      }
+
+      // Icon indicator
+      &::after {
+        content: "▼";
+        font-size: 0.75rem;
+        transition: transform $ax-transition-base;
+        flex-shrink: 0;
+        color: currentColor;
+      }
+    }
+
+    // Collapse content container
+    &-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                  padding 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                  opacity 0.3s ease;
+      background-color: $ax-white;
+      border: 1px solid $ax-border-color;
+      border-top: none;
+      border-radius: 0 0 $ax-radius-base $ax-radius-base;
+      opacity: 0;
+    }
+
+    // When checkbox is checked, show content
+    &-toggle:checked {
+      ~ .collapse-trigger {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        
+        &::after {
+          transform: rotate(180deg);
+        }
+      }
+      
+      ~ .collapse-content {
+        max-height: 2000px; // Large enough value for most content
+        padding: ax-spacing(4);
+        opacity: 1;
+      }
+    }
+  }
+
+  // =============================================================================
+  // SIZE VARIANTS
+  // =============================================================================
+  
+  .collapse.collapse-sm {
+    .collapse-trigger {
+      padding: ax-spacing(2) ax-spacing(3);
+      font-size: $ax-text-sm;
+      
+      &::after {
+        font-size: 0.625rem;
+      }
+    }
+    
+    .collapse-toggle:checked ~ .collapse-content {
+      padding: ax-spacing(3);
+    }
+  }
+  
+  .collapse.collapse-lg {
+    .collapse-trigger {
+      padding: ax-spacing(4) ax-spacing(5);
+      font-size: $ax-text-lg;
+      
+      &::after {
+        font-size: 0.875rem;
+      }
+    }
+    
+    .collapse-toggle:checked ~ .collapse-content {
+      padding: ax-spacing(5);
+    }
+  }
+  
+  .collapse.collapse-xl {
+    .collapse-trigger {
+      padding: ax-spacing(5) ax-spacing(6);
+      font-size: $ax-text-xl;
+      
+      &::after {
+        font-size: 1rem;
+      }
+    }
+    
+    .collapse-toggle:checked ~ .collapse-content {
+      padding: ax-spacing(6);
+    }
+  }
+
+  // =============================================================================
+  // COLOR VARIANTS - Direct Color Naming
+  // =============================================================================
+  
+  .collapse.collapse-blue {
+    .collapse-trigger {
+      background-color: $ax-blue;
+      color: $ax-white;
+      border-color: $ax-blue;
+      
+      &:hover {
+        background-color: $ax-blue-dark;
+        border-color: $ax-blue-dark;
+      }
+    }
+    
+    .collapse-content {
+      border-color: $ax-blue;
+    }
+  }
+  
+  .collapse.collapse-red {
+    .collapse-trigger {
+      background-color: $ax-red;
+      color: $ax-white;
+      border-color: $ax-red;
+      
+      &:hover {
+        background-color: $ax-red-dark;
+        border-color: $ax-red-dark;
+      }
+    }
+    
+    .collapse-content {
+      border-color: $ax-red;
+    }
+  }
+  
+  .collapse.collapse-green {
+    .collapse-trigger {
+      background-color: $ax-green;
+      color: $ax-white;
+      border-color: $ax-green;
+      
+      &:hover {
+        background-color: $ax-green-dark;
+        border-color: $ax-green-dark;
+      }
+    }
+    
+    .collapse-content {
+      border-color: $ax-green;
+    }
+  }
+  
+  .collapse.collapse-yellow {
+    .collapse-trigger {
+      background-color: $ax-yellow;
+      color: $ax-gray-dark;
+      border-color: $ax-yellow;
+      
+      &:hover {
+        background-color: $ax-yellow-dark;
+        border-color: $ax-yellow-dark;
+        color: $ax-white;
+      }
+    }
+    
+    .collapse-content {
+      border-color: $ax-yellow;
+    }
+  }
+  
+  .collapse.collapse-purple {
+    .collapse-trigger {
+      background-color: $ax-purple;
+      color: $ax-white;
+      border-color: $ax-purple;
+      
+      &:hover {
+        background-color: $ax-purple-dark;
+        border-color: $ax-purple-dark;
+      }
+    }
+    
+    .collapse-content {
+      border-color: $ax-purple;
+    }
+  }
+  
+  .collapse.collapse-pink {
+    .collapse-trigger {
+      background-color: $ax-pink;
+      color: $ax-white;
+      border-color: $ax-pink;
+      
+      &:hover {
+        background-color: $ax-pink-dark;
+        border-color: $ax-pink-dark;
+      }
+    }
+    
+    .collapse-content {
+      border-color: $ax-pink;
+    }
+  }
+  
+  .collapse.collapse-orange {
+    .collapse-trigger {
+      background-color: $ax-orange;
+      color: $ax-white;
+      border-color: $ax-orange;
+      
+      &:hover {
+        background-color: $ax-orange-dark;
+        border-color: $ax-orange-dark;
+      }
+    }
+    
+    .collapse-content {
+      border-color: $ax-orange;
+    }
+  }
+  
+  .collapse.collapse-teal {
+    .collapse-trigger {
+      background-color: $ax-teal;
+      color: $ax-white;
+      border-color: $ax-teal;
+      
+      &:hover {
+        background-color: $ax-teal-dark;
+        border-color: $ax-teal-dark;
+      }
+    }
+    
+    .collapse-content {
+      border-color: $ax-teal;
+    }
+  }
+  
+  .collapse.collapse-cyan {
+    .collapse-trigger {
+      background-color: $ax-cyan;
+      color: $ax-white;
+      border-color: $ax-cyan;
+      
+      &:hover {
+        background-color: $ax-cyan-dark;
+        border-color: $ax-cyan-dark;
+      }
+    }
+    
+    .collapse-content {
+      border-color: $ax-cyan;
+    }
+  }
+  
+  .collapse.collapse-gray {
+    .collapse-trigger {
+      background-color: $ax-gray;
+      color: $ax-white;
+      border-color: $ax-gray;
+      
+      &:hover {
+        background-color: $ax-gray-dark;
+        border-color: $ax-gray-dark;
+      }
+    }
+    
+    .collapse-content {
+      border-color: $ax-gray;
+    }
+  }
+
+  // =============================================================================
+  // STYLE VARIANTS
+  // =============================================================================
+  
+  .collapse.collapse-outline {
+    .collapse-trigger {
+      background-color: transparent;
+      border: 2px solid $ax-blue;
+      color: $ax-blue;
+      
+      &:hover {
+        background-color: $ax-blue;
+        color: $ax-white;
+        transform: translateY(-1px);
+      }
+    }
+    
+    &.collapse-red .collapse-trigger {
+      border-color: $ax-red;
+      color: $ax-red;
+      
+      &:hover {
+        background-color: $ax-red;
+        color: $ax-white;
+      }
+    }
+    
+    &.collapse-green .collapse-trigger {
+      border-color: $ax-green;
+      color: $ax-green;
+      
+      &:hover {
+        background-color: $ax-green;
+        color: $ax-white;
+      }
+    }
+  }
+  
+  .collapse.collapse-soft {
+    .collapse-trigger {
+      background-color: rgba($ax-blue, 0.1);
+      color: $ax-blue-dark;
+      border-color: rgba($ax-blue, 0.2);
+      
+      &:hover {
+        background-color: rgba($ax-blue, 0.2);
+        border-color: rgba($ax-blue, 0.3);
+      }
+    }
+    
+    &.collapse-red .collapse-trigger {
+      background-color: rgba($ax-red, 0.1);
+      color: $ax-red-dark;
+      border-color: rgba($ax-red, 0.2);
+      
+      &:hover {
+        background-color: rgba($ax-red, 0.2);
+        border-color: rgba($ax-red, 0.3);
+      }
+    }
+    
+    &.collapse-green .collapse-trigger {
+      background-color: rgba($ax-green, 0.1);
+      color: $ax-green-dark;
+      border-color: rgba($ax-green, 0.2);
+      
+      &:hover {
+        background-color: rgba($ax-green, 0.2);
+        border-color: rgba($ax-green, 0.3);
+      }
+    }
+  }
+  
+  .collapse.collapse-minimal {
+    .collapse-trigger {
+      @include ax-reset-button; // Use centralized button reset
+      color: $ax-blue;
+      padding: ax-spacing(2) 0;
+      font-weight: $ax-font-medium;
+      text-decoration: none;
+      border-radius: 0;
+      
+      &:hover {
+        color: $ax-blue-dark;
+        background: none;
+        transform: none;
+        box-shadow: none;
+        text-decoration: underline;
+      }
+      
+      &::after {
+        color: $ax-blue;
+      }
+    }
+    
+    .collapse-content {
+      border: none;
+      border-radius: 0;
+      background: none;
+      padding-left: ax-spacing(4);
+    }
+    
+    .collapse-toggle:checked ~ .collapse-content {
+      padding: ax-spacing(3) 0 ax-spacing(3) ax-spacing(4);
+    }
+  }
+  
+  .collapse.collapse-card {
+    border: 1px solid $ax-border-color;
+    border-radius: $ax-radius-lg;
+    box-shadow: $ax-shadow-sm;
+    
+    .collapse-trigger {
+      border: none;
+      border-radius: $ax-radius-lg $ax-radius-lg 0 0;
+      background-color: $ax-gray-light;
+      color: $ax-gray-dark;
+      
+      &:hover {
+        background-color: $ax-gray;
+        color: $ax-gray-dark;
+      }
+    }
+    
+    .collapse-content {
+      border: none;
+      border-radius: 0 0 $ax-radius-lg $ax-radius-lg;
+    }
+    
+    .collapse-toggle:checked ~ .collapse-trigger {
+      border-radius: $ax-radius-lg $ax-radius-lg 0 0;
+    }
+  }
+
+  // =============================================================================
+  // COLLAPSE GROUPS (Accordion)
+  // =============================================================================
+  
+  .collapse-group {
+    border: 1px solid $ax-border-color;
+    border-radius: $ax-radius-lg;
+    overflow: hidden;
+    
+    .collapse {
+      margin-bottom: 0;
+      
+      &:not(:last-child) {
+        border-bottom: 1px solid $ax-border-color;
+      }
+      
+      .collapse-trigger {
+        border-radius: 0;
+        border: none;
+        
+        &:hover {
+          transform: none;
+          box-shadow: none;
+        }
+      }
+      
+      .collapse-content {
+        border: none;
+        border-radius: 0;
+        border-top: 1px solid $ax-border-color;
+      }
+      
+      .collapse-toggle:checked ~ .collapse-trigger {
+        border-radius: 0;
+      }
+    }
+  }
+
+  // =============================================================================
+  // ADVANCED FEATURES
+  // =============================================================================
+  
+  .collapse.collapse-animated {
+    .collapse-content {
+      transition: max-height 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  padding 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  opacity 0.4s ease;
+    }
+    
+    .collapse-trigger::after {
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+  }
+  
+  .collapse.collapse-fade {
+    .collapse-content {
+      transition: max-height 0.4s ease,
+                  padding 0.4s ease,
+                  opacity 0.6s ease;
+    }
+  }
+
+  // =============================================================================
+  // CONTENT STYLING
+  // =============================================================================
+  
+  .collapse-content {
+    .collapse-title {
+      font-size: $ax-text-lg;
+      font-weight: $ax-font-semibold;
+      color: $ax-gray-dark;
+      margin: 0 0 ax-spacing(3) 0;
+    }
+    
+    .collapse-text {
+      color: $ax-gray-dark;
+      line-height: $ax-leading-relaxed;
+      margin: 0 0 ax-spacing(3) 0;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    
+    .collapse-actions {
+      display: flex;
+      gap: ax-spacing(2);
+      margin-top: ax-spacing(4);
+      padding-top: ax-spacing(3);
+      border-top: 1px solid $ax-border-color;
+    }
+  }
+
+  // =============================================================================
+  // ICON VARIANTS
+  // =============================================================================
+  
+  .collapse.collapse-plus {
+    .collapse-trigger::after {
+      content: "+";
+      font-size: 1.25rem;
+      line-height: 1;
+    }
+    
+    .collapse-toggle:checked ~ .collapse-trigger::after {
+      content: "−";
+      transform: none;
+    }
+  }
+  
+  .collapse.collapse-chevron {
+    .collapse-trigger::after {
+      content: "›";
+      font-size: 1.25rem;
+      font-weight: bold;
+      transform: rotate(90deg);
+    }
+    
+    .collapse-toggle:checked ~ .collapse-trigger::after {
+      transform: rotate(270deg);
+    }
+  }
+
+  // =============================================================================
+  // ACCESSIBILITY ENHANCEMENTS
+  // =============================================================================
+  
+  .collapse {
+    // Keyboard navigation
+    .collapse-toggle:focus-visible + .collapse-trigger {
+      @include ax-focus-ring();
+    }
+    
+    // High contrast mode support
+    @media (prefers-contrast: high) {
+      .collapse-trigger {
+        border-width: 2px;
+      }
+    }
+    
+    // Reduced motion support
+    @include ax-prefers-reduced-motion {
+      .collapse-trigger,
+      .collapse-content {
+        transition: none;
+      }
+      
+      .collapse-trigger {
+        &:hover {
+          transform: none;
+        }
+        
+        &::after {
+          transition: none;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,155 @@
+/*!****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./src/scss/custom-styles.scss ***!
+  \****************************************************************************************************************************************************************************************************************************************************/
+/*!
+ * AxisUI Custom Showcase Styles
+ * Minimal custom styles for documentation/showcase pages
+ * Most styling uses framework utilities (backgrounds, borders, spacing, etc.)
+ */
+:root {
+  --ax-white: #ffffff;
+  --ax-black: #000000;
+  --ax-transparent: transparent;
+  --ax-text-color: #374151;
+  --ax-text-light: #6b7280;
+  --ax-text-muted: #9ca3af;
+  --ax-blue-lighter: #e3f2fd;
+  --ax-blue-light: #64b5f6;
+  --ax-blue: #2196f3;
+  --ax-blue-dark: #1976d2;
+  --ax-blue-darker: #0d47a1;
+  --ax-red-lighter: #ffebee;
+  --ax-red-light: #ef5350;
+  --ax-red: #f44336;
+  --ax-red-dark: #d32f2f;
+  --ax-red-darker: #b71c1c;
+  --ax-green-lighter: #e8f5e9;
+  --ax-green-light: #66bb6a;
+  --ax-green: #4caf50;
+  --ax-green-dark: #388e3c;
+  --ax-green-darker: #1b5e20;
+  --ax-orange-lighter: #fff3e0;
+  --ax-orange-light: #ffb74d;
+  --ax-orange: #ff9800;
+  --ax-orange-dark: #f57c00;
+  --ax-orange-darker: #e65100;
+  --ax-yellow-lighter: #fffde7;
+  --ax-yellow-light: #ffee58;
+  --ax-yellow: #ffeb3b;
+  --ax-yellow-dark: #fbc02d;
+  --ax-yellow-darker: #f57f17;
+  --ax-gray-lighter: #fafafa;
+  --ax-gray-light: #e5e7eb;
+  --ax-gray: #9e9e9e;
+  --ax-gray-dark: #52525b;
+  --ax-gray-darker: #27272a;
+  --ax-purple-lighter: #f3e5f5;
+  --ax-purple-light: #ba68c8;
+  --ax-purple: #9c27b0;
+  --ax-purple-dark: #7b1fa2;
+  --ax-purple-darker: #4a148c;
+  --ax-pink-lighter: #fce4ec;
+  --ax-pink-light: #f48fb1;
+  --ax-pink: #e91e63;
+  --ax-pink-dark: #c2185b;
+  --ax-pink-darker: #880e4f;
+  --ax-teal-lighter: #e0f2f1;
+  --ax-teal-light: #4db6ac;
+  --ax-teal: #009688;
+  --ax-teal-dark: #00796b;
+  --ax-teal-darker: #004d40;
+  --ax-cyan-lighter: #e0f7fa;
+  --ax-cyan-light: #4fc3f7;
+  --ax-cyan: #00bcd4;
+  --ax-cyan-dark: #0097a7;
+  --ax-cyan-darker: #006064;
+  --ax-brown-lighter: #efebe9;
+  --ax-brown-light: #a1887f;
+  --ax-brown: #795548;
+  --ax-brown-dark: #5d4037;
+  --ax-brown-darker: #3e2723;
+  --ax-navy-lighter: #e8eaf6;
+  --ax-navy-light: #5c6bc0;
+  --ax-navy: #3f51b5;
+  --ax-navy-dark: #303f9f;
+  --ax-navy-darker: #1a237e;
+}
+
+.axis-ui .dashboard-content {
+  margin-top: var(--ax-navbar-height, 60px); /* Account for fixed navbar - uses CSS variable with fallback */
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  min-height: calc(100vh - var(--ax-navbar-height, 60px)); /* Full height minus navbar */
+}
+.axis-ui .navbar-demo-container {
+  position: relative;
+  min-height: 60px;
+}
+.axis-ui .navbar-demo-container-lg {
+  position: relative;
+  min-height: 120px;
+}
+.axis-ui .sidebar-design-1 {
+  background: linear-gradient(180deg, #1976d2 0%, #7b1fa2 100%);
+}
+.axis-ui .sidebar-design-1 .sidebar-nav .item.active {
+  background: rgba(100, 181, 246, 0.2);
+  border-left: 3px solid #64b5f6;
+}
+.axis-ui .sidebar-design-2 {
+  background: #52525b;
+}
+.axis-ui .sidebar-design-2 .sidebar-header {
+  background: #000000;
+}
+.axis-ui .sidebar-design-2 .sidebar-nav .item.active {
+  background: #388e3c;
+}
+.axis-ui .sidebar-design-3 {
+  background: #ffffff;
+}
+.axis-ui .sidebar-design-3 .sidebar-header {
+  background: #64b5f6;
+}
+.axis-ui .sidebar-design-3 .sidebar-nav .item.active {
+  background: #2196f3;
+}
+.axis-ui .sidebar-design-4 {
+  background: linear-gradient(180deg, #7b1fa2 0%, #c2185b 100%);
+}
+.axis-ui .sidebar-design-4 .sidebar-nav .item.active {
+  background: linear-gradient(90deg, rgba(244, 143, 177, 0.3) 0%, rgba(186, 104, 200, 0.3) 100%);
+  border-left: 4px solid #f48fb1;
+}
+.axis-ui .sidebar-design-5 {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+}
+.axis-ui .sidebar-design-5 .sidebar-nav .item.active {
+  background: #ff9800;
+}
+@media (min-width: 1023px) {
+  .axis-ui .desktop-nav-items {
+    display: none !important;
+  }
+  .axis-ui .sidebar-desktop {
+    display: none !important;
+  }
+  .axis-ui .main-content-responsive {
+    margin-left: 0 !important;
+    padding: 1.5rem !important;
+  }
+}
+@media (min-width: 767px) {
+  .axis-ui h1 {
+    font-size: 1.5rem !important;
+  }
+}
+.axis-ui .navbar-brand {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+/*# sourceMappingURL=custom-styles.css.map*/

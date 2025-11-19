@@ -1,0 +1,286 @@
+// =============================================================================
+// COMPLETE RESPONSIVE UTILITIES - Comprehensive responsive design system
+// Combines essential breakpoint utilities with modern responsive features
+// Mobile-first approach with smart breakpoint selection + advanced CSS features
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
+
+.axis-ui {
+  
+  // =============================================================================
+  // FLUID TYPOGRAPHY - Modern responsive text scaling
+  // =============================================================================
+  
+  .text-responsive-xs {
+    font-size: clamp(0.75rem, 2vw, 0.875rem);
+  }
+  
+  .text-responsive-sm {
+    font-size: clamp(0.875rem, 2.5vw, 1rem);
+  }
+  
+  .text-responsive {
+    font-size: clamp(1rem, 3vw, 1.125rem);
+  }
+  
+  .text-responsive-lg {
+    font-size: clamp(1.125rem, 4vw, 1.5rem);
+  }
+  
+  .text-responsive-xl {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+  }
+  
+  .text-responsive-2xl {
+    font-size: clamp(2rem, 6vw, 3rem);
+  }
+  
+  .text-responsive-3xl {
+    font-size: clamp(2.5rem, 7vw, 4rem);
+  }
+  
+  // =============================================================================
+  // RESPONSIVE SPACING - Fluid spacing system
+  // =============================================================================
+  
+  .space-responsive-xs { gap: clamp(0.25rem, 1vw, 0.5rem); }
+  .space-responsive-sm { gap: clamp(0.5rem, 2vw, 1rem); }
+  .space-responsive { gap: clamp(1rem, 3vw, 1.5rem); }
+  .space-responsive-lg { gap: clamp(1.5rem, 4vw, 2rem); }
+  .space-responsive-xl { gap: clamp(2rem, 5vw, 3rem); }
+  
+  .p-responsive { padding: clamp(1rem, 4vw, 2rem); }
+  .p-responsive-sm { padding: clamp(0.5rem, 2vw, 1rem); }
+  .p-responsive-lg { padding: clamp(2rem, 6vw, 4rem); }
+  
+  .m-responsive { margin: clamp(1rem, 4vw, 2rem); }
+  .m-responsive-sm { margin: clamp(0.5rem, 2vw, 1rem); }
+  .m-responsive-lg { margin: clamp(2rem, 6vw, 4rem); }
+  
+  // =============================================================================
+  // MOBILE-ONLY UTILITIES - Show/hide on mobile devices (< 640px)
+  // =============================================================================
+  
+  // Display on mobile only (hidden from sm and up)
+  .display-mobile { display: block !important; }
+  .flex-mobile { display: flex !important; }
+  .grid-mobile { display: grid !important; }
+  .inline-mobile { display: inline !important; }
+  .inline-block-mobile { display: inline-block !important; }
+  
+  // Hide on mobile (visible from sm and up)
+  .hide-mobile { display: none !important; }
+  
+  // =============================================================================
+  // BREAKPOINT HIDE/DISPLAY UTILITIES - Hide below breakpoint, show at breakpoint+
+  // =============================================================================
+  
+  // Hide below sm (< 640px), display at sm and up
+  .hide-sm { display: none !important; }
+  
+  // Hide below md (< 768px), display at md and up
+  .hide-md { display: none !important; }
+  
+  // Hide below lg (< 1024px), display at lg and up
+  .hide-lg { display: none !important; }
+  
+  // Hide below xl (< 1280px), display at xl and up
+  .hide-xl { display: none !important; }
+  
+  // =============================================================================
+  // DISPLAY AT BREAKPOINT - Show only at specific breakpoint or range
+  // =============================================================================
+  
+  // Display only on sm (640px - 767px), hide below and above
+  .display-sm-only { display: none !important; }
+  
+  // Display only on md (768px - 1023px), hide below and above
+  .display-md-only { display: none !important; }
+  
+  // Display only on lg (1024px - 1279px), hide below and above
+  .display-lg-only { display: none !important; }
+  
+  // Display at md and up (768px+) - hidden on mobile
+  .display-md { display: none !important; }
+  .display-md-flex { display: none !important; }
+  .display-md-grid { display: none !important; }
+  
+  // Display at lg and up (1024px+) - hidden below lg
+  .display-lg { display: none !important; }
+  .display-lg-flex { display: none !important; }
+  .display-lg-grid { display: none !important; }
+  
+  // =============================================================================
+  // BREAKPOINT-SPECIFIC UTILITIES - Essential responsive classes
+  // =============================================================================
+
+  // Small screens and up (sm: 640px)
+  @include ax-responsive(sm) {
+    // Hide mobile-only classes at sm+
+    .display-mobile,
+    .flex-mobile,
+    .grid-mobile,
+    .inline-mobile,
+    .inline-block-mobile {
+      display: none !important;
+    }
+    
+    // Show hide-mobile at sm+
+    .hide-mobile { display: block !important; }
+    
+    // Show hide-sm at sm+
+    .hide-sm { display: block !important; }
+    .hide-sm-flex { display: flex !important; }
+    .hide-sm-grid { display: grid !important; }
+    
+    // Display sm-only range (show at sm, hide at md)
+    .display-sm-only { display: block !important; }
+    
+    // Display
+    .block-sm { display: block !important; }
+    .flex-sm { display: flex !important; }
+    .grid-sm { display: grid !important; }
+    .hidden-sm { display: none !important; }
+    
+    // Typography alignment
+    .text-left-sm { text-align: left !important; }
+    .text-center-sm { text-align: center !important; }
+    .text-right-sm { text-align: right !important; }
+    
+    // Essential sizing
+    .w-full-sm { width: 100% !important; }
+    .w-auto-sm { width: auto !important; }
+    .w-fit-sm { width: fit-content !important; }
+    .h-auto-sm { height: auto !important; }
+    .h-full-sm { height: 100% !important; }
+  }
+
+  // Medium screens and up (md: 768px)
+  @include ax-responsive(md) {
+    // Hide sm-only range at md+
+    .display-sm-only { display: none !important; }
+    
+    // Show hide-md at md+
+    .hide-md { display: block !important; }
+    .hide-md-flex { display: flex !important; }
+    .hide-md-grid { display: grid !important; }
+    
+    // Display md-only range (show at md, hide at lg)
+    .display-md-only { display: block !important; }
+    
+    // Show display-md classes at md+
+    .display-md { display: block !important; }
+    .display-md-flex { display: flex !important; }
+    .display-md-grid { display: grid !important; }
+    
+    // Display
+    .block-md { display: block !important; }
+    .flex-md { display: flex !important; }
+    .grid-md { display: grid !important; }
+    .hidden-md { display: none !important; }
+    
+    // Typography alignment
+    .text-left-md { text-align: left !important; }
+    .text-center-md { text-align: center !important; }
+    .text-right-md { text-align: right !important; }
+    
+    // Essential sizing
+    .w-full-md { width: 100% !important; }
+    .w-auto-md { width: auto !important; }
+    .w-1\/2-md { width: 50% !important; }
+    .w-1\/3-md { width: 33.333333% !important; }
+    .w-2\/3-md { width: 66.666667% !important; }
+    .h-auto-md { height: auto !important; }
+    .h-full-md { height: 100% !important; }
+  }
+
+  // Large screens and up (lg: 1024px)
+  @include ax-responsive(lg) {
+    // Hide md-only range at lg+
+    .display-md-only { display: none !important; }
+    
+    // Show hide-lg at lg+
+    .hide-lg { display: block !important; }
+    .hide-lg-flex { display: flex !important; }
+    .hide-lg-grid { display: grid !important; }
+    
+    // Display lg-only range (show at lg, hide at xl)
+    .display-lg-only { display: block !important; }
+    
+    // Show display-lg classes at lg+
+    .display-lg { display: block !important; }
+    .display-lg-flex { display: flex !important; }
+    .display-lg-grid { display: grid !important; }
+    
+    // Display
+    .block-lg { display: block !important; }
+    .flex-lg { display: flex !important; }
+    .grid-lg { display: grid !important; }
+    .hidden-lg { display: none !important; }
+    
+    // Typography alignment
+    .text-left-lg { text-align: left !important; }
+    .text-center-lg { text-align: center !important; }
+    .text-right-lg { text-align: right !important; }
+    
+    // Essential sizing
+    .w-full-lg { width: 100% !important; }
+    .w-auto-lg { width: auto !important; }
+    .w-fit-lg { width: fit-content !important; }
+    .w-1\/2-lg { width: 50% !important; }
+    .w-1\/3-lg { width: 33.333333% !important; }
+    .w-2\/3-lg { width: 66.666667% !important; }
+    .w-1\/4-lg { width: 25% !important; }
+    .w-3\/4-lg { width: 75% !important; }
+    .h-auto-lg { height: auto !important; }
+    .h-full-lg { height: 100% !important; }
+  }
+
+  // Extra large screens and up (xl: 1280px)
+  @include ax-responsive(xl) {
+    // Hide lg-only range at xl+
+    .display-lg-only { display: none !important; }
+    
+    // Show hide-xl at xl+
+    .hide-xl { display: block !important; }
+    .hide-xl-flex { display: flex !important; }
+    .hide-xl-grid { display: grid !important; }
+    
+    .block-xl { display: block !important; }
+    .flex-xl { display: flex !important; }
+    .grid-xl { display: grid !important; }
+    .hidden-xl { display: none !important; }
+    
+    .text-left-xl { text-align: left !important; }
+    .text-center-xl { text-align: center !important; }
+    .text-right-xl { text-align: right !important; }
+    
+    .w-full-xl { width: 100% !important; }
+    .w-auto-xl { width: auto !important; }
+  }
+  
+  // =============================================================================
+  // PRINT UTILITIES - Print-optimized styling
+  // =============================================================================
+  
+  @media print {
+    .print-hidden { display: none !important; }
+    .print-visible { display: block !important; }
+    
+    .print-break-before { break-before: page; }
+    .print-break-after { break-after: page; }
+    .print-break-inside-avoid { break-inside: avoid; }
+    
+    .print-text-sm { font-size: 12px !important; }
+    .print-text-base { font-size: 14px !important; }
+    .print-text-lg { font-size: 16px !important; }
+    
+    // Ensure good print colors
+    * {
+      print-color-adjust: exact;
+    }
+  }
+}

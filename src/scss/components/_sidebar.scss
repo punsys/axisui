@@ -1,0 +1,475 @@
+// ===================================
+// SIDEBAR COMPONENTS
+// AxisUI Framework - Common Sidebar Base Styles
+// ===================================
+
+@use 'sass:map';
+@use '../abstracts/variables' as *;
+@use '../abstracts/colors' as *;
+@use '../abstracts/breakpoints' as *;
+@use '../abstracts/mixins' as *;
+
+.axis-ui {
+    // ===== BASE SIDEBAR STRUCTURE =====
+    .sidebar {
+        position: absolute;
+        @include ax-flex-column;
+        width: $ax-sidebar-width;
+        height: calc(100vh - #{$ax-navbar-height}); // Subtract navbar height
+        top: $ax-navbar-height; // Account for fixed navbar height
+        transition: all $ax-transition-base cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
+        z-index: 10;
+        
+        // Common positioning
+        &.left {
+            left: 0;
+            bottom: 0;
+        }
+        
+        &.right {
+            right: 0;
+            bottom: 0;
+        }
+    }
+
+    // ===== SIDEBAR HEADER =====
+    .sidebar-header {
+        flex-shrink: 0;
+        @include ax-flex-between;
+        padding: map.get($ax-spacing, 6);
+        border-bottom: $ax-border-width solid;
+        
+        &.column {
+            flex-direction: column;
+            gap: map.get($ax-spacing, 4);
+        }
+    }
+
+    // ===== SIDEBAR LOGO/BRAND =====
+    .sidebar-logo {
+        @include ax-flex-start;
+        gap: map.get($ax-spacing, 4);
+        white-space: nowrap;
+        overflow: hidden;
+
+        .icon {
+            flex-shrink: 0;
+            @include ax-flex-center;
+            border-radius: $ax-radius-lg;
+            font-weight: $ax-font-bold;
+        }
+
+        .text {
+            font-weight: $ax-font-semibold;
+            transition: opacity $ax-transition-base;
+        }
+    }
+
+    // ===== SIDEBAR TOGGLE BUTTON =====
+    .sidebar-toggle {
+        flex-shrink: 0;
+        border: none;
+        border-radius: $ax-radius-md;
+        cursor: pointer;
+        @include ax-flex-center;
+        width: 36px;
+        height: 36px;
+        padding: 0;
+        transition: all $ax-transition-base;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+        
+        &.rotate-on-collapse {
+            .sidebar.collapsed &,
+            .sidebar.minimized & {
+                transform: rotate(180deg);
+            }
+        }
+        
+        // Hide desktop toggle on mobile, show mobile toggle instead
+        @media (max-width: map.get($ax-breakpoints, 'md')) {
+            &.desktop-toggle {
+                display: none;
+            }
+        }
+    }
+
+    // ===== SIDEBAR NAVIGATION =====
+    .sidebar-nav {
+        flex: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: map.get($ax-spacing, 6) 0;
+        
+        // Custom scrollbar styling
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        &::-webkit-scrollbar-thumb {
+            background: rgba($ax-black, 0.2);
+            border-radius: $ax-radius-full;
+            
+            &:hover {
+                background: rgba($ax-black, 0.3);
+            }
+        }
+        
+        // Firefox scrollbar
+        scrollbar-width: thin;
+        scrollbar-color: rgba($ax-black, 0.2) transparent;
+
+        .section {
+            margin-bottom: map.get($ax-spacing, 8);
+
+            .title {
+                padding: 0 map.get($ax-spacing, 6) map.get($ax-spacing, 3) map.get($ax-spacing, 6);
+                font-size: $ax-text-xs;
+                font-weight: $ax-font-semibold;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                white-space: nowrap;
+                overflow: hidden;
+                transition: opacity $ax-transition-base;
+            }
+        }
+
+        .item {
+            @include ax-flex-start;
+            gap: map.get($ax-spacing, 4);
+            padding: map.get($ax-spacing, 3.5) map.get($ax-spacing, 6);
+            text-decoration: none;
+            transition: all $ax-transition-base;
+            position: relative;
+            white-space: nowrap;
+            overflow: hidden;
+
+            .icon {
+                flex-shrink: 0;
+                @include ax-flex-center;
+                font-size: $ax-text-lg;
+            }
+
+            .text {
+                transition: opacity $ax-transition-base;
+            }
+
+            .badge {
+                margin-left: auto;
+                padding: map.get($ax-spacing, 1) map.get($ax-spacing, 2.5);
+                border-radius: $ax-radius-full;
+                font-size: $ax-text-xs;
+                font-weight: $ax-font-semibold;
+                transition: opacity $ax-transition-base;
+            }
+            
+            .arrow {
+                margin-left: auto;
+                transition: transform $ax-transition-base;
+                font-size: $ax-text-sm;
+            }
+
+            &.active::before {
+                content: '';
+                position: absolute;
+                width: 4px;
+            }
+            
+            // Active indicator positions
+            &.active.indicator-left::before {
+                left: 0;
+                top: 0;
+                bottom: 0;
+            }
+            
+            &.active.indicator-right::after {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 4px;
+                height: 60%;
+                border-radius: 2px 0 0 2px;
+            }
+            
+            // Submenu parent state
+            &.has-submenu.open .arrow {
+                transform: rotate(90deg);
+            }
+        }
+        
+        // Submenu styles
+        .submenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            
+            &.open {
+                max-height: 500px;
+            }
+            
+            .item {
+                padding-left: map.get($ax-spacing, 12);
+                font-size: $ax-text-sm;
+                
+                .icon {
+                    font-size: $ax-text-base;
+                }
+            }
+        }
+    }
+
+    // ===== SIDEBAR FOOTER =====
+    .sidebar-footer {
+        flex-shrink: 0;
+        padding: map.get($ax-spacing, 6);
+        border-top: $ax-border-width solid;
+    }
+
+    // ===== SIDEBAR USER INFO =====
+    .sidebar-user {
+        @include ax-flex-start;
+        gap: map.get($ax-spacing, 4);
+        white-space: nowrap;
+        overflow: hidden;
+
+        .avatar {
+            flex-shrink: 0;
+            @include ax-flex-center;
+            border-radius: $ax-radius-lg;
+            font-weight: $ax-font-bold;
+        }
+
+        .info {
+            transition: opacity $ax-transition-base;
+        }
+
+        .name {
+            font-weight: $ax-font-semibold;
+            margin: 0;
+        }
+
+        .role,
+        .status {
+            font-size: $ax-text-sm;
+            margin: 0;
+        }
+    }
+
+    // ===== SIDEBAR SEARCH =====
+    .sidebar-search {
+        flex-shrink: 0;
+        @include ax-flex-start;
+        gap: map.get($ax-spacing, 3);
+        padding: map.get($ax-spacing, 6);
+        
+        .icon {
+            flex-shrink: 0;
+            font-size: $ax-text-lg;
+        }
+        
+        input {
+            flex: 1;
+            width: 100%;
+            padding: map.get($ax-spacing, 3) map.get($ax-spacing, 4);
+            border-radius: $ax-radius-lg;
+            border: $ax-border-width solid;
+            font-size: $ax-text-base;
+            transition: all $ax-transition-base;
+            
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+
+    // ===== SIDEBAR CONTENT AREA =====
+    .main-content {
+        flex: 1;
+        padding: map.get($ax-spacing, 6);
+        overflow-y: auto;
+        margin-left: $ax-sidebar-width; // Account for sidebar width when sidebar is fixed positioned
+        transition: margin-left $ax-transition-base cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    // ===== SIDEBAR BACKDROP =====
+    .sidebar-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba($ax-black, 0.5);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity $ax-transition-base;
+        z-index: 999;
+        
+        &.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+    }
+
+    // ===== MOBILE MENU TOGGLE BUTTON =====
+    .mobile-menu-toggle {
+        display: none; // Hidden on desktop
+        position: fixed; // Fixed to viewport
+        top: calc(#{$ax-navbar-height} + #{map.get($ax-spacing, 2)}); // Below navbar with small margin
+        left: map.get($ax-spacing, 4);
+        z-index: 1045; // Below navbar (1050) but above sidebar (1040)
+        background: $ax-blue;
+        color: $ax-white;
+        border: none;
+        padding: map.get($ax-spacing, 3);
+        border-radius: map.get($ax-spacing, 2);
+        font-size: 1.25rem;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba($ax-black, 0.1);
+        transition: all $ax-transition-base;
+        
+        &:hover {
+            background: $ax-blue-dark;
+            transform: scale(1.05);
+        }
+        
+        &:active {
+            transform: scale(0.95);
+        }
+        
+        // When sidebar is active, change to fixed positioning and close icon
+        &.active {
+            position: fixed; // Fixed to viewport when sidebar is open
+            left: calc(#{$ax-sidebar-width} + #{map.get($ax-spacing, 4)}); // Sidebar width + spacing
+            z-index: 1045; // Same level, stays visible
+            background: $ax-red;
+            
+            &::before {
+                content: '✕';
+            }
+            
+            &:hover {
+                background: $ax-red-dark;
+            }
+        }
+        
+        // Default icon (hamburger menu)
+        &::before {
+            content: '☰';
+        }
+        
+        // Show on mobile
+        @media (max-width: map.get($ax-breakpoints, md)) {
+            display: block;
+        }
+    }
+
+    // ===== SIDEBAR STATS (for dashboard widgets) =====
+    .sidebar-stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: map.get($ax-spacing, 4);
+        transition: opacity $ax-transition-base;
+
+        .stat {
+            padding: map.get($ax-spacing, 4);
+            border-radius: $ax-radius-xl;
+
+            .value {
+                font-size: $ax-text-2xl;
+                font-weight: $ax-font-bold;
+                margin: 0 0 map.get($ax-spacing, 1) 0;
+            }
+
+            .label {
+                font-size: $ax-text-sm;
+                margin: 0;
+            }
+        }
+    }
+
+    // ===== COLLAPSIBLE/MINIMIZABLE BEHAVIOR =====
+    .sidebar.collapsed,
+    .sidebar.minimized {
+        width: $ax-sidebar-width-collapsed;
+        
+        .sidebar-logo .text,
+        .sidebar-nav .section .title,
+        .sidebar-nav .item .text,
+        .sidebar-nav .item .badge,
+        .sidebar-user .info,
+        .sidebar-stats {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .sidebar-toggle {
+            transform: rotate(180deg);
+        }
+    }
+    
+    // Adjust content margin when sidebar is collapsed/minimized
+    // Works for both direct siblings and nested structures
+    .sidebar.collapsed ~ .main-content,
+    .sidebar.minimized ~ .main-content {
+        margin-left: $ax-sidebar-width-collapsed;
+    }
+    
+    // For nested structures (sidebar inside sidebar-wrapper div)
+    .dashboard-wrapper:has(.sidebar-wrapper .sidebar.collapsed) .main-content,
+    .dashboard-wrapper:has(.sidebar-wrapper .sidebar.minimized) .main-content {
+        margin-left: $ax-sidebar-width-collapsed;
+    }
+
+    // ===== RESPONSIVE BEHAVIOR =====
+    @media (max-width: map.get($ax-breakpoints, 'md')) {
+        .sidebar {
+            position: fixed;
+            top: $ax-navbar-height; // Keep navbar space on mobile
+            left: 0;
+            bottom: 0;
+            height: calc(100vh - #{$ax-navbar-height});
+            width: $ax-sidebar-width;
+            transform: translateX(-100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1040; // Below navbar (1050) but above content
+            
+            &.open {
+                transform: translateX(0);
+            }
+
+            // Remove collapsed state on mobile
+            &.collapsed,
+            &.minimized {
+                width: $ax-sidebar-width;
+                
+                .sidebar-logo .text,
+                .sidebar-nav .section .title,
+                .sidebar-nav .item .text,
+                .sidebar-nav .item .badge,
+                .sidebar-user .info,
+                .sidebar-stats {
+                    opacity: 1;
+                    visibility: visible;
+                }
+                
+                &:not(.open) {
+                    transform: translateX(-100%);
+                }
+            }
+        }
+
+        // Reset content margins on mobile so content doesn't get pushed off-screen
+        .main-content {
+            margin-left: 0 !important;
+        }
+    }
+}

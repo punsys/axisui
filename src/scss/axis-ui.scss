@@ -1,0 +1,60 @@
+/*!
+ * AxisUI Framework v1.0.0 - Modern CSS Framework
+ * CSS-Only Framework with Zero JavaScript Dependencies
+ * 
+ * Copyright 2025 - Built for Modern Web Development
+ * Licensed under MIT License
+ * 
+ * AxisUI Framework Features:
+ * - Zero JavaScript Dependencies - Pure CSS Only
+ * - Modern CSS Grid & Flexbox Layouts
+ * - CSS Custom Properties (CSS Variables)
+ * - Responsive Design with Mobile-First Approach
+ * - Accessibility-First Development (WCAG 2.1 AA)
+ * - Dark Mode Support with CSS-only Toggle
+ * - Modern Animation System with CSS Keyframes
+ * - Component-Based Architecture
+ * - Utility-First Classes
+ * - Cross-Browser Compatibility
+ */
+
+// =============================================================================
+// ABSTRACTS - Configuration, variables, functions, and mixins
+// =============================================================================
+@use 'abstracts/variables' as *;
+@use 'abstracts/functions' as *;
+@use 'abstracts/mixins' as *;
+@use 'abstracts/colors' as *;
+@use 'abstracts/breakpoints' as *;
+@use 'abstracts/dark-mode' as *;
+
+// =============================================================================
+// BASE - Reset, normalize, and basic element styles
+// =============================================================================
+@use 'base/reset';
+@use 'base/base';
+
+// =============================================================================
+// LAYOUT - Grid system, containers, and layout utilities
+// =============================================================================
+@use 'layouts/index' as *;
+
+// =============================================================================
+// ELEMENTS - Semantic HTML elements with pure CSS styling
+// =============================================================================
+@use 'elements';
+
+// =============================================================================
+// COMPONENTS - Pure CSS components (no JavaScript required)
+// =============================================================================
+@use 'components/index';
+
+// =============================================================================
+// FORMS - Complete form system with validation and advanced patterns
+// =============================================================================
+@use 'forms/index' as *;
+
+// =============================================================================
+// UTILITIES - Helper classes and utility functions
+// =============================================================================
+@use 'utilities/index' as *;

@@ -1,0 +1,9 @@
+// =============================================================================
+// ELEMENTS INDEX - AxisUI Framework Elements Entry Point
+// Imports all element files for the framework build system
+// =============================================================================
+
+// Import all element components
+@forward 'emoji';              // Emoji icon utilities
+@forward 'table-basic';        // Basic table styles and colors
+@forward 'table-advanced';     // Advanced table features (sortable, editable, etc.)

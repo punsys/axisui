@@ -1,0 +1,404 @@
+/*!
+ * AxisUI Design System Tokens - Complete Design System
+ * Comprehensive design tokens for professional consistency
+ * Includes CSS Custom Properties + Advanced SCSS Features
+ */
+
+// =============================================================================
+// DESIGN SYSTEM IMPORTS
+// =============================================================================
+
+@use 'sass:map';
+@use 'sass:color';
+@use 'variables' as *;
+@use 'functions' as *;
+@use 'colors' as *;
+@use 'mixins' as *;
+
+// =============================================================================
+// COMPONENT SIZING SCALE - Professional consistency system
+// =============================================================================
+
+$ax-component-sizes: (
+  xs: (
+    padding: ax-spacing(2) ax-spacing(3),
+    font-size: $ax-text-xs,
+    height: 28px,
+    emoji-size: 14px
+  ),
+  sm: (
+    padding: ax-spacing(2) ax-spacing(4),
+    font-size: $ax-text-sm,
+    height: 32px,
+    emoji-size: 16px
+  ),
+  base: (
+    padding: ax-spacing(3) ax-spacing(4),
+    font-size: $ax-text-base,
+    height: 40px,
+    emoji-size: 18px
+  ),
+  lg: (
+    padding: ax-spacing(3) ax-spacing(6),
+    font-size: $ax-text-lg,
+    height: 48px,
+    emoji-size: 20px
+  ),
+  xl: (
+    padding: ax-spacing(4) ax-spacing(8),
+    font-size: $ax-text-xl,
+    height: 56px,
+    emoji-size: 24px
+  )
+) !default;
+
+// =============================================================================
+// DIRECT COLOR SYSTEM - Direct color naming only (blue, red, green)
+// =============================================================================
+
+// Note: This map exists for backward compatibility with mixins but uses direct colors
+$ax-direct-colors: (
+  blue: $ax-blue,
+  blue-light: $ax-blue-light,
+  blue-dark: $ax-blue-dark,
+  
+  green: $ax-green,
+  green-light: $ax-green-light,
+  green-dark: $ax-green-dark,
+  
+  yellow: $ax-yellow,
+  yellow-light: $ax-yellow-light,
+  yellow-dark: $ax-yellow-dark,
+  
+  red: $ax-red,
+  red-light: $ax-red-light,
+  red-dark: $ax-red-dark,
+  
+  gray: $ax-gray,
+  gray-light: $ax-gray-light,
+  gray-dark: $ax-gray-dark
+) !default;
+
+// =============================================================================
+// ELEVATION SYSTEM - Consistent shadow depths
+// =============================================================================
+
+$ax-elevation-shadows: (
+  0: none,
+  1: (0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)),
+  2: (0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)),
+  3: (0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23)),
+  4: (0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22)),
+  5: (0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22)),
+  6: (0 24px 48px rgba(0, 0, 0, 0.35), 0 20px 15px rgba(0, 0, 0, 0.25))
+) !default;
+
+// =============================================================================
+// ANIMATION TIMING FUNCTIONS - Professional motion design
+// =============================================================================
+
+$ax-easings: (
+  linear: linear,
+  ease: ease,
+  ease-in: ease-in,
+  ease-out: ease-out,
+  ease-in-out: ease-in-out,
+  bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55),
+  smooth: cubic-bezier(0.4, 0, 0.2, 1),
+  sharp: cubic-bezier(0.4, 0, 0.6, 1),
+  standard: cubic-bezier(0.4, 0, 0.2, 1)
+) !default;
+
+// =============================================================================
+// CONSISTENT BORDER RADIUS SCALE
+// =============================================================================
+
+$ax-radius-scale: (
+  none: 0,
+  xs: 2px,
+  sm: 4px,
+  base: 6px,
+  md: 8px,
+  lg: 12px,
+  xl: 16px,
+  2xl: 20px,
+  3xl: 24px,
+  full: 9999px,
+  pill: 50px
+) !default;
+
+// =============================================================================
+// CONSISTENT LAYOUT PATTERNS
+// =============================================================================
+
+$ax-layout-patterns: (
+  // Content widths
+  content-sm: 600px,
+  content-base: 800px,
+  content-lg: 1000px,
+  content-xl: 1280px,
+  
+  // Sidebar widths
+  sidebar-sm: 200px,
+  sidebar-base: 250px,
+  sidebar-lg: 300px,
+  
+  // Header heights
+  header-sm: 50px,
+  header-base: 60px,
+  header-lg: 70px
+) !default;
+
+// =============================================================================
+// HELPER FUNCTIONS - Design token access
+// =============================================================================
+
+@function ax-component-size($size-name, $property) {
+  @return map.get($ax-component-sizes, $size-name, $property);
+}
+
+@function ax-direct-color($color-name) {
+  @return map.get($ax-direct-colors, $color-name);
+}
+
+@function ax-elevation($level) {
+  @return map.get($ax-elevation-shadows, $level);
+}
+
+@function ax-easing($name) {
+  @return map.get($ax-easings, $name);
+}
+
+@function ax-radius($size) {
+  @return map.get($ax-radius-scale, $size);
+}
+
+@function ax-layout($pattern) {
+  @return map.get($ax-layout-patterns, $pattern);
+}
+
+// =============================================================================
+// PROFESSIONAL MIXINS - Component consistency
+// =============================================================================
+
+@mixin ax-consistent-component($size) {
+  padding: ax-component-size($size, padding);
+  font-size: ax-component-size($size, font-size);
+  height: ax-component-size($size, height);
+  border-radius: $ax-radius-base;
+  transition: all $ax-transition-base;
+}
+
+@mixin ax-elevation($level) {
+  box-shadow: ax-elevation($level);
+}
+
+// =============================================================================
+// CSS CUSTOM PROPERTIES - For vanilla CSS integration
+// =============================================================================
+
+// Generate CSS Custom Properties from SCSS variables for pure CSS usage
+:root {
+  // =============================================================================
+  // COLOR SYSTEM - Direct Color References
+  // =============================================================================
+  
+  // Base Colors
+  --ax-white: #{$ax-white};
+  --ax-black: #{$ax-black};
+  --ax-transparent: #{$ax-transparent};
+  
+  // Blue Colors (Primary)
+  --ax-blue: #{$ax-blue};
+  --ax-blue-light: #{$ax-blue-light};
+  --ax-blue-dark: #{$ax-blue-dark};
+  
+  // Red Colors (Error/Danger)
+  --ax-red: #{$ax-red};
+  --ax-red-light: #{$ax-red-light};
+  --ax-red-dark: #{$ax-red-dark};
+  
+  // Green Colors (Success)
+  --ax-green: #{$ax-green};
+  --ax-green-light: #{$ax-green-light};
+  --ax-green-dark: #{$ax-green-dark};
+  
+  // Orange Colors (Warning)
+  --ax-orange: #{$ax-orange};
+  --ax-orange-light: #{$ax-orange-light};
+  --ax-orange-dark: #{$ax-orange-dark};
+  
+  // Yellow Colors (Caution/Info)
+  --ax-yellow: #{$ax-yellow};
+  --ax-yellow-light: #{$ax-yellow-light};
+  --ax-yellow-dark: #{$ax-yellow-dark};
+  
+  // Gray Colors (Neutral)
+  --ax-gray: #{$ax-gray};
+  --ax-gray-light: #{$ax-gray-light};
+  --ax-gray-dark: #{$ax-gray-dark};
+  
+  // Extended Colors - Best 15 Color Palette
+  --ax-purple: #{$ax-purple}; --ax-purple-light: #{$ax-purple-light}; --ax-purple-dark: #{$ax-purple-dark};
+  --ax-pink: #{$ax-pink}; --ax-pink-light: #{$ax-pink-light}; --ax-pink-dark: #{$ax-pink-dark};
+  --ax-teal: #{$ax-teal}; --ax-teal-light: #{$ax-teal-light}; --ax-teal-dark: #{$ax-teal-dark};
+  --ax-cyan: #{$ax-cyan}; --ax-cyan-light: #{$ax-cyan-light}; --ax-cyan-dark: #{$ax-cyan-dark};
+  --ax-brown: #{$ax-brown}; --ax-brown-light: #{$ax-brown-light}; --ax-brown-dark: #{$ax-brown-dark};
+  --ax-navy: #{$ax-navy}; --ax-navy-light: #{$ax-navy-light}; --ax-navy-dark: #{$ax-navy-dark};
+  
+  // =============================================================================
+  // SPACING SYSTEM
+  // =============================================================================
+  
+  --ax-space-0: #{ax-spacing(0)};
+  --ax-space-1: #{ax-spacing(1)};
+  --ax-space-2: #{ax-spacing(2)};
+  --ax-space-3: #{ax-spacing(3)};
+  --ax-space-4: #{ax-spacing(4)};
+  --ax-space-5: #{ax-spacing(5)};
+  --ax-space-6: #{ax-spacing(6)};
+  --ax-space-8: #{ax-spacing(8)};
+  --ax-space-10: #{ax-spacing(10)};
+  --ax-space-12: #{ax-spacing(12)};
+  --ax-space-16: #{ax-spacing(16)};
+  --ax-space-20: #{ax-spacing(20)};
+  --ax-space-24: #{ax-spacing(24)};
+  --ax-space-32: #{ax-spacing(32)};
+  --ax-space-40: #{ax-spacing(40)};
+  --ax-space-48: #{ax-spacing(48)};
+  --ax-space-56: #{ax-spacing(56)};
+  --ax-space-64: #{ax-spacing(64)};
+  
+  // =============================================================================
+  // COMPONENT SPACING PATTERNS - Common padding/margin combinations
+  // =============================================================================
+  
+  // Button padding patterns
+  --ax-btn-padding-xs: #{ax-spacing(1)} #{ax-spacing(2)};
+  --ax-btn-padding-sm: #{ax-spacing(2)} #{ax-spacing(3)};
+  --ax-btn-padding-base: #{ax-spacing(2.5)} #{ax-spacing(4)};
+  --ax-btn-padding-lg: #{ax-spacing(3)} #{ax-spacing(6)};
+  --ax-btn-padding-xl: #{ax-spacing(4)} #{ax-spacing(8)};
+  
+  // Standard component padding (0.75rem 1.5rem pattern)
+  --ax-component-padding: #{ax-spacing(2.5)} #{ax-spacing(4)};
+  --ax-component-padding-sm: 0.5rem 1rem;
+  --ax-component-padding-lg: 1rem 2rem;
+  
+  // Card padding patterns
+  --ax-card-padding: #{ax-spacing(6)};
+  --ax-card-padding-sm: #{ax-spacing(4)};
+  --ax-card-padding-lg: #{ax-spacing(8)};
+  
+  // =============================================================================
+  // TYPOGRAPHY SYSTEM
+  // =============================================================================
+  
+  --ax-font-family: #{$ax-font-family};
+  --ax-font-mono: #{$ax-font-mono};
+  
+  --ax-text-xs: #{$ax-text-xs};
+  --ax-text-sm: #{$ax-text-sm};
+  --ax-text-base: #{$ax-text-base};
+  --ax-text-lg: #{$ax-text-lg};
+  --ax-text-xl: #{$ax-text-xl};
+  --ax-text-2xl: #{$ax-text-2xl};
+  --ax-text-3xl: #{$ax-text-3xl};
+  --ax-text-4xl: #{$ax-text-4xl};
+  --ax-text-5xl: #{$ax-text-5xl};
+  
+  --ax-font-thin: #{$ax-font-thin};
+  --ax-font-light: #{$ax-font-light};
+  --ax-font-normal: #{$ax-font-normal};
+  --ax-font-medium: #{$ax-font-medium};
+  --ax-font-semibold: #{$ax-font-semibold};
+  --ax-font-bold: #{$ax-font-bold};
+  --ax-font-extrabold: #{$ax-font-extrabold};
+  
+  // =============================================================================
+  // BORDER RADIUS
+  // =============================================================================
+  
+  --ax-radius-none: #{$ax-radius-none};
+  --ax-radius-sm: #{$ax-radius-sm};
+  --ax-radius-base: #{$ax-radius-base};
+  --ax-radius-md: #{$ax-radius-md};
+  --ax-radius-lg: #{$ax-radius-lg};
+  --ax-radius-xl: #{$ax-radius-xl};
+  --ax-radius-2xl: #{$ax-radius-2xl};
+  --ax-radius-full: #{$ax-radius-full};
+  
+  // =============================================================================
+  // SHADOWS
+  // =============================================================================
+  
+  --ax-shadow-sm: #{$ax-shadow-sm};
+  --ax-shadow-base: #{$ax-shadow-base};
+  --ax-shadow-md: #{$ax-shadow-md};
+  --ax-shadow-lg: #{$ax-shadow-lg};
+  --ax-shadow-xl: #{$ax-shadow-xl};
+  --ax-shadow-2xl: #{$ax-shadow-2xl};
+  --ax-shadow-inner: #{$ax-shadow-inner};
+  
+  // =============================================================================
+  // TRANSITIONS
+  // =============================================================================
+  
+  --ax-transition-fast: #{$ax-transition-fast};
+  --ax-transition-base: #{$ax-transition-base};
+  --ax-transition-slow: #{$ax-transition-slow};
+  
+  // =============================================================================
+  // Z-INDEX SCALE
+  // =============================================================================
+  
+  --ax-z-auto: #{$ax-z-auto};
+  --ax-z-0: #{$ax-z-0};
+  --ax-z-10: #{$ax-z-10};
+  --ax-z-20: #{$ax-z-20};
+  --ax-z-30: #{$ax-z-30};
+  --ax-z-40: #{$ax-z-40};
+  --ax-z-50: #{$ax-z-50};
+}
+
+// =============================================================================
+// DARK MODE SUPPORT - System and container-scoped
+// =============================================================================
+
+// System dark mode (prefers-color-scheme: dark)
+@media (prefers-color-scheme: dark) {
+  :root {
+    // Dark mode overrides - direct color assignments
+    --ax-bg-gray-dark: #{$ax-gray-dark};
+    --ax-bg-black: #{$ax-black};
+    --ax-bg-card: #{$ax-gray-dark};
+    --ax-text-white: #{$ax-white};
+    --ax-text-gray-light: #{$ax-gray-light};
+    --ax-border-color: #{$ax-gray};
+    
+    // Adjust shadows for dark mode
+    --ax-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --ax-shadow-base: 0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    --ax-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    --ax-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
+    --ax-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+  }
+}
+
+// Container scoped dark mode (when using .axis-ui.dark)
+.axis-ui.dark {
+  // Dark mode overrides - direct color assignments
+  --ax-bg-gray-dark: #{$ax-gray-dark};
+  --ax-bg-black: #{$ax-black};
+  --ax-bg-card: #{$ax-gray-dark};
+  --ax-text-white: #{$ax-white};
+  --ax-text-gray-light: #{$ax-gray-light};
+  --ax-border-color: #{$ax-gray};
+  
+  // Adjust shadows for dark mode
+  --ax-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --ax-shadow-base: 0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  --ax-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  --ax-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
+  --ax-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+}

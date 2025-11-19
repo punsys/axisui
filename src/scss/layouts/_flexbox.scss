@@ -1,0 +1,380 @@
+// =============================================================================
+// FLEXBOX - AxisUI Framework Comprehensive Flexbox Utilities
+// Pure CSS flexbox system with responsive variants and modern patterns
+// Direct color naming with comprehensive flex patterns
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
+
+.axis-ui {
+  // =============================================================================
+  // FLEXBOX UTILITIES - Display utilities moved to _display.scss
+  // =============================================================================
+  
+  // =============================================================================
+  // FLEX DIRECTION
+  // =============================================================================
+  .flex-row { flex-direction: row; }
+  .flex-row-reverse { flex-direction: row-reverse; }
+  .flex-col { flex-direction: column; }
+  .flex-col-reverse { flex-direction: column-reverse; }
+  
+  // =============================================================================
+  // FLEX WRAP
+  // =============================================================================
+  .flex-wrap { flex-wrap: wrap; }
+  .flex-nowrap { flex-wrap: nowrap; }
+  .flex-wrap-reverse { flex-wrap: wrap-reverse; }
+  
+  // =============================================================================
+  // ALIGN ITEMS - Cross-axis alignment
+  // =============================================================================
+  .items-start { align-items: flex-start; }
+  .items-end { align-items: flex-end; }
+  .items-center { align-items: center; }
+  .items-baseline { align-items: baseline; }
+  .items-stretch { align-items: stretch; }
+  
+  // =============================================================================
+  // JUSTIFY CONTENT - Main-axis alignment
+  // =============================================================================
+  .justify-start { justify-content: flex-start; }
+  .justify-end { justify-content: flex-end; }
+  .justify-center { justify-content: center; }
+  .justify-between { justify-content: space-between; }
+  .justify-around { justify-content: space-around; }
+  .justify-evenly { justify-content: space-evenly; }
+  
+  // =============================================================================
+  // ALIGN CONTENT - Multi-line flex containers
+  // =============================================================================
+  .content-start { align-content: flex-start; }
+  .content-end { align-content: flex-end; }
+  .content-center { align-content: center; }
+  .content-between { align-content: space-between; }
+  .content-around { align-content: space-around; }
+  .content-evenly { align-content: space-evenly; }
+  .content-stretch { align-content: stretch; }
+  
+  // =============================================================================
+  // ALIGN SELF - Individual item alignment
+  // =============================================================================
+  .self-auto { align-self: auto; }
+  .self-start { align-self: flex-start; }
+  .self-end { align-self: flex-end; }
+  .self-center { align-self: center; }
+  .self-stretch { align-self: stretch; }
+  .self-baseline { align-self: baseline; }
+  
+  // =============================================================================
+  // FLEX GROW/SHRINK/BASIS - Comprehensive flex properties
+  // =============================================================================
+  .flex-1 { flex: 1 1 0%; }
+  .flex-2 { flex: 2 1 0%; }
+  .flex-3 { flex: 3 1 0%; }
+  .flex-4 { flex: 4 1 0%; }
+  .flex-5 { flex: 5 1 0%; }
+  .flex-auto { flex: 1 1 auto; }
+  .flex-initial { flex: 0 1 auto; }
+  .flex-none { flex: none; }
+  
+  // Flex grow
+  .grow { flex-grow: 1; }
+  .grow-0 { flex-grow: 0; }
+  .grow-2 { flex-grow: 2; }
+  .grow-3 { flex-grow: 3; }
+  
+  // Flex shrink
+  .shrink { flex-shrink: 1; }
+  .shrink-0 { flex-shrink: 0; }
+  .shrink-2 { flex-shrink: 2; }
+  .shrink-3 { flex-shrink: 3; }
+  
+  // Flex basis
+  .basis-0 { flex-basis: 0; }
+  .basis-auto { flex-basis: auto; }
+  .basis-px { flex-basis: 1px; }
+  .basis-1 { flex-basis: ax-spacing(1); }
+  .basis-2 { flex-basis: ax-spacing(2); }
+  .basis-3 { flex-basis: ax-spacing(3); }
+  .basis-4 { flex-basis: ax-spacing(4); }
+  .basis-6 { flex-basis: ax-spacing(6); }
+  .basis-8 { flex-basis: ax-spacing(8); }
+  .basis-12 { flex-basis: ax-spacing(12); }
+  .basis-16 { flex-basis: ax-spacing(16); }
+  .basis-20 { flex-basis: ax-spacing(20); }
+  .basis-24 { flex-basis: ax-spacing(24); }
+  .basis-32 { flex-basis: ax-spacing(32); }
+  .basis-40 { flex-basis: ax-spacing(40); }
+  .basis-48 { flex-basis: ax-spacing(48); }
+  .basis-56 { flex-basis: ax-spacing(56); }
+  .basis-64 { flex-basis: ax-spacing(64); }
+  .basis-72 { flex-basis: ax-spacing(72); }
+  .basis-80 { flex-basis: ax-spacing(80); }
+  .basis-96 { flex-basis: ax-spacing(96); }
+  
+  // Percentage basis
+  .basis-quarter { flex-basis: 25%; }
+  .basis-third { flex-basis: 33.333333%; }
+  .basis-half { flex-basis: 50%; }
+  .basis-two-thirds { flex-basis: 66.666667%; }
+  .basis-three-quarters { flex-basis: 75%; }
+  .basis-full { flex-basis: 100%; }
+  
+  // =============================================================================
+  // FLEX LAYOUT PATTERNS - Common flex patterns
+  // =============================================================================
+  
+  .flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .flex-around {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  
+  .flex-evenly {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  
+  .flex-start {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  
+  .flex-end {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  
+  .flex-column-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .flex-column-between {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .flex-column-start {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .flex-column-end {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  // =============================================================================
+  // FLEX RESPONSIVE UTILITIES
+  // =============================================================================
+  
+  // Responsive flex direction
+  @include ax-responsive(md-down) {
+    .flex-col-md { flex-direction: column !important; }
+    .flex-row-md { flex-direction: row !important; }
+  }
+  
+  @include ax-responsive(sm-down) {
+    .flex-col-sm { flex-direction: column !important; }
+    .flex-row-sm { flex-direction: row !important; }
+  }
+  
+  // Responsive flex wrap
+  @include ax-responsive(md-down) {
+    .flex-wrap-md { flex-wrap: wrap !important; }
+    .flex-nowrap-md { flex-wrap: nowrap !important; }
+  }
+  
+  @include ax-responsive(sm-down) {
+    .flex-wrap-sm { flex-wrap: wrap !important; }
+    .flex-nowrap-sm { flex-wrap: nowrap !important; }
+  }
+  
+  // Responsive justify content
+  @include ax-responsive(md-down) {
+    .justify-start-md { justify-content: flex-start !important; }
+    .justify-center-md { justify-content: center !important; }
+    .justify-end-md { justify-content: flex-end !important; }
+  }
+  
+  @include ax-responsive(sm-down) {
+    .justify-start-sm { justify-content: flex-start !important; }
+    .justify-center-sm { justify-content: center !important; }
+    .justify-end-sm { justify-content: flex-end !important; }
+  }
+  
+  // Responsive align items
+  @include ax-responsive(md-down) {
+    .items-start-md { align-items: flex-start !important; }
+    .items-center-md { align-items: center !important; }
+    .items-end-md { align-items: flex-end !important; }
+  }
+  
+  @include ax-responsive(sm-down) {
+    .items-start-sm { align-items: flex-start !important; }
+    .items-center-sm { align-items: center !important; }
+    .items-end-sm { align-items: flex-end !important; }
+  }
+
+  // =============================================================================
+  // FLEX ORDER UTILITIES
+  // =============================================================================
+  
+  .order-1 { order: 1; }
+  .order-2 { order: 2; }
+  .order-3 { order: 3; }
+  .order-4 { order: 4; }
+  .order-5 { order: 5; }
+  .order-6 { order: 6; }
+  .order-7 { order: 7; }
+  .order-8 { order: 8; }
+  .order-9 { order: 9; }
+  .order-10 { order: 10; }
+  .order-11 { order: 11; }
+  .order-12 { order: 12; }
+  .order-first { order: -9999; }
+  .order-last { order: 9999; }
+  .order-none { order: 0; }
+  
+  // Responsive order
+  @include ax-responsive(md-down) {
+    .order-1-md { order: 1; }
+    .order-2-md { order: 2; }
+    .order-3-md { order: 3; }
+    .order-first-md { order: -9999; }
+    .order-last-md { order: 9999; }
+    .order-none-md { order: 0; }
+  }
+  
+  @include ax-responsive(sm-down) {
+    .order-1-sm { order: 1; }
+    .order-2-sm { order: 2; }
+    .order-3-sm { order: 3; }
+    .order-first-sm { order: -9999; }
+    .order-last-sm { order: 9999; }
+    .order-none-sm { order: 0; }
+  }
+
+  // =============================================================================
+  // ADVANCED FLEX PATTERNS
+  // =============================================================================
+  
+  // Flex with equal heights
+  .flex-equal {
+    display: flex;
+    
+    > * {
+      flex: 1;
+    }
+  }
+  
+  // Flex with min-width preservation
+  .flex-min {
+    display: flex;
+    
+    > * {
+      flex: 1 1 0;
+      min-width: 0;
+    }
+  }
+  
+  // Flex toolbar pattern
+  .flex-toolbar {
+    display: flex;
+    align-items: center;
+    gap: ax-spacing(3);
+    padding: ax-spacing(2) ax-spacing(4);
+    background-color: $ax-gray-light;
+    border-radius: $ax-radius-base;
+    
+    > :first-child {
+      margin-right: auto;
+    }
+  }
+  
+  // Flex media object pattern
+  .flex-media {
+    display: flex;
+    gap: ax-spacing(3);
+    
+    .media-object {
+      flex-shrink: 0;
+    }
+    
+    .media-content {
+      flex: 1;
+      min-width: 0;
+    }
+  }
+  
+  // Flex stack with dividers
+  .flex-stack {
+    display: flex;
+    flex-direction: column;
+    
+    > * + * {
+      border-top: 1px solid $ax-border-color;
+      padding-top: ax-spacing(3);
+      margin-top: ax-spacing(3);
+    }
+  }
+  
+  // Flex inline list
+  .flex-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: ax-spacing(2);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  // =============================================================================
+  // ACCESSIBILITY ENHANCEMENTS
+  // =============================================================================
+  
+  // Focus management for flex containers
+  .flex-focus-within:focus-within {
+    outline: 2px solid $ax-blue;
+    outline-offset: 2px;
+  }
+  
+  // Reduced motion support
+  @include ax-prefers-reduced-motion {
+    .flex-toolbar {
+      transition: none;
+    }
+  }
+  
+  // High contrast mode support
+  @media (prefers-contrast: high) {
+    .flex-toolbar,
+    .flex-stack > * + * {
+      border-width: 2px;
+    }
+  }
+}

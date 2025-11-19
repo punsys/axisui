@@ -1,0 +1,241 @@
+/*!
+ * AxisUI Tabs Component - Pure CSS Tab System
+ * Professional tab interface using CSS-only approach with radio inputs
+ */
+
+// =============================================================================
+// TABS COMPONENT - Pure CSS Implementation
+// Uses radio inputs for state management, no JavaScript required  
+// Container-scoped with direct color naming
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// AxisUI Container Scope
+.axis-ui {
+
+  // =============================================================================
+  // TAB CONTAINER
+  // =============================================================================
+  
+  .tabs {
+    position: relative;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  // Hide radio inputs
+  .tab-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  // =============================================================================
+  // TAB NAVIGATION
+  // =============================================================================
+  
+  .tab-nav {
+    display: flex;
+    border-bottom: 2px solid $ax-gray-light;
+    margin-bottom: 1rem;
+    background: $ax-white;
+  }
+
+  .tab-label {
+    @include ax-btn-base; // Use centralized button foundation
+    flex: 1;
+    padding: 0.75rem 1rem;
+    background: transparent;
+    color: $ax-gray;
+    font-weight: 500;
+    text-align: center;
+    border-bottom: 3px solid transparent;
+    position: relative;
+    
+    &:hover {
+      background: $ax-blue-light;
+      color: $ax-white;
+    }
+  }
+
+  // =============================================================================
+  // ACTIVE TAB STATES
+  // =============================================================================
+  
+  .tab-input:nth-of-type(1):checked ~ .tab-nav .tab-label:nth-of-type(1),
+  .tab-input:nth-of-type(2):checked ~ .tab-nav .tab-label:nth-of-type(2),
+  .tab-input:nth-of-type(3):checked ~ .tab-nav .tab-label:nth-of-type(3),
+  .tab-input:nth-of-type(4):checked ~ .tab-nav .tab-label:nth-of-type(4),
+  .tab-input:nth-of-type(5):checked ~ .tab-nav .tab-label:nth-of-type(5),
+  .tab-input:nth-of-type(6):checked ~ .tab-nav .tab-label:nth-of-type(6) {
+    background: $ax-blue;
+    color: $ax-white;
+    border-bottom-color: $ax-blue-dark;
+  }
+
+  // =============================================================================
+  // TAB CONTENT CONTAINER
+  // =============================================================================
+  
+  .tab-content {
+    position: relative;
+    min-height: 200px;
+  }
+
+  .tab-pane {
+    display: none;
+    opacity: 0;
+    padding: 1.5rem;
+    background: $ax-white;
+    border: 1px solid $ax-gray-light;
+    border-radius: 0.375rem;
+    transition: opacity 0.3s ease;
+  }
+
+  // =============================================================================
+  // ACTIVE CONTENT STATES
+  // =============================================================================
+  
+  .tab-input:nth-of-type(1):checked ~ .tab-content .tab-pane:nth-of-type(1),
+  .tab-input:nth-of-type(2):checked ~ .tab-content .tab-pane:nth-of-type(2),
+  .tab-input:nth-of-type(3):checked ~ .tab-content .tab-pane:nth-of-type(3),
+  .tab-input:nth-of-type(4):checked ~ .tab-content .tab-pane:nth-of-type(4),
+  .tab-input:nth-of-type(5):checked ~ .tab-content .tab-pane:nth-of-type(5),
+  .tab-input:nth-of-type(6):checked ~ .tab-content .tab-pane:nth-of-type(6) {
+    display: block;
+    opacity: 1;
+  }
+
+  // =============================================================================
+  // TAB VARIANTS
+  // =============================================================================
+
+  // Bordered tabs variant
+  .tabs-bordered {
+    .tab-nav {
+      border: 1px solid $ax-gray-light;
+      border-bottom: none;
+      border-radius: 0.375rem 0.375rem 0 0;
+    }
+
+    .tab-content {
+      border: 1px solid $ax-gray-light;
+      border-radius: 0 0 0.375rem 0.375rem;
+      background: $ax-white;
+    }
+
+    .tab-pane {
+      border: none;
+      background: transparent;
+    }
+  }
+
+  // Pills variant  
+  .tabs-pills {
+    .tab-nav {
+      border: none;
+      gap: 0.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .tab-label {
+      border-radius: 2rem;
+      border-bottom: none;
+      background: $ax-gray-light;
+      color: $ax-gray-dark;
+
+      &:hover {
+        background: $ax-blue-light;
+        color: $ax-white;
+      }
+    }
+
+    .tab-input:nth-of-type(1):checked ~ .tab-nav .tab-label:nth-of-type(1),
+    .tab-input:nth-of-type(2):checked ~ .tab-nav .tab-label:nth-of-type(2),
+    .tab-input:nth-of-type(3):checked ~ .tab-nav .tab-label:nth-of-type(3),
+    .tab-input:nth-of-type(4):checked ~ .tab-nav .tab-label:nth-of-type(4),
+    .tab-input:nth-of-type(5):checked ~ .tab-nav .tab-label:nth-of-type(5),
+    .tab-input:nth-of-type(6):checked ~ .tab-nav .tab-label:nth-of-type(6) {
+      background: $ax-blue;
+      color: $ax-white;
+      border-bottom-color: transparent;
+    }
+  }
+
+  // =============================================================================
+  // COLOR VARIANTS - Direct Color Naming
+  // =============================================================================
+
+  // Red tabs
+  .tabs-red {
+    .tab-label:hover {
+      background: $ax-red-light;
+    }
+
+    .tab-input:nth-of-type(1):checked ~ .tab-nav .tab-label:nth-of-type(1),
+    .tab-input:nth-of-type(2):checked ~ .tab-nav .tab-label:nth-of-type(2),
+    .tab-input:nth-of-type(3):checked ~ .tab-nav .tab-label:nth-of-type(3),
+    .tab-input:nth-of-type(4):checked ~ .tab-nav .tab-label:nth-of-type(4),
+    .tab-input:nth-of-type(5):checked ~ .tab-nav .tab-label:nth-of-type(5),
+    .tab-input:nth-of-type(6):checked ~ .tab-nav .tab-label:nth-of-type(6) {
+      background: $ax-red;
+      border-bottom-color: $ax-red-dark;
+    }
+  }
+
+  // Green tabs
+  .tabs-green {
+    .tab-label:hover {
+      background: $ax-green-light;
+    }
+
+    .tab-input:nth-of-type(1):checked ~ .tab-nav .tab-label:nth-of-type(1),
+    .tab-input:nth-of-type(2):checked ~ .tab-nav .tab-label:nth-of-type(2),
+    .tab-input:nth-of-type(3):checked ~ .tab-nav .tab-label:nth-of-type(3),
+    .tab-input:nth-of-type(4):checked ~ .tab-nav .tab-label:nth-of-type(4),
+    .tab-input:nth-of-type(5):checked ~ .tab-nav .tab-label:nth-of-type(5),
+    .tab-input:nth-of-type(6):checked ~ .tab-nav .tab-label:nth-of-type(6) {
+      background: $ax-green;
+      border-bottom-color: $ax-green-dark;
+    }
+  }
+
+  // =============================================================================
+  // RESPONSIVE BEHAVIOR
+  // =============================================================================
+
+  @media (max-width: 767px) {
+    .tab-nav {
+      flex-direction: column;
+    }
+
+    .tab-label {
+      text-align: left;
+      border-bottom: 1px solid $ax-gray-light;
+      border-right: 3px solid transparent;
+
+      &:hover {
+        border-right-color: $ax-blue-light;
+        border-bottom-color: $ax-gray-light;
+      }
+    }
+
+    .tab-input:nth-of-type(1):checked ~ .tab-nav .tab-label:nth-of-type(1),
+    .tab-input:nth-of-type(2):checked ~ .tab-nav .tab-label:nth-of-type(2),
+    .tab-input:nth-of-type(3):checked ~ .tab-nav .tab-label:nth-of-type(3),
+    .tab-input:nth-of-type(4):checked ~ .tab-nav .tab-label:nth-of-type(4),
+    .tab-input:nth-of-type(5):checked ~ .tab-nav .tab-label:nth-of-type(5),
+    .tab-input:nth-of-type(6):checked ~ .tab-nav .tab-label:nth-of-type(6) {
+      border-right-color: $ax-blue-dark;
+      border-bottom-color: $ax-gray-light;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .tab-pane {
+      padding: 1rem;
+    }
+  }
+}

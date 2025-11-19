@@ -1,0 +1,185 @@
+// =============================================================================
+// BREAKPOINTS - AxisUI Framework Responsive Breakpoints
+// Pure CSS Framework - Mobile-first approach
+// =============================================================================
+
+@use 'sass:map';
+
+// Core Breakpoint Values (ax- prefixed variables)
+$ax-breakpoint-xs: 0 !default;
+$ax-breakpoint-sm: 640px !default;
+$ax-breakpoint-md: 768px !default;
+$ax-breakpoint-lg: 1024px !default;
+$ax-breakpoint-xl: 1280px !default;
+$ax-breakpoint-2xl: 1536px !default;
+
+// Breakpoints Map - Mobile-first approach with all variants
+$ax-breakpoints: (
+  xs: $ax-breakpoint-xs,
+  sm: $ax-breakpoint-sm,
+  md: $ax-breakpoint-md,
+  lg: $ax-breakpoint-lg,
+  xl: $ax-breakpoint-xl,
+  2xl: $ax-breakpoint-2xl,
+  // Down variants (max-width)
+  xs-down: ($ax-breakpoint-sm - 1px),  // Below sm
+  sm-down: ($ax-breakpoint-md - 1px),  // Below md
+  md-down: ($ax-breakpoint-lg - 1px),  // Below lg
+  lg-down: ($ax-breakpoint-xl - 1px),  // Below xl
+  xl-down: ($ax-breakpoint-2xl - 1px), // Below 2xl
+  // Up variants (min-width) - aliases for consistency
+  xs-up: $ax-breakpoint-xs,
+  sm-up: $ax-breakpoint-sm,
+  md-up: $ax-breakpoint-md,
+  lg-up: $ax-breakpoint-lg,
+  xl-up: $ax-breakpoint-xl,
+  2xl-up: $ax-breakpoint-2xl
+) !default;
+
+// Container Query Breakpoints (for modern CSS container queries)
+$ax-container-breakpoint-sm: 480px !default;
+$ax-container-breakpoint-md: 640px !default;
+$ax-container-breakpoint-lg: 800px !default;
+$ax-container-breakpoint-xl: 1024px !default;
+$ax-container-breakpoint-2xl: 1280px !default;
+
+$ax-container-breakpoints: (
+  'sm': $ax-container-breakpoint-sm,
+  'md': $ax-container-breakpoint-md,
+  'lg': $ax-container-breakpoint-lg,
+  'xl': $ax-container-breakpoint-xl,
+  '2xl': $ax-container-breakpoint-2xl
+) !default;
+
+// =============================================================================
+// MEDIA QUERY MIXINS - Pure CSS Implementation
+// =============================================================================
+
+// Mobile-first: min-width
+@mixin ax-media-up($breakpoint) {
+  @if map.has-key($ax-breakpoints, $breakpoint) {
+    $min: map.get($ax-breakpoints, $breakpoint);
+    @if $min != 0 {
+      @media (min-width: $min) { @content; }
+    } @else {
+      @content; // xs breakpoint - no media query needed
+    }
+  } @else {
+    @warn "Breakpoint `#{$breakpoint}` not found in $ax-breakpoints map. Available: #{map.keys($ax-breakpoints)}";
+  }
+}
+
+// Alias for ax-media-up (used in layout and utility files)
+@mixin ax-responsive($breakpoint) {
+  @include ax-media-up($breakpoint) { @content; }
+}
+
+// Desktop-first: max-width
+@mixin ax-media-down($breakpoint) {
+  @if map.has-key($ax-breakpoints, $breakpoint) {
+    $max: map.get($ax-breakpoints, $breakpoint);
+    @if $max != 0 {
+      $max: $max - 1px; // Use 1px to avoid overlap (industry standard)
+      @media (max-width: $max) { @content; }
+    } @else {
+      // xs breakpoint - show nothing as mobile-first approach
+    }
+  } @else {
+    @warn "Breakpoint `#{$breakpoint}` not found in $ax-breakpoints map. Available: #{map.keys($ax-breakpoints)}";
+  }
+}
+
+// Between two breakpoints
+@mixin ax-media-between($lower, $upper) {
+  $min: if(map.has-key($ax-breakpoints, $lower), map.get($ax-breakpoints, $lower), 0);
+  $max: if(map.has-key($ax-breakpoints, $upper), map.get($ax-breakpoints, $upper) - 1px, 9999px);
+  
+  @if $min != 0 and $max != 9999px {
+    @media (min-width: $min) and (max-width: $max) { @content; }
+  } @else if $min == 0 {
+    @include ax-media-down($upper) { @content; }
+  } @else if $max == 9999px {
+    @include ax-media-up($lower) { @content; }
+  } @else {
+    @warn "Invalid breakpoint parameters: #{$lower}, #{$upper}. Available: #{map.keys($ax-breakpoints)}";
+  }
+}
+
+// Only at specific breakpoint (between current and next)
+@mixin ax-media-only($breakpoint) {
+  $breakpoint-names: map.keys($ax-breakpoints);
+  $breakpoint-index: index($breakpoint-names, $breakpoint);
+  
+  @if $breakpoint-index {
+    @if $breakpoint-index < length($breakpoint-names) {
+      $next-breakpoint: nth($breakpoint-names, $breakpoint-index + 1);
+      @include ax-media-between($breakpoint, $next-breakpoint) { @content; }
+    } @else {
+      @include ax-media-up($breakpoint) { @content; }
+    }
+  } @else {
+    @warn "Breakpoint `#{$breakpoint}` not found in $ax-breakpoints map. Available: #{map.keys($ax-breakpoints)}";
+  }
+}
+
+// =============================================================================
+// CONTAINER QUERY MIXINS - Modern CSS Container Queries
+// =============================================================================
+
+// Container query for minimum width
+@mixin ax-container-up($breakpoint) {
+  @if map.has-key($ax-container-breakpoints, $breakpoint) {
+    $min: map.get($ax-container-breakpoints, $breakpoint);
+    @container (min-width: $min) { @content; }
+  } @else {
+    @warn "Container breakpoint `#{$breakpoint}` not found in $ax-container-breakpoints map. Available: #{map.keys($ax-container-breakpoints)}";
+  }
+}
+
+// Container query for maximum width
+@mixin ax-container-down($breakpoint) {
+  @if map.has-key($ax-container-breakpoints, $breakpoint) {
+    $max: map.get($ax-container-breakpoints, $breakpoint) - 1px;
+    @container (max-width: $max) { @content; }
+  } @else {
+    @warn "Container breakpoint `#{$breakpoint}` not found in $ax-container-breakpoints map. Available: #{map.keys($ax-container-breakpoints)}";
+  }
+}
+
+// =============================================================================
+// SCREEN MIXIN - Backward Compatibility (Updated to use variables)
+// =============================================================================
+
+// Legacy ax-screen mixin - now uses variables from the map
+@mixin ax-screen($size) {
+  @include ax-media-up($size) { @content; }
+}
+
+// =============================================================================
+// PURE CSS RESPONSIVE FRAMEWORK
+// No class generation mixins - pure CSS utilities only with .axis-ui scoping
+// =============================================================================
+
+// =============================================================================
+// PRINT MEDIA MIXIN
+// =============================================================================
+
+@mixin ax-print {
+  @media print { @content; }
+}
+
+// =============================================================================
+// PREFERENCE-BASED MEDIA QUERIES
+// =============================================================================
+
+@mixin ax-prefers-reduced-motion {
+  @media (prefers-reduced-motion: reduce) { @content; }
+}
+
+@mixin ax-prefers-color-scheme($scheme: dark) {
+  @media (prefers-color-scheme: $scheme) { @content; }
+}
+
+@mixin ax-prefers-contrast($level: high) {
+  @media (prefers-contrast: $level) { @content; }
+}

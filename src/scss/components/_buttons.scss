@@ -1,0 +1,303 @@
+﻿// =============================================================================
+// BUTTON ELEMENTS - AxisUI Framework Pure CSS Button Elements
+// Container-scoped button elements with direct color naming
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
+@use '../abstracts/design-system' as tokens;
+
+.axis-ui {
+  // =============================================================================
+  // BASE BUTTON ELEMENT
+  // =============================================================================
+  
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: ax-spacing(2);
+    @include ax-component-padding('base');
+    font-family: inherit;
+    font-size: $ax-text-base;
+    font-weight: $ax-font-medium;
+    line-height: 1.5;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    border-radius: $ax-radius-base;
+    cursor: pointer;
+    transition: all $ax-transition-base;
+    
+    &:focus {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      box-shadow: 0 0 0 2px currentColor;
+    }
+    
+    &:disabled,
+    &[disabled] {
+      opacity: 0.6;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+
+  // =============================================================================
+  // BUTTON COLOR VARIANTS - Generated with ax-color-variants mixin
+  // Direct color naming: btn-blue, btn-blue-light, btn-blue-dark
+  // Best 15 Colors: blue, red, green, orange, yellow, gray, purple,
+  // pink, teal, cyan, brown, navy (each with 3 variants: light, normal, dark)
+  // =============================================================================
+  
+  // Generate all button color variants automatically (36 total classes for 12 colors)
+  @include ax-color-variants('btn', 'background-color', $ax-white, true);
+
+  // =============================================================================
+  // BUTTON SIZES
+  // =============================================================================
+  
+  .btn-xs {
+    padding: ax-spacing(1) ax-spacing(2);
+    font-size: $ax-text-xs;
+  }
+
+  .btn-sm {
+    padding: ax-spacing(1.5) ax-spacing(3);
+    font-size: $ax-text-sm;
+  }
+
+  .btn-lg {
+    @include ax-component-padding('lg');
+    font-size: $ax-text-lg;
+  }
+
+  .btn-xl {
+    @include ax-component-padding('xl');
+    font-size: $ax-text-xl;
+  }
+
+  // =============================================================================
+  // BUTTON STYLES
+  // =============================================================================
+  
+  // Outline buttons
+  .btn-outline {
+    background-color: transparent;
+    color: currentColor;
+    
+    &.btn-blue { color: $ax-blue; border-color: $ax-blue; }
+    &.btn-blue:hover { background-color: $ax-blue; color: $ax-white; }
+    
+    &.btn-red { color: $ax-red; border-color: $ax-red; }
+    &.btn-red:hover { background-color: $ax-red; color: $ax-white; }
+    
+    &.btn-green { color: $ax-green; border-color: $ax-green; }
+    &.btn-green:hover { background-color: $ax-green; color: $ax-white; }
+    
+    &.btn-yellow { color: $ax-yellow-dark; border-color: $ax-yellow; }
+    &.btn-yellow:hover { background-color: $ax-yellow; color: $ax-gray-dark; }
+    
+    &.btn-gray { color: $ax-gray; border-color: $ax-gray; }
+    &.btn-gray:hover { background-color: $ax-gray; color: $ax-white; }
+  }
+
+  // Ghost buttons (no border)
+  .btn-ghost {
+    background-color: transparent;
+    border-color: transparent;
+    color: currentColor;
+    
+    &.btn-blue { color: $ax-blue; }
+    &.btn-blue:hover { background-color: rgba(30, 136, 229, 0.1); }
+    
+    &.btn-red { color: $ax-red; }
+    &.btn-red:hover { background-color: rgba(220, 53, 69, 0.1); }
+    
+    &.btn-green { color: $ax-green; }
+    &.btn-green:hover { background-color: rgba(46, 125, 50, 0.1); }
+    
+    &.btn-yellow { color: $ax-yellow-dark; }
+    &.btn-yellow:hover { background-color: rgba(255, 193, 7, 0.1); }
+    
+    &.btn-gray { color: $ax-gray; }
+    &.btn-gray:hover { background-color: rgba(108, 117, 125, 0.1); }
+  }
+
+  // =============================================================================
+  // BUTTON SHAPES
+  // =============================================================================
+  
+  .btn-rounded {
+    border-radius: $ax-radius-lg;
+  }
+
+  .btn-pill {
+    border-radius: $ax-radius-full;
+  }
+
+  .btn-square {
+    border-radius: 0;
+  }
+
+  // =============================================================================
+  // BUTTON STATES
+  // =============================================================================
+  
+  .btn-loading {
+    position: relative;
+    color: transparent;
+    
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 1rem;
+      height: 1rem;
+      margin: -0.5rem 0 0 -0.5rem;
+      border: 2px solid transparent;
+      border-top-color: currentColor;
+      border-radius: 50%;
+      animation: btn-spin 1s linear infinite;
+    }
+  }
+
+  @keyframes btn-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  // =============================================================================
+  // BUTTON GROUPS
+  // =============================================================================
+  
+  .btn-group {
+    display: inline-flex;
+    vertical-align: middle;
+    
+    .btn {
+      position: relative;
+      border-radius: 0;
+      
+      &:first-child {
+        border-top-left-radius: $ax-radius-base;
+        border-bottom-left-radius: $ax-radius-base;
+      }
+      
+      &:last-child {
+        border-top-right-radius: $ax-radius-base;
+        border-bottom-right-radius: $ax-radius-base;
+      }
+      
+      &:not(:first-child) {
+        margin-left: -1px;
+      }
+      
+      &:hover,
+      &:focus,
+      &:active {
+        z-index: 1;
+      }
+    }
+  }
+
+  // =============================================================================
+  // FULL WIDTH BUTTONS
+  // =============================================================================
+  
+  .btn-block {
+    display: flex;
+    width: 100%;
+  }
+  
+  // =============================================================================
+  // ADVANCED BUTTON FEATURES - Production-Ready Enhancements
+  // =============================================================================
+  
+  .btn-advanced {
+    @include tokens.ax-consistent-component(base);
+    @include ax-flex-center;
+    gap: ax-spacing(2);
+    font-weight: $ax-font-medium;
+    text-decoration: none;
+    border: 2px solid transparent;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    
+    // Loading state
+    &.loading {
+      color: transparent !important;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        border: 2px solid currentColor;
+        border-radius: 50%;
+        border-top-color: transparent;
+        animation: ax-spin 1s linear infinite;
+      }
+    }
+    
+    // Size variants
+    &.btn-xs { @include tokens.ax-consistent-component(xs); }
+    &.btn-sm { @include tokens.ax-consistent-component(sm); }
+    &.btn-lg { @include tokens.ax-consistent-component(lg); }
+    &.btn-xl { @include tokens.ax-consistent-component(xl); }
+    
+    // Special effects
+    &.btn-gradient {
+      background: linear-gradient(135deg, $ax-blue, $ax-blue-dark);
+      border: none;
+      color: white;
+      
+      &:hover {
+        transform: translateY(-1px);
+        @include tokens.ax-elevation(4);
+      }
+    }
+    
+    &.btn-glass {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+    }
+    
+    &.btn-shadow {
+      @include tokens.ax-elevation(2);
+      
+      &:hover {
+        @include tokens.ax-elevation(6);
+        transform: translateY(-2px);
+      }
+      
+      &:active {
+        @include tokens.ax-elevation(1);
+        transform: translateY(0);
+      }
+    }
+  }
+  
+  // =============================================================================
+  // BUTTON ANIMATIONS
+  // =============================================================================
+  
+  @keyframes ax-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+}
+

@@ -1,0 +1,95 @@
+// =============================================================================
+// DISPLAY UTILITIES - Complete display system (Consolidated & Optimized)
+// ELIMINATES: Redundant display utilities from _responsive.scss and other files
+// All display, visibility, and overflow utilities in one location
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
+
+.axis-ui {
+  // =============================================================================
+  // CORE DISPLAY PROPERTIES - All display values
+  // =============================================================================
+  
+  .block { display: block !important; }
+  .inline-block { display: inline-block !important; }
+  .inline { display: inline !important; }
+  .flex { display: flex !important; }
+  .inline-flex { display: inline-flex !important; }
+  .grid { display: grid !important; }
+  .inline-grid { display: inline-grid !important; }
+  .table { display: table !important; }
+  .table-caption { display: table-caption !important; }
+  .table-cell { display: table-cell !important; }
+  .table-column { display: table-column !important; }
+  .table-column-group { display: table-column-group !important; }
+  .table-footer-group { display: table-footer-group !important; }
+  .table-header-group { display: table-header-group !important; }
+  .table-row-group { display: table-row-group !important; }
+  .table-row { display: table-row !important; }
+  .flow-root { display: flow-root !important; }
+  .contents { display: contents !important; }
+  .list-item { display: list-item !important; }
+  .hidden { display: none !important; }
+  
+
+  
+  // =============================================================================
+  // OVERFLOW UTILITIES - Complete overflow control
+  // =============================================================================
+  
+  .overflow-auto { overflow: auto !important; }
+  .overflow-hidden { overflow: hidden !important; }
+  .overflow-clip { overflow: clip !important; }
+  .overflow-visible { overflow: visible !important; }
+  .overflow-scroll { overflow: scroll !important; }
+  
+  .overflow-x-auto { overflow-x: auto !important; }
+  .overflow-x-hidden { overflow-x: hidden !important; }
+  .overflow-x-clip { overflow-x: clip !important; }
+  .overflow-x-visible { overflow-x: visible !important; }
+  .overflow-x-scroll { overflow-x: scroll !important; }
+  
+  .overflow-y-auto { overflow-y: auto !important; }
+  .overflow-y-hidden { overflow-y: hidden !important; }
+  .overflow-y-clip { overflow-y: clip !important; }
+  .overflow-y-visible { overflow-y: visible !important; }
+  .overflow-y-scroll { overflow-y: scroll !important; }
+  
+  // =============================================================================
+  // OVERSCROLL UTILITIES - Scroll boundary behavior
+  // =============================================================================
+  
+  .overscroll-auto { overscroll-behavior: auto !important; }
+  .overscroll-contain { overscroll-behavior: contain !important; }
+  .overscroll-none { overscroll-behavior: none !important; }
+  
+  .overscroll-x-auto { overscroll-behavior-x: auto !important; }
+  .overscroll-x-contain { overscroll-behavior-x: contain !important; }
+  .overscroll-x-none { overscroll-behavior-x: none !important; }
+  
+  .overscroll-y-auto { overscroll-behavior-y: auto !important; }
+  .overscroll-y-contain { overscroll-behavior-y: contain !important; }
+  .overscroll-y-none { overscroll-behavior-y: none !important; }
+  
+  // =============================================================================
+  // VISIBILITY UTILITIES - Consolidated from _visibility.scss
+  // =============================================================================
+  
+  .hide { display: none !important; }
+  .show { display: block !important; }
+  .show-inline { display: inline !important; }
+  .show-inline-block { display: inline-block !important; }
+  .show-flex { display: flex !important; }
+  .show-inline-flex { display: inline-flex !important; }
+  .show-grid { display: grid !important; }
+  .show-table { display: table !important; }
+  .show-table-cell { display: table-cell !important; }
+  .show-table-row { display: table-row !important; }
+
+  // Visibility property utilities
+  .visible { visibility: visible !important; }
+  .invisible { visibility: hidden !important; }
+}

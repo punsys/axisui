@@ -1,0 +1,1950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Quality Dashboard - Monitor and visualize quality-related data">
+  <title>Quality Dashboard - AxisUI</title>
+  <link rel="stylesheet" href="../../dist/assets/css/axis-ui{{ASSET_SUFFIX}}.css">
+  <style>
+    /* Mobile Menu Toggle - Pure CSS (Custom functionality not in framework) */
+    #mobile-menu-toggle { display: none; }
+    
+    .hamburger-icon {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+    
+    .hamburger-icon span {
+      width: 24px;
+      height: 2px;
+      background: #475569;
+      transition: all 0.3s ease;
+      border-radius: 2px;
+    }
+    
+    #mobile-menu-toggle:checked ~ .mobile-nav-overlay {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    
+    #mobile-menu-toggle:checked ~ .navbar-content .mobile-menu {
+      transform: translateX(0);
+    }
+    
+    #mobile-menu-toggle:checked ~ .navbar-content .hamburger-icon span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    #mobile-menu-toggle:checked ~ .navbar-content .hamburger-icon span:nth-child(2) {
+      opacity: 0;
+    }
+    
+    #mobile-menu-toggle:checked ~ .navbar-content .hamburger-icon span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+    
+    .mobile-nav-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 280px;
+      height: 100vh;
+      background: white;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      z-index: 1000;
+      overflow-y: auto;
+      box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    @media (max-width: 768px) {
+      .hamburger-icon { display: flex; }
+      .mobile-nav-overlay { display: block; }
+      .desktop-nav-items { display: none !important; }
+      
+      .sidebar-desktop { display: none !important; }
+      
+      .main-content-responsive {
+        width: 100% !important;
+        padding: 1.5rem !important;
+      }
+      
+      /* Using framework responsive grid utilities instead of custom CSS */
+    }
+    
+    @media (max-width: 480px) {
+      h1 { font-size: 1.5rem !important; }
+    }
+    
+    /* Body Styles */
+    body.axis-ui {
+      background: #f8fafc;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    
+    /* Navbar Styles */
+    .main-navbar {
+      border-bottom: 1px solid #e2e8f0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .navbar-content {
+      padding: 1rem 2rem;
+      max-width: 1920px;
+      margin: 0 auto;
+    }
+    
+    .navbar-logo {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .navbar-logo-emoji {
+      font-size: 1.75rem;
+    }
+    
+    .navbar-logo-text {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1e293b;
+    }
+    
+    .desktop-nav-items {
+      gap: 1.5rem;
+    }
+    
+    .notification-btn-wrapper {
+      position: relative;
+    }
+    
+    .nav-icon-btn {
+      background: #f1f5f9;
+      border: none;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.5rem;
+    }
+    
+    .notification-badge {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      font-size: 0.625rem;
+      padding: 0.125rem 0.375rem;
+    }
+    
+    .user-profile-wrapper {
+      gap: 0.75rem;
+      padding-left: 1rem;
+      border-left: 1px solid #e2e8f0;
+    }
+    
+    .user-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+    
+    .user-name {
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: #1e293b;
+    }
+    
+    .user-role {
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+    
+    /* Mobile Menu Styles */
+    .mobile-menu {
+      padding: 2rem 1.5rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .mobile-user-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    
+    .mobile-user-name {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #1e293b;
+    }
+    
+    .mobile-user-role {
+      font-size: 0.875rem;
+      color: #64748b;
+    }
+    
+    .mobile-menu-section {
+      padding: 1.5rem 0;
+    }
+    
+    .mobile-menu-header {
+      padding: 0 1.5rem 1rem 1.5rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #64748b;
+    }
+    
+    .mobile-menu-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.875rem 1.5rem;
+      text-decoration: none;
+      color: #64748b;
+      font-size: 0.9375rem;
+      border-left: 3px solid transparent;
+    }
+    
+    .mobile-menu-link.active {
+      background: linear-gradient(90deg, rgba(59, 130, 246, 0.1) 0%, transparent 100%);
+      border-left: 3px solid #3b82f6;
+      color: #3b82f6;
+      font-weight: 600;
+    }
+    
+    .mobile-menu-divider {
+      padding: 1rem 1.5rem 0 1.5rem;
+      margin-top: 1rem;
+      border-top: 1px solid #e2e8f0;
+    }
+    
+    .mobile-menu-footer {
+      padding: 1.5rem;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      gap: 0.75rem;
+    }
+    
+    .mobile-notification-btn {
+      flex: 1;
+      padding: 0.75rem;
+      background: #f1f5f9;
+      border: none;
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+    
+    .mobile-notification-text {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #475569;
+    }
+    
+    .mobile-notification-badge {
+      font-size: 0.625rem;
+      padding: 0.125rem 0.375rem;
+    }
+    
+    .mobile-settings-btn {
+      padding: 0.75rem;
+      background: #f1f5f9;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+    
+    /* Sidebar Styles */
+    .sidebar-desktop {
+      width: 280px;
+      border-right: 1px solid #e2e8f0;
+      min-height: calc(100vh - 73px);
+      position: sticky;
+      top: 73px;
+      height: calc(100vh - 73px);
+    }
+    
+    .sidebar-content {
+      padding: 2rem 0;
+    }
+    
+    .sidebar-header {
+      padding: 0 1.5rem 1.5rem 1.5rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #64748b;
+    }
+    
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      color: #64748b;
+      font-size: 0.9375rem;
+      border-left: 3px solid transparent;
+    }
+    
+    .sidebar-link.active {
+      background: linear-gradient(90deg, rgba(59, 130, 246, 0.1) 0%, transparent 100%);
+      border-left: 3px solid #3b82f6;
+      color: #3b82f6;
+      font-weight: 600;
+    }
+    
+    .sidebar-preferences {
+      padding: 1.5rem 1.5rem 0 1.5rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #64748b;
+    }
+    
+    .sidebar-nav-bottom {
+      margin-top: 1rem;
+    }
+    
+    /* Main Layout */
+    .main-layout {
+      max-width: 1920px;
+      margin: 0 auto;
+    }
+    
+    .main-content-responsive {
+      background: #f8fafc;
+      padding: 2.5rem 3rem;
+      min-height: calc(100vh - 73px);
+    }
+    
+    /* Page Header */
+    .page-header {
+      margin-bottom: 2.5rem;
+    }
+    
+    .page-header-top {
+      margin-bottom: 0.5rem;
+    }
+    
+    .page-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin: 0 0 0.5rem 0;
+    }
+    
+    .page-subtitle {
+      color: #64748b;
+      margin: 0;
+      font-size: 0.9375rem;
+    }
+    
+    .page-actions {
+      gap: 0.75rem;
+    }
+    
+    .btn-export {
+      background: white;
+      border: 1px solid #e2e8f0;
+      padding: 0.625rem 1.25rem;
+      border-radius: 0.5rem;
+      font-weight: 500;
+      font-size: 0.875rem;
+      color: #475569;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .btn-export-icon {
+      font-size: 1rem;
+    }
+    
+    .btn-new-report {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border: none;
+      padding: 0.625rem 1.25rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 6px -1px rgba(102, 126, 234, 0.3);
+    }
+    
+    .btn-new-report-icon {
+      font-size: 1rem;
+    }
+    
+    /* KPI Cards */
+    .kpi-grid {
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    
+    .kpi-card {
+      border-radius: 1rem;
+      padding: 1.75rem;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    }
+    
+    .kpi-header {
+      margin-bottom: 1.25rem;
+    }
+    
+    .kpi-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .kpi-icon.green {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.3);
+    }
+    
+    .kpi-icon.blue {
+      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+      box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
+    }
+    
+    .kpi-icon.orange {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      box-shadow: 0 4px 6px -1px rgba(245, 158, 11, 0.3);
+    }
+    
+    .kpi-icon.purple {
+      background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+      box-shadow: 0 4px 6px -1px rgba(139, 92, 246, 0.3);
+    }
+    
+    .kpi-icon-emoji {
+      font-size: 1.5rem;
+      filter: brightness(0) invert(1);
+    }
+    
+    .kpi-badge {
+      padding: 0.25rem 0.625rem;
+      border-radius: 1rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    
+    .kpi-badge.green {
+      background: rgba(16, 185, 129, 0.1);
+      color: #059669;
+    }
+    
+    .kpi-badge.blue {
+      background: rgba(59, 130, 246, 0.1);
+      color: #2563eb;
+    }
+    
+    .kpi-badge.orange {
+      background: rgba(245, 158, 11, 0.1);
+      color: #d97706;
+    }
+    
+    .kpi-badge.purple {
+      background: rgba(139, 92, 246, 0.1);
+      color: #7c3aed;
+    }
+    
+    .kpi-label {
+      font-size: 0.8125rem;
+      color: #64748b;
+      margin-bottom: 0.25rem;
+      font-weight: 500;
+    }
+    
+    .kpi-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 0.5rem;
+    }
+    
+    .kpi-footer {
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+    
+    .kpi-change {
+      font-weight: 600;
+    }
+    
+    .kpi-change.green {
+      color: #10b981;
+    }
+    
+    .kpi-change.blue {
+      color: #3b82f6;
+    }
+    
+    .kpi-change.purple {
+      color: #8b5cf6;
+    }
+    
+    /* Charts Section */
+    .charts-grid {
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    
+    .chart-card {
+      border-radius: 1rem;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    }
+    
+    .chart-card.span-2 {
+      grid-column: span 2;
+    }
+    
+    .chart-header {
+      padding: 1.75rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .chart-title {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin: 0 0 0.25rem 0;
+    }
+    
+    .chart-subtitle {
+      font-size: 0.875rem;
+      color: #64748b;
+      margin: 0;
+    }
+    
+    .chart-select {
+      padding: 0.5rem 2.5rem 0.5rem 0.75rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      color: #475569;
+      background: white url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%277%27%3E%3Cpath d=%27M1 1l5 5 5-5%27 stroke=%27%23475569%27 stroke-width=%272%27 fill=%27none%27/%3E%3C/svg%3E') no-repeat right 0.75rem center;
+    }
+    
+    .chart-content {
+      padding: 2rem 1.75rem;
+    }
+    
+    .bar-chart {
+      height: 280px;
+      gap: 1rem;
+    }
+    
+    .bar {
+      flex: 1;
+      gap: 0.5rem;
+    }
+    
+    .bar-column {
+      width: 100%;
+      border-radius: 0.5rem 0.5rem 0 0;
+      position: relative;
+      cursor: pointer;
+    }
+    
+    .bar-column.blue {
+      background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%);
+    }
+    
+    .bar-column.green {
+      background: linear-gradient(180deg, #10b981 0%, #059669 100%);
+      box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.3);
+    }
+    
+    .bar-value {
+      position: absolute;
+      top: -1.75rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #0f172a;
+    }
+    
+    .bar-value.highlight {
+      font-weight: 700;
+      color: #10b981;
+    }
+    
+    .bar-label {
+      font-size: 0.75rem;
+      color: #64748b;
+      font-weight: 500;
+    }
+    
+    .bar-label.highlight {
+      color: #10b981;
+      font-weight: 700;
+    }
+    
+    .chart-legend {
+      gap: 2rem;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #e2e8f0;
+    }
+    
+    .legend-item {
+      gap: 0.5rem;
+    }
+    
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 0.25rem;
+    }
+    
+    .legend-color.blue {
+      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    }
+    
+    .legend-color.green {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    }
+    
+    .legend-text {
+      font-size: 0.8125rem;
+      color: #64748b;
+    }
+    
+    /* Performance Metrics */
+    .metrics-card {
+      padding: 1.75rem;
+    }
+    
+    .metric-item {
+      margin-bottom: 1.75rem;
+    }
+    
+    .metric-item:last-child {
+      margin-bottom: 0;
+    }
+    
+    .metric-header {
+      margin-bottom: 0.75rem;
+    }
+    
+    .metric-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    
+    .metric-dot.blue {
+      background: #3b82f6;
+    }
+    
+    .metric-dot.green {
+      background: #10b981;
+    }
+    
+    .metric-dot.orange {
+      background: #f59e0b;
+    }
+    
+    .metric-dot.purple {
+      background: #8b5cf6;
+    }
+    
+    .metric-label {
+      font-size: 0.875rem;
+      color: #475569;
+      font-weight: 500;
+    }
+    
+    .metric-value {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+    
+    .metric-bar-bg {
+      width: 100%;
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 1rem;
+      overflow: hidden;
+    }
+    
+    .metric-bar-fill {
+      height: 100%;
+      border-radius: 1rem;
+    }
+    
+    .metric-bar-fill.blue {
+      background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%);
+    }
+    
+    .metric-bar-fill.green {
+      background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+    }
+    
+    .metric-bar-fill.orange {
+      background: linear-gradient(90deg, #f59e0b 0%, #d97706 100%);
+    }
+    
+    .metric-bar-fill.purple {
+      background: linear-gradient(90deg, #8b5cf6 0%, #7c3aed 100%);
+    }
+    
+    .metric-summary {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #e2e8f0;
+    }
+    
+    .metric-summary-row {
+      margin-bottom: 0.5rem;
+    }
+    
+    .metric-summary-label {
+      font-size: 0.8125rem;
+      color: #64748b;
+    }
+    
+    .metric-summary-value {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: #10b981;
+    }
+    
+    .metric-summary-text {
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+    
+    /* Activities and Tasks */
+    .activities-grid {
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    
+    .activity-header {
+      padding: 1.75rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .activity-link {
+      font-size: 0.875rem;
+      color: #3b82f6;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    
+    .activity-item {
+      padding: 1.25rem 1.75rem;
+      border-bottom: 1px solid #f1f5f9;
+      cursor: pointer;
+    }
+    
+    .activity-item:last-child {
+      border-bottom: none;
+    }
+    
+    .activity-icon-wrapper {
+      width: 40px;
+      height: 40px;
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    
+    .activity-icon-wrapper.green {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
+    }
+    
+    .activity-icon-wrapper.blue {
+      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+      box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+    }
+    
+    .activity-icon-wrapper.orange {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      box-shadow: 0 2px 4px rgba(245, 158, 11, 0.2);
+    }
+    
+    .activity-icon-wrapper.purple {
+      background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+      box-shadow: 0 2px 4px rgba(139, 92, 246, 0.2);
+    }
+    
+    .activity-icon {
+      filter: brightness(0) invert(1);
+    }
+    
+    .activity-title {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 0.25rem;
+    }
+    
+    .activity-description {
+      font-size: 0.8125rem;
+      color: #64748b;
+      margin-bottom: 0.5rem;
+    }
+    
+    .activity-meta {
+      font-size: 0.75rem;
+      color: #94a3b8;
+    }
+    
+    .activity-author {
+      font-weight: 600;
+    }
+    
+    /* Tasks Card */
+    .tasks-badge {
+      padding: 0.25rem 0.75rem;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.1) 100%);
+      border-radius: 1rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #3b82f6;
+    }
+    
+    .task-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      margin-bottom: 0.75rem;
+      border: 1px solid #f1f5f9;
+    }
+    
+    .task-item.completed {
+      background: #f8fafc;
+    }
+    
+    .task-checkbox {
+      width: 18px;
+      height: 18px;
+      border-radius: 0.25rem;
+      border: 2px solid #e2e8f0;
+      cursor: pointer;
+      accent-color: #3b82f6;
+    }
+    
+    .task-checkbox:checked {
+      accent-color: #10b981;
+    }
+    
+    .task-title {
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: #0f172a;
+    }
+    
+    .task-title.completed {
+      color: #64748b;
+      text-decoration: line-through;
+    }
+    
+    .priority-badge {
+      padding: 0.25rem 0.625rem;
+      border-radius: 0.375rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    
+    .priority-badge.high {
+      background: rgba(239, 68, 68, 0.1);
+      color: #dc2626;
+    }
+    
+    .priority-badge.medium {
+      background: rgba(245, 158, 11, 0.1);
+      color: #d97706;
+    }
+    
+    .priority-badge.normal {
+      background: rgba(59, 130, 246, 0.1);
+      color: #2563eb;
+    }
+    
+    .priority-badge.done {
+      background: rgba(16, 185, 129, 0.1);
+      color: #059669;
+    }
+    
+    .add-task-btn {
+      width: 100%;
+      padding: 0.75rem;
+      background: white;
+      border: 2px dashed #e2e8f0;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #64748b;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    
+    .add-task-btn:hover {
+      border-color: #3b82f6;
+      color: #3b82f6;
+    }
+    
+    /* Team Performance Table */
+    .team-table-header {
+      padding: 1.75rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .team-table-title {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin: 0 0 0.25rem 0;
+    }
+    
+    .team-table-subtitle {
+      font-size: 0.875rem;
+      color: #64748b;
+      margin: 0;
+    }
+    
+    .team-export-btn {
+      padding: 0.5rem 1rem;
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #475569;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .team-export-btn:hover {
+      background: #f8fafc;
+    }
+    
+    .team-table-wrapper {
+      overflow-x: auto;
+    }
+    
+    .team-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .team-table thead tr {
+      background: #f8fafc;
+    }
+    
+    .team-table th {
+      padding: 1rem 1.5rem;
+      text-align: left;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .team-table th.center {
+      text-align: center;
+    }
+    
+    .team-table tbody tr {
+      border-top: 1px solid #f1f5f9;
+    }
+    
+    .team-table tbody tr:hover {
+      background: #f8fafc;
+    }
+    
+    .team-table td {
+      padding: 1.25rem 1.5rem;
+    }
+    
+    .team-member-cell {
+      gap: 0.75rem;
+    }
+    
+    .team-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+    
+    .team-avatar.pink {
+      background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+    }
+    
+    .team-avatar.blue {
+      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    }
+    
+    .team-avatar.orange {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    }
+    
+    .team-avatar.purple {
+      background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+    }
+    
+    .team-member-name {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: #0f172a;
+    }
+    
+    .team-member-role {
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+    
+    .team-tasks-count {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: #0f172a;
+    }
+    
+    .team-tasks-total {
+      color: #94a3b8;
+      font-weight: 400;
+    }
+    
+    .team-tasks-percent {
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    
+    .team-tasks-percent.green {
+      color: #10b981;
+    }
+    
+    .team-tasks-percent.blue {
+      color: #3b82f6;
+    }
+    
+    .team-tasks-percent.orange {
+      color: #f59e0b;
+    }
+    
+    .team-tasks-percent.red {
+      color: #ef4444;
+    }
+    
+    .team-progress-bar {
+      width: 120px;
+      height: 6px;
+      background: #e2e8f0;
+      border-radius: 1rem;
+      overflow: hidden;
+    }
+    
+    .team-progress-fill {
+      height: 100%;
+      border-radius: 1rem;
+    }
+    
+    .team-progress-fill.green {
+      background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+    }
+    
+    .team-progress-fill.blue {
+      background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%);
+    }
+    
+    .team-progress-fill.orange {
+      background: linear-gradient(90deg, #f59e0b 0%, #d97706 100%);
+    }
+    
+    .team-progress-value {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: #0f172a;
+      min-width: 40px;
+    }
+    
+    .team-status-badge {
+      padding: 0.375rem 0.75rem;
+      border-radius: 1rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+    }
+    
+    .team-status-badge.excellent {
+      background: rgba(16, 185, 129, 0.1);
+      color: #059669;
+    }
+    
+    .team-status-badge.good {
+      background: rgba(59, 130, 246, 0.1);
+      color: #2563eb;
+    }
+    
+    .team-status-badge.attention {
+      background: rgba(245, 158, 11, 0.1);
+      color: #d97706;
+    }
+    
+    .team-action-btn {
+      padding: 0.375rem 0.75rem;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.375rem;
+      cursor: pointer;
+      color: #475569;
+    }
+    
+    .team-action-btn:hover {
+      background: #3b82f6;
+      color: white;
+      border-color: #3b82f6;
+    }
+    
+    /* Footer */
+    .page-footer {
+      margin-top: 3rem;
+      padding: 2rem 0;
+      border-top: 1px solid #e2e8f0;
+    }
+    
+    .footer-wrapper {
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    
+    .footer-brand {
+      color: #64748b;
+      font-size: 0.875rem;
+    }
+    
+    .footer-brand-icon {
+      font-size: 1rem;
+      margin-right: 0.5rem;
+    }
+    
+    .footer-brand strong {
+      color: #3b82f6;
+    }
+    
+    .footer-links {
+      gap: 2rem;
+    }
+    
+    .footer-link {
+      color: #64748b;
+      font-size: 0.875rem;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    
+    .footer-link:hover {
+      color: #3b82f6;
+    }
+ 
+  </style>
+</head>
+<body class="axis-ui">
+  
+  <!-- Navbar -->
+  <nav class="bg-white main-navbar" role="navigation" aria-label="Main navigation">
+    <input type="checkbox" id="mobile-menu-toggle">
+    
+    <!-- Mobile Menu Overlay -->
+    <label for="mobile-menu-toggle" class="mobile-nav-overlay"></label>
+    
+    <div class="navbar-content">
+      <div class="flex justify-between align-center">
+        <a href="#" class="navbar-logo">
+          <span class="emoji emoji-chart-up navbar-logo-emoji" aria-hidden="true"></span>
+          <span class="navbar-logo-text">QualityHub</span>
+        </a>
+        
+        <!-- Desktop Navigation -->
+        <div class="desktop-nav-items flex align-center">
+          <div class="notification-btn-wrapper">
+            <button class="btn btn-sm nav-icon-btn" aria-label="Notifications">
+              <span class="emoji emoji-bell" aria-hidden="true"></span>
+            </button>
+            <span class="badge badge-red notification-badge">3</span>
+          </div>
+          
+          <button class="btn btn-sm nav-icon-btn" aria-label="Settings">
+            <span class="emoji emoji-settings" aria-hidden="true"></span>
+          </button>
+          
+          <div class="flex align-center user-profile-wrapper">
+            <div class="user-avatar">JD</div>
+            <div>
+              <div class="user-name">John Doe</div>
+              <div class="user-role">Administrator</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Hamburger Menu Button -->
+        <label for="mobile-menu-toggle" class="hamburger-icon" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
+      </div>
+      
+      <!-- Mobile Menu Slide-in -->
+      <div class="mobile-menu">
+        <div class="mobile-menu flex align-center">
+          <div class="mobile-user-avatar">JD</div>
+          <div>
+            <div class="mobile-user-name">John Doe</div>
+            <div class="mobile-user-role">Administrator</div>
+          </div>
+        </div>
+        
+        <div class="mobile-menu-section">
+          <div class="mobile-menu-header">
+            <div>MAIN MENU</div>
+          </div>
+          
+          <a href="#dashboard" class="mobile-menu-link active">
+            <span class="emoji emoji-home" aria-hidden="true"></span>
+            <span>Dashboard</span>
+          </a>
+          
+          <a href="#analytics" class="mobile-menu-link">
+            <span class="emoji emoji-stats" aria-hidden="true"></span>
+            <span>Analytics</span>
+          </a>
+          
+          <a href="#reports" class="mobile-menu-link">
+            <span class="emoji emoji-file" aria-hidden="true"></span>
+            <span>Reports</span>
+          </a>
+          
+          <a href="#quality" class="mobile-menu-link">
+            <span class="emoji emoji-check" aria-hidden="true"></span>
+            <span>Quality Metrics</span>
+          </a>
+          
+          <a href="#team" class="mobile-menu-link">
+            <span class="emoji emoji-users" aria-hidden="true"></span>
+            <span>Team</span>
+          </a>
+          
+          <div class="mobile-menu-divider">
+            <div>PREFERENCES</div>
+          </div>
+          
+          <a href="#settings" class="mobile-menu-link">
+            <span class="emoji emoji-settings" aria-hidden="true"></span>
+            <span>Settings</span>
+          </a>
+          
+          <a href="#help" class="mobile-menu-link">
+            <span class="emoji emoji-info" aria-hidden="true"></span>
+            <span>Help & Support</span>
+          </a>
+        </div>
+        
+        <div class="mobile-menu-footer">
+          <button class="mobile-notification-btn">
+            <span class="emoji emoji-bell" aria-hidden="true"></span>
+            <span class="mobile-notification-text">Notifications</span>
+            <span class="badge badge-red mobile-notification-badge">3</span>
+          </button>
+          <button class="mobile-settings-btn">
+            <span class="emoji emoji-settings" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Layout -->
+  <div class="flex main-layout">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar-desktop bg-white" role="navigation" aria-label="Sidebar navigation">
+      <div class="sidebar-content">
+        <div class="sidebar-header">
+          <div>MAIN MENU</div>
+        </div>
+        
+        <nav>
+          <a href="#dashboard" class="sidebar-link active">
+            <span class="emoji emoji-home" aria-hidden="true"></span>
+            <span>Dashboard</span>
+          </a>
+          
+          <a href="#analytics" class="sidebar-link">
+            <span class="emoji emoji-stats" aria-hidden="true"></span>
+            <span>Analytics</span>
+          </a>
+          
+          <a href="#reports" class="sidebar-link">
+            <span class="emoji emoji-file" aria-hidden="true"></span>
+            <span>Reports</span>
+          </a>
+          
+          <a href="#quality" class="sidebar-link">
+            <span class="emoji emoji-check" aria-hidden="true"></span>
+            <span>Quality Metrics</span>
+          </a>
+          
+          <a href="#team" class="sidebar-link">
+            <span class="emoji emoji-users" aria-hidden="true"></span>
+            <span>Team</span>
+          </a>
+        </nav>
+        
+        <div class="sidebar-preferences">
+          <div>PREFERENCES</div>
+        </div>
+        
+        <nav class="sidebar-nav-bottom">
+          <a href="#settings" class="sidebar-link">
+            <span class="emoji emoji-settings" aria-hidden="true"></span>
+            <span>Settings</span>
+          </a>
+          
+          <a href="#help" class="sidebar-link">
+            <span class="emoji emoji-info" aria-hidden="true"></span>
+            <span>Help & Support</span>
+          </a>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 main-content-responsive" role="main">
+      
+      <!-- Page Header -->
+      <div class="page-header">
+        <div class="flex justify-between align-center page-header-top">
+          <div>
+            <h1 class="page-title">Quality Dashboard</h1>
+            <p class="page-subtitle">Welcome back, John! Here's what's happening with your projects today.</p>
+          </div>
+          <div class="flex page-actions">
+            <button class="btn btn-export">
+              <span class="emoji emoji-download btn-export-icon" aria-hidden="true"></span>
+              <span>Export Data</span>
+            </button>
+            <button class="btn btn-new-report">
+              <span class="emoji emoji-plus btn-new-report-icon" aria-hidden="true"></span>
+              <span>New Report</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPI Cards Grid -->
+      <div class="grid grid-cols-4 grid-cols-2-md grid-cols-1-sm kpi-grid">
+        
+        <!-- KPI Card 1 -->
+        <article class="transition hover-lift card bg-white" style="border-radius: 1rem; padding: 1.75rem; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);">
+          <div class="flex justify-between align-start" style="margin-bottom: 1.25rem;">
+            <div style="width: 48px; height: 48px; border-radius: 0.75rem; background: linear-gradient(135deg, #10b981 0%, #059669 100%); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.3);">
+              <span class="emoji emoji-check" style="font-size: 1.5rem; filter: brightness(0) invert(1);" aria-hidden="true"></span>
+            </div>
+            <div style="padding: 0.25rem 0.625rem; background: rgba(16, 185, 129, 0.1); border-radius: 1rem; font-size: 0.75rem; font-weight: 600; color: #059669;">
+              +2.5%
+            </div>
+          </div>
+          <div>
+            <div style="font-size: 0.8125rem; color: #64748b; margin-bottom: 0.25rem; font-weight: 500;">Total Quality Score</div>
+            <div style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">94.5%</div>
+            <div style="font-size: 0.75rem; color: #64748b;">
+              <span style="color: #10b981; font-weight: 600;">↑ 2.3 points</span> from last month
+            </div>
+          </div>
+        </article>
+
+        <!-- KPI Card 2 -->
+        <article class="transition hover-lift card bg-white" style="border-radius: 1rem; padding: 1.75rem; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);">
+          <div class="flex justify-between align-start" style="margin-bottom: 1.25rem;">
+            <div style="width: 48px; height: 48px; border-radius: 0.75rem; background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);">
+              <span class="emoji emoji-tools" style="font-size: 1.5rem; filter: brightness(0) invert(1);" aria-hidden="true"></span>
+            </div>
+            <div style="padding: 0.25rem 0.625rem; background: rgba(59, 130, 246, 0.1); border-radius: 1rem; font-size: 0.75rem; font-weight: 600; color: #2563eb;">
+              +12.3%
+            </div>
+          </div>
+          <div>
+            <div style="font-size: 0.8125rem; color: #64748b; margin-bottom: 0.25rem; font-weight: 500;">Defects Resolved</div>
+            <div style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">1,247</div>
+            <div style="font-size: 0.75rem; color: #64748b;">
+              <span style="color: #3b82f6; font-weight: 600;">↑ 137 more</span> than last month
+            </div>
+          </div>
+        </article>
+
+        <!-- KPI Card 3 -->
+        <article class="transition hover-lift card bg-white" style="border-radius: 1rem; padding: 1.75rem; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);">
+          <div class="flex justify-between align-start" style="margin-bottom: 1.25rem;">
+            <div style="width: 48px; height: 48px; border-radius: 0.75rem; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 6px -1px rgba(245, 158, 11, 0.3);">
+              <span class="emoji emoji-clock" style="font-size: 1.5rem; filter: brightness(0) invert(1);" aria-hidden="true"></span>
+            </div>
+            <div style="padding: 0.25rem 0.625rem; background: rgba(245, 158, 11, 0.1); border-radius: 1rem; font-size: 0.75rem; font-weight: 600; color: #d97706;">
+              -8.2%
+            </div>
+          </div>
+          <div>
+            <div style="font-size: 0.8125rem; color: #64748b; margin-bottom: 0.25rem; font-weight: 500;">Open Issues</div>
+            <div style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">23</div>
+            <div style="font-size: 0.75rem; color: #64748b;">
+              <span style="color: #10b981; font-weight: 600;">↓ 2 issues</span> resolved today
+            </div>
+          </div>
+        </article>
+
+        <!-- KPI Card 4 -->
+        <article class="transition hover-lift card bg-white" style="border-radius: 1rem; padding: 1.75rem; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);">
+          <div class="flex justify-between align-start" style="margin-bottom: 1.25rem;">
+            <div style="width: 48px; height: 48px; border-radius: 0.75rem; background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 6px -1px rgba(139, 92, 246, 0.3);">
+              <span class="emoji emoji-chart" style="font-size: 1.5rem; filter: brightness(0) invert(1);" aria-hidden="true"></span>
+            </div>
+            <div style="padding: 0.25rem 0.625rem; background: rgba(139, 92, 246, 0.1); border-radius: 1rem; font-size: 0.75rem; font-weight: 600; color: #7c3aed;">
+              +5.7%
+            </div>
+          </div>
+          <div>
+            <div style="font-size: 0.8125rem; color: #64748b; margin-bottom: 0.25rem; font-weight: 500;">Team Efficiency</div>
+            <div style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">87%</div>
+            <div style="font-size: 0.75rem; color: #64748b;">
+              <span style="color: #8b5cf6; font-weight: 600;">↑ 5.7%</span> improvement
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Charts and Data Section -->
+      <div class="grid grid-cols-3 grid-cols-1-md" style="gap: 1.5rem; margin-bottom: 2.5rem;">
+        
+        <!-- Quality Trends Chart -->
+        <article class="card bg-white" style="grid-column: span 2; border-radius: 1rem; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);">
+          <div style="padding: 1.75rem; border-bottom: 1px solid #e2e8f0;">
+            <div class="flex justify-between align-center">
+              <div>
+                <h3 style="font-size: 1.125rem; font-weight: 700; color: #0f172a; margin: 0 0 0.25rem 0;">Quality Score Trends</h3>
+                <p style="font-size: 0.875rem; color: #64748b; margin: 0;">Last 6 months performance overview</p>
+              </div>
+              <select style="padding: 0.5rem 2.5rem 0.5rem 0.75rem; border: 1px solid #e2e8f0; border-radius: 0.5rem; font-size: 0.875rem; color: #475569; background: white url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%277%27%3E%3Cpath d=%27M1 1l5 5 5-5%27 stroke=%27%23475569%27 stroke-width=%272%27 fill=%27none%27/%3E%3C/svg%3E') no-repeat right 0.75rem center;">
+                <option>Last 6 Months</option>
+                <option>Last 3 Months</option>
+                <option>Last Month</option>
+              </select>
+            </div>
+          </div>
+          <div style="padding: 2rem 1.75rem;">
+            <!-- CSS Bar Chart -->
+            <div class="flex align-end justify-between" style="height: 280px; gap: 1rem;">
+              <div class="flex flex-col justify-end align-center" style="flex: 1; gap: 0.5rem;">
+                <div class="transition hover:opacity-80" style="width: 100%; background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%); border-radius: 0.5rem 0.5rem 0 0; height: 75%; position: relative; cursor: pointer;" title="May: 89%">
+                  <div style="position: absolute; top: -1.75rem; left: 50%; transform: translateX(-50%); font-size: 0.75rem; font-weight: 600; color: #0f172a;">89%</div>
+                </div>
+                <div style="font-size: 0.75rem; color: #64748b; font-weight: 500;">May</div>
+              </div>
+              <div class="flex flex-col justify-end align-center" style="flex: 1; gap: 0.5rem;">
+                <div class="transition hover:opacity-80" style="width: 100%; background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%); border-radius: 0.5rem 0.5rem 0 0; height: 80%; position: relative; cursor: pointer;" title="Jun: 91%">
+                  <div style="position: absolute; top: -1.75rem; left: 50%; transform: translateX(-50%); font-size: 0.75rem; font-weight: 600; color: #0f172a;">91%</div>
+                </div>
+                <div style="font-size: 0.75rem; color: #64748b; font-weight: 500;">Jun</div>
+              </div>
+              <div class="flex flex-col justify-end align-center" style="flex: 1; gap: 0.5rem;">
+                <div class="transition hover:opacity-80" style="width: 100%; background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%); border-radius: 0.5rem 0.5rem 0 0; height: 78%; position: relative; cursor: pointer;" title="Jul: 88%">
+                  <div style="position: absolute; top: -1.75rem; left: 50%; transform: translateX(-50%); font-size: 0.75rem; font-weight: 600; color: #0f172a;">88%</div>
+                </div>
+                <div style="font-size: 0.75rem; color: #64748b; font-weight: 500;">Jul</div>
+              </div>
+              <div class="flex flex-col justify-end align-center" style="flex: 1; gap: 0.5rem;">
+                <div class="transition hover:opacity-80" style="width: 100%; background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%); border-radius: 0.5rem 0.5rem 0 0; height: 85%; position: relative; cursor: pointer;" title="Aug: 92%">
+                  <div style="position: absolute; top: -1.75rem; left: 50%; transform: translateX(-50%); font-size: 0.75rem; font-weight: 600; color: #0f172a;">92%</div>
+                </div>
+                <div style="font-size: 0.75rem; color: #64748b; font-weight: 500;">Aug</div>
+              </div>
+              <div class="flex flex-col justify-end align-center" style="flex: 1; gap: 0.5rem;">
+                <div class="transition hover:opacity-80" style="width: 100%; background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%); border-radius: 0.5rem 0.5rem 0 0; height: 83%; position: relative; cursor: pointer;" title="Sep: 90%">
+                  <div style="position: absolute; top: -1.75rem; left: 50%; transform: translateX(-50%); font-size: 0.75rem; font-weight: 600; color: #0f172a;">90%</div>
+                </div>
+                <div style="font-size: 0.75rem; color: #64748b; font-weight: 500;">Sep</div>
+              </div>
+              <div class="flex flex-col justify-end align-center" style="flex: 1; gap: 0.5rem;">
+                <div class="transition hover:opacity-80" style="width: 100%; background: linear-gradient(180deg, #10b981 0%, #059669 100%); border-radius: 0.5rem 0.5rem 0 0; height: 95%; position: relative; cursor: pointer; box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.3);" title="Oct: 94.5%">
+                  <div style="position: absolute; top: -1.75rem; left: 50%; transform: translateX(-50%); font-size: 0.75rem; font-weight: 700; color: #10b981;">94.5%</div>
+                </div>
+                <div style="font-size: 0.75rem; color: #10b981; font-weight: 700;">Oct</div>
+              </div>
+            </div>
+            
+            <!-- Chart Legend -->
+            <div class="flex justify-center align-center" style="gap: 2rem; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #e2e8f0;">
+              <div class="flex align-center" style="gap: 0.5rem;">
+                <div style="width: 12px; height: 12px; border-radius: 0.25rem; background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);"></div>
+                <span style="font-size: 0.8125rem; color: #64748b;">Previous Months</span>
+              </div>
+              <div class="flex align-center" style="gap: 0.5rem;">
+                <div style="width: 12px; height: 12px; border-radius: 0.25rem; background: linear-gradient(135deg, #10b981 0%, #059669 100%);"></div>
+                <span style="font-size: 0.8125rem; color: #64748b;">Current Month</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Quick Stats -->
+        <article class="card bg-white" style="border-radius: 1rem; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);">
+          <div style="padding: 1.75rem; border-bottom: 1px solid #e2e8f0;">
+            <h3 style="font-size: 1.125rem; font-weight: 700; color: #0f172a; margin: 0;">Performance Metrics</h3>
+          </div>
+          <div style="padding: 1.75rem;">
+            
+            <div style="margin-bottom: 1.75rem;">
+              <div class="flex justify-between align-center" style="margin-bottom: 0.75rem;">
+                <div class="flex align-center" style="gap: 0.5rem;">
+                  <div style="width: 8px; height: 8px; border-radius: 50%; background: #3b82f6;"></div>
+                  <span style="font-size: 0.875rem; color: #475569; font-weight: 500;">Test Coverage</span>
+                </div>
+                <span style="font-size: 0.875rem; font-weight: 700; color: #0f172a;">92%</span>
+              </div>
+              <div style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 1rem; overflow: hidden;">
+                <div style="width: 92%; height: 100%; background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%); border-radius: 1rem;"></div>
+              </div>
+            </div>
+
+            <div style="margin-bottom: 1.75rem;">
+              <div class="flex justify-between align-center" style="margin-bottom: 0.75rem;">
+                <div class="flex align-center" style="gap: 0.5rem;">
+                  <div style="width: 8px; height: 8px; border-radius: 50%; background: #10b981;"></div>
+                  <span style="font-size: 0.875rem; color: #475569; font-weight: 500;">Code Quality</span>
+                </div>
+                <span style="font-size: 0.875rem; font-weight: 700; color: #0f172a;">88%</span>
+              </div>
+              <div style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 1rem; overflow: hidden;">
+                <div style="width: 88%; height: 100%; background: linear-gradient(90deg, #10b981 0%, #059669 100%); border-radius: 1rem;"></div>
+              </div>
+            </div>
+
+            <div style="margin-bottom: 1.75rem;">
+              <div class="flex justify-between align-center" style="margin-bottom: 0.75rem;">
+                <div class="flex align-center" style="gap: 0.5rem;">
+                  <div style="width: 8px; height: 8px; border-radius: 50%; background: #f59e0b;"></div>
+                  <span style="font-size: 0.875rem; color: #475569; font-weight: 500;">Documentation</span>
+                </div>
+                <span style="font-size: 0.875rem; font-weight: 700; color: #0f172a;">76%</span>
+              </div>
+              <div style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 1rem; overflow: hidden;">
+                <div style="width: 76%; height: 100%; background: linear-gradient(90deg, #f59e0b 0%, #d97706 100%); border-radius: 1rem;"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between align-center" style="margin-bottom: 0.75rem;">
+                <div class="flex align-center" style="gap: 0.5rem;">
+                  <div style="width: 8px; height: 8px; border-radius: 50%; background: #8b5cf6;"></div>
+                  <span style="font-size: 0.875rem; color: #475569; font-weight: 500;">Security Score</span>
+                </div>
+                <span style="font-size: 0.875rem; font-weight: 700; color: #0f172a;">95%</span>
+              </div>
+              <div style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 1rem; overflow: hidden;">
+                <div style="width: 95%; height: 100%; background: linear-gradient(90deg, #8b5cf6 0%, #7c3aed 100%); border-radius: 1rem;"></div>
+              </div>
+            </div>
+
+            <!-- Summary -->
+            <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #e2e8f0;">
+              <div class="flex justify-between align-center" style="margin-bottom: 0.5rem;">
+                <span style="font-size: 0.8125rem; color: #64748b;">Overall Health</span>
+                <span style="font-size: 0.875rem; font-weight: 700; color: #10b981;">Excellent</span>
+              </div>
+              <div style="font-size: 0.75rem; color: #64748b;">All metrics are performing above target thresholds</div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Recent Activities and Tasks -->
+      <div class="grid grid-cols-2 grid-cols-1-md" style="gap: 1.5rem; margin-bottom: 2.5rem;">
+        
+        <!-- Recent Activities -->
+        <article class="card bg-white" style="border-radius: 1rem; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);">
+          <div style="padding: 1.75rem; border-bottom: 1px solid #e2e8f0;">
+            <div class="flex justify-between align-center">
+              <h3 style="font-size: 1.125rem; font-weight: 700; color: #0f172a; margin: 0;">Recent Activities</h3>
+              <a href="#" style="font-size: 0.875rem; color: #3b82f6; text-decoration: none; font-weight: 600;">View all →</a>
+            </div>
+          </div>
+          <div style="padding: 0;">
+            
+            <div class="transition hover:bg-blue-5" style="padding: 1.25rem 1.75rem; border-bottom: 1px solid #f1f5f9; cursor: pointer;">
+              <div class="flex" style="gap: 1rem;">
+                <div style="width: 40px; height: 40px; border-radius: 0.5rem; background: linear-gradient(135deg, #10b981 0%, #059669 100%); display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);">
+                  <span class="emoji emoji-check" style="filter: brightness(0) invert(1);" aria-hidden="true"></span>
+                </div>
+                <div class="flex-1">
+                  <div style="font-size: 0.9375rem; font-weight: 600; color: #0f172a; margin-bottom: 0.25rem;">Defect #1234 resolved</div>
+                  <div style="font-size: 0.8125rem; color: #64748b; margin-bottom: 0.5rem;">Critical bug fix in authentication module completed successfully</div>
+                  <div style="font-size: 0.75rem; color: #94a3b8;">
+                    <span style="font-weight: 600;">Sarah Johnson</span> • 2 hours ago
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="transition hover:bg-blue-5" style="padding: 1.25rem 1.75rem; border-bottom: 1px solid #f1f5f9; cursor: pointer;">
+              <div class="flex" style="gap: 1rem;">
+                <div style="width: 40px; height: 40px; border-radius: 0.5rem; background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);">
+                  <span class="emoji emoji-file" style="filter: brightness(0) invert(1);" aria-hidden="true"></span>
+                </div>
+                <div class="flex-1">
+                  <div style="font-size: 0.9375rem; font-weight: 600; color: #0f172a; margin-bottom: 0.25rem;">Quality report generated</div>
+                  <div style="font-size: 0.8125rem; color: #64748b; margin-bottom: 0.5rem;">Monthly quality metrics report is now available for review</div>
+                  <div style="font-size: 0.75rem; color: #94a3b8;">
+                    <span style="font-weight: 600;">System</span> • 5 hours ago
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="transition hover:bg-blue-5" style="padding: 1.25rem 1.75rem; border-bottom: 1px solid #f1f5f9; cursor: pointer;">
+              <div class="flex" style="gap: 1rem;">
+                <div style="width: 40px; height: 40px; border-radius: 0.5rem; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 2px 4px rgba(245, 158, 11, 0.2);">
+                  <span class="emoji emoji-warning" style="filter: brightness(0) invert(1);" aria-hidden="true"></span>
+                </div>
+                <div class="flex-1">
+                  <div style="font-size: 0.9375rem; font-weight: 600; color: #0f172a; margin-bottom: 0.25rem;">New issue reported</div>
+                  <div style="font-size: 0.8125rem; color: #64748b; margin-bottom: 0.5rem;">Performance degradation detected in API endpoint /v2/users</div>
+                  <div style="font-size: 0.75rem; color: #94a3b8;">
+                    <span style="font-weight: 600;">Michael Chen</span> • 1 day ago
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="transition hover:bg-blue-5" style="padding: 1.25rem 1.75rem; cursor: pointer;">
+              <div class="flex" style="gap: 1rem;">
+                <div style="width: 40px; height: 40px; border-radius: 0.5rem; background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 2px 4px rgba(139, 92, 246, 0.2);">
+                  <span class="emoji emoji-users" style="filter: brightness(0) invert(1);" aria-hidden="true"></span>
+                </div>
+                <div class="flex-1">
+                  <div style="font-size: 0.9375rem; font-weight: 600; color: #0f172a; margin-bottom: 0.25rem;">Team review completed</div>
+                  <div style="font-size: 0.8125rem; color: #64748b; margin-bottom: 0.5rem;">Code review completed for release v2.3.0 with 12 approvals</div>
+                  <div style="font-size: 0.75rem; color: #94a3b8;">
+                    <span style="font-weight: 600;">Team</span> • 2 days ago
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Pending Tasks -->
+        <article class="card bg-white" style="border-radius: 1rem; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);">
+          <div style="padding: 1.75rem; border-bottom: 1px solid #e2e8f0;">
+            <div class="flex justify-between align-center">
+              <h3 style="font-size: 1.125rem; font-weight: 700; color: #0f172a; margin: 0;">Pending Tasks</h3>
+              <div style="padding: 0.25rem 0.75rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.1) 100%); border-radius: 1rem; font-size: 0.75rem; font-weight: 700; color: #3b82f6;">
+                6 of 8 tasks
+              </div>
+            </div>
+          </div>
+          <div style="padding: 1.75rem;">
+            
+            <label style="display: flex; align-items: center; gap: 0.75rem; padding: 1rem; border-radius: 0.5rem; cursor: pointer; margin-bottom: 0.75rem; border: 1px solid #f1f5f9;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='transparent'">
+              <input type="checkbox" id="task1" style="width: 18px; height: 18px; border-radius: 0.25rem; border: 2px solid #e2e8f0; cursor: pointer; accent-color: #3b82f6;">
+              <div class="flex-1">
+                <div style="font-size: 0.9375rem; font-weight: 500; color: #0f172a;">Review security audit findings</div>
+              </div>
+              <span style="padding: 0.25rem 0.625rem; background: rgba(239, 68, 68, 0.1); color: #dc2626; border-radius: 0.375rem; font-size: 0.75rem; font-weight: 600;">High</span>
+            </label>
+
+            <label style="display: flex; align-items: center; gap: 0.75rem; padding: 1rem; border-radius: 0.5rem; cursor: pointer; margin-bottom: 0.75rem; border: 1px solid #f1f5f9; background: #f8fafc;">
+              <input type="checkbox" id="task2" checked style="width: 18px; height: 18px; border-radius: 0.25rem; border: 2px solid #e2e8f0; cursor: pointer; accent-color: #10b981;">
+              <div class="flex-1">
+                <div style="font-size: 0.9375rem; font-weight: 500; color: #64748b; text-decoration: line-through;">Update test documentation</div>
+              </div>
+              <span style="padding: 0.25rem 0.625rem; background: rgba(16, 185, 129, 0.1); color: #059669; border-radius: 0.375rem; font-size: 0.75rem; font-weight: 600;">Done</span>
+            </label>
+
+            <label style="display: flex; align-items: center; gap: 0.75rem; padding: 1rem; border-radius: 0.5rem; cursor: pointer; margin-bottom: 0.75rem; border: 1px solid #f1f5f9;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='transparent'">
+              <input type="checkbox" id="task3" style="width: 18px; height: 18px; border-radius: 0.25rem; border: 2px solid #e2e8f0; cursor: pointer; accent-color: #3b82f6;">
+              <div class="flex-1">
+                <div style="font-size: 0.9375rem; font-weight: 500; color: #0f172a;">Analyze performance metrics</div>
+              </div>
+              <span style="padding: 0.25rem 0.625rem; background: rgba(245, 158, 11, 0.1); color: #d97706; border-radius: 0.375rem; font-size: 0.75rem; font-weight: 600;">Medium</span>
+            </label>
+
+            <label style="display: flex; align-items: center; gap: 0.75rem; padding: 1rem; border-radius: 0.5rem; cursor: pointer; margin-bottom: 0.75rem; border: 1px solid #f1f5f9;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='transparent'">
+              <input type="checkbox" id="task4" style="width: 18px; height: 18px; border-radius: 0.25rem; border: 2px solid #e2e8f0; cursor: pointer; accent-color: #3b82f6;">
+              <div class="flex-1">
+                <div style="font-size: 0.9375rem; font-weight: 500; color: #0f172a;">Schedule team retrospective</div>
+              </div>
+              <span style="padding: 0.25rem 0.625rem; background: rgba(59, 130, 246, 0.1); color: #2563eb; border-radius: 0.375rem; font-size: 0.75rem; font-weight: 600;">Normal</span>
+            </label>
+
+            <label style="display: flex; align-items: center; gap: 0.75rem; padding: 1rem; border-radius: 0.5rem; cursor: pointer; margin-bottom: 0.75rem; border: 1px solid #f1f5f9;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='transparent'">
+              <input type="checkbox" id="task5" style="width: 18px; height: 18px; border-radius: 0.25rem; border: 2px solid #e2e8f0; cursor: pointer; accent-color: #3b82f6;">
+              <div class="flex-1">
+                <div style="font-size: 0.9375rem; font-weight: 500; color: #0f172a;">Update quality standards documentation</div>
+              </div>
+              <span style="padding: 0.25rem 0.625rem; background: rgba(245, 158, 11, 0.1); color: #d97706; border-radius: 0.375rem; font-size: 0.75rem; font-weight: 600;">Medium</span>
+            </label>
+
+            <label style="display: flex; align-items: center; gap: 0.75rem; padding: 1rem; border-radius: 0.5rem; cursor: pointer; margin-bottom: 1.5rem; border: 1px solid #f1f5f9;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='transparent'">
+              <input type="checkbox" id="task6" style="width: 18px; height: 18px; border-radius: 0.25rem; border: 2px solid #e2e8f0; cursor: pointer; accent-color: #3b82f6;">
+              <div class="flex-1">
+                <div style="font-size: 0.9375rem; font-weight: 500; color: #0f172a;">Prepare monthly stakeholder report</div>
+              </div>
+              <span style="padding: 0.25rem 0.625rem; background: rgba(239, 68, 68, 0.1); color: #dc2626; border-radius: 0.375rem; font-size: 0.75rem; font-weight: 600;">High</span>
+            </label>
+
+            <button style="width: 100%; padding: 0.75rem; background: white; border: 2px dashed #e2e8f0; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 600; color: #64748b; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem;" onmouseover="this.style.borderColor='#3b82f6'; this.style.color='#3b82f6'" onmouseout="this.style.borderColor='#e2e8f0'; this.style.color='#64748b'">
+              <span class="emoji emoji-plus" aria-hidden="true"></span>
+              <span>Add New Task</span>
+            </button>
+          </div>
+        </article>
+      </div>
+
+      <!-- Team Performance Table -->
+      <article class="card bg-white" style="border-radius: 1rem; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1); margin-bottom: 2.5rem;">
+        <div style="padding: 1.75rem; border-bottom: 1px solid #e2e8f0;">
+          <div class="flex justify-between align-center">
+            <div>
+              <h3 style="font-size: 1.125rem; font-weight: 700; color: #0f172a; margin: 0 0 0.25rem 0;">Team Performance</h3>
+              <p style="font-size: 0.875rem; color: #64748b; margin: 0;">Current sprint metrics and individual contributions</p>
+            </div>
+            <button style="padding: 0.5rem 1rem; background: white; border: 1px solid #e2e8f0; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 500; color: #475569; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'">
+              <span class="emoji emoji-download" aria-hidden="true"></span>
+              <span>Export</span>
+            </button>
+          </div>
+        </div>
+        <div style="overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse;" role="table">
+            <thead>
+              <tr style="background: #f8fafc;">
+                <th style="padding: 1rem 1.5rem; text-align: left; font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em;">Team Member</th>
+                <th style="padding: 1rem 1.5rem; text-align: left; font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em;">Tasks</th>
+                <th style="padding: 1rem 1.5rem; text-align: left; font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em;">Quality Score</th>
+                <th style="padding: 1rem 1.5rem; text-align: left; font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em;">Status</th>
+                <th style="padding: 1rem 1.5rem; text-align: center; font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em;">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-top: 1px solid #f1f5f9;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='transparent'">
+                <td style="padding: 1.25rem 1.5rem;">
+                  <div class="flex align-center" style="gap: 0.75rem;">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 0.875rem;">SJ</div>
+                    <div>
+                      <div style="font-size: 0.9375rem; font-weight: 600; color: #0f172a;">Sarah Johnson</div>
+                      <div style="font-size: 0.75rem; color: #64748b;">Senior QA Engineer</div>
+                    </div>
+                  </div>
+                </td>
+                <td style="padding: 1.25rem 1.5rem;">
+                  <div style="font-size: 0.9375rem; font-weight: 600; color: #0f172a;">28 <span style="color: #94a3b8; font-weight: 400;">/ 30</span></div>
+                  <div style="font-size: 0.75rem; color: #10b981; font-weight: 600;">93% complete</div>
+                </td>
+                <td style="padding: 1.25rem 1.5rem;">
+                  <div class="flex align-center" style="gap: 0.75rem;">
+                    <div style="width: 120px; height: 6px; background: #e2e8f0; border-radius: 1rem; overflow: hidden;">
+                      <div style="width: 96%; height: 100%; background: linear-gradient(90deg, #10b981 0%, #059669 100%); border-radius: 1rem;"></div>
+                    </div>
+                    <span style="font-size: 0.875rem; font-weight: 700; color: #0f172a; min-width: 40px;">96%</span>
+                  </div>
+                </td>
+                <td style="padding: 1.25rem 1.5rem;">
+                  <span style="padding: 0.375rem 0.75rem; background: rgba(16, 185, 129, 0.1); color: #059669; border-radius: 1rem; font-size: 0.8125rem; font-weight: 600;">Excellent</span>
+                </td>
+                <td style="padding: 1.25rem 1.5rem; text-align: center;">
+                  <button style="padding: 0.375rem 0.75rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.375rem; cursor: pointer; color: #475569;" aria-label="View details" onmouseover="this.style.background='#3b82f6'; this.style.color='white'; this.style.borderColor='#3b82f6'" onmouseout="this.style.background='#f8fafc'; this.style.color='#475569'; this.style.borderColor='#e2e8f0'">
+                    <span class="emoji emoji-eye" style="font-size: 0.875rem;" aria-hidden="true"></span>
+                  </button>
+                </td>
+              </tr>
+              
+              <tr style="border-top: 1px solid #f1f5f9;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='transparent'">
+                <td style="padding: 1.25rem 1.5rem;">
+                  <div class="flex align-center" style="gap: 0.75rem;">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 0.875rem;">MC</div>
+                    <div>
+                      <div style="font-size: 0.9375rem; font-weight: 600; color: #0f172a;">Michael Chen</div>
+                      <div style="font-size: 0.75rem; color: #64748b;">QA Specialist</div>
+                    </div>
+                  </div>
+                </td>
+                <td style="padding: 1.25rem 1.5rem;">
+                  <div style="font-size: 0.9375rem; font-weight: 600; color: #0f172a;">25 <span style="color: #94a3b8; font-weight: 400;">/ 30</span></div>
+                  <div style="font-size: 0.75rem; color: #3b82f6; font-weight: 600;">83% complete</div>
+                </td>
+                <td style="padding: 1.25rem 1.5rem;">
+                  <div class="flex align-center" style="gap: 0.75rem;">
+                    <div style="width: 120px; height: 6px; background: #e2e8f0; border-radius: 1rem; overflow: hidden;">
+                      <div style="width: 92%; height: 100%; background: linear-gradient(90deg, #10b981 0%, #059669 100%); border-radius: 1rem;"></div>
+                    </div>
+                    <span style="font-size: 0.875rem; font-weight: 700; color: #0f172a; min-width: 40px;">92%</span>
+                  </div>
+                </td>
+                <td style="padding: 1.25rem 1.5rem;">
+                  <span style="padding: 0.375rem 0.75rem; background: rgba(16, 185, 129, 0.1); color: #059669; border-radius: 1rem; font-size: 0.8125rem; font-weight: 600;">Good</span>
+                </td>
+                <td style="padding: 1.25rem 1.5rem; text-align: center;">
+                  <button style="padding: 0.375rem 0.75rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.375rem; cursor: pointer; color: #475569;" aria-label="View details" onmouseover="this.style.background='#3b82f6'; this.style.color='white'; this.style.borderColor='#3b82f6'" onmouseout="this.style.background='#f8fafc'; this.style.color='#475569'; this.style.borderColor='#e2e8f0'">
+                    <span class="emoji emoji-eye" style="font-size: 0.875rem;" aria-hidden="true"></span>
+                  </button>
+                </td>
+              </tr>
+              
+              <tr style="border-top: 1px solid #f1f5f9;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='transparent'">
+                <td style="padding: 1.25rem 1.5rem;">
+                  <div class="flex align-center" style="gap: 0.75rem;">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 0.875rem;">ER</div>
+                    <div>
+                      <div style="font-size: 0.9375rem; font-weight: 600; color: #0f172a;">Emily Rodriguez</div>
+                      <div style="font-size: 0.75rem; color: #64748b;">Junior QA Analyst</div>
+                    </div>
+                  </div>
+                </td>
+                <td style="padding: 1.25rem 1.5rem;">
+                  <div style="font-size: 0.9375rem; font-weight: 600; color: #0f172a;">22 <span style="color: #94a3b8; font-weight: 400;">/ 30</span></div>
+                  <div style="font-size: 0.75rem; color: #f59e0b; font-weight: 600;">73% complete</div>
+                </td>
+                <td style="padding: 1.25rem 1.5rem;">
+                  <div class="flex align-center" style="gap: 0.75rem;">
+                    <div style="width: 120px; height: 6px; background: #e2e8f0; border-radius: 1rem; overflow: hidden;">
+                      <div style="width: 88%; height: 100%; background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%); border-radius: 1rem;"></div>
+                    </div>
+                    <span style="font-size: 0.875rem; font-weight: 700; color: #0f172a; min-width: 40px;">88%</span>
+                  </div>
+                </td>
+                <td style="padding: 1.25rem 1.5rem;">
+                  <span style="padding: 0.375rem 0.75rem; background: rgba(59, 130, 246, 0.1); color: #2563eb; border-radius: 1rem; font-size: 0.8125rem; font-weight: 600;">Good</span>
+                </td>
+                <td style="padding: 1.25rem 1.5rem; text-align: center;">
+                  <button style="padding: 0.375rem 0.75rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.375rem; cursor: pointer; color: #475569;" aria-label="View details" onmouseover="this.style.background='#3b82f6'; this.style.color='white'; this.style.borderColor='#3b82f6'" onmouseout="this.style.background='#f8fafc'; this.style.color='#475569'; this.style.borderColor='#e2e8f0'">
+                    <span class="emoji emoji-eye" style="font-size: 0.875rem;" aria-hidden="true"></span>
+                  </button>
+                </td>
+              </tr>
+              
+              <tr style="border-top: 1px solid #f1f5f9;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='transparent'">
+                <td style="padding: 1.25rem 1.5rem;">
+                  <div class="flex align-center" style="gap: 0.75rem;">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 0.875rem;">DK</div>
+                    <div>
+                      <div style="font-size: 0.9375rem; font-weight: 600; color: #0f172a;">David Kumar</div>
+                      <div style="font-size: 0.75rem; color: #64748b;">QA Analyst</div>
+                    </div>
+                  </div>
+                </td>
+                <td style="padding: 1.25rem 1.5rem;">
+                  <div style="font-size: 0.9375rem; font-weight: 600; color: #0f172a;">18 <span style="color: #94a3b8; font-weight: 400;">/ 30</span></div>
+                  <div style="font-size: 0.75rem; color: #ef4444; font-weight: 600;">60% complete</div>
+                </td>
+                <td style="padding: 1.25rem 1.5rem;">
+                  <div class="flex align-center" style="gap: 0.75rem;">
+                    <div style="width: 120px; height: 6px; background: #e2e8f0; border-radius: 1rem; overflow: hidden;">
+                      <div style="width: 76%; height: 100%; background: linear-gradient(90deg, #f59e0b 0%, #d97706 100%); border-radius: 1rem;"></div>
+                    </div>
+                    <span style="font-size: 0.875rem; font-weight: 700; color: #0f172a; min-width: 40px;">76%</span>
+                  </div>
+                </td>
+                <td style="padding: 1.25rem 1.5rem;">
+                  <span style="padding: 0.375rem 0.75rem; background: rgba(245, 158, 11, 0.1); color: #d97706; border-radius: 1rem; font-size: 0.8125rem; font-weight: 600;">Needs Attention</span>
+                </td>
+                <td style="padding: 1.25rem 1.5rem; text-align: center;">
+                  <button style="padding: 0.375rem 0.75rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.375rem; cursor: pointer; color: #475569;" aria-label="View details" onmouseover="this.style.background='#3b82f6'; this.style.color='white'; this.style.borderColor='#3b82f6'" onmouseout="this.style.background='#f8fafc'; this.style.color='#475569'; this.style.borderColor='#e2e8f0'">
+                    <span class="emoji emoji-eye" style="font-size: 0.875rem;" aria-hidden="true"></span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <!-- Footer -->
+      <footer style="margin-top: 3rem; padding: 2rem 0; border-top: 1px solid #e2e8f0;">
+        <div class="flex justify-between align-center" style="flex-wrap: wrap; gap: 1.5rem;">
+          <div style="color: #64748b; font-size: 0.875rem;">
+            <span class="emoji emoji-sparkle" style="font-size: 1rem;" aria-hidden="true"></span>
+            <span style="margin-left: 0.5rem;">© 2025 QualityHub. Built with <strong style="color: #3b82f6;">AxisUI Framework</strong></span>
+          </div>
+          <div class="flex" style="gap: 2rem;">
+            <a href="#" style="color: #64748b; font-size: 0.875rem; text-decoration: none; font-weight: 500;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#64748b'">Privacy Policy</a>
+            <a href="#" style="color: #64748b; font-size: 0.875rem; text-decoration: none; font-weight: 500;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#64748b'">Terms of Service</a>
+            <a href="#" style="color: #64748b; font-size: 0.875rem; text-decoration: none; font-weight: 500;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#64748b'">Support</a>
+          </div>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+// =============================================================================
+// TRANSITIONS UTILITIES - AxisUI Framework
+// Pure CSS transition system with container scoping
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+
+.axis-ui {
+  // =============================================================================
+  // BASIC TRANSITION UTILITIES (from variables)
+  // =============================================================================
+  .transition { transition: $ax-transition-base !important; }
+  .transition-fast { transition: $ax-transition-fast !important; }
+  .transition-slow { transition: $ax-transition-slow !important; }
+  .transition-none { transition: none !important; }
+
+  // =============================================================================
+  // ADVANCED TRANSITION PROPERTIES
+  // =============================================================================
+  .transition-none-property { 
+    transition-property: none !important;
+  }
+  
+  .transition-all { 
+    transition-property: all !important;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transition-duration: 150ms !important;
+  }
+  
+  .transition-colors { 
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke !important;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transition-duration: 150ms !important;
+  }
+  
+  .transition-opacity { 
+    transition-property: opacity !important;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transition-duration: 150ms !important;
+  }
+  
+  .transition-shadow { 
+    transition-property: box-shadow !important;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transition-duration: 150ms !important;
+  }
+  
+  .transition-transform { 
+    transition-property: transform !important;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transition-duration: 150ms !important;
+  }
+  
+  // =============================================================================
+  // TRANSITION DURATION
+  // =============================================================================
+  .duration-75 { transition-duration: 75ms !important; }
+  .duration-100 { transition-duration: 100ms !important; }
+  .duration-150 { transition-duration: 150ms !important; }
+  .duration-200 { transition-duration: 200ms !important; }
+  .duration-300 { transition-duration: 300ms !important; }
+  .duration-500 { transition-duration: 500ms !important; }
+  .duration-700 { transition-duration: 700ms !important; }
+  .duration-1000 { transition-duration: 1000ms !important; }
+  
+  // =============================================================================
+  // TRANSITION TIMING FUNCTION
+  // =============================================================================
+  .ease-linear { transition-timing-function: linear !important; }
+  .ease-in { transition-timing-function: cubic-bezier(0.4, 0, 1, 1) !important; }
+  .ease-out { transition-timing-function: cubic-bezier(0, 0, 0.2, 1) !important; }
+  .ease-in-out { transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important; }
+  
+  // =============================================================================
+  // TRANSITION DELAY
+  // =============================================================================
+  .delay-75 { transition-delay: 75ms !important; }
+  .delay-100 { transition-delay: 100ms !important; }
+  .delay-150 { transition-delay: 150ms !important; }
+  .delay-200 { transition-delay: 200ms !important; }
+  .delay-300 { transition-delay: 300ms !important; }
+  .delay-500 { transition-delay: 500ms !important; }
+  .delay-700 { transition-delay: 700ms !important; }
+  .delay-1000 { transition-delay: 1000ms !important; }
+  
+}

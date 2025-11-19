@@ -1,0 +1,608 @@
+/*!
+ * AxisUI Forms - Pure CSS Form System
+ * Base form styles, inputs, labels, and form layouts
+ * Direct color naming with ax- prefixed variables only
+ * 
+ * FRAMEWORK-AGNOSTIC: Works with all major frameworks and backends
+ * - PHP: Use standard HTML forms with action/method attributes
+ * - Java/Spring: Integrate with @ModelAttribute and form:input tags
+ * - Ruby on Rails: Works with form_for and form_tag helpers
+ * - WordPress: Compatible with wp_forms and Contact Form 7
+ * - Joomla: Integrates with JForm API
+ * - Django: Use with django.forms and template tags
+ * - Flask: Works with Flask-WTF and WTForms
+ * - React: Use with controlled components and onChange handlers
+ * - Vue: Compatible with v-model directive
+ * - Angular: Works with ngModel and reactive forms
+ * 
+ * Simply apply the CSS classes to your HTML form elements!
+ */
+
+// =============================================================================
+// FORMS SYSTEM - BASE FORM ELEMENTS
+// Container-scoped form system with comprehensive styling
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
+
+// AxisUI Container Scope
+.axis-ui {
+
+  // =============================================================================
+  // FORM CONTAINER
+  // =============================================================================
+
+  .form-wrapper {
+    display: block;
+    width: 100%;
+  }
+
+  .form-section {
+    margin-bottom: ax-spacing(6);
+  }
+
+  .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: ax-spacing(4);
+    margin-bottom: ax-spacing(4);
+  }
+
+  .form-col {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .form-col-auto {
+    flex: 0 0 auto;
+  }
+
+  // =============================================================================
+  // FORM GROUP
+  // =============================================================================
+
+  .form-group {
+    margin-bottom: ax-spacing(4);
+    position: relative;
+  }
+
+  .form-group-inline {
+    @include ax-flex-center;
+    gap: ax-spacing(2);
+    margin-bottom: ax-spacing(4);
+  }
+
+  // =============================================================================
+  // LABELS
+  // =============================================================================
+
+  .form-label {
+    @include form-label-base;
+  }
+
+  .form-label-inline {
+    margin-bottom: 0;
+    margin-right: ax-spacing(2);
+  }
+
+  // =============================================================================
+  // BASE INPUT STYLES
+  // =============================================================================
+
+  .form,
+  .form-input {
+    @include form-base;
+  }
+
+  // =============================================================================
+  // INPUT SIZE VARIANTS
+  // Note: Validation states are in _form-validation.scss
+  // =============================================================================
+
+  .form-xs {
+    @include form-xs;
+  }
+
+  .form-sm {
+    @include form-sm;
+  }
+
+  .form-lg {
+    @include form-lg;
+  }
+
+  .form-xl {
+    @include form-xl;
+  }
+
+  // =============================================================================
+  // TEXTAREA
+  // =============================================================================
+
+  .form-textarea {
+    @extend .form;
+    min-height: ax-spacing(20);
+    resize: vertical;
+
+    &.resize-none {
+      resize: none;
+    }
+
+    &.resize-horizontal {
+      resize: horizontal;
+    }
+
+    &.resize-both {
+      resize: both;
+    }
+  }
+
+  // =============================================================================
+  // SELECT DROPDOWN
+  // =============================================================================
+
+  .form-select {
+    @include form-select-base;
+
+    &[multiple] {
+      background-image: none;
+      padding-right: ax-spacing(3);
+    }
+
+    // Note: Validation states (.valid, .invalid, .warning) are in _form-validation.scss
+  }
+
+  // =============================================================================
+  // CHECKBOXES AND RADIO BUTTONS
+  // =============================================================================
+
+  .form-check {
+    @include ax-flex-start;
+    gap: ax-spacing(2);
+    margin-bottom: ax-spacing(2);
+
+    &.form-check-inline {
+      display: inline-flex;
+      margin-right: ax-spacing(4);
+      margin-bottom: 0;
+    }
+  }
+
+  .form-check-input {
+    width: 1rem;
+    height: 1rem;
+    margin-top: 0.125rem;
+    vertical-align: top;
+    background-color: $ax-white;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: $ax-border-width solid $ax-border-color;
+    appearance: none;
+    transition: background-color $ax-transition-base, border-color $ax-transition-base, box-shadow $ax-transition-base;
+
+    &[type="checkbox"] {
+      border-radius: $ax-radius-sm;
+
+      &:checked {
+        background-color: $ax-blue;
+        border-color: $ax-blue;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='white'%3e%3cpath fill-rule='evenodd' d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' clip-rule='evenodd'/%3e%3c/svg%3e");
+      }
+    }
+
+    &[type="radio"] {
+      border-radius: 50%;
+
+      &:checked {
+        background-color: $ax-blue;
+        border-color: $ax-blue;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='white'/%3e%3c/svg%3e");
+      }
+    }
+
+    &:focus {
+      border-color: $ax-blue;
+      outline: 0;
+      box-shadow: 0 0 0 2px rgba($ax-blue, 0.25);
+    }
+
+    &:disabled {
+      pointer-events: none;
+      filter: none;
+      opacity: 0.5;
+    }
+  }
+
+  .form-check-label {
+    font-size: $ax-text-sm;
+    color: $ax-gray-dark;
+    cursor: pointer;
+
+    &:has(.form-check-input:disabled) {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+  }
+
+  // =============================================================================
+  // HTML5 INPUT TYPES - FILE, NUMBER, COLOR, SEARCH, DATE, TIME
+  // =============================================================================
+
+  // File input styling
+  input[type="file"].form,
+  .form-file {
+    padding: ax-spacing(2);
+    cursor: pointer;
+    
+    &::file-selector-button {
+      padding: ax-spacing(1.5) ax-spacing(3);
+      margin-right: ax-spacing(2);
+      background-color: $ax-blue;
+      color: $ax-white;
+      border: none;
+      border-radius: $ax-radius-sm;
+      font-size: $ax-text-sm;
+      font-weight: $ax-font-medium;
+      cursor: pointer;
+      transition: background-color $ax-transition-base;
+
+      &:hover {
+        background-color: $ax-blue-dark;
+      }
+    }
+
+    &::-webkit-file-upload-button {
+      padding: ax-spacing(1.5) ax-spacing(3);
+      margin-right: ax-spacing(2);
+      background-color: $ax-blue;
+      color: $ax-white;
+      border: none;
+      border-radius: $ax-radius-sm;
+      font-size: $ax-text-sm;
+      font-weight: $ax-font-medium;
+      cursor: pointer;
+      transition: background-color $ax-transition-base;
+
+      &:hover {
+        background-color: $ax-blue-dark;
+      }
+    }
+
+    &:disabled {
+      &::file-selector-button,
+      &::-webkit-file-upload-button {
+        background-color: $ax-gray;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  // Number input with custom spin buttons
+  input[type="number"].form,
+  .form-number {
+    appearance: textfield;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      appearance: none;
+      margin: 0;
+    }
+  }
+
+  // Color input styling
+  input[type="color"].form,
+  .form-color {
+    height: ax-spacing(10);
+    padding: ax-spacing(1);
+    cursor: pointer;
+
+    &::-webkit-color-swatch-wrapper {
+      padding: 0;
+    }
+
+    &::-webkit-color-swatch {
+      border: $ax-border-width solid $ax-border-color;
+      border-radius: $ax-radius-sm;
+    }
+
+    &::-moz-color-swatch {
+      border: $ax-border-width solid $ax-border-color;
+      border-radius: $ax-radius-sm;
+    }
+  }
+
+  // Search input styling
+  input[type="search"].form,
+  .form-search {
+    &::-webkit-search-cancel-button {
+      appearance: none;
+      height: ax-spacing(4);
+      width: ax-spacing(4);
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%236b7280'%3e%3cpath fill-rule='evenodd' d='M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z' clip-rule='evenodd'/%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-size: contain;
+      cursor: pointer;
+    }
+  }
+
+  // Date and Time inputs
+  input[type="date"].form,
+  input[type="time"].form,
+  input[type="datetime-local"].form,
+  input[type="month"].form,
+  input[type="week"].form,
+  .form-date,
+  .form-time,
+  .form-datetime {
+    &::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+      opacity: 0.6;
+      transition: opacity $ax-transition-base;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  // Range input (already in advanced-forms, but basic styling here)
+  input[type="range"].form,
+  .form-range-input {
+    width: 100%;
+    height: ax-spacing(1.5);
+    background: $ax-gray-light;
+    border-radius: $ax-radius-full;
+    outline: none;
+    appearance: none;
+
+    &::-webkit-slider-thumb {
+      appearance: none;
+      width: ax-spacing(4);
+      height: ax-spacing(4);
+      background: $ax-blue;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all $ax-transition-base;
+
+      &:hover {
+        background: $ax-blue-dark;
+        transform: scale(1.1);
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+
+    &::-moz-range-thumb {
+      width: ax-spacing(4);
+      height: ax-spacing(4);
+      background: $ax-blue;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all $ax-transition-base;
+
+      &:hover {
+        background: $ax-blue-dark;
+        transform: scale(1.1);
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+
+    &::-webkit-slider-runnable-track {
+      height: ax-spacing(1.5);
+      background: $ax-gray-light;
+      border-radius: $ax-radius-full;
+    }
+
+    &::-moz-range-track {
+      height: ax-spacing(1.5);
+      background: $ax-gray-light;
+      border-radius: $ax-radius-full;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+
+      &::-webkit-slider-thumb,
+      &::-moz-range-thumb {
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  // =============================================================================
+  // FLOATING LABELS
+  // Modern floating label effect for enhanced UX
+  // =============================================================================
+
+  .form-floating {
+    position: relative;
+
+    .form {
+      padding-top: ax-spacing(4);
+      padding-bottom: ax-spacing(2);
+
+      &::placeholder {
+        color: transparent;
+      }
+
+      &:focus::placeholder {
+        color: $ax-gray;
+      }
+    }
+
+    .form-label {
+      position: absolute;
+      top: ax-spacing(2.5);
+      left: ax-spacing(3);
+      padding: 0 ax-spacing(1);
+      background-color: $ax-white;
+      color: $ax-gray;
+      font-size: $ax-text-base;
+      pointer-events: none;
+      transition: all $ax-transition-base;
+      transform-origin: left center;
+    }
+
+    .form:focus ~ .form-label,
+    .form:not(:placeholder-shown) ~ .form-label {
+      top: -ax-spacing(1.5);
+      font-size: $ax-text-xs;
+      color: $ax-blue;
+      font-weight: $ax-font-medium;
+    }
+
+    // Note: Validation state colors (.valid, .invalid, .warning) for floating labels are in _form-validation.scss
+
+    // Disabled state
+    .form:disabled ~ .form-label {
+      color: $ax-gray;
+      opacity: 0.6;
+    }
+  }
+
+  // =============================================================================
+  // FORM TEXT AND HELP
+  // =============================================================================
+
+  .form-text {
+    margin-top: ax-spacing(1);
+    font-size: $ax-text-xs;
+    color: $ax-gray;
+  }
+
+  .form-help {
+    font-size: $ax-text-xs;
+    color: $ax-gray;
+    margin-top: ax-spacing(0.5);
+  }
+
+  
+  // =============================================================================
+  // FORM LAYOUTS
+  // =============================================================================
+
+
+  // Horizontal forms
+  .form-horizontal {
+    .form-group {
+      @include ax-flex-center;
+      gap: ax-spacing(4);
+      margin-bottom: ax-spacing(4);
+    }
+
+    .form-label {
+      flex: 0 0 auto;
+      width: 25%;
+      margin-bottom: 0;
+      text-align: right;
+    }
+
+    .form {
+      flex: 1;
+    }
+
+    @media (max-width: #{$ax-breakpoint-md - 1px}) {
+      .form-group {
+        @include ax-flex-column;
+        align-items: stretch;
+        gap: ax-spacing(1);
+      }
+
+      .form-label {
+        width: auto;
+        text-align: left;
+      }
+    }
+  }
+
+  // Inline forms
+  .form-inline {
+    @include ax-flex-center;
+    flex-wrap: wrap;
+    gap: ax-spacing(2);
+
+    .form-group {
+      margin-bottom: 0;
+      flex: 0 0 auto;
+    }
+
+    .form-label {
+      margin-bottom: 0;
+      margin-right: ax-spacing(1);
+    }
+
+    .form {
+      width: auto;
+    }
+
+    @media (max-width: #{$ax-breakpoint-md - 1px}) {
+      @include ax-flex-column;
+      align-items: stretch;
+
+      .form {
+        width: 100%;
+      }
+    }
+  }
+
+  // =============================================================================
+  // FIELDSETS
+  // =============================================================================
+
+  .fieldset {
+    border: $ax-border-width solid $ax-border-color;
+    border-radius: $ax-radius-base;
+    padding: ax-spacing(4);
+    margin-bottom: ax-spacing(4);
+
+    .fieldset-legend {
+      font-weight: $ax-font-semibold;
+      color: $ax-gray-dark;
+      margin-bottom: ax-spacing(3);
+      padding: 0 ax-spacing(2);
+      background-color: $ax-white;
+      position: relative;
+      top: -ax-spacing(2.5);
+      left: ax-spacing(1);
+    }
+  }
+
+  // =============================================================================
+  // FORM BUTTONS
+  // =============================================================================
+
+  .form-actions {
+    display: flex;
+    gap: ax-spacing(3);
+    padding-top: ax-spacing(4);
+    border-top: $ax-border-width solid $ax-border-color;
+    margin-top: ax-spacing(6);
+
+    &.form-actions-center {
+      justify-content: center;
+    }
+
+    &.form-actions-end {
+      justify-content: flex-end;
+    }
+
+    @media (max-width: #{$ax-breakpoint-md - 1px}) {
+      @include ax-flex-column;
+
+      .btn {
+        width: 100%;
+      }
+    }
+  }
+
+} // End .axis-ui container scope

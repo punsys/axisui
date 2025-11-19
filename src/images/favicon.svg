@@ -1,0 +1,14 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="32" height="32" rx="6" fill="#007bff"/>
+  
+  <!-- Logo Mark - Stylized "A" -->
+  <g transform="translate(6, 6)">
+    <!-- Main A shape -->
+    <path d="M10 3 L16 17 L13.5 17 L12.5 15 L7.5 15 L6.5 17 L4 17 L10 3 Z M8.5 12.5 L11.5 12.5 L10 9 Z" 
+          fill="white" stroke="none"/>
+  </g>
+  
+  <!-- Small accent dot -->
+  <circle cx="24" cy="8" r="1.5" fill="rgba(255,255,255,0.6)"/>
+</svg>

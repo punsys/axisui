@@ -1,0 +1,341 @@
+// =============================================================================
+// TAG ELEMENTS - AxisUI Framework Pure CSS Tag Elements  
+// Container-scoped tag elements for categorization and labeling
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
+
+.axis-ui {
+  // =============================================================================
+  // BASE TAG ELEMENT
+  // =============================================================================
+  
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    padding: ax-spacing(1) ax-spacing(2);
+    font-size: $ax-text-xs;
+    font-weight: $ax-font-medium;
+    line-height: 1.2;
+    color: $ax-gray-dark;
+    background-color: $ax-gray-light;
+    border: 1px solid transparent;
+    border-radius: $ax-radius-sm;
+    text-decoration: none;
+    vertical-align: baseline;
+    white-space: nowrap;
+    transition: all $ax-transition-base;
+  }
+
+  // HTML tag mapping for semantic usage
+  tag {
+    @extend .tag;
+  }
+
+  // =============================================================================
+  // TAG COLOR VARIANTS - 3-variant direct color system
+  // =============================================================================
+  
+  // Blue tags
+  .tag-blue {
+    background-color: $ax-blue;
+    color: $ax-white;
+  }
+  
+  .tag-blue-light {
+    background-color: $ax-blue-light;
+    color: $ax-white;
+  }
+  
+  .tag-blue-dark {
+    background-color: $ax-blue-dark;
+    color: $ax-white;
+  }
+
+  // Red tags
+  .tag-red {
+    background-color: $ax-red;
+    color: $ax-white;
+  }
+  
+  .tag-red-light {
+    background-color: $ax-red-light;
+    color: $ax-white;
+  }
+  
+  .tag-red-dark {
+    background-color: $ax-red-dark;
+    color: $ax-white;
+  }
+
+  // Green tags
+  .tag-green {
+    background-color: $ax-green;
+    color: $ax-white;
+  }
+  
+  .tag-green-light {
+    background-color: $ax-green-light;
+    color: $ax-white;
+  }
+  
+  .tag-green-dark {
+    background-color: $ax-green-dark;
+    color: $ax-white;
+  }
+
+  // Yellow tags
+  .tag-yellow {
+    background-color: $ax-yellow;
+    color: $ax-gray-dark;
+  }
+  
+  .tag-yellow-light {
+    background-color: $ax-yellow-light;
+    color: $ax-gray-dark;
+  }
+  
+  .tag-yellow-dark {
+    background-color: $ax-yellow-dark;
+    color: $ax-white;
+  }
+
+  // Gray tags (default)
+  .tag-gray {
+    background-color: $ax-gray;
+    color: $ax-white;
+  }
+  
+  .tag-gray-light {
+    background-color: $ax-gray-light;
+    color: $ax-gray-dark;
+  }
+  
+  .tag-gray-dark {
+    background-color: $ax-gray-dark;
+    color: $ax-white;
+  }
+
+  // =============================================================================
+  // TAG SIZES
+  // =============================================================================
+  
+  .tag-xs {
+    padding: ax-spacing(0.5) ax-spacing(1);
+    font-size: $ax-text-xs;
+  }
+
+  .tag-sm {
+    padding: ax-spacing(1) ax-spacing(1.5);
+    font-size: $ax-text-xs;
+  }
+
+  .tag-lg {
+    padding: ax-spacing(1.5) ax-spacing(2.5);
+    font-size: $ax-text-sm;
+  }
+
+  .tag-xl {
+    padding: ax-spacing(2) ax-spacing(3);
+    font-size: $ax-text-base;
+  }
+
+  // =============================================================================
+  // TAG STYLES
+  // =============================================================================
+  
+  // Outline tags
+  .tag-outline {
+    background-color: transparent;
+    border: 1px solid currentColor;
+    
+    &.tag-blue { color: $ax-blue; border-color: $ax-blue; }
+    &.tag-blue-light { color: $ax-blue-light; border-color: $ax-blue-light; }
+    &.tag-blue-dark { color: $ax-blue-dark; border-color: $ax-blue-dark; }
+    
+    &.tag-red { color: $ax-red; border-color: $ax-red; }
+    &.tag-red-light { color: $ax-red-light; border-color: $ax-red-light; }
+    &.tag-red-dark { color: $ax-red-dark; border-color: $ax-red-dark; }
+    
+    &.tag-green { color: $ax-green; border-color: $ax-green; }
+    &.tag-green-light { color: $ax-green-light; border-color: $ax-green-light; }
+    &.tag-green-dark { color: $ax-green-dark; border-color: $ax-green-dark; }
+    
+    &.tag-yellow { color: $ax-yellow-dark; border-color: $ax-yellow; }
+    &.tag-yellow-light { color: $ax-yellow; border-color: $ax-yellow-light; }
+    &.tag-yellow-dark { color: $ax-yellow-dark; border-color: $ax-yellow-dark; }
+    
+    &.tag-gray { color: $ax-gray; border-color: $ax-gray; }
+    &.tag-gray-light { color: $ax-gray-light; border-color: $ax-gray-light; }
+    &.tag-gray-dark { color: $ax-gray-dark; border-color: $ax-gray-dark; }
+  }
+
+  // Soft tags (subtle background)
+  .tag-soft {
+    &.tag-blue { background-color: rgba(30, 136, 229, 0.1); color: $ax-blue-dark; }
+    &.tag-blue-light { background-color: rgba(74, 158, 255, 0.1); color: $ax-blue; }
+    &.tag-blue-dark { background-color: rgba(21, 101, 192, 0.1); color: $ax-blue-dark; }
+    
+    &.tag-red { background-color: rgba(220, 53, 69, 0.1); color: $ax-red-dark; }
+    &.tag-red-light { background-color: rgba(255, 77, 77, 0.1); color: $ax-red; }
+    &.tag-red-dark { background-color: rgba(176, 42, 55, 0.1); color: $ax-red-dark; }
+    
+    &.tag-green { background-color: rgba(46, 125, 50, 0.1); color: $ax-green-dark; }
+    &.tag-green-light { background-color: rgba(76, 175, 80, 0.1); color: $ax-green; }
+    &.tag-green-dark { background-color: rgba(27, 94, 32, 0.1); color: $ax-green-dark; }
+    
+    &.tag-yellow { background-color: rgba(255, 193, 7, 0.1); color: $ax-yellow-dark; }
+    &.tag-yellow-light { background-color: rgba(255, 213, 79, 0.1); color: $ax-yellow; }
+    &.tag-yellow-dark { background-color: rgba(255, 160, 0, 0.1); color: $ax-yellow-dark; }
+    
+    &.tag-gray { background-color: rgba(108, 117, 125, 0.1); color: $ax-gray-dark; }
+    &.tag-gray-light { background-color: rgba(248, 249, 250, 0.8); color: $ax-gray; }
+    &.tag-gray-dark { background-color: rgba(52, 58, 64, 0.1); color: $ax-gray-dark; }
+  }
+
+  // =============================================================================
+  // TAG SHAPES
+  // =============================================================================
+  
+  .tag-rounded {
+    border-radius: $ax-radius-base;
+  }
+
+  .tag-pill {
+    border-radius: $ax-radius-full;
+  }
+
+  .tag-square {
+    border-radius: 0;
+  }
+
+  // =============================================================================
+  // INTERACTIVE TAGS
+  // =============================================================================
+  
+  .tag-clickable {
+    cursor: pointer;
+    
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  // Link tags
+  a.tag {
+    text-decoration: none;
+    
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  // =============================================================================
+  // TAG WITH ICON
+  // =============================================================================
+  
+  .tag-with-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: ax-spacing(1);
+    
+    .tag-icon {
+      width: 0.875rem;
+      height: 0.875rem;
+      flex-shrink: 0;
+    }
+  }
+
+  // =============================================================================
+  // DISMISSIBLE TAGS (Pure CSS)
+  // =============================================================================
+  
+  .tag-dismissible {
+    padding-right: ax-spacing(3);
+    position: relative;
+    
+    .tag-close {
+      position: absolute;
+      right: ax-spacing(1);
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: inherit;
+      font-size: 0.875rem;
+      cursor: pointer;
+      opacity: 0.7;
+      padding: 0;
+      width: 1rem;
+      height: 1rem;
+      @include ax-flex-center;
+      
+      &:hover {
+        opacity: 1;
+      }
+      
+      &::before {
+        content: "×";
+        font-weight: bold;
+      }
+    }
+  }
+
+  // =============================================================================
+  // TAG GROUPS
+  // =============================================================================
+  
+  .tag-group {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: ax-spacing(1);
+    align-items: center;
+  }
+
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: ax-spacing(1);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+    li {
+      display: inline-flex;
+    }
+  }
+
+  // =============================================================================
+  // STATUS TAGS - Common use cases
+  // =============================================================================
+  
+  .tag-status {
+    &.status-active { @extend .tag-green; }
+    &.status-inactive { @extend .tag-gray; }
+    &.status-pending { @extend .tag-yellow; }
+    // Use direct color classes instead of semantic names
+    &.tag-red-status { @extend .tag-red; }
+    &.tag-yellow-status { @extend .tag-yellow; }
+    &.tag-green-status { @extend .tag-green; }
+    &.tag-blue-status { @extend .tag-blue; }
+  }
+
+  // =============================================================================
+  // PRIORITY TAGS - Common use cases
+  // =============================================================================
+  
+  .tag-priority {
+    &.priority-low { @extend .tag-gray; }
+    &.priority-medium { @extend .tag-yellow; }
+    &.priority-high { @extend .tag-red; }
+    &.priority-critical { @extend .tag-red-dark; }
+  }
+}

@@ -1,0 +1,315 @@
+/*!
+ * AxisUI Filter and Visual Effects Utilities - Pure CSS Visual Effects
+ * Complete filter system and visual effects without JavaScript dependencies
+ */
+
+// =============================================================================
+// FILTER AND VISUAL EFFECTS SYSTEM
+// Container-scoped filter utilities with enhanced visual effects
+// Includes: filters, backdrop filters, opacity, visibility, and blend modes
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+@use '../abstracts/breakpoints' as *;
+
+// AxisUI Container Scope
+.axis-ui {
+
+  // =============================================================================
+  // BLUR FILTERS
+  // =============================================================================
+
+  .blur-none { filter: blur(0) !important; }
+  .blur-sm { filter: blur(4px) !important; }
+  .blur { filter: blur(8px) !important; }
+  .blur-md { filter: blur(12px) !important; }
+  .blur-lg { filter: blur(16px) !important; }
+  .blur-xl { filter: blur(24px) !important; }
+  .blur-2xl { filter: blur(40px) !important; }
+  .blur-3xl { filter: blur(64px) !important; }
+
+  // =============================================================================
+  // BRIGHTNESS FILTERS
+  // =============================================================================
+
+  .brightness-0 { filter: brightness(0) !important; }
+  .brightness-50 { filter: brightness(0.5) !important; }
+  .brightness-75 { filter: brightness(0.75) !important; }
+  .brightness-90 { filter: brightness(0.9) !important; }
+  .brightness-95 { filter: brightness(0.95) !important; }
+  .brightness-100 { filter: brightness(1) !important; }
+  .brightness-105 { filter: brightness(1.05) !important; }
+  .brightness-110 { filter: brightness(1.1) !important; }
+  .brightness-125 { filter: brightness(1.25) !important; }
+  .brightness-150 { filter: brightness(1.5) !important; }
+  .brightness-200 { filter: brightness(2) !important; }
+
+  // =============================================================================
+  // CONTRAST FILTERS
+  // =============================================================================
+
+  .contrast-0 { filter: contrast(0) !important; }
+  .contrast-50 { filter: contrast(0.5) !important; }
+  .contrast-75 { filter: contrast(0.75) !important; }
+  .contrast-100 { filter: contrast(1) !important; }
+  .contrast-125 { filter: contrast(1.25) !important; }
+  .contrast-150 { filter: contrast(1.5) !important; }
+  .contrast-200 { filter: contrast(2) !important; }
+
+  // =============================================================================
+  // GRAYSCALE FILTERS
+  // =============================================================================
+
+  .grayscale-0 { filter: grayscale(0) !important; }
+  .grayscale-25 { filter: grayscale(0.25) !important; }
+  .grayscale-50 { filter: grayscale(0.5) !important; }
+  .grayscale-75 { filter: grayscale(0.75) !important; }
+  .grayscale { filter: grayscale(1) !important; }
+
+  // =============================================================================
+  // HUE ROTATE FILTERS
+  // =============================================================================
+
+  .hue-rotate-0 { filter: hue-rotate(0deg) !important; }
+  .hue-rotate-15 { filter: hue-rotate(15deg) !important; }
+  .hue-rotate-30 { filter: hue-rotate(30deg) !important; }
+  .hue-rotate-60 { filter: hue-rotate(60deg) !important; }
+  .hue-rotate-90 { filter: hue-rotate(90deg) !important; }
+  .hue-rotate-180 { filter: hue-rotate(180deg) !important; }
+
+  // Negative hue rotates
+  .-hue-rotate-15 { filter: hue-rotate(-15deg) !important; }
+  .-hue-rotate-30 { filter: hue-rotate(-30deg) !important; }
+  .-hue-rotate-60 { filter: hue-rotate(-60deg) !important; }
+  .-hue-rotate-90 { filter: hue-rotate(-90deg) !important; }
+  .-hue-rotate-180 { filter: hue-rotate(-180deg) !important; }
+
+  // =============================================================================
+  // INVERT FILTERS
+  // =============================================================================
+
+  .invert-0 { filter: invert(0) !important; }
+  .invert-25 { filter: invert(0.25) !important; }
+  .invert-50 { filter: invert(0.5) !important; }
+  .invert-75 { filter: invert(0.75) !important; }
+  .invert { filter: invert(1) !important; }
+
+  // =============================================================================
+  // SATURATE FILTERS
+  // =============================================================================
+
+  .saturate-0 { filter: saturate(0) !important; }
+  .saturate-50 { filter: saturate(0.5) !important; }
+  .saturate-100 { filter: saturate(1) !important; }
+  .saturate-150 { filter: saturate(1.5) !important; }
+  .saturate-200 { filter: saturate(2) !important; }
+
+  // =============================================================================
+  // SEPIA FILTERS
+  // =============================================================================
+
+  .sepia-0 { filter: sepia(0) !important; }
+  .sepia-25 { filter: sepia(0.25) !important; }
+  .sepia-50 { filter: sepia(0.5) !important; }
+  .sepia-75 { filter: sepia(0.75) !important; }
+  .sepia { filter: sepia(1) !important; }
+
+  // =============================================================================
+  // DROP SHADOW FILTERS
+  // =============================================================================
+
+  .drop-shadow-none { filter: drop-shadow(0 0 rgba($ax-black, 0)) !important; }
+  .drop-shadow-sm { filter: drop-shadow(0 1px 2px rgba($ax-black, 0.05)) !important; }
+  .drop-shadow { filter: drop-shadow(0 1px 3px rgba($ax-black, 0.1)) drop-shadow(0 1px 2px rgba($ax-black, 0.06)) !important; }
+  .drop-shadow-md { filter: drop-shadow(0 4px 6px rgba($ax-black, 0.07)) drop-shadow(0 2px 4px rgba($ax-black, 0.06)) !important; }
+  .drop-shadow-lg { filter: drop-shadow(0 10px 15px rgba($ax-black, 0.1)) drop-shadow(0 4px 6px rgba($ax-black, 0.05)) !important; }
+  .drop-shadow-xl { filter: drop-shadow(0 20px 25px rgba($ax-black, 0.1)) drop-shadow(0 10px 10px rgba($ax-black, 0.04)) !important; }
+  .drop-shadow-2xl { filter: drop-shadow(0 25px 50px rgba($ax-black, 0.25)) !important; }
+
+  // Colored drop shadows
+  .drop-shadow-blue { filter: drop-shadow(0 4px 6px rgba($ax-blue, 0.3)) !important; }
+  .drop-shadow-red { filter: drop-shadow(0 4px 6px rgba($ax-red, 0.3)) !important; }
+  .drop-shadow-green { filter: drop-shadow(0 4px 6px rgba($ax-green, 0.3)) !important; }
+  .drop-shadow-yellow { filter: drop-shadow(0 4px 6px rgba($ax-yellow, 0.3)) !important; }
+  .drop-shadow-purple { filter: drop-shadow(0 4px 6px rgba($ax-purple, 0.3)) !important; }
+
+  // =============================================================================
+  // BACKDROP FILTERS
+  // =============================================================================
+
+  .backdrop-blur-none { backdrop-filter: blur(0) !important; }
+  .backdrop-blur-sm { backdrop-filter: blur(4px) !important; }
+  .backdrop-blur { backdrop-filter: blur(8px) !important; }
+  .backdrop-blur-md { backdrop-filter: blur(12px) !important; }
+  .backdrop-blur-lg { backdrop-filter: blur(16px) !important; }
+  .backdrop-blur-xl { backdrop-filter: blur(24px) !important; }
+  .backdrop-blur-2xl { backdrop-filter: blur(40px) !important; }
+  .backdrop-blur-3xl { backdrop-filter: blur(64px) !important; }
+
+  .backdrop-brightness-0 { backdrop-filter: brightness(0) !important; }
+  .backdrop-brightness-50 { backdrop-filter: brightness(0.5) !important; }
+  .backdrop-brightness-75 { backdrop-filter: brightness(0.75) !important; }
+  .backdrop-brightness-90 { backdrop-filter: brightness(0.9) !important; }
+  .backdrop-brightness-95 { backdrop-filter: brightness(0.95) !important; }
+  .backdrop-brightness-100 { backdrop-filter: brightness(1) !important; }
+  .backdrop-brightness-105 { backdrop-filter: brightness(1.05) !important; }
+  .backdrop-brightness-110 { backdrop-filter: brightness(1.1) !important; }
+  .backdrop-brightness-125 { backdrop-filter: brightness(1.25) !important; }
+  .backdrop-brightness-150 { backdrop-filter: brightness(1.5) !important; }
+  .backdrop-brightness-200 { backdrop-filter: brightness(2) !important; }
+
+  .backdrop-contrast-0 { backdrop-filter: contrast(0) !important; }
+  .backdrop-contrast-50 { backdrop-filter: contrast(0.5) !important; }
+  .backdrop-contrast-75 { backdrop-filter: contrast(0.75) !important; }
+  .backdrop-contrast-100 { backdrop-filter: contrast(1) !important; }
+  .backdrop-contrast-125 { backdrop-filter: contrast(1.25) !important; }
+  .backdrop-contrast-150 { backdrop-filter: contrast(1.5) !important; }
+  .backdrop-contrast-200 { backdrop-filter: contrast(2) !important; }
+
+  .backdrop-grayscale-0 { backdrop-filter: grayscale(0) !important; }
+  .backdrop-grayscale { backdrop-filter: grayscale(1) !important; }
+
+  .backdrop-hue-rotate-0 { backdrop-filter: hue-rotate(0deg) !important; }
+  .backdrop-hue-rotate-15 { backdrop-filter: hue-rotate(15deg) !important; }
+  .backdrop-hue-rotate-30 { backdrop-filter: hue-rotate(30deg) !important; }
+  .backdrop-hue-rotate-60 { backdrop-filter: hue-rotate(60deg) !important; }
+  .backdrop-hue-rotate-90 { backdrop-filter: hue-rotate(90deg) !important; }
+  .backdrop-hue-rotate-180 { backdrop-filter: hue-rotate(180deg) !important; }
+
+  .backdrop-invert-0 { backdrop-filter: invert(0) !important; }
+  .backdrop-invert { backdrop-filter: invert(1) !important; }
+
+  .backdrop-opacity-0 { backdrop-filter: opacity(0) !important; }
+  .backdrop-opacity-5 { backdrop-filter: opacity(0.05) !important; }
+  .backdrop-opacity-10 { backdrop-filter: opacity(0.1) !important; }
+  .backdrop-opacity-20 { backdrop-filter: opacity(0.2) !important; }
+  .backdrop-opacity-25 { backdrop-filter: opacity(0.25) !important; }
+  .backdrop-opacity-30 { backdrop-filter: opacity(0.3) !important; }
+  .backdrop-opacity-40 { backdrop-filter: opacity(0.4) !important; }
+  .backdrop-opacity-50 { backdrop-filter: opacity(0.5) !important; }
+  .backdrop-opacity-60 { backdrop-filter: opacity(0.6) !important; }
+  .backdrop-opacity-70 { backdrop-filter: opacity(0.7) !important; }
+  .backdrop-opacity-75 { backdrop-filter: opacity(0.75) !important; }
+  .backdrop-opacity-80 { backdrop-filter: opacity(0.8) !important; }
+  .backdrop-opacity-90 { backdrop-filter: opacity(0.9) !important; }
+  .backdrop-opacity-95 { backdrop-filter: opacity(0.95) !important; }
+  .backdrop-opacity-100 { backdrop-filter: opacity(1) !important; }
+
+  .backdrop-saturate-0 { backdrop-filter: saturate(0) !important; }
+  .backdrop-saturate-50 { backdrop-filter: saturate(0.5) !important; }
+  .backdrop-saturate-100 { backdrop-filter: saturate(1) !important; }
+  .backdrop-saturate-150 { backdrop-filter: saturate(1.5) !important; }
+  .backdrop-saturate-200 { backdrop-filter: saturate(2) !important; }
+
+  .backdrop-sepia-0 { backdrop-filter: sepia(0) !important; }
+  .backdrop-sepia { backdrop-filter: sepia(1) !important; }
+
+  // =============================================================================
+  // OPACITY UTILITIES
+  // =============================================================================
+
+  .opacity-0 { opacity: 0 !important; }
+  .opacity-5 { opacity: 0.05 !important; }
+  .opacity-10 { opacity: 0.1 !important; }
+  .opacity-20 { opacity: 0.2 !important; }
+  .opacity-25 { opacity: 0.25 !important; }
+  .opacity-30 { opacity: 0.3 !important; }
+  .opacity-40 { opacity: 0.4 !important; }
+  .opacity-50 { opacity: 0.5 !important; }
+  .opacity-60 { opacity: 0.6 !important; }
+  .opacity-70 { opacity: 0.7 !important; }
+  .opacity-75 { opacity: 0.75 !important; }
+  .opacity-80 { opacity: 0.8 !important; }
+  .opacity-90 { opacity: 0.9 !important; }
+  .opacity-95 { opacity: 0.95 !important; }
+  .opacity-100 { opacity: 1 !important; }
+
+  // =============================================================================
+  // MIX BLEND MODE UTILITIES
+  // =============================================================================
+
+  .mix-blend-normal { mix-blend-mode: normal !important; }
+  .mix-blend-multiply { mix-blend-mode: multiply !important; }
+  .mix-blend-screen { mix-blend-mode: screen !important; }
+  .mix-blend-overlay { mix-blend-mode: overlay !important; }
+  .mix-blend-darken { mix-blend-mode: darken !important; }
+  .mix-blend-lighten { mix-blend-mode: lighten !important; }
+  .mix-blend-color-dodge { mix-blend-mode: color-dodge !important; }
+  .mix-blend-color-burn { mix-blend-mode: color-burn !important; }
+  .mix-blend-hard-light { mix-blend-mode: hard-light !important; }
+  .mix-blend-soft-light { mix-blend-mode: soft-light !important; }
+  .mix-blend-difference { mix-blend-mode: difference !important; }
+  .mix-blend-exclusion { mix-blend-mode: exclusion !important; }
+  .mix-blend-hue { mix-blend-mode: hue !important; }
+  .mix-blend-saturation { mix-blend-mode: saturation !important; }
+  .mix-blend-color { mix-blend-mode: color !important; }
+  .mix-blend-luminosity { mix-blend-mode: luminosity !important; }
+
+  // =============================================================================
+  // ISOLATION UTILITIES
+  // =============================================================================
+
+  .isolate { isolation: isolate !important; }
+  .isolation-auto { isolation: auto !important; }
+
+  // =============================================================================
+  // FILTER COMBINATIONS - COMMON VISUAL EFFECTS
+  // =============================================================================
+
+  .filter-none { filter: none !important; }
+
+  // Photo effects
+  .filter-vintage {
+    filter: sepia(0.5) contrast(1.2) brightness(1.1) saturate(0.8) !important;
+  }
+
+  .filter-black-white {
+    filter: grayscale(1) contrast(1.2) brightness(1.1) !important;
+  }
+
+  .filter-warm {
+    filter: hue-rotate(15deg) saturate(1.2) brightness(1.05) !important;
+  }
+
+  .filter-cool {
+    filter: hue-rotate(-15deg) saturate(1.1) brightness(0.95) !important;
+  }
+
+  .filter-high-contrast {
+    filter: contrast(1.5) brightness(1.1) saturate(1.2) !important;
+  }
+
+  .filter-soft {
+    filter: blur(1px) brightness(1.05) contrast(0.9) !important;
+  }
+
+  .filter-dramatic {
+    filter: contrast(1.3) brightness(0.9) saturate(1.4) !important;
+  }
+
+  // Glass morphism effect
+  .glass-effect {
+    backdrop-filter: blur(10px) saturate(180%) !important;
+    background-color: rgba($ax-white, 0.1) !important;
+    border: 1px solid rgba($ax-white, 0.2) !important;
+  }
+
+  .glass-effect-dark {
+    backdrop-filter: blur(10px) saturate(180%) !important;
+    background-color: rgba($ax-black, 0.1) !important;
+    border: 1px solid rgba($ax-white, 0.1) !important;
+  }
+
+  // Frosted glass effect
+  .frosted-glass {
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    background-color: rgba($ax-white, 0.05) !important;
+  }
+
+  .frosted-glass-dark {
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    background-color: rgba($ax-black, 0.05) !important;
+  }
+
+} // End .axis-ui container scope

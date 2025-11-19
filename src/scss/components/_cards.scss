@@ -1,0 +1,668 @@
+﻿// =============================================================================
+// CARDS - AxisUI Framework Comprehensive Card Components
+// Direct color naming with comprehensive variants and layouts
+// No ax- class prefixes, container scoped
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
+@use '../abstracts/design-system' as tokens;
+
+.axis-ui {
+  // =============================================================================
+  // BASE CARD STYLES
+  // =============================================================================
+  
+  .card {
+    @include ax-card;
+    @include ax-flex-column; // Use centralized flexbox pattern
+    @include ax-transition-base; // Use centralized transition pattern
+    position: relative;
+    min-width: 0;
+    word-wrap: break-word;
+    
+    // Interactive card
+    &.card-interactive {
+      cursor: pointer;
+      
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: $ax-shadow-lg;
+      }
+      
+      &:focus {
+        @include ax-focus-ring();
+      }
+      
+      &:active {
+        transform: translateY(0);
+      }
+    }
+    
+    // Card with link wrapper
+    &.card-link {
+      text-decoration: none;
+      color: inherit;
+      
+      &:hover {
+        text-decoration: none;
+        color: inherit;
+        transform: translateY(-2px);
+        box-shadow: $ax-shadow-lg;
+      }
+    }
+  }
+
+  // =============================================================================
+  // CARD SECTIONS
+  // =============================================================================
+  
+  .card-header {
+    padding: ax-spacing(4);
+    background-color: transparent;
+    border-bottom: 1px solid $ax-border-color;
+    border-radius: $ax-radius-lg $ax-radius-lg 0 0;
+    
+    &:first-child {
+      border-radius: $ax-radius-lg $ax-radius-lg 0 0;
+    }
+    
+    .card-title {
+      margin: 0;
+      font-size: $ax-text-lg;
+      font-weight: $ax-font-semibold;
+      color: $ax-gray-dark;
+      line-height: $ax-leading-tight;
+    }
+    
+    .card-subtitle {
+      margin: ax-spacing(1) 0 0 0;
+      font-size: $ax-text-sm;
+      color: $ax-gray;
+      font-weight: $ax-font-normal;
+    }
+  }
+  
+  .card-body {
+    padding: ax-spacing(4);
+    flex: 1 1 auto;
+    
+    .card-title {
+      margin: 0 0 ax-spacing(2) 0;
+      font-size: $ax-text-lg;
+      font-weight: $ax-font-semibold;
+      color: $ax-gray-dark;
+      line-height: $ax-leading-tight;
+    }
+    
+    .card-subtitle {
+      margin: 0 0 ax-spacing(3) 0;
+      font-size: $ax-text-sm;
+      color: $ax-gray;
+      font-weight: $ax-font-normal;
+    }
+    
+    .card-text {
+      margin: 0 0 ax-spacing(4) 0;
+      color: $ax-gray-dark;
+      line-height: $ax-leading-relaxed;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+  
+  .card-footer {
+    padding: ax-spacing(4);
+    background-color: rgba($ax-gray-light, 0.5);
+    border-top: 1px solid $ax-border-color;
+    border-radius: 0 0 $ax-radius-lg $ax-radius-lg;
+    
+    &:last-child {
+      border-radius: 0 0 $ax-radius-lg $ax-radius-lg;
+    }
+    
+    .card-footer-text {
+      font-size: $ax-text-sm;
+      color: $ax-gray;
+      margin: 0;
+    }
+  }
+
+  // =============================================================================
+  // CARD IMAGE STYLES
+  // =============================================================================
+  
+  .card-img,
+  .card-img-top,
+  .card-img-bottom {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  .card-img-top {
+    border-radius: $ax-radius-lg $ax-radius-lg 0 0;
+  }
+  
+  .card-img-bottom {
+    border-radius: 0 0 $ax-radius-lg $ax-radius-lg;
+  }
+  
+  .card-img-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: ax-spacing(4);
+    border-radius: $ax-radius-lg;
+    background: linear-gradient(
+      to bottom,
+      rgba($ax-black, 0) 0%,
+      rgba($ax-black, 0.7) 100%
+    );
+    color: $ax-white;
+    
+    .card-title {
+      color: $ax-white;
+    }
+    
+    .card-text {
+      color: rgba($ax-white, 0.9);
+    }
+  }
+
+  // =============================================================================
+  // SIZE VARIANTS
+  // =============================================================================
+  
+  .card.card-sm {
+    .card-header,
+    .card-body,
+    .card-footer {
+      padding: ax-spacing(2);
+    }
+    
+    .card-title {
+      font-size: $ax-text-base;
+    }
+    
+    .card-text {
+      font-size: $ax-text-sm;
+    }
+  }
+  
+  .card.card-lg {
+    .card-header,
+    .card-body,
+    .card-footer {
+      padding: ax-spacing(6);
+    }
+    
+    .card-title {
+      font-size: $ax-text-xl;
+    }
+  }
+  
+  .card.card-xl {
+    .card-header,
+    .card-body,
+    .card-footer {
+      padding: ax-spacing(8);
+    }
+    
+    .card-title {
+      font-size: $ax-text-2xl;
+    }
+  }
+
+  // =============================================================================
+  // COLOR VARIANTS - Direct Color Naming
+  // =============================================================================
+  
+  .card.card-blue {
+    border-color: $ax-blue;
+    
+    .card-header {
+      background-color: rgba($ax-blue, 0.1);
+      border-bottom-color: rgba($ax-blue, 0.2);
+      color: $ax-blue-dark;
+    }
+    
+    .card-title {
+      color: $ax-blue-dark;
+    }
+  }
+  
+  .card.card-red {
+    border-color: $ax-red;
+    
+    .card-header {
+      background-color: rgba($ax-red, 0.1);
+      border-bottom-color: rgba($ax-red, 0.2);
+      color: $ax-red-dark;
+    }
+    
+    .card-title {
+      color: $ax-red-dark;
+    }
+  }
+  
+  .card.card-green {
+    border-color: $ax-green;
+    
+    .card-header {
+      background-color: rgba($ax-green, 0.1);
+      border-bottom-color: rgba($ax-green, 0.2);
+      color: $ax-green-dark;
+    }
+    
+    .card-title {
+      color: $ax-green-dark;
+    }
+  }
+  
+  .card.card-yellow {
+    border-color: $ax-yellow;
+    
+    .card-header {
+      background-color: rgba($ax-yellow, 0.1);
+      border-bottom-color: rgba($ax-yellow, 0.2);
+      color: $ax-yellow-dark;
+    }
+    
+    .card-title {
+      color: $ax-yellow-dark;
+    }
+  }
+  
+  .card.card-purple {
+    border-color: $ax-purple;
+    
+    .card-header {
+      background-color: rgba($ax-purple, 0.1);
+      border-bottom-color: rgba($ax-purple, 0.2);
+      color: $ax-purple-dark;
+    }
+    
+    .card-title {
+      color: $ax-purple-dark;
+    }
+  }
+  
+  .card.card-pink {
+    border-color: $ax-pink;
+    
+    .card-header {
+      background-color: rgba($ax-pink, 0.1);
+      border-bottom-color: rgba($ax-pink, 0.2);
+      color: $ax-pink-dark;
+    }
+    
+    .card-title {
+      color: $ax-pink-dark;
+    }
+  }
+  
+  .card.card-orange {
+    border-color: $ax-orange;
+    
+    .card-header {
+      background-color: rgba($ax-orange, 0.1);
+      border-bottom-color: rgba($ax-orange, 0.2);
+      color: $ax-orange-dark;
+    }
+    
+    .card-title {
+      color: $ax-orange-dark;
+    }
+  }
+  
+  .card.card-teal {
+    border-color: $ax-teal;
+    
+    .card-header {
+      background-color: rgba($ax-teal, 0.1);
+      border-bottom-color: rgba($ax-teal, 0.2);
+      color: $ax-teal-dark;
+    }
+    
+    .card-title {
+      color: $ax-teal-dark;
+    }
+  }
+  
+  .card.card-cyan {
+    border-color: $ax-cyan;
+    
+    .card-header {
+      background-color: rgba($ax-cyan, 0.1);
+      border-bottom-color: rgba($ax-cyan, 0.2);
+      color: $ax-cyan-dark;
+    }
+    
+    .card-title {
+      color: $ax-cyan-dark;
+    }
+  }
+
+  // =============================================================================
+  // STYLE VARIANTS
+  // =============================================================================
+  
+  .card.card-elevated {
+    box-shadow: $ax-shadow-lg;
+    border: none;
+    
+    &:hover {
+      box-shadow: $ax-shadow-xl;
+    }
+  }
+  
+  .card.card-flat {
+    box-shadow: none;
+    border: 1px solid $ax-border-color;
+  }
+  
+  .card.card-outline {
+    background-color: transparent;
+    border: 2px solid $ax-border-color;
+    box-shadow: none;
+    
+    &.card-blue {
+      border-color: $ax-blue;
+    }
+    
+    &.card-red {
+      border-color: $ax-red;
+    }
+    
+    &.card-green {
+      border-color: $ax-green;
+    }
+  }
+  
+  .card.card-filled {
+    &.card-blue {
+      background-color: $ax-blue;
+      color: $ax-white;
+      border-color: $ax-blue;
+      
+      .card-header {
+        background-color: rgba($ax-white, 0.1);
+        border-bottom-color: rgba($ax-white, 0.2);
+        color: $ax-white;
+      }
+      
+      .card-title {
+        color: $ax-white;
+      }
+      
+      .card-text {
+        color: rgba($ax-white, 0.9);
+      }
+    }
+    
+    &.card-red {
+      background-color: $ax-red;
+      color: $ax-white;
+      border-color: $ax-red;
+      
+      .card-header {
+        background-color: rgba($ax-white, 0.1);
+        border-bottom-color: rgba($ax-white, 0.2);
+        color: $ax-white;
+      }
+      
+      .card-title {
+        color: $ax-white;
+      }
+      
+      .card-text {
+        color: rgba($ax-white, 0.9);
+      }
+    }
+    
+    &.card-green {
+      background-color: $ax-green;
+      color: $ax-white;
+      border-color: $ax-green;
+      
+      .card-header {
+        background-color: rgba($ax-white, 0.1);
+        border-bottom-color: rgba($ax-white, 0.2);
+        color: $ax-white;
+      }
+      
+      .card-title {
+        color: $ax-white;
+      }
+      
+      .card-text {
+        color: rgba($ax-white, 0.9);
+      }
+    }
+  }
+
+  // =============================================================================
+  // CARD LAYOUTS
+  // =============================================================================
+  
+  .card.card-horizontal {
+    flex-direction: row;
+    
+    .card-img-left {
+      width: 200px;
+      height: auto;
+      object-fit: cover;
+      border-radius: $ax-radius-lg 0 0 $ax-radius-lg;
+    }
+    
+    .card-body {
+      flex: 1;
+    }
+    
+    @include ax-responsive(md-down) {
+      flex-direction: column;
+      
+      .card-img-left {
+        width: 100%;
+        border-radius: $ax-radius-lg $ax-radius-lg 0 0;
+      }
+    }
+  }
+
+  // =============================================================================
+  // CARD GROUPS AND DECKS
+  // =============================================================================
+  
+  .card-group {
+    display: flex;
+    flex-flow: row wrap;
+    
+    .card {
+      flex: 1 0 0%;
+      margin-bottom: 0;
+      
+      + .card {
+        margin-left: 0;
+        border-left: 0;
+      }
+      
+      &:not(:last-child) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+      
+      &:not(:first-child) {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
+  }
+  
+  .card-deck {
+    @include ax-flex-column;
+    gap: ax-spacing(4);
+    
+    @include ax-responsive(md-up) {
+      flex-flow: row wrap;
+      margin-right: -#{ax-spacing(2)};
+      margin-left: -#{ax-spacing(2)};
+      
+      .card {
+        flex: 1 0 0%;
+        margin-right: ax-spacing(2);
+        margin-left: ax-spacing(2);
+      }
+    }
+  }
+  
+  .card-columns {
+    column-count: 3;
+    column-gap: ax-spacing(4);
+    orphans: 1;
+    widows: 1;
+    
+    .card {
+      display: inline-block;
+      width: 100%;
+      margin-bottom: ax-spacing(4);
+    }
+    
+    @include ax-responsive(lg-down) {
+      column-count: 2;
+    }
+    
+    @include ax-responsive(sm-down) {
+      column-count: 1;
+    }
+  }
+
+  // =============================================================================
+  // CARD UTILITIES
+  // =============================================================================
+  
+  .card-actions {
+    @include ax-flex-start;
+    gap: ax-spacing(2);
+    margin-top: ax-spacing(3);
+    
+    .btn {
+      flex-shrink: 0;
+    }
+    
+    &.card-actions-center {
+      justify-content: center;
+    }
+    
+    &.card-actions-end {
+      justify-content: flex-end;
+    }
+  }
+  
+  .card-meta {
+    font-size: $ax-text-xs;
+    color: $ax-gray;
+    margin-bottom: ax-spacing(2);
+    
+    .card-meta-item {
+      display: inline-flex;
+      align-items: center;
+      
+      + .card-meta-item {
+        margin-left: ax-spacing(3);
+        
+        &::before {
+          content: 'â€¢';
+          margin-right: ax-spacing(3);
+          margin-left: -#{ax-spacing(3)};
+        }
+      }
+    }
+  }
+
+  // =============================================================================
+  // ADVANCED CARD FEATURES - Production-Ready Enhancements
+  // =============================================================================
+  
+  .card-advanced {
+    @include ax-flex-column;
+    @include tokens.ax-elevation(2);
+    background: var(--ax-card-bg);
+    border-radius: $ax-radius-lg;
+    overflow: hidden;
+    @include ax-transition-base;
+    
+    &.card-hover {
+      cursor: pointer;
+      
+      &:hover {
+        @include tokens.ax-elevation(4);
+        transform: translateY(-2px);
+      }
+    }
+    
+    &.card-interactive {
+      @include ax-transition-base;
+      
+      &:hover {
+        @include tokens.ax-elevation(6);
+        transform: scale(1.02);
+      }
+      
+      &:active {
+        transform: scale(0.98);
+      }
+    }
+    
+    // Color variants
+    &.card-blue {
+      border-top: 4px solid $ax-blue;
+    }
+    
+    &.card-green {
+      border-top: 4px solid $ax-green;
+    }
+    
+    &.card-gradient {
+      background: linear-gradient(135deg, $ax-white, rgba($ax-blue, 0.05));
+    }
+  }
+  
+  .card-image-advanced {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    @include ax-transition-base;
+    
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+  
+  // =============================================================================
+  // ACCESSIBILITY ENHANCEMENTS
+  // =============================================================================
+  
+  .card {
+    // Focus management for interactive cards
+    &.card-interactive:focus-visible,
+    &.card-link:focus-visible {
+      @include ax-focus-ring();
+    }
+    
+    // Reduced motion support
+    @include ax-prefers-reduced-motion {
+      transition: none;
+      
+      &.card-interactive:hover,
+      &.card-link:hover {
+        transform: none;
+      }
+    }
+  }
+}

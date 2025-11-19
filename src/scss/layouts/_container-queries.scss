@@ -1,0 +1,193 @@
+// =============================================================================
+// CONTAINER-RESPONSIVE LAYOUTS - AxisUI Framework Container Query System
+// Modern container queries for component-level responsive design
+// Direct color naming with comprehensive container-based utilities
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
+
+.axis-ui {
+  // =============================================================================
+  // CONTAINER QUERY SETUP - Container types and naming
+  // =============================================================================
+  
+  .container-query {
+    container-type: inline-size;
+  }
+
+  .container-query-size {
+    container-type: size;
+  }
+
+  .container-query-normal {
+    container-type: normal;
+  }
+
+  // =============================================================================
+  // CONTAINER SIZE BREAKPOINTS - Grid utilities only
+  // Note: Use existing utility classes (display, flexbox, spacing, typography)
+  // They work inside container queries without duplication
+  // Matches framework breakpoints: sm(640px), md(768px), lg(1024px), xl(1280px)
+  // =============================================================================
+
+  // Small containers (640px+)
+  @container (min-width: 640px) {
+    .cq-sm-grid-cols-1 { grid-template-columns: 1fr !important; }
+    .cq-sm-grid-cols-2 { grid-template-columns: repeat(2, 1fr) !important; }
+    .cq-sm-grid-cols-3 { grid-template-columns: repeat(3, 1fr) !important; }
+    .cq-sm-grid-cols-4 { grid-template-columns: repeat(4, 1fr) !important; }
+  }
+
+  // Medium containers (768px+)
+  @container (min-width: 768px) {
+    .cq-md-grid-cols-1 { grid-template-columns: 1fr !important; }
+    .cq-md-grid-cols-2 { grid-template-columns: repeat(2, 1fr) !important; }
+    .cq-md-grid-cols-3 { grid-template-columns: repeat(3, 1fr) !important; }
+    .cq-md-grid-cols-4 { grid-template-columns: repeat(4, 1fr) !important; }
+    .cq-md-grid-cols-5 { grid-template-columns: repeat(5, 1fr) !important; }
+    .cq-md-grid-cols-6 { grid-template-columns: repeat(6, 1fr) !important; }
+    .cq-md-grid-cols-7 { grid-template-columns: repeat(7, 1fr) !important; }
+    .cq-md-grid-cols-8 { grid-template-columns: repeat(8, 1fr) !important; }
+  }
+
+  // Large containers (1024px+)
+  @container (min-width: 1024px) {
+    .cq-lg-grid-cols-1 { grid-template-columns: 1fr !important; }
+    .cq-lg-grid-cols-2 { grid-template-columns: repeat(2, 1fr) !important; }
+    .cq-lg-grid-cols-3 { grid-template-columns: repeat(3, 1fr) !important; }
+    .cq-lg-grid-cols-4 { grid-template-columns: repeat(4, 1fr) !important; }
+    .cq-lg-grid-cols-5 { grid-template-columns: repeat(5, 1fr) !important; }
+    .cq-lg-grid-cols-6 { grid-template-columns: repeat(6, 1fr) !important; }
+    .cq-lg-grid-cols-7 { grid-template-columns: repeat(7, 1fr) !important; }
+    .cq-lg-grid-cols-8 { grid-template-columns: repeat(8, 1fr) !important; }
+    .cq-lg-grid-cols-9 { grid-template-columns: repeat(9, 1fr) !important; }
+    .cq-lg-grid-cols-10 { grid-template-columns: repeat(10, 1fr) !important; }
+    .cq-lg-grid-cols-11 { grid-template-columns: repeat(11, 1fr) !important; }
+    .cq-lg-grid-cols-12 { grid-template-columns: repeat(12, 1fr) !important; }
+  }
+
+  // Extra large containers (1280px+)
+  @container (min-width: 1280px) {
+    .cq-xl-grid-cols-1 { grid-template-columns: 1fr !important; }
+    .cq-xl-grid-cols-2 { grid-template-columns: repeat(2, 1fr) !important; }
+    .cq-xl-grid-cols-3 { grid-template-columns: repeat(3, 1fr) !important; }
+    .cq-xl-grid-cols-4 { grid-template-columns: repeat(4, 1fr) !important; }
+    .cq-xl-grid-cols-5 { grid-template-columns: repeat(5, 1fr) !important; }
+    .cq-xl-grid-cols-6 { grid-template-columns: repeat(6, 1fr) !important; }
+    .cq-xl-grid-cols-7 { grid-template-columns: repeat(7, 1fr) !important; }
+    .cq-xl-grid-cols-8 { grid-template-columns: repeat(8, 1fr) !important; }
+    .cq-xl-grid-cols-9 { grid-template-columns: repeat(9, 1fr) !important; }
+    .cq-xl-grid-cols-10 { grid-template-columns: repeat(10, 1fr) !important; }
+    .cq-xl-grid-cols-11 { grid-template-columns: repeat(11, 1fr) !important; }
+    .cq-xl-grid-cols-12 { grid-template-columns: repeat(12, 1fr) !important; }
+    .cq-xl-grid-cols-13 { grid-template-columns: repeat(13, 1fr) !important; }
+    .cq-xl-grid-cols-14 { grid-template-columns: repeat(14, 1fr) !important; }
+    .cq-xl-grid-cols-15 { grid-template-columns: repeat(15, 1fr) !important; }
+    .cq-xl-grid-cols-16 { grid-template-columns: repeat(16, 1fr) !important; }
+  }
+
+  // =============================================================================
+  // INTRINSIC LAYOUTS - Self-adapting layout patterns
+  // =============================================================================
+  
+  .grid-intrinsic {
+    display: grid;
+    gap: ax-spacing(4);
+    grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+  }
+  
+  .grid-intrinsic-sm {
+    display: grid;
+    gap: ax-spacing(3);
+    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+  }
+  
+  .grid-intrinsic-lg {
+    display: grid;
+    gap: ax-spacing(5);
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  }
+
+  // =============================================================================
+  // FLUID RESPONSIVE UTILITIES
+  // =============================================================================
+
+  .cq-text-fluid {
+    font-size: $ax-text-sm;
+    
+    @container (min-width: 640px) {
+      font-size: $ax-text-base;
+    }
+    
+    @container (min-width: 768px) {
+      font-size: $ax-text-lg;
+    }
+    
+    @container (min-width: 1024px) {
+      font-size: $ax-text-xl;
+    }
+  }
+
+  .cq-spacing-fluid {
+    padding: ax-spacing(2);
+    
+    @container (min-width: 640px) {
+      padding: ax-spacing(3);
+    }
+    
+    @container (min-width: 768px) {
+      padding: ax-spacing(4);
+    }
+    
+    @container (min-width: 1024px) {
+      padding: ax-spacing(5);
+    }
+  }
+  
+  .cq-gap-fluid {
+    gap: ax-spacing(2);
+    
+    @container (min-width: 640px) {
+      gap: ax-spacing(3);
+    }
+    
+    @container (min-width: 768px) {
+      gap: ax-spacing(4);
+    }
+    
+    @container (min-width: 1024px) {
+      gap: ax-spacing(5);
+    }
+  }
+
+  // =============================================================================
+  // CONTAINER QUERY ASPECT RATIOS
+  // =============================================================================
+  
+  .cq-aspect-responsive {
+    aspect-ratio: 1 / 1;
+    
+    @container (min-width: 400px) {
+      aspect-ratio: 4 / 3;
+    }
+    
+    @container (min-width: 600px) {
+      aspect-ratio: 16 / 9;
+    }
+  }
+
+  // =============================================================================
+  // ACCESSIBILITY AND PERFORMANCE
+  // =============================================================================
+  
+  @include ax-prefers-reduced-motion {
+    .cq-text-fluid,
+    .cq-spacing-fluid,
+    .cq-gap-fluid {
+      transition: none;
+    }
+  }
+
+}

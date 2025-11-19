@@ -1,0 +1,514 @@
+// =============================================================================
+// CSS-ONLY EMOJI UTILITIES
+// AxisUI Framework - Pure CSS Emoji System using Pseudo-elements
+// =============================================================================
+
+// ACCESSIBILITY NOTES:
+// - For decorative emojis: Add aria-hidden="true" to the element
+// - For semantic emojis: Add role="img" and aria-label="description"
+// - Example: <span class="emoji emoji-home" aria-hidden="true"></span>
+// - Example: <span class="emoji emoji-home" role="img" aria-label="Home"></span>
+
+@use '../abstracts/variables' as *;
+
+// Container-scoped CSS-only emojis system
+.axis-ui {
+
+  // =============================================================================
+  // BASE EMOJI UTILITY
+  // =============================================================================
+  
+  .emoji {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
+  }
+
+  // =============================================================================
+  // EMOJI SIZES
+  // =============================================================================
+  
+  .emoji-xs { font-size: 0.75rem; }   // 12px
+  .emoji-sm { font-size: 0.875rem; }  // 14px
+  .emoji-md { font-size: 1rem; }      // 16px (default)
+  .emoji-lg { font-size: 1.25rem; }   // 20px
+  .emoji-xl { font-size: 1.5rem; }    // 24px
+  .emoji-xxl { font-size: 2rem; }     // 32px
+
+  // =============================================================================
+  // ARROW EMOJIS
+  // =============================================================================
+
+  .emoji-arrow-right::after {
+    content: '';
+    border: solid currentColor;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 0.15em;
+    transform: rotate(-45deg);
+    vertical-align: middle;
+  }
+
+  .emoji-arrow-left::after {
+    content: '';
+    border: solid currentColor;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 0.15em;
+    transform: rotate(135deg);
+    vertical-align: middle;
+  }
+
+  .emoji-arrow-up::after {
+    content: '';
+    border: solid currentColor;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 0.15em;
+    transform: rotate(-135deg);
+    vertical-align: middle;
+  }
+
+  .emoji-arrow-down::after {
+    content: '';
+    border: solid currentColor;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 0.15em;
+    transform: rotate(45deg);
+    vertical-align: middle;
+  }
+
+  // =============================================================================
+  // INTERFACE EMOJIS
+  // =============================================================================
+
+  .emoji-close::before {
+    content: '×';
+    font-size: 1.5em;
+    line-height: 0.8;
+    font-weight: 300;
+  }
+
+  .emoji-menu::before {
+    content: '☰';
+    font-size: 1.2em;
+    line-height: 1;
+  }
+
+  .emoji-plus::before {
+    content: '+';
+    font-size: 1.2em;
+    font-weight: 300;
+    line-height: 1;
+  }
+
+  .emoji-minus::before {
+    content: '−';
+    font-size: 1.2em;
+    font-weight: 300;
+    line-height: 1;
+  }
+
+  // Search emoji with CSS circle
+  .emoji-search {
+    position: relative;
+  }
+  
+  .emoji-search::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0.7em;
+    height: 0.7em;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    transform: translate(-50%, -60%);
+  }
+  
+  .emoji-search::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2px;
+    height: 0.4em;
+    background: currentColor;
+    transform: translate(-30%, 10%) rotate(45deg);
+  }
+
+  // =============================================================================
+  // STATUS EMOJIS
+  // =============================================================================
+
+  .emoji-loading {
+    animation: emoji-spin 1s linear infinite;
+  }
+
+  .emoji-loading::before {
+    content: '';
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+  }
+
+  .emoji-check::before {
+    content: '✓';
+    font-size: 1.1em;
+    font-weight: bold;
+    line-height: 1;
+    color: currentColor;
+  }
+
+  .emoji-warning::before {
+    content: '!';
+    font-size: 1.1em;
+    font-weight: bold;
+    line-height: 1;
+    color: currentColor;
+  }
+
+  .emoji-error::before {
+    content: '✕';
+    font-size: 1em;
+    font-weight: bold;
+    line-height: 1;
+    color: currentColor;
+  }
+
+  .emoji-info::before {
+    content: 'i';
+    font-size: 1.1em;
+    font-weight: bold;
+    line-height: 1;
+    font-style: normal;
+    color: currentColor;
+  }
+
+  // =============================================================================
+  // SOCIAL & UTILITY EMOJIS
+  // =============================================================================
+
+  .emoji-heart::before {
+    content: '♥';
+    color: currentColor;
+  }
+
+  .emoji-star::before {
+    content: '★';
+    color: currentColor;
+  }
+
+  .emoji-star-outline::before {
+    content: '☆';
+    color: currentColor;
+  }
+
+  .emoji-share::before {
+    content: '↗';
+    font-size: 1.1em;
+    font-weight: bold;
+  }
+
+  .emoji-download::before {
+    content: '↓';
+    font-size: 1.1em;
+    font-weight: bold;
+  }
+
+  .emoji-upload::before {
+    content: '↑';
+    font-size: 1.1em;
+    font-weight: bold;
+  }
+
+  .emoji-link::before {
+    content: '🔗';
+    font-size: 0.9em;
+  }
+
+  .emoji-mail::before {
+    content: '✉';
+    font-size: 1em;
+  }
+
+  .emoji-phone::before {
+    content: '☎';
+    font-size: 1em;
+  }
+
+  .emoji-home::before {
+    content: '🏠';
+    font-size: 1em;
+  }
+
+  .emoji-user::before {
+    content: '👤';
+    font-size: 1em;
+  }
+
+  .emoji-users::before {
+    content: '👥';
+    font-size: 1em;
+  }
+
+  .emoji-settings::before {
+    content: '⚙';
+    font-size: 1em;
+  }
+
+  .emoji-calendar::before {
+    content: '📅';
+    font-size: 1em;
+  }
+
+  .emoji-clock::before {
+    content: '🕐';
+    font-size: 1em;
+  }
+
+  .emoji-folder::before {
+    content: '📁';
+    font-size: 1em;
+  }
+
+  .emoji-file::before {
+    content: '📄';
+    font-size: 1em;
+  }
+
+  // Common emojis used in markup but not defined above
+  .emoji-stats::before {
+    content: '📊';
+    font-size: 1em;
+  }
+
+  .emoji-chart-up::before {
+    content: '📈';
+    font-size: 1em;
+  }
+
+  .emoji-money::before {
+    content: '💰';
+    font-size: 1em;
+  }
+
+  .emoji-target::before {
+    content: '🎯';
+    font-size: 1em;
+  }
+
+  .emoji-dot::before {
+    content: '•';
+    font-size: 1em;
+    line-height: 1;
+  }
+
+  .emoji-rocket::before {
+    content: '🚀';
+    font-size: 1em;
+  }
+
+  .emoji-palette::before {
+    content: '🎨';
+    font-size: 1em;
+  }
+
+  .emoji-mobile::before {
+    content: '📱';
+    font-size: 1em;
+  }
+
+  .emoji-flash::before {
+    content: '⚡';
+    font-size: 1em;
+  }
+
+  .emoji-tools::before {
+    content: '🔧';
+    font-size: 1em;
+  }
+
+  .emoji-note::before {
+    content: '📝';
+    font-size: 1em;
+  }
+
+  .emoji-eye::before {
+    content: '👁️';
+    font-size: 1em;
+  }
+
+  .emoji-globe::before {
+    content: '🌐';
+    font-size: 1em;
+  }
+
+  .emoji-shop::before {
+    content: '🛍️';
+    font-size: 1em;
+  }
+
+  .emoji-bell::before {
+    content: '🔔';
+    font-size: 1em;
+  }
+
+  .emoji-lock::before {
+    content: '🔒';
+    font-size: 1em;
+  }
+
+  .emoji-sparkle::before {
+    content: '✨';
+    font-size: 1em;
+  }
+
+  .emoji-chart-down::before {
+    content: '📉';
+    font-size: 1em;
+  }
+
+  // =============================================================================
+  // GEOMETRIC EMOJIS (Pure CSS Shapes)
+  // =============================================================================
+
+  // Circle emoji
+  .emoji-circle::before {
+    content: '';
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+  }
+
+  // Square emoji
+  .emoji-square::before {
+    content: '';
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    border: 2px solid currentColor;
+  }
+
+  // Triangle emoji
+  .emoji-triangle::before {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 0.5em solid transparent;
+    border-right: 0.5em solid transparent;
+    border-bottom: 0.8em solid currentColor;
+  }
+
+  // Diamond emoji
+  .emoji-diamond::before {
+    content: '';
+    display: inline-block;
+    width: 0.7em;
+    height: 0.7em;
+    background: currentColor;
+    transform: rotate(45deg);
+  }
+
+  // =============================================================================
+  // EMOJI ANIMATIONS
+  // =============================================================================
+
+  @keyframes emoji-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .emoji-spin {
+    animation: emoji-spin 1s linear infinite;
+  }
+
+  .emoji-pulse {
+    animation: emoji-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes emoji-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.1); }
+  }
+
+  .emoji-bounce {
+    animation: emoji-bounce 1s ease-in-out infinite;
+  }
+
+  @keyframes emoji-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-0.2em); }
+  }
+
+  // =============================================================================
+  // EMOJI COLORS (Direct Color Names)
+  // =============================================================================
+
+  .emoji-blue { color: $ax-blue; }
+  .emoji-blue-light { color: $ax-blue-light; }
+  .emoji-blue-dark { color: $ax-blue-dark; }
+  
+  .emoji-red { color: $ax-red; }
+  .emoji-red-light { color: $ax-red-light; }
+  .emoji-red-dark { color: $ax-red-dark; }
+  
+  .emoji-green { color: $ax-green; }
+  .emoji-green-light { color: $ax-green-light; }
+  .emoji-green-dark { color: $ax-green-dark; }
+  
+  .emoji-yellow { color: $ax-yellow; }
+  .emoji-yellow-light { color: $ax-yellow-light; }
+  .emoji-yellow-dark { color: $ax-yellow-dark; }
+  
+  .emoji-orange { color: $ax-orange; }
+  .emoji-orange-light { color: $ax-orange-light; }
+  .emoji-orange-dark { color: $ax-orange-dark; }
+  
+  .emoji-purple { color: $ax-purple; }
+  .emoji-purple-light { color: $ax-purple-light; }
+  .emoji-purple-dark { color: $ax-purple-dark; }
+  
+  .emoji-pink { color: $ax-pink; }
+  .emoji-pink-light { color: $ax-pink-light; }
+  .emoji-pink-dark { color: $ax-pink-dark; }
+  
+  .emoji-teal { color: $ax-teal; }
+  .emoji-teal-light { color: $ax-teal-light; }
+  .emoji-teal-dark { color: $ax-teal-dark; }
+  
+  .emoji-cyan { color: $ax-cyan; }
+  .emoji-cyan-light { color: $ax-cyan-light; }
+  .emoji-cyan-dark { color: $ax-cyan-dark; }
+  
+  .emoji-gray { color: $ax-gray; }
+  .emoji-gray-light { color: $ax-gray-light; }
+  .emoji-gray-dark { color: $ax-gray-dark; }
+
+  // =============================================================================
+  // RESPONSIVE EMOJI UTILITIES
+  // =============================================================================
+
+  @media (max-width: 639px) {
+    .emoji-sm-xs { font-size: 0.75rem; }
+    .emoji-sm-sm { font-size: 0.875rem; }
+  }
+
+  @media (max-width: 767px) {
+    .emoji-md-sm { font-size: 0.875rem; }
+    .emoji-md-md { font-size: 1rem; }
+  }
+
+  @media (max-width: 1023px) {
+    .emoji-lg-md { font-size: 1rem; }
+    .emoji-lg-lg { font-size: 1.25rem; }
+  }
+}

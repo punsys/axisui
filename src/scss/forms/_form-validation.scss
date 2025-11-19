@@ -1,0 +1,533 @@
+// AxisUI Form Validation Styles
+// Comprehensive validation system with responsive design
+// Only validation-related styles, pure CSS, no ax- class prefixes except for variables
+// Direct color naming: green, green-light, green-dark, red, red-light, red-dark, orange, orange-light, orange-dark
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
+
+.axis-ui {
+  // =============================================================================
+  // BASE VALIDATION STATES
+  // =============================================================================
+
+  // Valid state - green with checkmark icon
+  .form.valid,
+  .form-input.valid,
+  .form-select.valid,
+  .form-textarea.valid {
+    border-color: $ax-green !important;
+    background-color: rgba($ax-green-light, 0.05);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%232e7d32' d='m6.564.75-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right ax-spacing(3) center;
+    background-size: ax-spacing(4) ax-spacing(4);
+    padding-right: ax-spacing(10) !important;
+    transition: all $ax-transition-base;
+
+    &:focus {
+      border-color: $ax-green-dark !important;
+      box-shadow: 0 0 0 2px rgba($ax-green, 0.25);
+      background-color: $ax-white;
+    }
+
+    &:hover {
+      border-color: $ax-green-dark;
+    }
+  }
+
+  // Invalid state - red with error icon
+  .form.invalid,
+  .form-input.invalid,
+  .form-select.invalid,
+  .form-textarea.invalid {
+    border-color: $ax-red !important;
+    background-color: rgba($ax-red-light, 0.05);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath d='m5.5 5.5 1 1m0-1-1 1'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right ax-spacing(3) center;
+    background-size: ax-spacing(4) ax-spacing(4);
+    padding-right: ax-spacing(10) !important;
+    transition: all $ax-transition-base;
+
+    &:focus {
+      border-color: $ax-red-dark !important;
+      box-shadow: 0 0 0 2px rgba($ax-red, 0.25);
+      background-color: $ax-white;
+    }
+
+    &:hover {
+      border-color: $ax-red-dark;
+    }
+  }
+
+  // Warning state - orange with warning icon
+  .form.warning,
+  .form-input.warning,
+  .form-select.warning,
+  .form-textarea.warning {
+    border-color: $ax-orange !important;
+    background-color: rgba($ax-orange-light, 0.05);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23f97316' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right ax-spacing(3) center;
+    background-size: ax-spacing(4) ax-spacing(4);
+    padding-right: ax-spacing(10) !important;
+    transition: all $ax-transition-base;
+
+    &:focus {
+      border-color: $ax-orange-dark !important;
+      box-shadow: 0 0 0 2px rgba($ax-orange, 0.25);
+      background-color: $ax-white;
+    }
+
+    &:hover {
+      border-color: $ax-orange-dark;
+    }
+  }
+
+  // =============================================================================
+  // FEEDBACK MESSAGES
+  // =============================================================================
+
+  .valid-feedback {
+    display: block;
+    width: 100%;
+    margin-top: ax-spacing(1);
+    font-size: $ax-text-xs;
+    color: $ax-green-dark;
+    font-weight: $ax-font-medium;
+    line-height: 1.4;
+
+    &::before {
+      content: '✓ ';
+      font-weight: $ax-font-bold;
+    }
+  }
+
+  .invalid-feedback {
+    display: block;
+    width: 100%;
+    margin-top: ax-spacing(1);
+    font-size: $ax-text-xs;
+    color: $ax-red-dark;
+    font-weight: $ax-font-medium;
+    line-height: 1.4;
+
+    &::before {
+      content: '✕ ';
+      font-weight: $ax-font-bold;
+    }
+  }
+
+  .warning-feedback {
+    display: block;
+    width: 100%;
+    margin-top: ax-spacing(1);
+    font-size: $ax-text-xs;
+    color: $ax-orange-dark;
+    font-weight: $ax-font-medium;
+    line-height: 1.4;
+
+    &::before {
+      content: '⚠ ';
+      font-weight: $ax-font-bold;
+    }
+  }
+
+  .info-feedback {
+    display: block;
+    width: 100%;
+    margin-top: ax-spacing(1);
+    font-size: $ax-text-xs;
+    color: $ax-blue-dark;
+    font-weight: $ax-font-medium;
+    line-height: 1.4;
+
+    &::before {
+      content: 'ℹ ';
+      font-weight: $ax-font-bold;
+    }
+  }
+
+  // =============================================================================
+  // CHECKBOX & RADIO VALIDATION STATES
+  // =============================================================================
+
+  .form-check-input {
+    &.valid {
+      border-color: $ax-green;
+      
+      &:checked {
+        background-color: $ax-green;
+        border-color: $ax-green;
+      }
+
+      &:focus {
+        box-shadow: 0 0 0 2px rgba($ax-green, 0.25);
+      }
+    }
+
+    &.invalid {
+      border-color: $ax-red;
+
+      &:focus {
+        box-shadow: 0 0 0 2px rgba($ax-red, 0.25);
+      }
+    }
+
+    &.warning {
+      border-color: $ax-orange;
+
+      &:focus {
+        box-shadow: 0 0 0 2px rgba($ax-orange, 0.25);
+      }
+    }
+  }
+
+  // =============================================================================
+  // TEXTAREA VALIDATION
+  // =============================================================================
+
+  .form-textarea {
+    &.valid,
+    &.invalid,
+    &.warning {
+      background-position: right ax-spacing(3) top ax-spacing(3);
+    }
+  }
+
+  // =============================================================================
+  // FILE INPUT VALIDATION
+  // =============================================================================
+
+  input[type="file"] {
+    &.valid,
+    &.invalid,
+    &.warning {
+      background-image: none;
+      padding-right: ax-spacing(3) !important;
+    }
+  }
+
+  // =============================================================================
+  // VALIDATION SUMMARY & ALERTS
+  // =============================================================================
+
+  .validation-summary {
+    padding: ax-spacing(4);
+    border-radius: $ax-radius-base;
+    margin-bottom: ax-spacing(4);
+    border-left: 4px solid;
+
+    &.validation-summary-error {
+      background-color: rgba($ax-red-light, 0.1);
+      border-color: $ax-red;
+      color: $ax-red-dark;
+
+      .validation-summary-title {
+        color: $ax-red-dark;
+        font-weight: $ax-font-semibold;
+        margin-bottom: ax-spacing(2);
+      }
+
+      ul {
+        margin: 0;
+        padding-left: ax-spacing(4);
+      }
+
+      li {
+        margin-bottom: ax-spacing(1);
+        color: $ax-red-dark;
+      }
+    }
+
+    &.validation-summary-success {
+      background-color: rgba($ax-green-light, 0.1);
+      border-color: $ax-green;
+      color: $ax-green-dark;
+
+      .validation-summary-title {
+        color: $ax-green-dark;
+        font-weight: $ax-font-semibold;
+        margin-bottom: ax-spacing(2);
+      }
+    }
+  }
+
+  // =============================================================================
+  // INLINE VALIDATION INDICATORS
+  // =============================================================================
+
+  .form-group {
+    position: relative;
+
+    &.has-validation {
+      .form,
+      .form-input,
+      .form-select,
+      .form-textarea {
+        padding-right: ax-spacing(10);
+      }
+    }
+  }
+
+  // =============================================================================
+  // RESPONSIVE VALIDATION FEEDBACK
+  // =============================================================================
+
+  @media (max-width: #{$ax-breakpoint-md - 1px}) {
+    .valid-feedback,
+    .invalid-feedback,
+    .warning-feedback,
+    .info-feedback {
+      font-size: $ax-text-xs;
+      margin-top: ax-spacing(0.5);
+    }
+
+    .form.valid,
+    .form.invalid,
+    .form.warning,
+    .form-input.valid,
+    .form-input.invalid,
+    .form-input.warning {
+      background-size: ax-spacing(3) ax-spacing(3);
+      padding-right: ax-spacing(8) !important;
+    }
+
+    .validation-summary {
+      padding: ax-spacing(3);
+      font-size: $ax-text-sm;
+    }
+  }
+
+  // =============================================================================
+  // VALIDATION WITH TOOLTIPS
+  // =============================================================================
+
+  .validation-tooltip {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: $ax-z-tooltip;
+    display: none;
+    max-width: 100%;
+    padding: ax-spacing(1.5) ax-spacing(2);
+    margin-top: ax-spacing(0.5);
+    font-size: $ax-text-xs;
+    border-radius: $ax-radius-sm;
+    box-shadow: $ax-shadow-md;
+
+    &.valid-tooltip {
+      background-color: $ax-green-dark;
+      color: $ax-white;
+    }
+
+    &.invalid-tooltip {
+      background-color: $ax-red-dark;
+      color: $ax-white;
+    }
+
+    &.warning-tooltip {
+      background-color: $ax-orange-dark;
+      color: $ax-white;
+    }
+
+    &.show {
+      display: block;
+    }
+  }
+
+  // =============================================================================
+  // FORM GROUP VALIDATION STATES
+  // =============================================================================
+
+  .form-group {
+    &.is-valid {
+      .form-label {
+        color: $ax-green-dark;
+      }
+    }
+
+    &.is-invalid {
+      .form-label {
+        color: $ax-red-dark;
+      }
+    }
+
+    &.is-warning {
+      .form-label {
+        color: $ax-orange-dark;
+      }
+    }
+  }
+
+  // =============================================================================
+  // FLOATING LABEL VALIDATION STATES
+  // =============================================================================
+
+  .form-floating {
+    .form.valid:focus ~ .form-label,
+    .form.valid:not(:placeholder-shown) ~ .form-label,
+    .form-textarea.valid:focus ~ .form-label,
+    .form-textarea.valid:not(:placeholder-shown) ~ .form-label {
+      color: $ax-green;
+    }
+
+    .form.invalid:focus ~ .form-label,
+    .form.invalid:not(:placeholder-shown) ~ .form-label,
+    .form-textarea.invalid:focus ~ .form-label,
+    .form-textarea.invalid:not(:placeholder-shown) ~ .form-label {
+      color: $ax-red;
+    }
+
+    .form.warning:focus ~ .form-label,
+    .form.warning:not(:placeholder-shown) ~ .form-label,
+    .form-textarea.warning:focus ~ .form-label,
+    .form-textarea.warning:not(:placeholder-shown) ~ .form-label {
+      color: $ax-orange;
+    }
+  }
+
+  // =============================================================================
+  // SELECT VALIDATION (NO BACKGROUND ICON CONFLICT)
+  // =============================================================================
+
+  .form-select {
+    &.valid {
+      border-color: $ax-green !important;
+      // Keep dropdown arrow, remove validation icon
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+      background-position: right ax-spacing(2) center;
+      padding-right: ax-spacing(8) !important;
+
+      &:focus {
+        border-color: $ax-green-dark !important;
+        box-shadow: 0 0 0 2px rgba($ax-green, 0.25);
+      }
+    }
+
+    &.invalid {
+      border-color: $ax-red !important;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+      background-position: right ax-spacing(2) center;
+      padding-right: ax-spacing(8) !important;
+
+      &:focus {
+        border-color: $ax-red-dark !important;
+        box-shadow: 0 0 0 2px rgba($ax-red, 0.25);
+      }
+    }
+
+    &.warning {
+      border-color: $ax-orange !important;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+      background-position: right ax-spacing(2) center;
+      padding-right: ax-spacing(8) !important;
+
+      &:focus {
+        border-color: $ax-orange-dark !important;
+        box-shadow: 0 0 0 2px rgba($ax-orange, 0.25);
+      }
+    }
+  }
+
+  .dark-mode {
+    .form.valid,
+    .form.invalid,
+    .form.warning {
+      background-color: transparent;
+
+      &:focus {
+        background-color: $ax-gray-dark;
+      }
+    }
+
+    .valid-feedback {
+      color: $ax-green-light;
+    }
+
+    .invalid-feedback {
+      color: $ax-red-light;
+    }
+
+    .warning-feedback {
+      color: $ax-orange-light;
+    }
+
+    .validation-summary {
+      &.validation-summary-error {
+        background-color: rgba($ax-red-dark, 0.2);
+        color: $ax-red-light;
+
+        .validation-summary-title {
+          color: $ax-red-light;
+        }
+
+        li {
+          color: $ax-red-light;
+        }
+      }
+
+      &.validation-summary-success {
+        background-color: rgba($ax-green-dark, 0.2);
+        color: $ax-green-light;
+
+        .validation-summary-title {
+          color: $ax-green-light;
+        }
+      }
+    }
+  }
+
+  // =============================================================================
+  // DISABLED STATE (NO VALIDATION STYLING)
+  // =============================================================================
+
+  .form:disabled,
+  .form-input:disabled,
+  .form-select:disabled,
+  .form-textarea:disabled {
+    &.valid,
+    &.invalid,
+    &.warning {
+      border-color: $ax-border-color;
+      background-image: none;
+      background-color: $ax-gray-light;
+      opacity: 0.6;
+    }
+  }
+
+  // =============================================================================
+  // VALIDATION ANIMATIONS
+  // =============================================================================
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+  }
+
+  .form.invalid.shake,
+  .form-input.invalid.shake {
+    animation: shake 0.5s ease-in-out;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .valid-feedback,
+  .invalid-feedback,
+  .warning-feedback {
+    animation: fadeInUp 0.3s ease-out;
+  }
+}

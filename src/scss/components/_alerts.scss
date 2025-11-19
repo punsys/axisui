@@ -1,0 +1,453 @@
+// =============================================================================
+// ALERTS - AxisUI Framework Comprehensive Alert Components
+// Direct color naming with comprehensive variants
+// Includes dismissible functionality and accessibility features
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
+
+.axis-ui {
+  // =============================================================================
+  // BASE ALERT STYLES
+  // =============================================================================
+  
+  .alert {
+    position: relative;
+    padding: ax-spacing(4);
+    margin-bottom: ax-spacing(4);
+    border: 1px solid transparent;
+    border-radius: $ax-radius-base;
+    font-size: $ax-text-base;
+    line-height: $ax-leading-relaxed;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+    
+    // Alert content elements
+    .alert-title {
+      font-weight: $ax-font-semibold;
+      margin-bottom: ax-spacing(1);
+      font-size: $ax-text-lg;
+    }
+    
+    .alert-content {
+      margin: 0;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    
+    // Links within alerts
+    a {
+      font-weight: $ax-font-medium;
+      text-decoration: underline;
+      
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  // =============================================================================
+  // DISMISSIBLE ALERTS (Pure CSS)
+  // =============================================================================
+  
+  .alert.alert-dismissible {
+    padding-right: ax-spacing(12);
+    
+    .alert-close {
+      @include ax-reset-button; // Use centralized button reset
+      @include ax-transition-fast; // Use centralized transition pattern
+      @include ax-line-height-tight; // Use centralized typography pattern
+      position: absolute;
+      top: ax-spacing(3);
+      right: ax-spacing(3);
+      font-size: $ax-text-xl;
+      padding: ax-spacing(1);
+      border-radius: $ax-radius-sm;
+      
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+      
+      &:focus {
+        @include ax-focus-ring();
+      }
+    }
+  }
+  
+  // Pure CSS dismiss functionality using checkbox
+  .alert-dismiss-toggle {
+    display: none;
+  }
+  
+  .alert-dismiss-toggle:checked + .alert {
+    display: none;
+  }
+
+  // =============================================================================
+  // SIZE VARIANTS
+  // =============================================================================
+  
+  .alert.alert-sm {
+    padding: ax-spacing(2) ax-spacing(3);
+    font-size: $ax-text-sm;
+    
+    .alert-title {
+      font-size: $ax-text-base;
+      margin-bottom: ax-spacing(0.5);
+    }
+    
+    &.alert-dismissible {
+      padding-right: ax-spacing(8);
+      
+      .alert-close {
+        top: ax-spacing(1);
+        right: ax-spacing(1);
+        font-size: $ax-text-lg;
+      }
+    }
+  }
+  
+  .alert.alert-lg {
+    padding: ax-spacing(6);
+    font-size: $ax-text-lg;
+    
+    .alert-title {
+      font-size: $ax-text-xl;
+      margin-bottom: ax-spacing(2);
+    }
+    
+    &.alert-dismissible {
+      padding-right: ax-spacing(16);
+      
+      .alert-close {
+        top: ax-spacing(5);
+        right: ax-spacing(5);
+        font-size: $ax-text-xxl;
+      }
+    }
+  }
+
+  // =============================================================================
+  // COLOR VARIANTS - Direct Color Naming with 3-Variant Pattern
+  // =============================================================================
+  
+  .alert.alert-blue {
+    background-color: rgba($ax-blue-light, 0.1);
+    border-color: $ax-blue-light;
+    color: $ax-blue-dark;
+    
+    .alert-title {
+      color: $ax-blue-dark;
+    }
+    
+    a {
+      color: $ax-blue-dark;
+      
+      &:hover {
+        color: $ax-blue;
+      }
+    }
+    
+    .alert-close {
+      color: $ax-blue-dark;
+      
+      &:hover {
+        color: $ax-blue;
+        background-color: rgba($ax-blue, 0.1);
+      }
+    }
+  }
+  
+  .alert.alert-red {
+    background-color: rgba($ax-red-light, 0.1);
+    border-color: $ax-red-light;
+    color: $ax-red-dark;
+    
+    .alert-title {
+      color: $ax-red-dark;
+    }
+    
+    a {
+      color: $ax-red-dark;
+      
+      &:hover {
+        color: $ax-red;
+      }
+    }
+    
+    .alert-close {
+      color: $ax-red-dark;
+      
+      &:hover {
+        color: $ax-red;
+        background-color: rgba($ax-red, 0.1);
+      }
+    }
+  }
+  
+  .alert.alert-green {
+    background-color: rgba($ax-green-light, 0.1);
+    border-color: $ax-green-light;
+    color: $ax-green-dark;
+    
+    .alert-title {
+      color: $ax-green-dark;
+    }
+    
+    a {
+      color: $ax-green-dark;
+      
+      &:hover {
+        color: $ax-green;
+      }
+    }
+    
+    .alert-close {
+      color: $ax-green-dark;
+      
+      &:hover {
+        color: $ax-green;
+        background-color: rgba($ax-green, 0.1);
+      }
+    }
+  }
+  
+  .alert.alert-yellow {
+    background-color: rgba($ax-yellow-light, 0.1);
+    border-color: $ax-yellow-light;
+    color: $ax-yellow-dark;
+    
+    .alert-title {
+      color: $ax-yellow-dark;
+    }
+    
+    a {
+      color: $ax-yellow-dark;
+      
+      &:hover {
+        color: $ax-yellow;
+      }
+    }
+    
+    .alert-close {
+      color: $ax-yellow-dark;
+      
+      &:hover {
+        color: $ax-yellow;
+        background-color: rgba($ax-yellow, 0.1);
+      }
+    }
+  }
+  
+  .alert.alert-purple {
+    background-color: rgba($ax-purple-light, 0.1);
+    border-color: $ax-purple-light;
+    color: $ax-purple-dark;
+    
+    .alert-title {
+      color: $ax-purple-dark;
+    }
+    
+    a {
+      color: $ax-purple-dark;
+      
+      &:hover {
+        color: $ax-purple;
+      }
+    }
+    
+    .alert-close {
+      color: $ax-purple-dark;
+      
+      &:hover {
+        color: $ax-purple;
+        background-color: rgba($ax-purple, 0.1);
+      }
+    }
+  }
+  
+  .alert.alert-pink {
+    background-color: rgba($ax-pink-light, 0.1);
+    border-color: $ax-pink-light;
+    color: $ax-pink-dark;
+    
+    .alert-title {
+      color: $ax-pink-dark;
+    }
+    
+    a {
+      color: $ax-pink-dark;
+      
+      &:hover {
+        color: $ax-pink;
+      }
+    }
+    
+    .alert-close {
+      color: $ax-pink-dark;
+      
+      &:hover {
+        color: $ax-pink;
+        background-color: rgba($ax-pink, 0.1);
+      }
+    }
+  }
+  
+  .alert.alert-orange {
+    background-color: rgba($ax-orange-light, 0.1);
+    border-color: $ax-orange-light;
+    color: $ax-orange-dark;
+    
+    .alert-title {
+      color: $ax-orange-dark;
+    }
+    
+    a {
+      color: $ax-orange-dark;
+      
+      &:hover {
+        color: $ax-orange;
+      }
+    }
+    
+    .alert-close {
+      color: $ax-orange-dark;
+      
+      &:hover {
+        color: $ax-orange;
+        background-color: rgba($ax-orange, 0.1);
+      }
+    }
+  }
+  
+  .alert.alert-teal {
+    background-color: rgba($ax-teal-light, 0.1);
+    border-color: $ax-teal-light;
+    color: $ax-teal-dark;
+    
+    .alert-title {
+      color: $ax-teal-dark;
+    }
+    
+    a {
+      color: $ax-teal-dark;
+      
+      &:hover {
+        color: $ax-teal;
+      }
+    }
+    
+    .alert-close {
+      color: $ax-teal-dark;
+      
+      &:hover {
+        color: $ax-teal;
+        background-color: rgba($ax-teal, 0.1);
+      }
+    }
+  }
+  
+  .alert.alert-cyan {
+    background-color: rgba($ax-cyan-light, 0.1);
+    border-color: $ax-cyan-light;
+    color: $ax-cyan-dark;
+    
+    .alert-title {
+      color: $ax-cyan-dark;
+    }
+    
+    a {
+      color: $ax-cyan-dark;
+      
+      &:hover {
+        color: $ax-cyan;
+      }
+    }
+    
+    .alert-close {
+      color: $ax-cyan-dark;
+      
+      &:hover {
+        color: $ax-cyan;
+        background-color: rgba($ax-cyan, 0.1);
+      }
+    }
+  }
+
+  // =============================================================================
+  // STYLE VARIANTS
+  // =============================================================================
+  
+  .alert.alert-solid {
+    &.alert-blue {
+      background-color: $ax-blue;
+      border-color: $ax-blue;
+      color: $ax-white;
+      
+      .alert-title,
+      a,
+      .alert-close {
+        color: $ax-white;
+      }
+    }
+    
+    &.alert-red {
+      background-color: $ax-red;
+      border-color: $ax-red;
+      color: $ax-white;
+      
+      .alert-title,
+      a,
+      .alert-close {
+        color: $ax-white;
+      }
+    }
+    
+    &.alert-green {
+      background-color: $ax-green;
+      border-color: $ax-green;
+      color: $ax-white;
+      
+      .alert-title,
+      a,
+      .alert-close {
+        color: $ax-white;
+      }
+    }
+    
+    // Add other solid color variants as needed
+  }
+  
+  .alert.alert-outline {
+    background-color: transparent;
+    border-width: 2px;
+  }
+
+  // =============================================================================
+  // ACCESSIBILITY ENHANCEMENTS
+  // =============================================================================
+  
+  .alert {
+    // Ensure proper ARIA attributes are used in HTML
+    // role="alert" for important messages
+    // aria-live="polite" for less urgent messages
+    
+    // Focus management for dismissible alerts
+    .alert-close:focus-visible {
+      @include ax-focus-ring();
+    }
+    
+    // Reduced motion support
+    @include ax-prefers-reduced-motion {
+      .alert-close {
+        transition: none;
+      }
+    }
+  }
+}

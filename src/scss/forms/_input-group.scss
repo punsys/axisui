@@ -1,0 +1,637 @@
+﻿/*!
+ * AxisUI Input Group Forms - Pure CSS Input Group System
+ * Input groups, addons, and combined input patterns
+ * Direct color naming with ax- prefixed variables only
+ */
+
+// =============================================================================
+// INPUT GROUP FORMS SYSTEM - PURE CSS INPUT COMBINATIONS
+// Container-scoped input groups with addons and combinations
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
+
+// AxisUI Container Scope
+.axis-ui {
+
+  // =============================================================================
+  // BASE INPUT GROUP
+  // =============================================================================
+
+  .input-group {
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    width: 100%;
+
+    .form {
+      position: relative;
+      flex: 1 1 auto;
+      width: 1%;
+      min-width: 0;
+      margin-bottom: 0;
+
+      &:focus {
+        z-index: 3;
+      }
+
+      // Remove border radius for middle elements
+      &:not(:first-child):not(:last-child) {
+        border-radius: 0;
+      }
+
+      // Left element
+      &:first-child {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      // Right element
+      &:last-child {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+
+      // Adjacent border handling
+      + .form {
+        margin-left: -$ax-border-width;
+      }
+    }
+  }
+
+  // =============================================================================
+  // INPUT GROUP ADDONS
+  // =============================================================================
+
+  .input-group-addon {
+    @include input-group-addon-base;
+    white-space: nowrap;
+
+    // Remove border radius for middle elements
+    &:not(:first-child):not(:last-child) {
+      border-radius: 0;
+    }
+
+    // Left addon
+    &:first-child {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    // Right addon
+    &:last-child {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    // Adjacent border handling
+    + .form,
+    + .input-group-addon {
+      margin-left: -$ax-border-width;
+    }
+  }
+
+  // Text addons
+  .input-group-text {
+    @extend .input-group-addon;
+    font-weight: $ax-font-medium;
+  }
+
+  // =============================================================================
+  // INPUT GROUP BUTTONS
+  // =============================================================================
+
+  .input-group-btn {
+    position: relative;
+    font-size: 0;
+    white-space: nowrap;
+
+    .btn {
+      position: relative;
+      border-radius: $ax-radius-base;
+      margin: 0;
+
+      // Remove border radius for middle elements
+      &:not(:first-child):not(:last-child) {
+        border-radius: 0;
+      }
+
+      // Left button
+      &:first-child {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      // Right button
+      &:last-child {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+
+      + .btn {
+        margin-left: -$ax-border-width;
+      }
+
+      &:hover,
+      &:focus,
+      &:active {
+        z-index: 2;
+      }
+    }
+  }
+
+  // =============================================================================
+  // INPUT GROUP SIZE VARIANTS
+  // =============================================================================
+
+  .input-group-sm {
+    .form,
+    .input-group-addon,
+    .input-group-text {
+      padding: ax-spacing(1.5) ax-spacing(2);
+      font-size: $ax-text-sm;
+    }
+
+    .btn {
+      padding: ax-spacing(1.5) ax-spacing(2);
+      font-size: $ax-text-sm;
+    }
+  }
+
+  .input-group-lg {
+    .form,
+    .input-group-addon,
+    .input-group-text {
+      padding: ax-spacing(3) ax-spacing(4);
+      font-size: $ax-text-lg;
+    }
+
+    .btn {
+      padding: ax-spacing(3) ax-spacing(4);
+      font-size: $ax-text-lg;
+    }
+  }
+
+  // =============================================================================
+  // SEARCH INPUT GROUPS
+  // =============================================================================
+
+  .input-group-search {
+    .search-icon {
+      @extend .input-group-text;
+      background-color: $ax-white;
+      border-right: none;
+      color: $ax-gray;
+
+      &::before {
+        content: "ðŸ”";
+        font-size: $ax-text-base;
+      }
+    }
+
+    .form {
+      border-left: none;
+      padding-left: 0;
+
+      &:focus {
+        border-left: none;
+        box-shadow: none;
+      }
+    }
+
+    .search-button {
+      background: $ax-blue;
+      color: $ax-white;
+      border: $ax-border-width solid $ax-blue;
+
+      &:hover {
+        background: $ax-blue-dark;
+        border-color: $ax-blue-dark;
+      }
+    }
+  }
+
+  // =============================================================================
+  // CURRENCY INPUT GROUPS
+  // =============================================================================
+
+  .input-group-currency {
+    .currency-addon {
+      @extend .input-group-text;
+      font-weight: $ax-font-semibold;
+      background-color: $ax-green-light;
+      color: $ax-green-dark;
+      border-color: $ax-green;
+    }
+
+    .form {
+      text-align: right;
+      font-family: $ax-font-mono;
+    }
+  }
+
+  // =============================================================================
+  // URL INPUT GROUPS
+  // =============================================================================
+
+  .input-group-url {
+    .protocol-addon {
+      @extend .input-group-text;
+      background-color: $ax-blue-light;
+      color: $ax-blue-dark;
+      border-color: $ax-blue;
+    }
+
+    .domain-addon {
+      @extend .input-group-text;
+      background-color: $ax-gray-light;
+      color: $ax-gray-dark;
+    }
+  }
+
+  // =============================================================================
+  // EMAIL INPUT GROUPS
+  // =============================================================================
+
+  .input-group-email {
+    .at-symbol {
+      @extend .input-group-text;
+      font-weight: $ax-font-bold;
+    }
+
+    .domain-select {
+      border-left: none;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      min-width: 150px;
+    }
+  }
+
+  // =============================================================================
+  // PASSWORD INPUT GROUPS
+  // =============================================================================
+
+  .input-group-password {
+    .password-toggle {
+      @extend .input-group-btn;
+
+      .toggle-btn {
+        background: $ax-white;
+        color: $ax-gray;
+        border: $ax-border-width solid $ax-border-color;
+        cursor: pointer;
+        font-size: $ax-text-sm;
+
+        &:hover {
+          background: $ax-gray-light;
+          color: $ax-gray-dark;
+        }
+
+        &::before {
+          content: "ðŸ‘";
+        }
+
+        &.active::before {
+          content: "ðŸ™ˆ";
+        }
+      }
+    }
+
+    .strength-indicator {
+      position: absolute;
+      bottom: -ax-spacing(1);
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: $ax-gray-light;
+      border-radius: $ax-radius-sm;
+
+      .strength-bar {
+        height: 100%;
+        border-radius: $ax-radius-sm;
+        transition: all $ax-transition-base;
+
+        &.weak {
+          width: 25%;
+          background: $ax-red;
+        }
+
+        &.fair {
+          width: 50%;
+          background: $ax-yellow;
+        }
+
+        &.good {
+          width: 75%;
+          background: $ax-blue;
+        }
+
+        &.strong {
+          width: 100%;
+          background: $ax-green;
+        }
+      }
+    }
+  }
+
+  // =============================================================================
+  // DATE RANGE INPUT GROUPS
+  // =============================================================================
+
+  .input-group-date-range {
+    .date-separator {
+      @extend .input-group-text;
+      background-color: $ax-white;
+      border-left: none;
+      border-right: none;
+      padding: 0 ax-spacing(2);
+
+      &::before {
+        content: "to";
+        font-size: $ax-text-sm;
+        color: $ax-gray;
+      }
+    }
+
+    .form {
+      &:first-child {
+        border-right: none;
+      }
+
+      &:last-child {
+        border-left: none;
+      }
+    }
+  }
+
+  // =============================================================================
+  // QUANTITY INPUT GROUPS
+  // =============================================================================
+
+  .input-group-quantity {
+    .quantity-btn {
+      @extend .input-group-btn;
+
+      .btn {
+        background: $ax-gray-light;
+        color: $ax-gray-dark;
+        border: $ax-border-width solid $ax-border-color;
+        width: ax-spacing(10);
+        font-weight: $ax-font-bold;
+
+        &:hover {
+          background: $ax-gray;
+          color: $ax-white;
+        }
+
+        // Removed ::before pseudo-elements - buttons now use text content from HTML
+      }
+    }
+
+    .form {
+      text-align: center;
+      font-weight: $ax-font-medium;
+    }
+  }
+
+  // =============================================================================
+  // MULTI-INPUT GROUPS
+  // =============================================================================
+
+  .input-group-multi {
+    display: flex;
+    gap: ax-spacing(2);
+
+    .input-segment {
+      flex: 1;
+      display: flex;
+
+      .form {
+        border-radius: $ax-radius-base;
+      }
+
+      .segment-label {
+        @extend .input-group-text;
+        font-size: $ax-text-xs;
+        padding: ax-spacing(1) ax-spacing(2);
+        background: $ax-blue-light;
+        color: $ax-blue-dark;
+      }
+    }
+
+    @media (max-width: #{$ax-breakpoint-md - 1px}) {
+      @include ax-flex-column;
+      gap: ax-spacing(1);
+    }
+  }
+
+  // =============================================================================
+  // VALIDATION STATES FOR INPUT GROUPS
+  // Purpose-based class names (not color-based)
+  // =============================================================================
+
+  .input-group {
+    &.valid {
+      .form {
+        border-color: $ax-green;
+      }
+
+      .input-group-addon,
+      .input-group-text {
+        border-color: $ax-green;
+        background-color: rgba($ax-green, 0.1);
+        color: $ax-green-dark;
+      }
+    }
+
+    &.invalid {
+      .form {
+        border-color: $ax-red;
+      }
+
+      .input-group-addon,
+      .input-group-text {
+        border-color: $ax-red;
+        background-color: rgba($ax-red, 0.1);
+        color: $ax-red-dark;
+      }
+    }
+
+    &.warning {
+      .form {
+        border-color: $ax-orange;
+      }
+
+      .input-group-addon,
+      .input-group-text {
+        border-color: $ax-orange;
+        background-color: rgba($ax-orange, 0.1);
+        color: $ax-orange-dark;
+      }
+    }
+  }
+
+  // =============================================================================
+  // INPUT GROUP DROPDOWN
+  // =============================================================================
+
+  .input-group-dropdown {
+    position: relative;
+
+    .dropdown-toggle {
+      @extend .input-group-btn;
+
+      .btn {
+        background: $ax-white;
+        color: $ax-gray-dark;
+        border: $ax-border-width solid $ax-border-color;
+
+        &::after {
+          content: "▼";
+          margin-left: ax-spacing(1);
+          font-size: $ax-text-xs;
+        }
+
+        &:hover {
+          background: $ax-gray-light;
+        }
+      }
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      z-index: $ax-z-dropdown;
+      display: none;
+      margin-top: ax-spacing(1);
+      background: $ax-white;
+      border: $ax-border-width solid $ax-border-color;
+      border-radius: $ax-radius-base;
+      box-shadow: $ax-shadow-lg;
+      max-height: ax-spacing(48);
+      overflow-y: auto;
+
+      &.show {
+        display: block;
+      }
+
+      .dropdown-item {
+        display: block;
+        width: 100%;
+        padding: ax-spacing(2) ax-spacing(3);
+        color: $ax-gray-dark;
+        text-decoration: none;
+        border: none;
+        background: none;
+        text-align: left;
+        cursor: pointer;
+
+        &:hover {
+          background: $ax-gray-light;
+        }
+
+        &.active {
+          background: $ax-blue;
+          color: $ax-white;
+        }
+      }
+    }
+  }
+
+  // =============================================================================
+  // RESPONSIVE INPUT GROUPS
+  // =============================================================================
+
+  @media (max-width: #{$ax-breakpoint-md - 1px}) {
+    .input-group {
+      // Keep flex-row for inline layout on mobile
+      flex-wrap: nowrap;
+
+      .form,
+      .input-group-addon,
+      .input-group-text,
+      .btn {
+        // Keep border radius adjustments
+        &:not(:first-child):not(:last-child) {
+          border-radius: 0;
+        }
+
+        &:first-child {
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+
+        &:last-child {
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+        }
+      }
+    }
+
+    // Only stack for multi-input groups
+    .input-group-multi {
+      @include ax-flex-column;
+      
+      .form,
+      .input-group-addon,
+      .input-group-text,
+      .btn {
+        border-radius: $ax-radius-base !important;
+        margin-left: 0 !important;
+        margin-bottom: ax-spacing(2);
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  // =============================================================================
+  // INPUT GROUP ANIMATIONS
+  // =============================================================================
+
+  .input-group {
+    .form,
+    .input-group-addon,
+    .input-group-text,
+    .btn {
+      transition: all $ax-transition-base;
+    }
+
+    &:hover {
+      .form:not(:focus) {
+        border-color: rgba($ax-blue, 0.5);
+      }
+    }
+
+    &:focus-within {
+      .input-group-addon,
+      .input-group-text {
+        border-color: $ax-blue;
+        background-color: rgba($ax-blue, 0.05);
+      }
+    }
+  }
+
+  .input-group-fade-in {
+    animation: fadeInUp 0.3s ease-out;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(ax-spacing(2));
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+} // End .axis-ui container scope

@@ -1,0 +1,559 @@
+// =============================================================================
+// MEDIA UTILITIES
+// AxisUI Framework - Image, Video & Media Object Utilities
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/breakpoints' as *;
+@use '../abstracts/mixins' as *;
+
+// Container-scoped media utilities
+.axis-ui {
+
+  // =============================================================================
+  // RESPONSIVE IMAGES
+  // =============================================================================
+
+  .img-responsive {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .img-fluid {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .img-full {
+    width: 100%;
+    height: 100%;
+  }
+
+  .img-fixed {
+    width: 100px;
+    height: 100px;
+  }
+
+  // =============================================================================
+  // MEDIA FIT UTILITIES (Object Fit)
+  // =============================================================================
+
+  .media-fit-contain { object-fit: contain !important; }
+  .media-fit-cover { object-fit: cover !important; }
+  .media-fit-fill { object-fit: fill !important; }
+  .media-fit-none { object-fit: none !important; }
+  .media-fit-scale-down { object-fit: scale-down !important; }
+
+  // Short media naming
+  .media-contain { object-fit: contain !important; }
+  .media-cover { object-fit: cover !important; }
+  .media-fill { object-fit: fill !important; }
+  .media-none { object-fit: none !important; }
+  .media-scale-down { object-fit: scale-down !important; }
+
+  // =============================================================================
+  // MEDIA POSITION UTILITIES (Object Position)
+  // =============================================================================
+
+  .media-position-bottom { object-position: bottom !important; }
+  .media-position-center { object-position: center !important; }
+  .media-position-left { object-position: left !important; }
+  .media-position-left-bottom { object-position: left bottom !important; }
+  .media-position-left-top { object-position: left top !important; }
+  .media-position-right { object-position: right !important; }
+  .media-position-right-bottom { object-position: right bottom !important; }
+  .media-position-right-top { object-position: right top !important; }
+  .media-position-top { object-position: top !important; }
+
+  // Short media positioning utilities
+  .media-bottom { object-position: bottom !important; }
+  .media-center { object-position: center !important; }
+  .media-left { object-position: left !important; }
+  .media-left-bottom { object-position: left bottom !important; }
+  .media-left-top { object-position: left top !important; }
+  .media-right { object-position: right !important; }
+  .media-right-bottom { object-position: right bottom !important; }
+  .media-right-top { object-position: right top !important; }
+  .media-top { object-position: top !important; }
+
+  // =============================================================================
+  // MEDIA ASPECT RATIO UTILITIES
+  // =============================================================================
+
+  .media-aspect-auto { aspect-ratio: auto !important; }
+  .media-aspect-square { aspect-ratio: 1 / 1 !important; }
+  .media-aspect-video { aspect-ratio: 16 / 9 !important; }
+  .media-aspect-photo { aspect-ratio: 4 / 3 !important; }
+  .media-aspect-portrait { aspect-ratio: 3 / 4 !important; }
+  .media-aspect-wide { aspect-ratio: 21 / 9 !important; }
+  .media-aspect-golden { aspect-ratio: 1.618 / 1 !important; }
+
+  // Short media aspect ratio naming
+  .media-auto { aspect-ratio: auto !important; }
+  .media-square { aspect-ratio: 1 / 1 !important; }
+  .media-video { aspect-ratio: 16 / 9 !important; }
+  .media-photo { aspect-ratio: 4 / 3 !important; }
+  .media-portrait { aspect-ratio: 3 / 4 !important; }
+  .media-wide { aspect-ratio: 21 / 9 !important; }
+  .media-golden { aspect-ratio: 1.618 / 1 !important; }
+
+  // =============================================================================
+  // IMAGE RENDERING & QUALITY
+  // =============================================================================
+
+  .img-crisp {
+    image-rendering: crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+  }
+
+  .img-pixelated {
+    image-rendering: pixelated;
+  }
+
+  .img-smooth {
+    image-rendering: smooth;
+    image-rendering: -webkit-optimize-contrast;
+  }
+
+  .img-auto {
+    image-rendering: auto;
+  }
+
+  // =============================================================================
+  // IMAGE SHAPES & STYLING
+  // =============================================================================
+
+  .img-rounded {
+    border-radius: 0.25rem;
+  }
+
+  .img-rounded-sm {
+    border-radius: 0.125rem;
+  }
+
+  .img-rounded-md {
+    border-radius: 0.375rem;
+  }
+
+  .img-rounded-lg {
+    border-radius: 0.5rem;
+  }
+
+  .img-rounded-xl {
+    border-radius: 0.75rem;
+  }
+
+  .img-rounded-full {
+    border-radius: 50%;
+  }
+
+  .img-circle {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+
+  .img-thumbnail {
+    background-color: $ax-white;
+    border: 1px solid $ax-border-color;
+    border-radius: $ax-radius-sm;
+    max-width: 100%;
+    height: auto;
+  }
+
+  // =============================================================================
+  // IMAGE STATES & EFFECTS
+  // =============================================================================
+
+  .img-grayscale {
+    filter: grayscale(100%);
+  }
+
+  .img-grayscale-50 {
+    filter: grayscale(50%);
+  }
+
+  .img-blur {
+    filter: blur(5px);
+  }
+
+  .img-blur-sm {
+    filter: blur(2px);
+  }
+
+  .img-blur-lg {
+    filter: blur(10px);
+  }
+
+  .img-brightness-50 {
+    filter: brightness(0.5);
+  }
+
+  .img-brightness-75 {
+    filter: brightness(0.75);
+  }
+
+  .img-brightness-125 {
+    filter: brightness(1.25);
+  }
+
+  .img-brightness-150 {
+    filter: brightness(1.5);
+  }
+
+  .img-contrast-50 {
+    filter: contrast(0.5);
+  }
+
+  .img-contrast-75 {
+    filter: contrast(0.75);
+  }
+
+  .img-contrast-125 {
+    filter: contrast(1.25);
+  }
+
+  .img-contrast-150 {
+    filter: contrast(1.5);
+  }
+
+  .img-sepia {
+    filter: sepia(100%);
+  }
+
+  .img-invert {
+    filter: invert(100%);
+  }
+
+  // =============================================================================
+  // IMAGE HOVER EFFECTS
+  // =============================================================================
+
+  .img-hover-zoom {
+    transition: transform 0.3s ease;
+  }
+
+  .img-hover-zoom:hover {
+    transform: scale(1.05);
+  }
+
+  .img-hover-grayscale {
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+  }
+
+  .img-hover-grayscale:hover {
+    filter: grayscale(0%);
+  }
+
+  .img-hover-brightness {
+    transition: filter 0.3s ease;
+  }
+
+  .img-hover-brightness:hover {
+    filter: brightness(1.1);
+  }
+
+  .img-hover-opacity {
+    transition: opacity 0.3s ease;
+  }
+
+  .img-hover-opacity:hover {
+    opacity: 0.8;
+  }
+
+  // =============================================================================
+  // VIDEO UTILITIES
+  // =============================================================================
+
+  .video-responsive {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+  }
+
+  .video-responsive iframe,
+  .video-responsive object,
+  .video-responsive embed,
+  .video-responsive video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .video-4-3 {
+    padding-bottom: 75%; /* 4:3 aspect ratio */
+  }
+
+  .video-square {
+    padding-bottom: 100%; /* 1:1 aspect ratio */
+  }
+
+  // =============================================================================
+  // AUDIO PLAYER UTILITIES
+  // =============================================================================
+
+  .audio-player {
+    width: 100%;
+    max-width: 100%;
+    border-radius: $ax-radius-base;
+    background-color: $ax-gray-light;
+    padding: ax-spacing(3);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .audio-player audio {
+    width: 100%;
+    height: 40px;
+    outline: none;
+  }
+
+  .audio-player-compact {
+    padding: ax-spacing(2);
+  }
+
+  .audio-player-compact audio {
+    height: 32px;
+  }
+
+  .audio-player-lg {
+    padding: ax-spacing(4);
+  }
+
+  .audio-player-lg audio {
+    height: 48px;
+  }
+
+  // Audio player with custom styling
+  .audio-custom {
+    width: 100%;
+    border-radius: $ax-radius-base;
+    
+    &::-webkit-media-controls-panel {
+      background-color: $ax-white;
+      border-radius: $ax-radius-base;
+    }
+    
+    &::-webkit-media-controls-play-button {
+      background-color: $ax-blue;
+      border-radius: 50%;
+    }
+    
+    &::-webkit-media-controls-timeline {
+      background-color: $ax-gray-light;
+      border-radius: $ax-radius-sm;
+    }
+    
+    &::-webkit-media-controls-current-time-display,
+    &::-webkit-media-controls-time-remaining-display {
+      color: $ax-text-color;
+      font-size: $ax-text-sm;
+    }
+  }
+
+  // Audio with metadata display
+  .audio-wrapper {
+    display: flex;
+    align-items: center;
+    gap: ax-spacing(3);
+    padding: ax-spacing(3);
+    background-color: $ax-white;
+    border: 1px solid $ax-border-color;
+    border-radius: $ax-radius-base;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+
+  .audio-wrapper-artwork {
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    border-radius: $ax-radius-base;
+    object-fit: cover;
+    background-color: $ax-gray-light;
+  }
+
+  .audio-wrapper-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .audio-wrapper-title {
+    font-weight: 600;
+    color: $ax-text-color;
+    margin: 0 0 ax-spacing(1) 0;
+    font-size: $ax-text-base;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .audio-wrapper-artist {
+    font-size: $ax-text-sm;
+    color: $ax-gray;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .audio-wrapper audio {
+    width: 100%;
+    margin-top: ax-spacing(2);
+  }
+
+  // Simple audio styles
+  .audio-simple {
+    width: 100%;
+    max-width: 100%;
+    outline: none;
+  }
+
+  .audio-fluid {
+    width: 100%;
+    height: auto;
+  }
+
+  // Audio playlist container
+  .audio-playlist {
+    background-color: $ax-white;
+    border: 1px solid $ax-border-color;
+    border-radius: $ax-radius-base;
+    padding: ax-spacing(3);
+  }
+
+  .audio-playlist-item {
+    display: flex;
+    align-items: center;
+    gap: ax-spacing(2);
+    padding: ax-spacing(2);
+    border-radius: $ax-radius-sm;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    
+    &:hover {
+      background-color: $ax-gray-light;
+    }
+    
+    &.active {
+      background-color: rgba($ax-blue, 0.1);
+      color: $ax-blue;
+    }
+  }
+
+  .audio-playlist-item-number {
+    flex-shrink: 0;
+    width: 24px;
+    text-align: center;
+    font-size: $ax-text-sm;
+    color: $ax-gray;
+  }
+
+  .audio-playlist-item-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .audio-playlist-item-title {
+    font-weight: 500;
+    font-size: $ax-text-base;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .audio-playlist-item-duration {
+    flex-shrink: 0;
+    font-size: $ax-text-sm;
+    color: $ax-gray;
+  }
+
+  // =============================================================================
+  // MEDIA OBJECT PATTERNS
+  // =============================================================================
+
+  .media-object {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .media-object-media {
+    flex-shrink: 0;
+    margin-right: 1rem;
+  }
+
+  .media-object-body {
+    flex: 1;
+  }
+
+  .media-object-reverse .media-object-media {
+    margin-right: 0;
+    margin-left: 1rem;
+    order: 1;
+  }
+
+  .media-object-middle {
+    align-items: center;
+  }
+
+  .media-object-bottom {
+    align-items: flex-end;
+  }
+
+  // =============================================================================
+  // FIGURE & CAPTION UTILITIES
+  // =============================================================================
+
+  .figure {
+    display: inline-block;
+  }
+
+  .figure-img {
+    margin-bottom: 0.5rem;
+    line-height: 1;
+  }
+
+  .figure-caption {
+    font-size: $ax-text-sm;
+    color: $ax-gray;
+    text-align: center;
+  }
+
+  .figure-caption-left {
+    text-align: left;
+  }
+
+  .figure-caption-right {
+    text-align: right;
+  }
+
+  // =============================================================================
+  // RESPONSIVE MEDIA UTILITIES - Using framework breakpoint mixins
+  // =============================================================================
+
+  @include ax-media-down(sm) {
+    .img-sm-fluid { max-width: 100%; height: auto; }
+    .img-sm-full { width: 100%; }
+    .media-sm-stack { flex-direction: column; }
+    .media-sm-stack .media-object-media { margin-right: 0; margin-bottom: 1rem; }
+  }
+
+  @include ax-media-down(md) {
+    .img-md-fluid { max-width: 100%; height: auto; }
+    .img-md-full { width: 100%; }
+    .media-md-stack { flex-direction: column; }
+    .media-md-stack .media-object-media { margin-right: 0; margin-bottom: 1rem; }
+  }
+
+  @include ax-media-down(lg) {
+    .img-lg-fluid { max-width: 100%; height: auto; }
+    .img-lg-full { width: 100%; }
+    .media-lg-stack { flex-direction: column; }
+    .media-lg-stack .media-object-media { margin-right: 0; margin-bottom: 1rem; }
+  }
+}

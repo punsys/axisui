@@ -1,0 +1,228 @@
+/*!
+ * AxisUI Interactive Utilities - Pure CSS Interactive States
+ * Interactive   .close-btn-lg {
+    font-size: 2rem;close-btn-lg {
+    font-size: 2rem;lities and states without JavaScript dependencies
+ */
+
+// =============================================================================
+// INTERACTIVE UTILITIES SYSTEM
+// Container-scoped interactive utilities for hover, focus, cursor, and states
+// Components like accordions, modals, dropdowns are in their respective component files
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// AxisUI Container Scope
+.axis-ui {
+
+  // =============================================================================
+  // CLOSE/DISMISS BUTTONS - Utility Component
+  // =============================================================================
+
+  .close-button {
+    position: relative;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    line-height: 1;
+    opacity: 0.6;
+    transition: all 0.2s ease;
+    font-size: 1.25rem;
+    color: inherit;
+    width: 2rem;
+    height: 2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.25rem;
+
+    &:hover {
+      opacity: 1;
+      background-color: rgba($ax-black, 0.1);
+    }
+
+    &:focus {
+      outline: 2px solid #{$ax-blue};
+      outline-offset: 2px;
+      opacity: 1;
+    }
+
+    // X mark using pure CSS
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      width: 1rem;
+      height: 2px;
+      background-color: currentColor;
+      border-radius: 1px;
+    }
+
+    &::before {
+      transform: rotate(45deg);
+    }
+
+    &::after {
+      transform: rotate(-45deg);
+    }
+  }
+
+  .close-btn-sm {
+    font-size: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
+
+    &::before,
+    &::after {
+      width: 0.75rem;
+      height: 1.5px;
+    }
+  }
+
+  .close-btn-lg {
+    font-size: 1.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+
+    &::before,
+    &::after {
+      width: 1.25rem;
+      height: 2.5px;
+    }
+  }
+
+  .close-btn-top-right {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    z-index: 10;
+  }
+
+  // =============================================================================
+  // COMPONENT NOTE
+  // =============================================================================
+  // Accordion, Dropdown, and Tab components have been moved to their
+  // respective component files in src/scss/components/
+  // This file now contains only interactive utilities and states
+
+  // =============================================================================
+  // HOVER EFFECTS - Pure CSS Interactive States
+  // =============================================================================
+
+  .hover-lift {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-0.25rem);
+      box-shadow: #{$ax-shadow-lg};
+    }
+  }
+
+  .hover-lift-sm {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-0.125rem);
+      box-shadow: #{$ax-shadow-md};
+    }
+  }
+
+  .hover-lift-lg {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-0.5rem);
+      box-shadow: #{$ax-shadow-xl};
+    }
+  }
+
+  .hover-scale {
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  .hover-scale-sm {
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+
+  .hover-scale-lg {
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  .hover-brightness {
+    transition: filter 0.2s ease;
+
+    &:hover {
+      filter: brightness(1.1);
+    }
+  }
+
+  .hover-blur {
+    transition: filter 0.2s ease;
+
+    &:hover {
+      filter: blur(2px);
+    }
+  }
+
+  .hover-rotate {
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: rotate(5deg);
+    }
+  }
+
+  .hover-rotate-reverse {
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: rotate(-5deg);
+    }
+  }
+
+  // =============================================================================
+  // FOCUS STATES - Moved to utilities/_accessibility.scss
+  // =============================================================================
+  // Focus utilities have been moved to the accessibility file where they belong
+  // for better organization and comprehensive accessibility features
+
+  // =============================================================================
+  // CURSOR UTILITIES
+  // =============================================================================
+
+  .cursor-auto { cursor: auto !important; }
+  .cursor-default { cursor: default !important; }
+  .cursor-pointer { cursor: pointer !important; }
+  .cursor-wait { cursor: wait !important; }
+  .cursor-text { cursor: text !important; }
+  .cursor-move { cursor: move !important; }
+  .cursor-help { cursor: help !important; }
+  .cursor-not-allowed { cursor: not-allowed !important; }
+  .cursor-grab { cursor: grab !important; }
+  .cursor-grabbing { cursor: grabbing !important; }
+
+  // =============================================================================
+  // USER SELECT UTILITIES
+  // =============================================================================
+
+  .select-none { user-select: none !important; }
+  .select-text { user-select: text !important; }
+  .select-all { user-select: all !important; }
+  .select-auto { user-select: auto !important; }
+
+} // End .axis-ui container scope

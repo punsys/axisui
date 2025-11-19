@@ -1,0 +1,355 @@
+﻿// NAVBAR Component for AxisUI Framework
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+@use '../abstracts/breakpoints' as *;
+
+.axis-ui {
+  .navbar {
+    @include ax-flex-between; // Use centralized flexbox pattern
+    padding: 0.75rem 1.25rem;
+    width: 100%;
+    background-color: $ax-white;
+    border-bottom: 1px solid $ax-gray-light;
+    position: relative;
+    z-index: 1000;
+    flex-wrap: wrap; // Allow wrapping if content overflows
+    
+    &.navbar-fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      box-shadow: $ax-shadow-sm;
+      z-index: 1050;
+    }
+    
+    &.navbar-sticky {
+      position: sticky;
+      top: 0;
+      box-shadow: $ax-shadow-sm;
+    }
+  }
+  
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+    font-size: $ax-text-lg;
+    font-weight: $ax-font-semibold;
+    color: $ax-gray-dark;
+    text-decoration: none;
+    z-index: 1051;
+    position: relative;
+    
+    &:hover {
+      color: $ax-blue;
+      text-decoration: none;
+    }
+  }
+  
+  .navbar-nav {
+    @include ax-flex-start; // Use centralized flexbox pattern
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    flex-wrap: wrap; // Allow wrapping on desktop if needed
+    gap: 0; // Remove gap to maintain compact spacing
+    
+    @include ax-media-down(md) {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: flex-start;
+      background-color: $ax-white;
+      border-bottom: 1px solid $ax-gray-light;
+      box-shadow: $ax-shadow-md;
+      max-height: 0;
+      overflow: hidden;
+      visibility: hidden;
+      opacity: 0;
+      transition: max-height 0.3s ease, visibility 0.3s ease, opacity 0.3s ease;
+    }
+  }
+  
+  .navbar-item {
+    position: relative;
+    
+    @include ax-media-down(md) {
+      width: 100%;
+    }
+  }
+  
+  .navbar-link {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    color: $ax-gray;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    white-space: nowrap; // Prevent text wrapping in links
+    
+    &:hover {
+      color: $ax-blue;
+    }
+    
+    &.active {
+      color: $ax-blue;
+      font-weight: $ax-font-semibold;
+    }
+    
+    @include ax-media-down(md) {
+      padding: 0.75rem 1.5rem;
+      width: 100%;
+      white-space: normal; // Allow wrapping on mobile
+    }
+  }
+
+  .navbar-toggle {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .navbar-toggle-label {
+    @include ax-btn-base; // Use centralized button foundation
+    display: none;
+    position: relative;
+    z-index: 1051;
+    border: none;
+    background: transparent;
+    
+    @include ax-media-down(md) {
+      display: flex;
+      flex-direction: column;
+      width: 30px;
+      height: 30px;
+    }
+    
+    span {
+      display: block;
+      height: 2px;
+      width: 24px;
+      background-color: $ax-gray-dark;
+      margin: 3px 0;
+      transition: all 0.3s ease;
+    }
+  }
+  
+  .navbar-toggle:checked ~ .navbar-nav {
+    max-height: 80vh;
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .navbar-toggle:checked ~ .navbar-toggle-label {
+    span:nth-child(1) {
+      transform: rotate(45deg) translate(6px, 6px);
+    }
+    span:nth-child(2) {
+      opacity: 0;
+    }
+    span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+  }
+  
+  // Color variants
+  .navbar-light {
+    background-color: $ax-white;
+    border-color: $ax-gray-light;
+  }
+  
+  .navbar-dark {
+    background-color: $ax-gray-dark;
+    border-color: $ax-black;
+    
+    .navbar-brand, .navbar-link {
+      color: $ax-white;
+      
+      &:hover, &.active {
+        color: $ax-blue-light;
+      }
+    }
+    
+    .navbar-toggle-label span {
+      background-color: $ax-white;
+    }
+    
+    .navbar-nav {
+      background-color: $ax-gray-dark;
+    }
+  }
+  
+  .navbar-blue {
+    background-color: $ax-blue;
+    border-color: $ax-blue-dark;
+    
+    .navbar-brand, .navbar-link {
+      color: $ax-white;
+      
+      &:hover, &.active {
+        color: $ax-blue-light;
+      }
+    }
+    
+    .navbar-toggle-label span {
+      background-color: $ax-white;
+    }
+    
+    .navbar-nav {
+      background-color: $ax-blue;
+    }
+  }
+  
+  // Navbar-specific adaptations for dropdown component
+  .navbar-item.dropdown {
+    // Ensure dropdown works in navbar context
+    .dropdown {
+      // Reset any navbar-specific styles
+      position: relative;
+      display: block;
+      
+      // Hide the checkbox
+      input[type="checkbox"] {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+        width: 0;
+        height: 0;
+      }
+      
+      // Adapt dropdown toggle to look like navbar link
+      label.dropdown-toggle {
+        display: block;
+        padding: 0.5rem 1rem;
+        color: $ax-gray;
+        text-decoration: none;
+        background: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        cursor: pointer;
+        transition: color 0.2s ease;
+        font-size: inherit;
+        font-weight: inherit;
+        min-width: auto;
+        gap: 0.5rem;
+        
+        // Remove any btn-specific styling
+        &.btn {
+          background: none !important;
+          border: none !important;
+          color: $ax-gray !important;
+          padding: 0.5rem 1rem !important;
+          
+          &:hover {
+            background: none !important;
+            color: $ax-blue !important;
+          }
+        }
+        
+        &:hover {
+          color: $ax-blue;
+        }
+        
+        &.active {
+          color: $ax-blue;
+          font-weight: $ax-font-semibold;
+        }
+        
+        @include ax-media-down(md) {
+          padding: 0.75rem 1.5rem;
+          width: 100%;
+        }
+        
+        // Ensure dropdown arrow is properly styled
+        &::after {
+          color: currentColor;
+          margin-left: 0.5rem;
+        }
+      }
+      
+      // Ensure dropdown menu has proper z-index for navbar
+      .dropdown-menu {
+        z-index: 1020;
+        
+        @include ax-media-down(md) {
+          position: static;
+          box-shadow: none;
+          border: none;
+          border-left: 2px solid $ax-gray-light;
+          border-radius: 0;
+          margin-left: 1.5rem;
+          background-color: $ax-white;
+          transform: none !important;
+          
+          // Use max-height for mobile animation instead
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.3s ease, padding 0.3s ease;
+          padding: 0;
+        }
+      }
+      
+      // Mobile dropdown activation
+      @include ax-media-down(md) {
+        input[type="checkbox"]:checked ~ .dropdown-menu {
+          max-height: 500px;
+          padding: ax-spacing(2) 0;
+        }
+      }
+    }
+  }
+  
+  // Dark navbar dropdown adaptations
+  .navbar-dark .navbar-item.dropdown .dropdown {
+    label.dropdown-toggle {
+      color: $ax-white !important;
+      
+      &.btn {
+        color: $ax-white !important;
+        
+        &:hover {
+          color: $ax-blue-light !important;
+        }
+      }
+      
+      &:hover, &.active {
+        color: $ax-blue-light;
+      }
+    }
+    
+    .dropdown-menu {
+      @include ax-media-down(md) {
+        background-color: $ax-gray-dark;
+        border-left-color: $ax-gray;
+      }
+    }
+  }
+  
+  // Blue navbar dropdown adaptations  
+  .navbar-blue .navbar-item.dropdown .dropdown {
+    label.dropdown-toggle {
+      color: $ax-white !important;
+      
+      &.btn {
+        color: $ax-white !important;
+        
+        &:hover {
+          color: $ax-blue-light !important;
+        }
+      }
+      
+      &:hover, &.active {
+        color: $ax-blue-light;
+      }
+    }
+    
+    .dropdown-menu {
+      @include ax-media-down(md) {
+        background-color: $ax-blue;
+      }
+    }
+  }
+}

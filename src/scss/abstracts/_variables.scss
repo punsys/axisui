@@ -1,0 +1,315 @@
+// =============================================================================
+// VARIABLES - AxisUI Framework Core Variables
+// Direct color naming with ax- prefixed variables only
+// =============================================================================
+
+@use 'sass:map';
+@use 'sass:math';
+@use 'colors' as *;
+@use 'breakpoints' as *;
+@forward 'colors';
+
+// Colors are imported from colors.scss - Direct color naming with 3 variants
+// Each color has: color-light, color, color-dark (no numbering like blue-100, blue-500)
+
+// =============================================================================
+// TYPOGRAPHY VARIABLES
+// =============================================================================
+
+// Font Families
+$ax-font-family: 'Inter', system-ui, sans-serif !default;
+$ax-font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace !default;
+
+// Font Sizes
+$ax-text-xs: 0.75rem !default; // 12px
+$ax-text-sm: 0.875rem !default; // 14px
+$ax-text-base: 1rem !default; // 16px
+$ax-text-lg: 1.125rem !default; // 18px
+$ax-text-xl: 1.25rem !default; // 20px
+$ax-text-2xl: 1.5rem !default; // 24px (alias for xxl)
+$ax-text-xxl: 1.5rem !default; // 24px
+$ax-text-3xl: 1.875rem !default; // 30px
+$ax-text-4xl: 2.25rem !default; // 36px
+$ax-text-5xl: 3rem !default; // 48px
+$ax-text-6xl: 3.75rem !default; // 60px
+
+// Font Weights
+$ax-font-thin: 100 !default;
+$ax-font-light: 300 !default;
+$ax-font-normal: 400 !default;
+$ax-font-medium: 500 !default;
+$ax-font-semibold: 600 !default;
+$ax-font-bold: 700 !default;
+$ax-font-extrabold: 800 !default;
+$ax-font-black: 900 !default;
+
+// Line Heights
+$ax-leading-none: 1 !default;
+$ax-leading-tight: 1.25 !default;
+$ax-leading-snug: 1.375 !default;
+$ax-leading-normal: 1.5 !default;
+$ax-leading-relaxed: 1.625 !default;
+$ax-leading-loose: 2 !default;
+
+// =============================================================================
+// SPACING
+// =============================================================================
+
+// Core spacing system - Comprehensive scale for all UI needs
+$ax-spacing: (
+  0: 0,
+  0.5: 0.125rem, // 2px
+  1: 0.25rem,    // 4px
+  1.5: 0.375rem, // 6px
+  2: 0.5rem,     // 8px
+  2.5: 0.625rem, // 10px
+  3: 0.75rem,    // 12px
+  3.5: 0.875rem, // 14px
+  4: 1rem,       // 16px
+  5: 1.25rem,    // 20px
+  6: 1.5rem,     // 24px
+  7: 1.75rem,    // 28px
+  8: 2rem,       // 32px
+  9: 2.25rem,    // 36px
+  10: 2.5rem,    // 40px
+  11: 2.75rem,   // 44px
+  12: 3rem,      // 48px
+  14: 3.5rem,    // 56px
+  16: 4rem,      // 64px
+  18: 4.5rem,    // 72px
+  20: 5rem,      // 80px
+  24: 6rem,      // 96px
+  28: 7rem,      // 112px
+  32: 8rem,      // 128px
+  36: 9rem,      // 144px
+  40: 10rem,     // 160px
+  44: 11rem,     // 176px
+  48: 12rem,     // 192px
+  52: 13rem,     // 208px
+  56: 14rem,     // 224px
+  60: 15rem,     // 240px
+  64: 16rem,     // 256px
+  72: 18rem,     // 288px
+  80: 20rem,     // 320px
+  96: 24rem      // 384px
+) !default;
+
+// =============================================================================
+// BORDERS
+// =============================================================================
+
+// Border widths
+$ax-border-width: 1px !default;
+$ax-border-width-2: 2px !default;
+$ax-border-width-4: 4px !default;
+$ax-border-width-8: 8px !default;
+
+// Border colors
+$ax-border-color: $ax-gray-lighter !default;  // Light gray border from color system
+$ax-border-color-dark: $ax-gray !default;
+
+// =============================================================================
+// BORDER RADIUS
+// =============================================================================
+
+$ax-radius-none: 0 !default;
+$ax-radius-sm: 0.125rem !default; // 2px
+$ax-radius-base: 0.25rem !default; // 4px
+$ax-radius-md: 0.375rem !default; // 6px
+$ax-radius-lg: 0.5rem !default; // 8px
+$ax-radius-xl: 0.75rem !default; // 12px
+$ax-radius-2xl: 1rem !default; // 16px
+$ax-radius-full: 9999px !default;
+
+// =============================================================================
+// SHADOWS
+// =============================================================================
+
+$ax-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !default;
+$ax-shadow-base: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !default;
+$ax-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !default;
+$ax-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !default;
+$ax-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !default;
+$ax-shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !default;
+$ax-shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06) !default;
+
+// =============================================================================
+// TRANSITIONS
+// =============================================================================
+
+$ax-transition-fast: 150ms ease-in-out !default;
+$ax-transition-base: 300ms ease-in-out !default;
+$ax-transition-slow: 500ms ease-in-out !default;
+
+// =============================================================================
+// Z-INDEX SCALE
+// =============================================================================
+
+$ax-z-auto: auto !default;
+$ax-z-0: 0 !default;
+$ax-z-10: 10 !default;
+$ax-z-20: 20 !default;
+$ax-z-30: 30 !default;
+$ax-z-40: 40 !default;
+$ax-z-50: 50 !default;
+$ax-z-dropdown: 1000 !default;
+$ax-z-sticky: 1020 !default;
+$ax-z-fixed: 1030 !default;
+$ax-z-popover: 1060 !default;
+$ax-z-modal: 1050 !default; // Added for modals
+$ax-z-tooltip: 1070 !default;
+
+// =============================================================================
+// COMPONENT SPECIFIC VARIABLES
+// =============================================================================
+
+// Component Heights
+$ax-navbar-height: 60px !default;
+$ax-sidebar-width: 280px !default;
+$ax-sidebar-width-collapsed: 80px !default;
+
+// Buttons
+$ax-btn-padding-x: 1rem !default;
+$ax-btn-padding-y: 0.5rem !default;
+$ax-btn-font-size: $ax-text-base !default;
+$ax-btn-border-radius: $ax-radius-base !default;
+
+// Button sizes
+$ax-btn-padding-x-sm: 0.75rem !default;
+$ax-btn-padding-y-sm: 0.375rem !default;
+$ax-btn-font-size-sm: $ax-text-sm !default;
+
+$ax-btn-padding-x-lg: 1.25rem !default;
+$ax-btn-padding-y-lg: 0.75rem !default;
+$ax-btn-font-size-lg: $ax-text-lg !default;
+
+// Cards
+$ax-card-padding: 1.5rem !default;
+$ax-card-border-radius: $ax-radius-lg !default;
+$ax-card-border-color: $ax-border-color !default;
+$ax-card-shadow: $ax-shadow-base !default;
+
+// Grid
+$ax-container-max-widths: (
+  sm: 640px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  2xl: 1536px,
+) !default;
+
+$ax-grid-columns: 16 !default;
+$ax-grid-gutter: 1.5rem !default;
+
+
+// =============================================================================
+// UTILITY MAPS
+// =============================================================================
+
+// =============================================================================
+// COMPREHENSIVE UTILITY MAPS
+// =============================================================================
+
+// Font size map for utilities
+$ax-font-sizes: (
+  xs: $ax-text-xs, sm: $ax-text-sm, base: $ax-text-base, lg: $ax-text-lg, xl: $ax-text-xl,
+  '2xl': $ax-text-2xl, 'xxl': $ax-text-xxl, '3xl': $ax-text-3xl, '4xl': $ax-text-4xl, '5xl': $ax-text-5xl, '6xl': $ax-text-6xl
+) !default;
+
+// Font weight map
+$ax-font-weights: (
+  thin: $ax-font-thin, light: $ax-font-light, normal: $ax-font-normal, medium: $ax-font-medium,
+  semibold: $ax-font-semibold, bold: $ax-font-bold, extrabold: $ax-font-extrabold, 'black': $ax-font-black
+) !default;
+
+// Line height map
+$ax-line-heights: (
+  none: $ax-leading-none, tight: $ax-leading-tight, snug: $ax-leading-snug, 
+  normal: $ax-leading-normal, relaxed: $ax-leading-relaxed, loose: $ax-leading-loose
+) !default;
+
+// Border radius map
+$ax-border-radius: (
+  none: $ax-radius-none, sm: $ax-radius-sm, base: $ax-radius-base, md: $ax-radius-md, 
+  lg: $ax-radius-lg, xl: $ax-radius-xl, '2xl': $ax-radius-2xl, full: $ax-radius-full
+) !default;
+
+// Border width map
+$ax-border-widths: (
+  0: 0, 1: $ax-border-width, 2: $ax-border-width-2, 4: $ax-border-width-4, 8: $ax-border-width-8
+) !default;
+
+// Shadow map
+$ax-shadows: (
+  sm: $ax-shadow-sm, base: $ax-shadow-base, md: $ax-shadow-md, 
+  lg: $ax-shadow-lg, xl: $ax-shadow-xl, inner: $ax-shadow-inner, none: none
+) !default;
+
+// Transition map
+$ax-transitions: (
+  fast: $ax-transition-fast, base: $ax-transition-base, slow: $ax-transition-slow, none: none
+) !default;
+
+// Z-index map
+$ax-z-indexes: (
+  auto: $ax-z-auto, 0: $ax-z-0, 10: $ax-z-10, 20: $ax-z-20, 30: $ax-z-30, 40: $ax-z-40, 50: $ax-z-50,
+  dropdown: $ax-z-dropdown, sticky: $ax-z-sticky, fixed: $ax-z-fixed, 
+  popover: $ax-z-popover, tooltip: $ax-z-tooltip
+) !default;
+
+// =============================================================================
+// LOADER COMPONENT VARIABLES
+// =============================================================================
+
+// Loader base variables
+$ax-loader-size: 2rem !default;
+$ax-loader-border-width: 2px !default;
+$ax-loader-color: $ax-blue !default;
+$ax-loader-bg-color: rgba($ax-loader-color, 0.2) !default;
+
+// Color map for all loader variants
+$ax-loader-colors: (
+  'blue': $ax-blue,
+  'red': $ax-red,
+  'green': $ax-green,
+  'yellow': $ax-yellow,
+  'orange': $ax-orange,
+  'purple': $ax-purple,
+  'teal': $ax-teal,
+  'pink': $ax-pink
+) !default;
+
+// Size map for all loader variants
+$ax-loader-sizes: (
+  'sm': (
+    size: 1rem,
+    border: 1px,
+    dot: 0.25rem,
+    bar: 0.125rem
+  ),
+  'md': (
+    size: $ax-loader-size,
+    border: $ax-loader-border-width,
+    dot: 0.5rem,
+    bar: 0.25rem
+  ),
+  'lg': (
+    size: 3rem,
+    border: 3px,
+    dot: 0.75rem,
+    bar: 0.375rem
+  ),
+  'xl': (
+    size: 4rem,
+    border: 4px,
+    dot: 1rem,
+    bar: 0.5rem
+  )
+) !default;
+
+// =============================================================================
+// CONFIGURATION OPTIONS
+// =============================================================================
+
+// Enable global basics (emits styles globally, not just within .axis-ui)
+$ax-enable-global-basics: false !default;

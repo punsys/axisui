@@ -1,0 +1,104 @@
+/*!
+ * AxisUI Avatar Component - Pure CSS Avatar System
+ * Circular avatar utilities with group layouts
+ */
+
+// =============================================================================
+// AVATAR COMPONENT SYSTEM
+// Container-scoped avatar utilities for profile images and placeholders
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+
+// AxisUI Container Scope
+.axis-ui {
+
+  // =============================================================================
+  // AVATAR BASE STYLES
+  // =============================================================================
+
+  .avatar {
+    display: inline-block;
+    border-radius: 50%;
+    overflow: hidden;
+    object-fit: cover;
+    background-color: var(--ax-color-neutral-light);
+    color: var(--ax-color-neutral-dark);
+  }
+
+  // =============================================================================
+  // AVATAR SIZE UTILITIES
+  // =============================================================================
+
+  .avatar-xs {
+    width: 1.5rem !important; // 24px
+    height: 1.5rem !important;
+    border-radius: 50% !important;
+  }
+
+  .avatar-sm {
+    width: 2rem !important; // 32px
+    height: 2rem !important;
+    border-radius: 50% !important;
+  }
+
+  .avatar-md {
+    width: 2.5rem !important; // 40px
+    height: 2.5rem !important;
+    border-radius: 50% !important;
+  }
+
+  .avatar-lg {
+    width: 3rem !important; // 48px
+    height: 3rem !important;
+    border-radius: 50% !important;
+  }
+
+  .avatar-xl {
+    width: 4rem !important; // 64px
+    height: 4rem !important;
+    border-radius: 50% !important;
+  }
+
+  .avatar-2xl {
+    width: 5rem !important; // 80px
+    height: 5rem !important;
+    border-radius: 50% !important;
+  }
+
+  // =============================================================================
+  // AVATAR GROUP LAYOUTS
+  // =============================================================================
+
+  .avatar-group {
+    display: flex !important;
+    padding-left: 0.75rem !important;
+
+    .avatar {
+      margin-left: -0.75rem !important;
+      border: 2px solid var(--ax-color-surface) !important;
+
+      &:hover {
+        z-index: 10 !important;
+      }
+    }
+  }
+
+  // Avatar group variants
+  .avatar-group-tight {
+    padding-left: 0.5rem !important;
+
+    .avatar {
+      margin-left: -0.5rem !important;
+    }
+  }
+
+  .avatar-group-loose {
+    padding-left: 1rem !important;
+
+    .avatar {
+      margin-left: -1rem !important;
+    }
+  }
+
+} // End .axis-ui container scope

@@ -1,0 +1,864 @@
+// =============================================================================
+// DROPDOWN - AxisUI Framework Comprehensive Pure CSS Dropdown Component
+// Direct color naming with comprehensive variants and positioning
+// Pure CSS implementation using checkbox technique, no ax- class prefixes
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
+
+.axis-ui {
+  // =============================================================================
+  // BASE DROPDOWN STRUCTURE
+  // =============================================================================
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    
+    // Hidden checkbox for pure CSS control
+    input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+      
+      // Focus on toggle when checkbox is focused
+      &:focus + .dropdown-toggle {
+        @include ax-focus-ring();
+      }
+    }
+    
+    // Dropdown trigger/toggle button
+    .dropdown-toggle {
+      @include ax-btn-base;
+      @include ax-flex-between; // Use centralized flexbox pattern
+      gap: ax-spacing(2);
+      min-width: 120px;
+      user-select: none;
+      position: relative;
+      
+      // Dropdown arrow
+      &::after {
+        content: "";
+        border-top: 0.35em solid;
+        border-right: 0.35em solid transparent;
+        border-bottom: 0;
+        border-left: 0.35em solid transparent;
+        transition: transform $ax-transition-base;
+        flex-shrink: 0;
+      }
+    }
+    
+    // =============================================================================
+    // DROPDOWN MENU
+    // =============================================================================
+    
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + #{ax-spacing(1)});
+      bottom: auto; // Ensure it opens downward
+      left: 0;
+      z-index: 1000;
+      min-width: 12rem;
+      max-width: 20rem;
+      padding: ax-spacing(2) 0;
+      background-color: $ax-white;
+      border: 1px solid $ax-border-color;
+      border-radius: $ax-radius-lg;
+      box-shadow: $ax-shadow-lg;
+      list-style: none;
+      
+      // Initially hidden - starts slightly above and fades down
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px) scale(0.95);
+      transition: all $ax-transition-base cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transform-origin: top left; // Opens from top-left corner
+    }
+    
+    // =============================================================================
+    // DIRECTIONAL POSITIONING VARIANTS
+    // =============================================================================
+    
+    // DOWN (Default) - Menu appears below trigger
+    &.dropdown-down .dropdown-menu {
+      top: calc(100% + #{ax-spacing(1)});
+      bottom: auto;
+      left: 0;
+      right: auto;
+      transform: translateY(-#{ax-spacing(2)}) scale(0.95);
+      transform-origin: top left;
+    }
+    
+    // UP - Menu appears above trigger
+    &.dropdown-up .dropdown-menu {
+      top: auto;
+      bottom: calc(100% + #{ax-spacing(1)});
+      left: 0;
+      right: auto;
+      transform: translateY(#{ax-spacing(2)}) scale(0.95);
+      transform-origin: bottom left;
+    }
+    
+    // LEFT - Menu appears to the left of trigger
+    &.dropdown-left .dropdown-menu {
+      top: 0;
+      bottom: auto;
+      left: auto;
+      right: calc(100% + #{ax-spacing(1)});
+      transform: translateX(#{ax-spacing(2)}) scale(0.95);
+      transform-origin: top right;
+    }
+    
+    // RIGHT - Menu appears to the right of trigger
+    &.dropdown-right .dropdown-menu {
+      top: 0;
+      bottom: auto;
+      left: calc(100% + #{ax-spacing(1)});
+      right: auto;
+      transform: translateX(-#{ax-spacing(2)}) scale(0.95);
+      transform-origin: top left;
+    }
+    
+    // Legacy positioning variants (maintained for compatibility)
+    .dropdown-menu-right {
+      right: 0;
+      left: auto;
+      transform-origin: top right;
+    }
+    
+    .dropdown-menu-center {
+      left: 50%;
+      transform: translateX(-50%) translateY(-#{ax-spacing(2)}) scale(0.95);
+      transform-origin: top center;
+    }
+    
+    .dropdown-menu-up {
+      top: auto;
+      bottom: calc(100% + #{ax-spacing(1)});
+      transform: translateY(#{ax-spacing(2)}) scale(0.95);
+      transform-origin: bottom center;
+      
+      &.dropdown-menu-right {
+        transform-origin: bottom right;
+      }
+      
+      &.dropdown-menu-center {
+        transform: translateX(-50%) translateY(#{ax-spacing(2)}) scale(0.95);
+        transform-origin: bottom center;
+      }
+    }
+    
+    // =============================================================================
+    // DROPDOWN ITEMS
+    // =============================================================================
+    
+    .dropdown-item {
+      @include ax-flex-start; // Use centralized flexbox pattern
+      @include ax-transition-fast; // Use centralized transition pattern
+      width: 100%;
+      padding: ax-spacing(2.5) ax-spacing(4);
+      color: $ax-gray-dark;
+      text-decoration: none;
+      background-color: transparent;
+      border: 0;
+      cursor: pointer;
+      font-size: $ax-text-sm;
+      line-height: $ax-leading-normal;
+      
+      &:hover,
+      &:focus {
+        background-color: $ax-gray-light;
+        color: $ax-gray-dark;
+        text-decoration: none;
+      }
+      
+      &:active {
+        background-color: $ax-blue-light;
+        color: $ax-blue-dark;
+      }
+      
+      // Active/selected state
+      &.active {
+        background-color: $ax-blue;
+        color: $ax-white;
+        font-weight: $ax-font-medium;
+        
+        &::after {
+          content: "✓";
+          margin-left: auto;
+          font-size: 0.875rem;
+        }
+      }
+      
+      // Disabled state
+      &.disabled {
+        color: $ax-gray;
+        cursor: not-allowed;
+        opacity: 0.6;
+        
+        &:hover,
+        &:focus {
+          background-color: transparent;
+          color: $ax-gray;
+        }
+      }
+      
+      // With icon
+      .dropdown-icon {
+        margin-right: ax-spacing(2);
+        font-size: 1rem;
+        flex-shrink: 0;
+      }
+      
+      // With description
+      .dropdown-description {
+        font-size: $ax-text-xs;
+        color: $ax-gray;
+        margin-top: ax-spacing(0.5);
+        line-height: $ax-leading-tight;
+      }
+    }
+    
+    // Dropdown divider
+    .dropdown-divider {
+      height: 0;
+      margin: ax-spacing(2) 0;
+      overflow: hidden;
+      border-top: 1px solid $ax-border-color;
+    }
+    
+    // Dropdown header
+    .dropdown-header {
+      display: block;
+      padding: ax-spacing(2) ax-spacing(4) ax-spacing(1) ax-spacing(4);
+      margin-bottom: 0;
+      font-size: $ax-text-xs;
+      font-weight: $ax-font-semibold;
+      color: $ax-gray;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+    
+    // Dropdown text (non-interactive)
+    .dropdown-text {
+      display: block;
+      padding: ax-spacing(2) ax-spacing(4);
+      color: $ax-gray;
+      font-size: $ax-text-sm;
+    }
+    
+    // =============================================================================
+    // PURE CSS DROPDOWN FUNCTIONALITY
+    // =============================================================================
+    
+    // Show dropdown when checkbox is checked
+    input[type="checkbox"]:checked {
+      // Rotate arrow
+      ~ .dropdown-toggle::after {
+        transform: rotate(180deg);
+      }
+      
+      // Show dropdown menu
+      ~ .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0) scale(1);
+        
+        &.dropdown-menu-center {
+          transform: translateX(-50%) translateY(0) scale(1);
+        }
+        
+        &.dropdown-menu-up {
+          transform: translateY(0) scale(1);
+          
+          &.dropdown-menu-center {
+            transform: translateX(-50%) translateY(0) scale(1);
+          }
+        }
+      }
+    }
+    
+    // Directional variant show states
+    &.dropdown-down input[type="checkbox"]:checked ~ .dropdown-menu {
+      transform: translateY(0) scale(1);
+    }
+    
+    &.dropdown-up input[type="checkbox"]:checked ~ .dropdown-menu {
+      transform: translateY(0) scale(1);
+    }
+    
+    &.dropdown-left input[type="checkbox"]:checked ~ .dropdown-menu {
+      transform: translateX(0) scale(1);
+    }
+    
+    &.dropdown-right input[type="checkbox"]:checked ~ .dropdown-menu {
+      transform: translateX(0) scale(1);
+    }
+  }
+  
+  // =============================================================================
+  // SIZE VARIANTS
+  // =============================================================================
+  
+  .dropdown.dropdown-sm {
+    .dropdown-toggle {
+      @include ax-btn-size(sm);
+      min-width: 100px;
+      
+      &::after {
+        border-top-width: 0.25em;
+        border-right-width: 0.25em;
+        border-left-width: 0.25em;
+      }
+    }
+    
+    .dropdown-menu {
+      min-width: 10rem;
+    }
+    
+    .dropdown-item {
+      padding: ax-spacing(2) ax-spacing(3);
+      font-size: $ax-text-xs;
+    }
+    
+    .dropdown-header {
+      padding: ax-spacing(1.5) ax-spacing(3) ax-spacing(0.5) ax-spacing(3);
+    }
+  }
+  
+  .dropdown.dropdown-lg {
+    .dropdown-toggle {
+      @include ax-btn-size(lg);
+      min-width: 140px;
+      
+      &::after {
+        border-top-width: 0.4em;
+        border-right-width: 0.4em;
+        border-left-width: 0.4em;
+      }
+    }
+    
+    .dropdown-menu {
+      min-width: 14rem;
+    }
+    
+    .dropdown-item {
+      padding: ax-spacing(3) ax-spacing(5);
+      font-size: $ax-text-base;
+    }
+    
+    .dropdown-header {
+      padding: ax-spacing(2.5) ax-spacing(5) ax-spacing(1.5) ax-spacing(5);
+    }
+  }
+  
+  .dropdown.dropdown-xl {
+    .dropdown-toggle {
+      @include ax-btn-size(xl);
+      min-width: 160px;
+      font-size: $ax-text-lg;
+      
+      &::after {
+        border-top-width: 0.45em;
+        border-right-width: 0.45em;
+        border-left-width: 0.45em;
+      }
+    }
+    
+    .dropdown-menu {
+      min-width: 16rem;
+    }
+    
+    .dropdown-item {
+      padding: ax-spacing(4) ax-spacing(6);
+      font-size: $ax-text-lg;
+    }
+    
+    .dropdown-header {
+      padding: ax-spacing(3) ax-spacing(6) ax-spacing(2) ax-spacing(6);
+    }
+  }
+  
+  // =============================================================================
+  // COLOR VARIANTS - Direct Color Naming
+  // =============================================================================
+  
+  .dropdown.dropdown-blue {
+    .dropdown-toggle {
+      background-color: $ax-blue;
+      color: $ax-white;
+      border-color: $ax-blue;
+      
+      &:hover {
+        background-color: $ax-blue-dark;
+        border-color: $ax-blue-dark;
+      }
+    }
+  }
+  
+  .dropdown.dropdown-red {
+    .dropdown-toggle {
+      background-color: $ax-red;
+      color: $ax-white;
+      border-color: $ax-red;
+      
+      &:hover {
+        background-color: $ax-red-dark;
+        border-color: $ax-red-dark;
+      }
+    }
+  }
+  
+  .dropdown.dropdown-green {
+    .dropdown-toggle {
+      background-color: $ax-green;
+      color: $ax-white;
+      border-color: $ax-green;
+      
+      &:hover {
+        background-color: $ax-green-dark;
+        border-color: $ax-green-dark;
+      }
+    }
+  }
+  
+  .dropdown.dropdown-yellow {
+    .dropdown-toggle {
+      background-color: $ax-yellow;
+      color: $ax-gray-dark;
+      border-color: $ax-yellow;
+      
+      &:hover {
+        background-color: $ax-yellow-dark;
+        border-color: $ax-yellow-dark;
+        color: $ax-white;
+      }
+    }
+  }
+  
+  .dropdown.dropdown-purple {
+    .dropdown-toggle {
+      background-color: $ax-purple;
+      color: $ax-white;
+      border-color: $ax-purple;
+      
+      &:hover {
+        background-color: $ax-purple-dark;
+        border-color: $ax-purple-dark;
+      }
+    }
+  }
+  
+  .dropdown.dropdown-pink {
+    .dropdown-toggle {
+      background-color: $ax-pink;
+      color: $ax-white;
+      border-color: $ax-pink;
+      
+      &:hover {
+        background-color: $ax-pink-dark;
+        border-color: $ax-pink-dark;
+      }
+    }
+  }
+  
+  .dropdown.dropdown-orange {
+    .dropdown-toggle {
+      background-color: $ax-orange;
+      color: $ax-white;
+      border-color: $ax-orange;
+      
+      &:hover {
+        background-color: $ax-orange-dark;
+        border-color: $ax-orange-dark;
+      }
+    }
+  }
+  
+  .dropdown.dropdown-teal {
+    .dropdown-toggle {
+      background-color: $ax-teal;
+      color: $ax-white;
+      border-color: $ax-teal;
+      
+      &:hover {
+        background-color: $ax-teal-dark;
+        border-color: $ax-teal-dark;
+      }
+    }
+  }
+  
+  .dropdown.dropdown-cyan {
+    .dropdown-toggle {
+      background-color: $ax-cyan;
+      color: $ax-white;
+      border-color: $ax-cyan;
+      
+      &:hover {
+        background-color: $ax-cyan-dark;
+        border-color: $ax-cyan-dark;
+      }
+    }
+  }
+  
+  .dropdown.dropdown-gray {
+    .dropdown-toggle {
+      background-color: $ax-gray;
+      color: $ax-white;
+      border-color: $ax-gray;
+      
+      &:hover {
+        background-color: $ax-gray-dark;
+        border-color: $ax-gray-dark;
+      }
+    }
+  }
+  
+  // =============================================================================
+  // STYLE VARIANTS
+  // =============================================================================
+  
+  .dropdown.dropdown-outline {
+    .dropdown-toggle {
+      background-color: transparent;
+      color: $ax-blue;
+      border: 2px solid $ax-blue;
+      
+      &:hover {
+        background-color: $ax-blue;
+        color: $ax-white;
+      }
+      
+      &::after {
+        border-top-color: currentColor;
+      }
+    }
+    
+    &.dropdown-red .dropdown-toggle {
+      color: $ax-red;
+      border-color: $ax-red;
+      
+      &:hover {
+        background-color: $ax-red;
+        color: $ax-white;
+      }
+    }
+    
+    &.dropdown-green .dropdown-toggle {
+      color: $ax-green;
+      border-color: $ax-green;
+      
+      &:hover {
+        background-color: $ax-green;
+        color: $ax-white;
+      }
+    }
+    
+    &.dropdown-yellow .dropdown-toggle {
+      color: $ax-yellow-dark;
+      border-color: $ax-yellow;
+      
+      &:hover {
+        background-color: $ax-yellow;
+        color: $ax-gray-dark;
+      }
+    }
+    
+    &.dropdown-purple .dropdown-toggle {
+      color: $ax-purple;
+      border-color: $ax-purple;
+      
+      &:hover {
+        background-color: $ax-purple;
+        color: $ax-white;
+      }
+    }
+    
+    &.dropdown-gray .dropdown-toggle {
+      color: $ax-gray;
+      border-color: $ax-gray;
+      
+      &:hover {
+        background-color: $ax-gray;
+        color: $ax-white;
+      }
+    }
+  }
+  
+  .dropdown.dropdown-soft {
+    .dropdown-toggle {
+      background-color: rgba($ax-blue, 0.1);
+      color: $ax-blue-dark;
+      border-color: rgba($ax-blue, 0.2);
+      
+      &:hover {
+        background-color: rgba($ax-blue, 0.2);
+        border-color: rgba($ax-blue, 0.3);
+      }
+      
+      &::after {
+        border-top-color: currentColor;
+      }
+    }
+    
+    &.dropdown-red .dropdown-toggle {
+      background-color: rgba($ax-red, 0.1);
+      color: $ax-red-dark;
+      border-color: rgba($ax-red, 0.2);
+      
+      &:hover {
+        background-color: rgba($ax-red, 0.2);
+        border-color: rgba($ax-red, 0.3);
+      }
+    }
+    
+    &.dropdown-green .dropdown-toggle {
+      background-color: rgba($ax-green, 0.1);
+      color: $ax-green-dark;
+      border-color: rgba($ax-green, 0.2);
+      
+      &:hover {
+        background-color: rgba($ax-green, 0.2);
+        border-color: rgba($ax-green, 0.3);
+      }
+    }
+  }
+  
+  .dropdown.dropdown-ghost {
+    .dropdown-toggle {
+      background-color: transparent;
+      color: $ax-gray-dark;
+      border: 1px solid transparent;
+      
+      &:hover {
+        background-color: $ax-gray-light;
+        border-color: $ax-border-color;
+      }
+      
+      &::after {
+        border-top-color: currentColor;
+      }
+    }
+  }
+  
+  // =============================================================================
+  // DROPDOWN MENU VARIANTS
+  // =============================================================================
+  
+  .dropdown-menu.dropdown-menu-dark {
+    background-color: $ax-gray-dark;
+    border-color: $ax-gray;
+    
+    .dropdown-item {
+      color: $ax-white;
+      
+      &:hover,
+      &:focus {
+        background-color: rgba($ax-white, 0.1);
+        color: $ax-white;
+      }
+      
+      &.active {
+        background-color: $ax-blue;
+        color: $ax-white;
+      }
+      
+      &.disabled {
+        color: $ax-gray;
+      }
+    }
+    
+    .dropdown-header {
+      color: $ax-gray-light;
+    }
+    
+    .dropdown-divider {
+      border-top-color: $ax-gray;
+    }
+  }
+  
+  .dropdown-menu.dropdown-menu-lg {
+    min-width: 16rem;
+    padding: ax-spacing(3) 0;
+    
+    .dropdown-item {
+      padding: ax-spacing(3) ax-spacing(5);
+      font-size: $ax-text-base;
+    }
+  }
+  
+  .dropdown-menu.dropdown-menu-sm {
+    min-width: 8rem;
+    padding: ax-spacing(1) 0;
+    
+    .dropdown-item {
+      padding: ax-spacing(1.5) ax-spacing(3);
+      font-size: $ax-text-xs;
+    }
+  }
+  
+  // =============================================================================
+  // DROPDOWN GROUPS
+  // =============================================================================
+  
+  .dropdown-group {
+    display: flex;
+    
+    .dropdown {
+      &:not(:first-child) .dropdown-toggle {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        margin-left: -1px;
+      }
+      
+      &:not(:last-child) .dropdown-toggle {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+      
+      &:focus-within {
+        z-index: 1;
+      }
+    }
+  }
+  
+  // =============================================================================
+  // SPLIT DROPDOWN
+  // =============================================================================
+  
+  .dropdown-split {
+    display: flex;
+    
+    .dropdown-toggle {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      padding-right: ax-spacing(3);
+      
+      &::after {
+        display: none;
+      }
+    }
+    
+    .dropdown-split-toggle {
+      @include ax-btn-base;
+      padding: ax-spacing(2.5) ax-spacing(2);
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-left: 1px solid rgba(255, 255, 255, 0.2);
+      margin-left: -1px;
+      
+      &::after {
+        content: "";
+        border-top: 0.35em solid;
+        border-right: 0.35em solid transparent;
+        border-bottom: 0;
+        border-left: 0.35em solid transparent;
+        transition: transform $ax-transition-base;
+      }
+    }
+    
+    // Copy styles from main dropdown toggle
+    &.dropdown-blue {
+      .dropdown-toggle,
+      .dropdown-split-toggle {
+        background-color: $ax-blue;
+        color: $ax-white;
+        border-color: $ax-blue;
+        
+        &:hover {
+          background-color: $ax-blue-dark;
+          border-color: $ax-blue-dark;
+        }
+      }
+    }
+    
+    input[type="checkbox"]:checked ~ .dropdown-split-toggle::after {
+      transform: rotate(180deg);
+    }
+  }
+  
+  // =============================================================================
+  // RESPONSIVE BEHAVIOR
+  // =============================================================================
+  
+  @include ax-responsive(sm-down) {
+    .dropdown-menu {
+      position: fixed;
+      top: auto !important;
+      left: ax-spacing(4) !important;
+      right: ax-spacing(4) !important;
+      bottom: ax-spacing(4);
+      width: auto;
+      max-width: none;
+      min-width: 0;
+      transform: translateY(#{ax-spacing(4)}) scale(0.95);
+      
+      &.dropdown-menu-center,
+      &.dropdown-menu-right {
+        left: ax-spacing(4) !important;
+        right: ax-spacing(4) !important;
+        transform: translateY(#{ax-spacing(4)}) scale(0.95);
+      }
+    }
+    
+    .dropdown input[type="checkbox"]:checked ~ .dropdown-menu {
+      transform: translateY(0) scale(1);
+      
+      &.dropdown-menu-center,
+      &.dropdown-menu-right {
+        transform: translateY(0) scale(1);
+      }
+    }
+  }
+  
+  // =============================================================================
+  // ACCESSIBILITY ENHANCEMENTS
+  // =============================================================================
+  
+  .dropdown {
+    // Keyboard navigation
+    input[type="checkbox"]:focus-visible + .dropdown-toggle {
+      @include ax-focus-ring();
+    }
+    
+    // High contrast mode support
+    @media (prefers-contrast: high) {
+      .dropdown-toggle {
+        border-width: 2px;
+      }
+      
+      .dropdown-menu {
+        border-width: 2px;
+      }
+    }
+    
+    // Reduced motion support
+    @include ax-prefers-reduced-motion {
+      .dropdown-toggle::after,
+      .dropdown-menu {
+        transition: none;
+      }
+      
+      .dropdown-menu {
+        transform: none;
+        
+        &.dropdown-menu-center,
+        &.dropdown-menu-up {
+          transform: none;
+        }
+      }
+      
+      input[type="checkbox"]:checked ~ .dropdown-menu {
+        transform: none;
+        
+        &.dropdown-menu-center,
+        &.dropdown-menu-up {
+          transform: none;
+        }
+      }
+    }
+  }
+}

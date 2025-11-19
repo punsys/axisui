@@ -1,0 +1,387 @@
+// =============================================================================
+// DARK MODE SYSTEM - AxisUI Framework
+// Pure CSS Dark Mode Implementation with Zero JavaScript
+// Direct color naming only - no semantic abstractions
+// =============================================================================
+
+@use 'sass:map';
+@use 'colors' as *;
+@use 'functions' as *;
+
+// =============================================================================
+// DARK MODE CSS CUSTOM PROPERTIES
+// Define adaptive color variables that change based on theme
+// =============================================================================
+
+// Light Mode (Default) - Uses framework color variables
+:root {
+  // Background Colors
+  --ax-bg-body: #{$ax-white};
+  --ax-bg-surface: #{$ax-gray-light};
+  --ax-bg-card: #{$ax-white};
+  
+  // Text Colors
+  --ax-text-primary: #{$ax-text-color};
+  --ax-text-secondary: #{$ax-text-light};
+  --ax-text-muted: #{$ax-text-muted};
+  
+  // Border Colors
+  --ax-border-color: #{$ax-gray-lighter};
+  --ax-border-color-light: #{$ax-gray-light};
+  --ax-border-color-dark: #{$ax-gray};
+  
+  // Input/Form Colors
+  --ax-input-bg: #{$ax-white};
+  --ax-input-border: #{$ax-gray-lighter};
+  --ax-input-text: #{$ax-text-color};
+  --ax-input-placeholder: #{$ax-text-muted};
+  
+  // Component Colors
+  --ax-card-bg: #{$ax-white};
+  --ax-card-border: #{$ax-gray-lighter};
+  --ax-code-bg: #{$ax-gray-light};
+  --ax-code-text: #{$ax-text-color};
+  
+  // Alert Background Opacity
+  --ax-alert-bg-opacity: 0.1;
+  
+  // Shadow opacity for depth
+  --ax-shadow-opacity: 0.1;
+}
+
+// Smooth transitions for theme switching - Applied to .axis-ui container
+.axis-ui {
+  transition: background-color 0.3s ease, color 0.3s ease;
+  
+  *, *::before, *::after {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  }
+}
+
+// =============================================================================
+// DARK MODE ACTIVATION - METHOD 1: System Preference
+// Automatically follows user's OS dark mode setting
+// =============================================================================
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    // Dark Background Colors - Using existing gray scale
+    --ax-bg-body: #{$ax-gray-darker};
+    --ax-bg-surface: #{$ax-gray-dark};
+    --ax-bg-card: #{$ax-gray-dark};
+    
+    // Dark Text Colors - Using existing gray scale
+    --ax-text-primary: #{$ax-gray-lighter};
+    --ax-text-secondary: #{$ax-gray-light};
+    --ax-text-muted: #{$ax-gray};
+    
+    // Dark Border Colors - Using existing gray scale
+    --ax-border-color: #{$ax-gray-dark};
+    --ax-border-color-light: #{$ax-gray-dark};
+    --ax-border-color-dark: #{$ax-gray};
+    
+    // Dark Input/Form Colors
+    --ax-input-bg: #{$ax-gray-dark};
+    --ax-input-border: #{$ax-gray-dark};
+    --ax-input-text: #{$ax-gray-lighter};
+    --ax-input-placeholder: #{$ax-gray};
+    
+    // Dark Component Colors
+    --ax-card-bg: #{$ax-gray-dark};
+    --ax-card-border: #{$ax-gray-dark};
+    --ax-code-bg: #{$ax-gray-darker};
+    --ax-code-text: #{$ax-gray-light};
+    
+    // Alert Background Opacity
+    --ax-alert-bg-opacity: 0.2;
+    
+    // Shadow opacity for depth
+    --ax-shadow-opacity: 0.4;
+  }
+}
+
+// =============================================================================
+// DARK MODE ACTIVATION - METHOD 2: Pure CSS Toggle
+// Checkbox-based toggle without JavaScript
+// Checkbox must be sibling of .axis-ui container
+// =============================================================================
+
+.dark-mode-toggle:checked ~ .axis-ui,
+.dark-mode-toggle:checked ~ * .axis-ui,
+.dark-mode-toggle:checked ~ body.axis-ui,
+html .dark-mode-toggle:checked ~ body.axis-ui {
+  // Dark Background Colors - Using existing gray scale
+  --ax-bg-body: #{$ax-gray-darker};
+  --ax-bg-surface: #{$ax-gray-dark};
+  --ax-bg-card: #{$ax-gray-dark};
+  
+  // Dark Text Colors
+  --ax-text-primary: #{$ax-gray-lighter};
+  --ax-text-secondary: #{$ax-gray-light};
+  --ax-text-muted: #{$ax-gray};
+  
+  // Dark Border Colors
+  --ax-border-color: #{$ax-gray-dark};
+  --ax-border-color-light: #{$ax-gray-dark};
+  --ax-border-color-dark: #{$ax-gray};
+  
+  // Dark Input/Form Colors
+  --ax-input-bg: #{$ax-gray-dark};
+  --ax-input-border: #{$ax-gray-dark};
+  --ax-input-text: #{$ax-gray-lighter};
+  --ax-input-placeholder: #{$ax-gray};
+  
+  // Dark Component Colors
+  --ax-card-bg: #{$ax-gray-dark};
+  --ax-card-border: #{$ax-gray-dark};
+  --ax-code-bg: #{$ax-gray-darker};
+  --ax-code-text: #{$ax-gray-light};
+  
+  // Alert Background Opacity
+  --ax-alert-bg-opacity: 0.2;
+  
+  // Shadow opacity
+  --ax-shadow-opacity: 0.4;
+}
+
+// =============================================================================
+// DARK MODE ACTIVATION - METHOD 3: Manual Data Attribute
+// Highest specificity - overrides system preference
+// Usage: <html data-theme="dark">
+// =============================================================================
+
+[data-theme="dark"] {
+  // Dark Background Colors - Using existing gray scale
+  --ax-bg-body: #{$ax-gray-darker};
+  --ax-bg-surface: #{$ax-gray-dark};
+  --ax-bg-card: #{$ax-gray-dark};
+  
+  // Dark Text Colors
+  --ax-text-primary: #{$ax-gray-lighter};
+  --ax-text-secondary: #{$ax-gray-light};
+  --ax-text-muted: #{$ax-gray};
+  
+  // Dark Border Colors
+  --ax-border-color: #{$ax-gray-dark};
+  --ax-border-color-light: #{$ax-gray-dark};
+  --ax-border-color-dark: #{$ax-gray};
+  
+  // Dark Input/Form Colors
+  --ax-input-bg: #{$ax-gray-dark};
+  --ax-input-border: #{$ax-gray-dark};
+  --ax-input-text: #{$ax-gray-lighter};
+  --ax-input-placeholder: #{$ax-gray};
+  
+  // Dark Component Colors
+  --ax-card-bg: #{$ax-gray-dark};
+  --ax-card-border: #{$ax-gray-dark};
+  --ax-code-bg: #{$ax-gray-darker};
+  --ax-code-text: #{$ax-gray-light};
+  
+  // Alert Background Opacity
+  --ax-alert-bg-opacity: 0.2;
+  
+  // Shadow opacity
+  --ax-shadow-opacity: 0.4;
+}
+
+// =============================================================================
+// LIGHT MODE OVERRIDE - Manual Data Attribute
+// Forces light mode even if system prefers dark
+// Usage: <html data-theme="light">
+// =============================================================================
+
+[data-theme="light"] {
+  // Light Background Colors
+  --ax-bg-body: #{$ax-white};
+  --ax-bg-surface: #{$ax-gray-light};
+  --ax-bg-card: #{$ax-white};
+  
+  // Light Text Colors
+  --ax-text-primary: #{$ax-text-color};
+  --ax-text-secondary: #{$ax-text-light};
+  --ax-text-muted: #{$ax-text-muted};
+  
+  // Light Border Colors
+  --ax-border-color: #{$ax-gray-lighter};
+  --ax-border-color-light: #{$ax-gray-light};
+  --ax-border-color-dark: #{$ax-gray};
+  
+  // Light Input/Form Colors
+  --ax-input-bg: #{$ax-white};
+  --ax-input-border: #{$ax-gray-lighter};
+  --ax-input-text: #{$ax-text-color};
+  --ax-input-placeholder: #{$ax-text-muted};
+  
+  // Light Component Colors
+  --ax-card-bg: #{$ax-white};
+  --ax-card-border: #{$ax-gray-lighter};
+  --ax-code-bg: #{$ax-gray-light};
+  --ax-code-text: #{$ax-text-color};
+  
+  // Alert Background Opacity
+  --ax-alert-bg-opacity: 0.1;
+  
+  // Shadow opacity
+  --ax-shadow-opacity: 0.1;
+}
+
+// =============================================================================
+// DARK MODE TOGGLE COMPONENT - Pure CSS
+// Checkbox-based toggle with icon switching
+// =============================================================================
+
+// Hide the checkbox input (must be before .axis-ui container)
+.dark-mode-toggle {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+// Toggle button label styling
+.toggle-label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  background: var(--ax-bg-card);
+  border: 1px solid var(--ax-border-color);
+  border-radius: 2rem;
+  transition: all 0.3s ease;
+  user-select: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ax-text-primary);
+  
+  // Hover effect
+  &:hover {
+    background: var(--ax-bg-surface);
+    border-color: var(--ax-border-color-dark);
+  }
+  
+  // Moon icon (visible in light mode) - Professional SVG icon
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 1.25rem;
+    height: 1.25rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%232196f3'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+  
+  // Sun icon (visible in dark mode) - Professional SVG icon
+  &::after {
+    content: '';
+    display: inline-block;
+    width: 1.25rem;
+    height: 1.25rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23fbbf24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    left: 0.5rem;
+    opacity: 0;
+    transform: rotate(180deg);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+}
+
+// Icon switching when dark mode is active
+.dark-mode-toggle:checked + .toggle-label {
+  // Hide moon icon
+  &::before {
+    opacity: 0;
+    transform: rotate(180deg);
+  }
+  
+  // Show sun icon
+  &::after {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+}
+
+// =============================================================================
+// DARK MODE MIXIN FOR COMPONENTS
+// Use this mixin to add dark mode styles to any component
+// =============================================================================
+
+@mixin ax-dark-mode {
+  // System preference
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) & {
+      @content;
+    }
+  }
+  
+  // Checkbox toggle
+  .dark-mode-toggle:checked ~ .axis-ui &,
+  .dark-mode-toggle:checked ~ * .axis-ui &,
+  .dark-mode-toggle:checked ~ body.axis-ui &,
+  html .dark-mode-toggle:checked ~ body.axis-ui & {
+    @content;
+  }
+  
+  // Manual data attribute
+  [data-theme="dark"] & {
+    @content;
+  }
+}
+
+// Light mode mixin (for overrides)
+@mixin ax-light-mode {
+  // System preference
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) & {
+      @content;
+    }
+  }
+  
+  // Checkbox toggle - when not checked
+  .dark-mode-toggle:not(:checked) ~ .axis-ui &,
+  .dark-mode-toggle:not(:checked) ~ * .axis-ui &,
+  .dark-mode-toggle:not(:checked) ~ body.axis-ui &,
+  html .dark-mode-toggle:not(:checked) ~ body.axis-ui & {
+    @content;
+  }
+  
+  // Manual data attribute
+  [data-theme="light"] & {
+    @content;
+  }
+}
+
+// =============================================================================
+// USAGE EXAMPLES
+// =============================================================================
+// 
+// HTML Structure:
+// <body>
+//   <input type="checkbox" id="dark-mode-toggle" class="dark-mode-toggle">
+//   <div class="axis-ui bg-body">
+//     <label for="dark-mode-toggle" class="toggle-label">Dark Mode</label>
+//     <!-- Your content -->
+//   </div>
+// </body>
+//
+// SCSS Usage:
+// .my-component {
+//   background: var(--ax-bg-card);
+//   color: var(--ax-text-primary);
+//   
+//   // Custom dark mode styles
+//   @include ax-dark-mode {
+//     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+//   }
+// }
+//

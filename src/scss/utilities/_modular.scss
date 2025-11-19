@@ -1,0 +1,66 @@
+// =============================================================================
+// AXISUI MODULAR UTILITIES - Selective Import System 🚀
+// Choose only what you need to optimize bundle size
+// =============================================================================
+
+// =============================================================================
+// 🎯 ESSENTIAL UTILITIES (~80KB) - Core functionality
+// =============================================================================
+@forward 'display';           // Display, visibility, overflow (~8KB)
+@forward 'spacing';           // Margin, padding utilities (~20KB)
+@forward 'typography';        // Text colors, fonts, sizes (~25KB)
+@forward 'positioning';       // Position, z-index (~10KB)
+@forward 'sizing';            // Width, height utilities (~15KB)
+
+// =============================================================================
+// 🎨 VISUAL UTILITIES (~60KB) - Styling and appearance
+// =============================================================================
+// @forward 'backgrounds';    // Background colors (~15KB)
+// @forward 'borders';        // Border utilities (~15KB)
+// @forward 'shadows';        // Box shadows (~10KB)
+// @forward 'cross-browser';  // Browser compatibility (~20KB)
+
+// =============================================================================
+// 🎭 INTERACTIVE UTILITIES (~40KB) - Animations and interactions
+// =============================================================================
+// @forward 'transforms';     // CSS transforms (~15KB)
+// @forward 'transitions';    // Transition effects (~10KB)
+// @forward 'animations';     // Keyframe animations (~15KB)
+
+// =============================================================================
+// ♿ ACCESSIBILITY UTILITIES (~30KB) - A11y and specialized features
+// =============================================================================
+// @forward 'accessibility';  // Screen reader, focus utilities (~20KB)
+// @forward 'interactives';   // Hover, focus states (~10KB)
+
+// =============================================================================
+// 🔧 SPECIALIZED UTILITIES (~35KB) - Advanced features
+// =============================================================================
+// @forward 'filters';        // CSS filters (~10KB)
+// @forward 'media';          // Media queries (~10KB)
+// @forward 'dividers';       // Divider utilities (~5KB)
+// @forward 'direction';      // Text direction (~5KB)
+// @forward 'spacing-layout'; // Advanced spacing (~5KB)
+
+// =============================================================================
+// 📱 RESPONSIVE SYSTEM (~25KB) - Complete responsive features
+// =============================================================================
+// @forward 'responsive';     // Responsive utilities (~25KB)
+
+// =============================================================================
+// USAGE EXAMPLES:
+// =============================================================================
+// 
+// For minimal build (~80KB):
+// Just uncomment the ESSENTIAL UTILITIES section
+//
+// For standard build (~140KB):
+// Uncomment ESSENTIAL + VISUAL sections
+//
+// For complete build (~200KB+):
+// Uncomment ESSENTIAL + VISUAL + INTERACTIVE sections
+//
+// For full framework (~270KB+):
+// Uncomment all sections
+//
+// =============================================================================

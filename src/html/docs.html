@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AxisUI Documentation - Quick Start Guide</title>
+    <link rel="stylesheet" href="../assets/css/axis-ui{{ASSET_SUFFIX}}.css">
+    <style>
+        .axis-ui .dark-mode-wrapper {
+            position: relative;
+        }
+        .axis-ui .docs-layout {
+            margin-top: 60px;
+            min-height: calc(100vh - 60px);
+        }
+        .axis-ui .sidebar.left {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            height: calc(100vh - 60px);
+            overflow-y: auto;
+        }
+        .axis-ui .docs-toc {
+            width: 250px;
+            position: fixed;
+            right: 0;
+            top: 60px;
+            height: calc(100vh - 60px);
+            overflow-y: auto;
+            border-left: 1px solid var(--ax-border-color);
+        }
+        .axis-ui .navbar-search {
+            display: block;
+        }
+        .axis-ui .mobile-search-footer {
+            display: none;
+        }
+        .axis-ui .navbar-toggle-label span {
+            background: none;
+            height: auto;
+            width: auto;
+            margin: 0;
+        }
+        @media (max-width: 767px) {
+            .axis-ui .navbar-search {
+                display: none;
+            }
+            .axis-ui .mobile-search-footer {
+                display: block;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 1000;
+                background: var(--ax-bg-card);
+                border-top: 1px solid var(--ax-border-color);
+                box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+                padding: 1rem;
+            }
+            .axis-ui .docs-main {
+                padding-bottom: 80px;
+            }
+        }
+        @media (max-width: 1279px) {
+            .axis-ui .docs-toc {
+                display: none;
+            }
+        }
+        @media (min-width: 1280px) {
+            .axis-ui .docs-main {
+                margin-right: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Dark Mode Toggle Checkbox (must be before .axis-ui) -->
+    <input type="checkbox" id="dark-mode-toggle" class="dark-mode-toggle">
+    
+    <div class="axis-ui">
+    <!-- Fixed Navbar using framework structure -->
+    <nav class="navbar navbar-fixed bg-card border-bottom">
+        <div class="container-fluid px-6 flex align-center justify-between">
+            <div class="navbar-brand">
+                <h1 class="text-lg fw-bold m-0">AxisUI</h1>
+                <span class="text-xs text-gray px-2 py-1 bg-surface rounded ml-3">Docs</span>
+            </div>
+
+            <!-- Search Bar with Icon (Desktop only) -->
+            <div class="navbar-search flex align-center gap-3 flex-1 hide-mobile" style="max-width: 500px; margin: 0 2rem;">
+                <div class="input-group w-full">
+                    <span class="input-group-text">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg>
+                    </span>
+                    <input type="search" class="form-control form-control-sm border-left-0" placeholder="Search documentation..." aria-label="Search">
+                </div>
+            </div>
+
+            <!-- Mobile toggle and menu - MUST be siblings for CSS to work -->
+            <input type="checkbox" id="navbar-toggle" class="navbar-toggle">
+            <label for="navbar-toggle" class="navbar-toggle-label">
+                <span class="text-xs fw-semibold text-gray-dark">MENU</span>
+            </label>
+            
+            <!-- Navigation menu (responsive - horizontal on desktop, dropdown on mobile) -->
+            <ul class="navbar-nav">
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link active">Documentation</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link">Components</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link">Examples</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link">GitHub</a>
+                </li>
+                <li class="navbar-item">
+                    <label for="dark-mode-toggle" class="toggle-label" style="margin: 0; cursor: pointer;"></label>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Layout -->
+    <div class="docs-layout">
+        <!-- Sidebar wrapper for framework JavaScript -->
+        <div class="sidebar-wrapper">
+            <!-- Left Sidebar using framework structure -->
+            <aside class="sidebar left bg-card border-right" id="docsSidebar">
+                <div class="sidebar-header border-bottom">
+                    <h2 class="text-base fw-bold m-0">Documentation</h2>
+                </div>
+                <nav class="sidebar-nav">
+                    <div class="section">
+                        <div class="title text-gray">GETTING STARTED</div>
+                        <a href="#what-is-axisui" class="item active text-blue bg-blue-lightest">
+                            <span class="text">What is AxisUI?</span>
+                        </a>
+                        <a href="#installation" class="item">
+                            <span class="text">Installation</span>
+                        </a>
+                        <a href="#quick-start" class="item">
+                            <span class="text">Quick Start</span>
+                        </a>
+                        <a href="#customization" class="item">
+                            <span class="text">Customization</span>
+                        </a>
+                    </div>
+
+                    <div class="section">
+                        <div class="title text-gray">CORE CONCEPTS</div>
+                        <a href="#" class="item">
+                            <span class="text">Utility Classes</span>
+                        </a>
+                        <a href="#" class="item">
+                            <span class="text">Responsive Design</span>
+                        </a>
+                        <a href="#" class="item">
+                            <span class="text">Color System</span>
+                        </a>
+                        <a href="#" class="item">
+                            <span class="text">Typography</span>
+                        </a>
+                    </div>
+
+                    <div class="section">
+                        <div class="title text-gray">COMPONENTS</div>
+                        <a href="#" class="item">
+                            <span class="text">Buttons</span>
+                        </a>
+                        <a href="#" class="item">
+                            <span class="text">Cards</span>
+                        </a>
+                        <a href="#" class="item">
+                            <span class="text">Forms</span>
+                        </a>
+                        <a href="#" class="item">
+                            <span class="text">Navigation</span>
+                        </a>
+                        <a href="#" class="item">
+                            <span class="text">Tables</span>
+                        </a>
+                    </div>
+                </nav>
+            </aside>
+
+            <!-- Mobile toggle button -->
+            <button class="mobile-menu-toggle" aria-label="Toggle sidebar"></button>
+
+            <!-- Sidebar backdrop -->
+            <div class="sidebar-backdrop"></div>
+        </div>
+
+        <!-- Main Content Area -->
+        <main class="main-content docs-main bg-surface">
+            <div class="container-lg py-5">
+                <article class="bg-white rounded-lg shadow-sm p-8">
+                    <section id="what-is-axisui" class="mb-5">
+                        <h2 class="text-3xl fw-bold mb-4">What is AxisUI?</h2>
+                        <p class="text-base mb-4 line-height-relaxed">
+                            AxisUI is a modern, lightweight CSS framework built with Sass that provides a comprehensive set of utility classes
+                            and pre-built components for rapid web development. Designed with flexibility and performance in mind, it offers
+                            a perfect balance between utility-first and component-based approaches.
+                        </p>
+                        <div class="alert alert-info mb-6">
+                            <strong>Key Features:</strong> Responsive grid system, utility classes, dark mode support, and customizable components.
+                        </div>
+                    </section>
+
+                    <section id="installation" class="mb-10">
+                        <h2 class="text-3xl fw-bold mb-4">Installation</h2>
+                        <p class="text-base mb-4 line-height-relaxed">
+                            Get started with AxisUI by including it in your project via CDN or by installing it through npm.
+                        </p>
+                        
+                        <h3 class="text-xl fw-semibold mb-3">Via CDN</h3>
+                        <pre class="bg-gray-darker text-white p-4 rounded mb-6 overflow-x-auto"><code>&lt;link rel="stylesheet" href="https://cdn.axisui.com/v1/axis-ui{{ASSET_SUFFIX}}.css"&gt;</code></pre>
+                        
+                        <h3 class="text-xl fw-semibold mb-3">Via NPM</h3>
+                        <pre class="bg-gray-darker text-white p-4 rounded mb-6 overflow-x-auto"><code>npm install axisui</code></pre>
+                    </section>
+
+                    <section id="quick-start" class="mb-10">
+                        <h2 class="text-3xl fw-bold mb-4">Quick Start</h2>
+                        <p class="text-base mb-4 line-height-relaxed">
+                            Create your first page with AxisUI in just a few steps:
+                        </p>
+                        <ol class="list-decimal pl-6 mb-4">
+                            <li class="mb-2">Include the AxisUI CSS file in your HTML head</li>
+                            <li class="mb-2">Add the <code class="bg-surface px-2 py-1 rounded text-sm">axis-ui</code> class to your body or container</li>
+                            <li class="mb-2">Start using utility classes and components</li>
+                        </ol>
+                        <pre class="bg-gray-darker text-white p-4 rounded mb-6 overflow-x-auto"><code>&lt;body class="axis-ui"&gt;
+    &lt;div class="container"&gt;
+        &lt;h1 class="text-3xl fw-bold text-blue"&gt;Hello AxisUI!&lt;/h1&gt;
+        &lt;button class="btn btn-primary"&gt;Click Me&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/body&gt;</code></pre>
+                    </section>
+
+                    <section id="customization" class="mb-10">
+                        <h2 class="text-3xl fw-bold mb-4">Customization</h2>
+                        <p class="text-base mb-4 line-height-relaxed">
+                            AxisUI is built with Sass, making it easy to customize colors, spacing, breakpoints, and more.
+                            Simply override the default variables before importing AxisUI:
+                        </p>
+                        <pre class="bg-gray-darker text-white p-4 rounded overflow-x-auto"><code>// your-custom-styles.scss
+$ax-primary-color: #ff6b6b;
+$ax-spacing-base: 1rem;
+
+@import 'axisui/axis-ui';</code></pre>
+                    </section>
+                </article>
+            </div>
+        </main>
+
+        <!-- Right Sidebar: Table of Contents -->
+        <aside class="docs-toc bg-card">
+            <div class="p-6">
+                <div class="text-xs fw-semibold text-gray uppercase mb-4">On This Page</div>
+                <nav class="flex-column gap-2">
+                    <a href="#what-is-axisui" class="block py-2 text-sm text-blue text-decoration-none">What is AxisUI?</a>
+                    <a href="#installation" class="block py-2 text-sm text-decoration-none hover-text-blue">Installation</a>
+                    <a href="#quick-start" class="block py-2 text-sm text-decoration-none hover-text-blue">Quick Start</a>
+                    <a href="#customization" class="block py-2 text-sm text-decoration-none hover-text-blue">Customization</a>
+                </nav>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Mobile Search Footer (visible only on small screens) -->
+    <div class="mobile-search-footer">
+        <div class="input-group flex align-center">
+            <span class="input-group-text border-right-0">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg>
+            </span>
+            <input type="search" class="form-control border-left-0" placeholder="Search documentation..." aria-label="Search">
+        </div>
+    </div>
+
+    <!-- Include framework's sidebar JavaScript -->
+    <script src="../assets/js/axis-ui{{ASSET_SUFFIX}}.js"></script>
+    <script src="../assets/js/axis-sidebar.js"></script>
+    </div>
+</body>
+</html>

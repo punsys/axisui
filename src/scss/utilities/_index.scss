@@ -1,0 +1,54 @@
+// =============================================================================
+// AXISUI OPTIMIZED UTILITIES - Modular Import System 🚀
+// SIZE OPTIMIZED: Choose your level - Core (~50KB) vs Extended (~120KB) vs Full (~200KB)
+// ELIMINATES REDUNDANCY: No more duplicate utilities across files!
+// =============================================================================
+
+// =============================================================================
+// 🎯 CORE UTILITIES (Essential - Recommended for most projects)
+// =============================================================================
+@forward 'display';           // Display, visibility, overflow (~8KB)
+
+// =============================================================================
+// 📦 EXTENDED UTILITIES (Add as needed - Comprehensive coverage)
+// =============================================================================
+@forward 'spacing';           // Complete spacing system (~20KB)
+@forward 'typography';         // Complete typography utilities
+@forward 'sizing';            // Width, height, min/max utilities
+@forward 'positioning';        // Position, top/right/bottom/left, z-index
+@forward 'borders';           // Border utilities
+@forward 'backgrounds';       // Background color utilities
+@forward 'cross-browser'; // Performance and compatibility utilities
+@forward 'transforms';         // Transform utilities
+@forward 'transitions';        // Transition utilities
+@forward 'animations';         // Animation utilities
+
+// =============================================================================
+// 🔧 SPECIALIZED UTILITIES (Optional - For specific use cases)
+// =============================================================================
+@forward 'interactives';       // Interactive states (hover, focus, etc.)
+@forward 'accessibility';      // Screen reader, focus utilities
+@forward 'filters';           // CSS filters
+@forward 'dividers';          // Divider utilities
+@forward 'spacing-layout';     // Spacing and layout utilities (space-between, size variants)
+@forward 'media';             // Media utilities
+@forward 'shadows';           // Shadow utilities
+@forward 'direction';         // Text direction utilities
+// @forward 'visibility';     // ✅ CONSOLIDATED into _display.scss
+
+// =============================================================================
+// ⚡ COMPLETE RESPONSIVE SYSTEM (All responsive features in one file)
+// =============================================================================
+@forward 'responsive';   // Comprehensive responsive system with modern CSS features
+
+// =============================================================================
+// ⚠️  LEGACY/REDUNDANT FILES (Not recommended - use optimized versions above)
+// =============================================================================
+// Files have been optimized and consolidated:
+// - responsive.scss now contains the optimized 171-line version
+// - spacing.scss now contains the extended spacing system
+// @forward 'positioning';    // ✅ Already included above
+// @forward 'sizing';         // ✅ Already included above  
+// @forward 'transforms';     // ✅ Already included above
+// @forward 'transitions';    // ✅ Already included above
+// @forward 'typography';     // ✅ Already included above

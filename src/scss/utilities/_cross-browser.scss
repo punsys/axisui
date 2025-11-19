@@ -1,0 +1,370 @@
+/*!
+ * AxisUI Performance & Cross-Browser Utilities
+ * Optimized utilities for better performance and compatibility
+ */
+
+// =============================================================================
+// PERFORMANCE OPTIMIZATIONS
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.axis-ui {
+  
+  // =============================================================================
+  // GPU ACCELERATION UTILITIES
+  // =============================================================================
+  
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+  
+  .will-change-transform {
+    will-change: transform;
+  }
+  
+  .will-change-opacity {
+    will-change: opacity;
+  }
+  
+  .will-change-scroll {
+    will-change: scroll-position;
+  }
+  
+  // Reset will-change after animation
+  .will-change-auto {
+    will-change: auto;
+  }
+  
+  // =============================================================================
+  // OPTIMIZED ANIMATIONS
+  // =============================================================================
+  
+  .animate-optimized {
+    animation-fill-mode: both;
+    animation-play-state: paused;
+    
+    &.animate-running {
+      animation-play-state: running;
+    }
+    
+    // Use transform and opacity for better performance
+    &.fade-in {
+      animation: ax-fade-in 0.3s ease-out;
+    }
+    
+    &.slide-up {
+      animation: ax-slide-up 0.4s ease-out;
+    }
+    
+    &.scale-in {
+      animation: ax-scale-in 0.3s ease-out;
+    }
+  }
+  
+  // Optimized keyframes using transform and opacity only
+  @keyframes ax-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes ax-slide-up {
+    from { 
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes ax-scale-in {
+    from { 
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to { 
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  // =============================================================================
+  // CROSS-BROWSER COMPATIBILITY
+  // =============================================================================
+  
+  // Enhanced focus styles for better accessibility
+  .focus-enhanced {
+    &:focus {
+      outline: 2px solid $ax-blue;
+      outline-offset: 2px;
+    }
+    
+    &:focus:not(:focus-visible) {
+      outline: none;
+    }
+    
+    &:focus-visible {
+      outline: 2px solid $ax-blue;
+      outline-offset: 2px;
+    }
+  }
+  
+  // Cross-browser input styling
+  .input-normalized {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    
+    &::-webkit-input-placeholder {
+      color: $ax-gray;
+      opacity: 1;
+    }
+    
+    &::-moz-placeholder {
+      color: $ax-gray;
+      opacity: 1;
+    }
+    
+    &:-ms-input-placeholder {
+      color: $ax-gray;
+      opacity: 1;
+    }
+    
+    &::placeholder {
+      color: $ax-gray;
+      opacity: 1;
+    }
+  }
+  
+  // Cross-browser scrollbar styling
+  .scrollbar-styled {
+    scrollbar-width: thin;
+    scrollbar-color: $ax-gray-light transparent;
+    
+    &::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background-color: $ax-gray-light;
+      border-radius: 4px;
+      
+      &:hover {
+        background-color: $ax-gray;
+      }
+    }
+  }
+  
+  // =============================================================================
+  // LOADING & SKELETON STATES
+  // =============================================================================
+  
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      $ax-gray-light 25%,
+      rgba($ax-gray-light, 0.5) 50%,
+      $ax-gray-light 75%
+    );
+    background-size: 200% 100%;
+    animation: ax-skeleton-loading 1.5s infinite;
+    border-radius: $ax-radius-base;
+    
+    &.skeleton-text {
+      height: 1em;
+      margin-bottom: 0.5em;
+      
+      &:last-child {
+        margin-bottom: 0;
+        width: 75%;
+      }
+    }
+    
+    &.skeleton-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+    
+    &.skeleton-card {
+      height: 200px;
+      width: 100%;
+    }
+  }
+  
+  @keyframes ax-skeleton-loading {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+  
+  // =============================================================================
+  // LAZY LOADING UTILITIES
+  // =============================================================================
+  
+  .lazy-load {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    
+    &.lazy-loaded {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .lazy-image {
+    background-color: $ax-gray-light;
+    background-image: linear-gradient(
+      45deg,
+      rgba($ax-gray, 0.1) 25%,
+      transparent 25%,
+      transparent 75%,
+      rgba($ax-gray, 0.1) 75%
+    );
+    background-size: 20px 20px;
+    
+    &.loaded {
+      background: none;
+    }
+  }
+  
+  // =============================================================================
+  // ERROR HANDLING & FALLBACKS
+  // =============================================================================
+  
+  .error-boundary {
+    @include ax-flex-column-center;
+    padding: ax-spacing(8);
+    text-align: center;
+    color: $ax-gray;
+    
+    .error-icon {
+      font-size: 3rem;
+      margin-bottom: ax-spacing(4);
+      color: $ax-red;
+    }
+    
+    .error-message {
+      margin-bottom: ax-spacing(4);
+      font-size: $ax-text-lg;
+    }
+    
+    .error-details {
+      font-size: $ax-text-sm;
+      color: $ax-gray;
+      font-family: monospace;
+    }
+  }
+  
+  // Graceful image fallbacks
+  .image-fallback {
+    position: relative;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    &::after {
+      content: '🖼️';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    img[alt]::after,
+    img[src=""]::after,
+    img:not([src])::after {
+      opacity: 1;
+    }
+  }
+  
+  // =============================================================================
+  // CRITICAL CSS UTILITIES
+  // =============================================================================
+  
+  // Above-the-fold critical utilities
+  .critical {
+    &.critical-text {
+      font-family: system-ui, -apple-system, sans-serif;
+      line-height: 1.5;
+    }
+    
+    &.critical-layout {
+      @include ax-flex-column;
+      min-height: 100vh;
+    }
+    
+    &.critical-header {
+      @include ax-flex-between;
+      padding: 1rem;
+      background: var(--ax-white);
+      border-bottom: 1px solid var(--ax-gray-light);
+    }
+    
+    &.critical-main {
+      flex: 1;
+      padding: 1rem;
+    }
+  }
+  
+  // =============================================================================
+  // ACCESSIBILITY ENHANCEMENTS
+  // =============================================================================
+  
+  .sr-only-focusable {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+    
+    &:focus {
+      position: static !important;
+      width: auto !important;
+      height: auto !important;
+      padding: inherit !important;
+      margin: inherit !important;
+      overflow: visible !important;
+      clip: auto !important;
+      white-space: normal !important;
+    }
+  }
+  
+  // Note: .skip-link is defined in utilities/_accessibility.scss
+  
+  // High contrast mode support
+  
+  // Reduced motion support
+  @media (prefers-reduced-motion: reduce) {
+    .respect-motion-preference {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}

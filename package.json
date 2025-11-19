@@ -1,0 +1,64 @@
+{
+  "name": "axis-ui",
+  "version": "1.0.0",
+  "description": "AxisUI Framework - Modern CSS-only framework without JavaScript dependencies",
+  "main": "dist/css/axis-ui.css",
+  "files": [
+    "dist/",
+    "src/"
+  ],
+  "scripts": {
+    "predev": "node set-asset-suffix.js dev",
+    "dev": "npm run clean && webpack --mode=development",
+    "postdev": "node set-asset-suffix.js restore",
+    "predev:serve": "node set-asset-suffix.js dev",
+    "dev:serve": "webpack serve --mode=development --open",
+    "prebuild": "node set-asset-suffix.js prod",
+    "build": "npm run clean && webpack --mode=production --env minify",
+    "postbuild": "node set-asset-suffix.js restore",
+    "clean": "rimraf dist",
+    "serve": "npm run build && webpack serve --mode=development --open",
+    "watch": "npm run clean && webpack --mode=development --watch",
+    "analyze": "webpack --mode=production --env analyze"
+  },
+  "keywords": [
+    "css",
+    "framework",
+    "pure-css",
+    "scss",
+    "ui",
+    "components",
+    "responsive",
+    "modern",
+    "no-javascript"
+  ],
+  "author": "Pure CSS Framework Team",
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer": "^10.4.16",
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.8.1",
+    "css-minimizer-webpack-plugin": "^5.0.1",
+    "glob": "^11.0.3",
+    "html-loader": "^5.1.0",
+    "html-webpack-plugin": "^5.5.3",
+    "mini-css-extract-plugin": "^2.7.6",
+    "postcss": "^8.4.31",
+    "postcss-loader": "^7.3.3",
+    "posthtml": "^0.16.6",
+    "posthtml-include": "^2.0.1",
+    "posthtml-loader": "^2.0.1",
+    "rimraf": "^5.0.5",
+    "sass": "^1.69.5",
+    "sass-loader": "^13.3.2",
+    "webpack": "^5.89.0",
+    "webpack-bundle-analyzer": "^4.9.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

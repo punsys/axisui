@@ -1,0 +1,840 @@
+// =============================================================================
+// TABLE BASIC - AxisUI Framework Basic Table Styles
+// Core table features: base styles, variants, sizes, colors, and responsiveness
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
+
+.axis-ui {
+  // =============================================================================
+  // BASE TABLE ELEMENT
+  // =============================================================================
+  
+  .table {
+    width: 100%;
+    margin-bottom: ax-spacing(4);
+    color: $ax-gray-dark;
+    background-color: transparent;
+    border-collapse: collapse;
+    
+    th,
+    td {
+      padding: ax-spacing(2) ax-spacing(3);
+      text-align: left;
+      vertical-align: top;
+      border-top: 1px solid $ax-gray-light;
+    }
+    
+    thead th {
+      vertical-align: bottom;
+      font-weight: $ax-font-semibold;
+      background-color: $ax-gray-light;
+      border-bottom: 2px solid $ax-gray;
+      border-top: 0;
+    }
+    
+    tbody + tbody {
+      border-top: 2px solid $ax-gray;
+    }
+  }
+
+  // HTML table mapping for semantic usage
+  table {
+    @extend .table;
+  }
+
+  // =============================================================================
+  // TABLE VARIANTS
+  // =============================================================================
+  
+  // Striped rows
+  .table-striped {
+    tbody tr:nth-of-type(odd) {
+      background-color: rgba($ax-black, 0.025);
+    }
+  }
+
+  // Bordered table
+  .table-bordered {
+    border: 1px solid $ax-gray-light;
+    
+    th,
+    td {
+      border: 1px solid $ax-gray-light;
+    }
+    
+    thead th {
+      border-bottom-width: 2px;
+    }
+  }
+
+  // Borderless table
+  .table-borderless {
+    th,
+    td,
+    thead th {
+      border: 0;
+    }
+  }
+
+  // Hoverable rows
+  .table-hover {
+    tbody tr {
+      transition: background-color $ax-transition-base;
+      
+      &:hover {
+        background-color: rgba($ax-black, 0.05);
+      }
+    }
+  }
+
+  // =============================================================================
+  // TABLE SIZES
+  // =============================================================================
+  
+  .table-sm {
+    th,
+    td {
+      padding: ax-spacing(1) ax-spacing(2);
+      font-size: $ax-text-sm;
+    }
+  }
+
+  .table-lg {
+    th,
+    td {
+      padding: ax-spacing(3) ax-spacing(4);
+      font-size: $ax-text-base;
+    }
+  }
+
+  .table-compact {
+    th,
+    td {
+      padding: ax-spacing(1) ax-spacing(2);
+      font-size: $ax-text-xs;
+    }
+  }
+
+  .table-dense {
+    th,
+    td {
+      padding: ax-spacing(0.5) ax-spacing(1.5);
+      font-size: $ax-text-xs;
+      line-height: $ax-leading-tight;
+    }
+  }
+
+  .table-condensed {
+    th,
+    td {
+      padding: ax-spacing(1.5) ax-spacing(2.5);
+      font-size: $ax-text-sm;
+    }
+  }
+
+  .table-relaxed {
+    th,
+    td {
+      padding: ax-spacing(3.5) ax-spacing(4.5);
+      line-height: $ax-leading-relaxed;
+    }
+  }
+
+  .table-expanded {
+    th,
+    td {
+      padding: ax-spacing(4) ax-spacing(6);
+      font-size: $ax-text-lg;
+    }
+  }
+
+  // =============================================================================
+  // TABLE HEADER COLORS - 10 colors × 3 variants each
+  // =============================================================================
+  
+  // Blue variants
+  .table-head-blue {
+    thead th {
+      background-color: $ax-blue;
+      color: $ax-white;
+      border-color: $ax-blue-dark;
+    }
+  }
+
+  .table-head-blue-light {
+    thead th {
+      background-color: $ax-blue-light;
+      color: $ax-white;
+      border-color: $ax-blue;
+    }
+  }
+
+  .table-head-blue-dark {
+    thead th {
+      background-color: $ax-blue-dark;
+      color: $ax-white;
+      border-color: $ax-blue-dark;
+    }
+  }
+
+  // Red variants
+  .table-head-red {
+    thead th {
+      background-color: $ax-red;
+      color: $ax-white;
+      border-color: $ax-red-dark;
+    }
+  }
+
+  .table-head-red-light {
+    thead th {
+      background-color: $ax-red-light;
+      color: $ax-white;
+      border-color: $ax-red;
+    }
+  }
+
+  .table-head-red-dark {
+    thead th {
+      background-color: $ax-red-dark;
+      color: $ax-white;
+      border-color: $ax-red-dark;
+    }
+  }
+
+  // Green variants
+  .table-head-green {
+    thead th {
+      background-color: $ax-green;
+      color: $ax-white;
+      border-color: $ax-green-dark;
+    }
+  }
+
+  .table-head-green-light {
+    thead th {
+      background-color: $ax-green-light;
+      color: $ax-white;
+      border-color: $ax-green;
+    }
+  }
+
+  .table-head-green-dark {
+    thead th {
+      background-color: $ax-green-dark;
+      color: $ax-white;
+      border-color: $ax-green-dark;
+    }
+  }
+
+  // Yellow variants
+  .table-head-yellow {
+    thead th {
+      background-color: $ax-yellow;
+      color: $ax-gray-dark;
+      border-color: $ax-yellow-dark;
+    }
+  }
+
+  .table-head-yellow-light {
+    thead th {
+      background-color: $ax-yellow-light;
+      color: $ax-gray-dark;
+      border-color: $ax-yellow;
+    }
+  }
+
+  .table-head-yellow-dark {
+    thead th {
+      background-color: $ax-yellow-dark;
+      color: $ax-white;
+      border-color: $ax-yellow-dark;
+    }
+  }
+
+  // Orange variants
+  .table-head-orange {
+    thead th {
+      background-color: $ax-orange;
+      color: $ax-white;
+      border-color: $ax-orange-dark;
+    }
+  }
+
+  .table-head-orange-light {
+    thead th {
+      background-color: $ax-orange-light;
+      color: $ax-white;
+      border-color: $ax-orange;
+    }
+  }
+
+  .table-head-orange-dark {
+    thead th {
+      background-color: $ax-orange-dark;
+      color: $ax-white;
+      border-color: $ax-orange-dark;
+    }
+  }
+
+  // Purple variants
+  .table-head-purple {
+    thead th {
+      background-color: $ax-purple;
+      color: $ax-white;
+      border-color: $ax-purple-dark;
+    }
+  }
+
+  .table-head-purple-light {
+    thead th {
+      background-color: $ax-purple-light;
+      color: $ax-white;
+      border-color: $ax-purple;
+    }
+  }
+
+  .table-head-purple-dark {
+    thead th {
+      background-color: $ax-purple-dark;
+      color: $ax-white;
+      border-color: $ax-purple-dark;
+    }
+  }
+
+  // Pink variants
+  .table-head-pink {
+    thead th {
+      background-color: $ax-pink;
+      color: $ax-white;
+      border-color: $ax-pink-dark;
+    }
+  }
+
+  .table-head-pink-light {
+    thead th {
+      background-color: $ax-pink-light;
+      color: $ax-white;
+      border-color: $ax-pink;
+    }
+  }
+
+  .table-head-pink-dark {
+    thead th {
+      background-color: $ax-pink-dark;
+      color: $ax-white;
+      border-color: $ax-pink-dark;
+    }
+  }
+
+  // Teal variants
+  .table-head-teal {
+    thead th {
+      background-color: $ax-teal;
+      color: $ax-white;
+      border-color: $ax-teal-dark;
+    }
+  }
+
+  .table-head-teal-light {
+    thead th {
+      background-color: $ax-teal-light;
+      color: $ax-white;
+      border-color: $ax-teal;
+    }
+  }
+
+  .table-head-teal-dark {
+    thead th {
+      background-color: $ax-teal-dark;
+      color: $ax-white;
+      border-color: $ax-teal-dark;
+    }
+  }
+
+  // Cyan variants
+  .table-head-cyan {
+    thead th {
+      background-color: $ax-cyan;
+      color: $ax-white;
+      border-color: $ax-cyan-dark;
+    }
+  }
+
+  .table-head-cyan-light {
+    thead th {
+      background-color: $ax-cyan-light;
+      color: $ax-white;
+      border-color: $ax-cyan;
+    }
+  }
+
+  .table-head-cyan-dark {
+    thead th {
+      background-color: $ax-cyan-dark;
+      color: $ax-white;
+      border-color: $ax-cyan-dark;
+    }
+  }
+
+  // Gray variants
+  .table-head-gray {
+    thead th {
+      background-color: $ax-gray;
+      color: $ax-white;
+      border-color: $ax-gray-dark;
+    }
+  }
+
+  .table-head-gray-light {
+    thead th {
+      background-color: $ax-gray-light;
+      color: $ax-gray-dark;
+      border-color: $ax-gray;
+    }
+  }
+
+  .table-head-gray-dark {
+    thead th {
+      background-color: $ax-gray-dark;
+      color: $ax-white;
+      border-color: $ax-gray-dark;
+    }
+  }
+
+  // =============================================================================
+  // ROW CONTEXTUAL CLASSES - 10 colors
+  // =============================================================================
+  
+  .table-row-blue,
+  tr.table-row-blue {
+    background-color: rgba($ax-blue, 0.1);
+    
+    &:hover {
+      background-color: rgba($ax-blue, 0.15);
+    }
+  }
+
+  .table-row-red,
+  tr.table-row-red {
+    background-color: rgba($ax-red, 0.1);
+    
+    &:hover {
+      background-color: rgba($ax-red, 0.15);
+    }
+  }
+
+  .table-row-green,
+  tr.table-row-green {
+    background-color: rgba($ax-green, 0.1);
+    
+    &:hover {
+      background-color: rgba($ax-green, 0.15);
+    }
+  }
+
+  .table-row-yellow,
+  tr.table-row-yellow {
+    background-color: rgba($ax-yellow, 0.1);
+    
+    &:hover {
+      background-color: rgba($ax-yellow, 0.15);
+    }
+  }
+
+  .table-row-orange,
+  tr.table-row-orange {
+    background-color: rgba($ax-orange, 0.1);
+    
+    &:hover {
+      background-color: rgba($ax-orange, 0.15);
+    }
+  }
+
+  .table-row-purple,
+  tr.table-row-purple {
+    background-color: rgba($ax-purple, 0.1);
+    
+    &:hover {
+      background-color: rgba($ax-purple, 0.15);
+    }
+  }
+
+  .table-row-pink,
+  tr.table-row-pink {
+    background-color: rgba($ax-pink, 0.1);
+    
+    &:hover {
+      background-color: rgba($ax-pink, 0.15);
+    }
+  }
+
+  .table-row-teal,
+  tr.table-row-teal {
+    background-color: rgba($ax-teal, 0.1);
+    
+    &:hover {
+      background-color: rgba($ax-teal, 0.15);
+    }
+  }
+
+  .table-row-cyan,
+  tr.table-row-cyan {
+    background-color: rgba($ax-cyan, 0.1);
+    
+    &:hover {
+      background-color: rgba($ax-cyan, 0.15);
+    }
+  }
+
+  .table-row-gray,
+  tr.table-row-gray {
+    background-color: rgba($ax-gray, 0.1);
+    
+    &:hover {
+      background-color: rgba($ax-gray, 0.15);
+    }
+  }
+
+  // =============================================================================
+  // CELL CONTEXTUAL CLASSES - 10 colors
+  // =============================================================================
+  
+  .table-cell-blue,
+  td.table-cell-blue,
+  th.table-cell-blue {
+    background-color: rgba($ax-blue, 0.1);
+    color: $ax-blue-dark;
+  }
+
+  .table-cell-red,
+  td.table-cell-red,
+  th.table-cell-red {
+    background-color: rgba($ax-red, 0.1);
+    color: $ax-red-dark;
+  }
+
+  .table-cell-green,
+  td.table-cell-green,
+  th.table-cell-green {
+    background-color: rgba($ax-green, 0.1);
+    color: $ax-green-dark;
+  }
+
+  .table-cell-yellow,
+  td.table-cell-yellow,
+  th.table-cell-yellow {
+    background-color: rgba($ax-yellow, 0.1);
+    color: $ax-yellow-dark;
+  }
+
+  .table-cell-orange,
+  td.table-cell-orange,
+  th.table-cell-orange {
+    background-color: rgba($ax-orange, 0.1);
+    color: $ax-orange-dark;
+  }
+
+  .table-cell-purple,
+  td.table-cell-purple,
+  th.table-cell-purple {
+    background-color: rgba($ax-purple, 0.1);
+    color: $ax-purple-dark;
+  }
+
+  .table-cell-pink,
+  td.table-cell-pink,
+  th.table-cell-pink {
+    background-color: rgba($ax-pink, 0.1);
+    color: $ax-pink-dark;
+  }
+
+  .table-cell-teal,
+  td.table-cell-teal,
+  th.table-cell-teal {
+    background-color: rgba($ax-teal, 0.1);
+    color: $ax-teal-dark;
+  }
+
+  .table-cell-cyan,
+  td.table-cell-cyan,
+  th.table-cell-cyan {
+    background-color: rgba($ax-cyan, 0.1);
+    color: $ax-cyan-dark;
+  }
+
+  .table-cell-gray,
+  td.table-cell-gray,
+  th.table-cell-gray {
+    background-color: rgba($ax-gray, 0.1);
+    color: $ax-gray-dark;
+  }
+
+  // =============================================================================
+  // TABLE ALIGNMENT
+  // =============================================================================
+  
+  .table-center {
+    th,
+    td {
+      text-align: center;
+    }
+  }
+
+  .table-right {
+    th,
+    td {
+      text-align: right;
+    }
+  }
+
+  // Cell-specific alignment
+  .text-left { text-align: left !important; }
+  .text-center { text-align: center !important; }
+  .text-right { text-align: right !important; }
+
+  .align-top { vertical-align: top !important; }
+  .align-middle { vertical-align: middle !important; }
+  .align-bottom { vertical-align: bottom !important; }
+
+  // =============================================================================
+  // RESPONSIVE TABLE
+  // =============================================================================
+  
+  .table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    
+    .table {
+      margin-bottom: 0;
+    }
+  }
+
+  // Responsive breakpoint tables
+  @media (max-width: 639px) {
+    .table-responsive-sm {
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      
+      .table {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+    .table-responsive-md {
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      
+      .table {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .table-responsive-lg {
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      
+      .table {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  @media (max-width: 1279px) {
+    .table-responsive-xl {
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      
+      .table {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  // =============================================================================
+  // TABLE WITH ACTIONS
+  // =============================================================================
+  
+  .table-actions {
+    .table-action-cell {
+      width: 1%;
+      white-space: nowrap;
+      text-align: right;
+      
+      .btn {
+        margin-left: ax-spacing(1);
+        
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+
+  // =============================================================================
+  // TABLE FOOTER
+  // =============================================================================
+  
+  .table-footer {
+    @include ax-flex-between;
+    padding: ax-spacing(3) ax-spacing(3) 0;
+    border-top: 1px solid $ax-gray-light;
+    margin-top: ax-spacing(4);
+    
+    .table-info {
+      font-size: $ax-text-sm;
+      color: $ax-gray;
+    }
+    
+    .table-pagination {
+      @include ax-flex-start;
+      gap: ax-spacing(2);
+    }
+  }
+
+  // =============================================================================
+  // TABLE CARD WRAPPER
+  // =============================================================================
+  
+  .table-card {
+    background-color: $ax-white;
+    border: 1px solid $ax-gray-light;
+    border-radius: $ax-radius-base;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba($ax-black, 0.1);
+    
+    .table {
+      margin-bottom: 0;
+      
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
+    
+    .table-header {
+      padding: ax-spacing(4);
+      background-color: $ax-gray-light;
+      border-bottom: 1px solid $ax-gray-light;
+      
+      .table-title {
+        font-size: $ax-text-lg;
+        font-weight: $ax-font-semibold;
+        color: $ax-gray-dark;
+        margin: 0;
+      }
+      
+      .table-subtitle {
+        font-size: $ax-text-sm;
+        color: $ax-gray;
+        margin: ax-spacing(1) 0 0;
+      }
+    }
+  }
+
+  // =============================================================================
+  // MOBILE RESPONSIVE TABLE
+  // =============================================================================
+  
+  @media (max-width: 767px) {
+    .table-mobile {
+      thead {
+        display: none;
+      }
+      
+      tbody,
+      tr,
+      td {
+        display: block;
+      }
+      
+      tr {
+        border: 1px solid $ax-gray-light;
+        border-radius: $ax-radius-base;
+        margin-bottom: ax-spacing(2);
+        padding: ax-spacing(3);
+        background-color: $ax-white;
+      }
+      
+      td {
+        border: none;
+        padding: ax-spacing(1) 0;
+        position: relative;
+        padding-left: 40%;
+        
+        &::before {
+          content: attr(data-label);
+          position: absolute;
+          left: 0;
+          width: 35%;
+          padding-right: ax-spacing(2);
+          white-space: nowrap;
+          font-weight: $ax-font-semibold;
+          color: $ax-gray-dark;
+        }
+      }
+    }
+  }
+
+  // =============================================================================
+  // TABLE VISUAL ENHANCEMENTS
+  // =============================================================================
+  
+  // Table with dividers between rows
+  .table-divided {
+    tbody tr {
+      border-bottom: 2px solid $ax-gray-light;
+      
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+
+  // Vertical table layout
+  .table-vertical {
+    th {
+      text-align: right;
+      font-weight: $ax-font-semibold;
+      width: 30%;
+      padding-right: ax-spacing(4);
+      border-right: 2px solid $ax-gray-light;
+    }
+    
+    td {
+      text-align: left;
+      padding-left: ax-spacing(4);
+    }
+  }
+
+  // Table with alternating column colors
+  .table-column-striped {
+    th:nth-child(even),
+    td:nth-child(even) {
+      background-color: rgba($ax-black, 0.015);
+    }
+  }
+
+  // Table with shadow
+  .table-shadow {
+    box-shadow: $ax-shadow-md;
+    border-radius: $ax-radius-base;
+    overflow: hidden;
+  }
+}

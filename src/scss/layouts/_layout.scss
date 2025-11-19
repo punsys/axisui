@@ -1,0 +1,425 @@
+// ====================================================  .top-half { top: 50%; } .top-half { t  .right-half { right: 50%; }p: 50%; }=====  .bottom-half { bottom: 50%; }========  .rig  .left-half { left: 50%; }t-half { right: 50%; }=========
+//   .bottom-half { bottom: 50%; }AYOUT UTILITIE  .left-half { left: 50%; } - AxisUI Framework Comprehensive Layout System
+// Pure CSS positioning, display, and layout utilities with responsive variants
+// Direct color naming with comprehensive layout patterns
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
+
+.axis-ui {
+  // =============================================================================
+  // LAYOUT UTILITIES - Display utilities moved to _display.scss
+  // =============================================================================
+  
+  // =============================================================================
+  // LAYOUT-SPECIFIC UTILITIES
+  // =============================================================================
+  // (Positioning utilities moved to utilities/_positioning.scss)
+  
+  // =============================================================================
+  // OVERFLOW - Comprehensive Overflow Control
+  // =============================================================================
+  .overflow-auto { overflow: auto; }
+  .overflow-hidden { overflow: hidden; }
+  .overflow-visible { overflow: visible; }
+  .overflow-scroll { overflow: scroll; }
+  .overflow-clip { overflow: clip; }
+  
+  .overflow-x-auto { overflow-x: auto; }
+  .overflow-y-auto { overflow-y: auto; }
+  .overflow-x-hidden { overflow-x: hidden; }
+  .overflow-y-hidden { overflow-y: hidden; }
+  .overflow-x-visible { overflow-x: visible; }
+  .overflow-y-visible { overflow-y: visible; }
+  .overflow-x-scroll { overflow-x: scroll; }
+  .overflow-y-scroll { overflow-y: scroll; }
+  .overflow-x-clip { overflow-x: clip; }
+  .overflow-y-clip { overflow-y: clip; }
+  
+  // Scrollbar styling
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    
+    &::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: $ax-gray-light;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: $ax-gray;
+      border-radius: $ax-radius-full;
+      
+      &:hover {
+        background: $ax-gray-dark;
+      }
+    }
+  }
+  
+  .scrollbar-none {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  
+  // =============================================================================
+  // VISIBILITY AND OPACITY
+  // =============================================================================
+  .visible { visibility: visible; }
+  .invisible { visibility: hidden; }
+  .collapse { visibility: collapse; }
+  
+  .opacity-0 { opacity: 0; }
+  .opacity-25 { opacity: 0.25; }
+  .opacity-50 { opacity: 0.5; }
+  .opacity-75 { opacity: 0.75; }
+  .opacity-100 { opacity: 1; }
+  
+  // =============================================================================
+  // FLOAT AND CLEAR
+  // =============================================================================
+  .float-right { float: right; }
+  .float-left { float: left; }
+  .float-none { float: none; }
+  
+  .clear-left { clear: left; }
+  .clear-right { clear: right; }
+  .clear-both { clear: both; }
+  .clear-none { clear: none; }
+  
+  // =============================================================================
+  // OBJECT FIT AND POSITION
+  // =============================================================================
+  .object-contain { object-fit: contain; }
+  .object-cover { object-fit: cover; }
+  .object-fill { object-fit: fill; }
+  .object-none { object-fit: none; }
+  .object-scale-down { object-fit: scale-down; }
+  
+  .object-bottom { object-position: bottom; }
+  .object-center { object-position: center; }
+  .object-left { object-position: left; }
+  .object-left-bottom { object-position: left bottom; }
+  .object-left-top { object-position: left top; }
+  .object-right { object-position: right; }
+  .object-right-bottom { object-position: right bottom; }
+  .object-right-top { object-position: right top; }
+  .object-top { object-position: top; }
+  
+  // =============================================================================
+  // ISOLATION AND MIX BLEND MODE
+  // =============================================================================
+  .isolate { isolation: isolate; }
+  .isolation-auto { isolation: auto; }
+  
+  .mix-blend-normal { mix-blend-mode: normal; }
+  .mix-blend-multiply { mix-blend-mode: multiply; }
+  .mix-blend-screen { mix-blend-mode: screen; }
+  .mix-blend-overlay { mix-blend-mode: overlay; }
+  .mix-blend-darken { mix-blend-mode: darken; }
+  .mix-blend-lighten { mix-blend-mode: lighten; }
+  .mix-blend-color-dodge { mix-blend-mode: color-dodge; }
+  .mix-blend-color-burn { mix-blend-mode: color-burn; }
+  .mix-blend-hard-light { mix-blend-mode: hard-light; }
+  .mix-blend-soft-light { mix-blend-mode: soft-light; }
+  .mix-blend-difference { mix-blend-mode: difference; }
+  .mix-blend-exclusion { mix-blend-mode: exclusion; }
+  
+  // =============================================================================
+  // LAYOUT PATTERNS - Modern Layout Components
+  // =============================================================================
+  
+  .centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  
+  .full-height {
+    min-height: 100vh;
+  }
+  
+  .full-screen {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .hero {
+    position: relative;
+    overflow: hidden;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    @include ax-responsive(md) {
+      min-height: 80vh;
+    }
+    
+    @include ax-responsive(lg) {
+      min-height: 100vh;
+    }
+  }
+  
+  .section {
+    padding-top: ax-spacing(8);
+    padding-bottom: ax-spacing(8);
+    
+    @include ax-responsive(md) {
+      padding-top: ax-spacing(12);
+      padding-bottom: ax-spacing(12);
+    }
+    
+    @include ax-responsive(lg) {
+      padding-top: ax-spacing(16);
+      padding-bottom: ax-spacing(16);
+    }
+  }
+  
+  .section-sm {
+    padding-top: ax-spacing(6);
+    padding-bottom: ax-spacing(6);
+    
+    @include ax-responsive(md) {
+      padding-top: ax-spacing(8);
+      padding-bottom: ax-spacing(8);
+    }
+  }
+  
+  .section-lg {
+    padding-top: ax-spacing(12);
+    padding-bottom: ax-spacing(12);
+    
+    @include ax-responsive(md) {
+      padding-top: ax-spacing(16);
+      padding-bottom: ax-spacing(16);
+    }
+    
+    @include ax-responsive(lg) {
+      padding-top: ax-spacing(20);
+      padding-bottom: ax-spacing(20);
+    }
+  }
+  
+  // Sticky elements
+  .sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: $ax-z-sticky;
+    background-color: $ax-white;
+    border-bottom: 1px solid $ax-border-color;
+    backdrop-filter: blur(8px);
+    background-color: rgba($ax-white, 0.95);
+  }
+  
+  .sticky-footer {
+    position: sticky;
+    bottom: 0;
+    z-index: $ax-z-sticky;
+    background-color: $ax-white;
+    border-top: 1px solid $ax-border-color;
+  }
+  
+  // Pin elements to corners
+  .pin-top-left {
+    position: fixed;
+    top: ax-spacing(4);
+    left: ax-spacing(4);
+    z-index: $ax-z-fixed;
+  }
+  
+  .pin-top-right {
+    position: fixed;
+    top: ax-spacing(4);
+    right: ax-spacing(4);
+    z-index: $ax-z-fixed;
+  }
+  
+  .pin-bottom-left {
+    position: fixed;
+    bottom: ax-spacing(4);
+    left: ax-spacing(4);
+    z-index: $ax-z-fixed;
+  }
+  
+  .pin-bottom-right {
+    position: fixed;
+    bottom: ax-spacing(4);
+    right: ax-spacing(4);
+    z-index: $ax-z-fixed;
+  }
+  
+  // Aspect ratios - using existing aspect-* utilities below instead
+  
+  // Modern layout utilities
+  .masonry {
+    columns: 3;
+    column-gap: ax-spacing(4);
+    
+    @include ax-responsive(md-down) {
+      columns: 2;
+    }
+    
+    @include ax-responsive(sm-down) {
+      columns: 1;
+    }
+    
+    > * {
+      break-inside: avoid;
+      margin-bottom: ax-spacing(4);
+    }
+  }
+
+  // =============================================================================
+  // RESPONSIVE DISPLAY UTILITIES
+  // =============================================================================
+  
+  // Hide on specific breakpoints
+  @include ax-responsive(sm-down) {
+    .hidden-sm { display: none !important; }
+  }
+  
+  @include ax-responsive(md-down) {
+    .hidden-md { display: none !important; }
+  }
+  
+  @include ax-responsive(lg-down) {
+    .hidden-lg { display: none !important; }
+  }
+  
+  @include ax-responsive(xl-down) {
+    .hidden-xl { display: none !important; }
+  }
+  
+  // Show only on specific breakpoints
+  .visible-sm { display: none !important; }
+  .visible-md { display: none !important; }
+  .visible-lg { display: none !important; }
+  .visible-xl { display: none !important; }
+  
+  @include ax-responsive(sm) {
+    .visible-sm { display: block !important; }
+  }
+  
+  @include ax-responsive(md) {
+    .visible-md { display: block !important; }
+  }
+  
+  @include ax-responsive(lg) {
+    .visible-lg { display: block !important; }
+  }
+  
+  @include ax-responsive(xl) {
+    .visible-xl { display: block !important; }
+  }
+
+  // =============================================================================
+  // ACCESSIBILITY ENHANCEMENTS
+  // =============================================================================
+  
+  // Note: .sr-only is defined in utilities/_accessibility.scss
+  
+  .not-sr-only {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+  
+  // Focus utilities
+  .focus-visible:focus-visible {
+    @include ax-focus-ring();
+  }
+  
+  // Reduced motion utilities
+  @include ax-prefers-reduced-motion {
+    .motion-reduce {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+  
+  // High contrast mode support
+  @media (prefers-contrast: high) {
+    .sticky-header,
+    .sticky-footer {
+      border-width: 2px;
+    }
+  }
+  
+  // Print utilities
+  @media print {
+    .print-hidden { display: none !important; }
+    .print-visible { display: block !important; }
+    
+    .hero,
+    .full-height,
+    .full-screen {
+      min-height: auto;
+      height: auto;
+    }
+  }
+
+  // =============================================================================
+  // ASPECT RATIO UTILITIES - Modern CSS aspect-ratio property
+  // =============================================================================
+  
+  .aspect-square { aspect-ratio: 1 / 1 !important; }
+  .aspect-video { aspect-ratio: 16 / 9 !important; }
+  .aspect-photo { aspect-ratio: 4 / 3 !important; }
+  .aspect-portrait { aspect-ratio: 3 / 4 !important; }
+  .aspect-golden { aspect-ratio: 1.618 / 1 !important; }
+  .aspect-cinema { aspect-ratio: 21 / 9 !important; }
+
+  // =============================================================================
+  // OBJECT FIT AND POSITION UTILITIES
+  // =============================================================================
+  
+  .object-contain { object-fit: contain !important; }
+  .object-cover { object-fit: cover !important; }
+  .object-fill { object-fit: fill !important; }
+  .object-none { object-fit: none !important; }
+  .object-scale-down { object-fit: scale-down !important; }
+
+  .object-bottom { object-position: bottom !important; }
+  .object-center { object-position: center !important; }
+  .object-left { object-position: left !important; }
+  .object-left-bottom { object-position: left bottom !important; }
+  .object-left-top { object-position: left top !important; }
+  .object-right { object-position: right !important; }
+  .object-right-bottom { object-position: right bottom !important; }
+  .object-right-top { object-position: right top !important; }
+  .object-top { object-position: top !important; }
+
+  // =============================================================================
+  // ADDITIONAL OVERFLOW UTILITIES (complement existing ones)
+  // =============================================================================
+  
+  // Overscroll behavior
+  .overscroll-auto { overscroll-behavior: auto !important; }
+  .overscroll-contain { overscroll-behavior: contain !important; }
+  .overscroll-none { overscroll-behavior: none !important; }
+
+  .overscroll-x-auto { overscroll-behavior-x: auto !important; }
+  .overscroll-x-contain { overscroll-behavior-x: contain !important; }
+  .overscroll-x-none { overscroll-behavior-x: none !important; }
+
+  .overscroll-y-auto { overscroll-behavior-y: auto !important; }
+  .overscroll-y-contain { overscroll-behavior-y: contain !important; }
+  .overscroll-y-none { overscroll-behavior-y: none !important; }
+}

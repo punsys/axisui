@@ -1,0 +1,748 @@
+// =============================================================================
+// PAGINATION - AxisUI Framework Comprehensive Pagination Components
+// Direct color naming with comprehensive variants and states
+// No ax- class prefixes, container scoped
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
+
+.axis-ui {
+  // =============================================================================
+  // BASE PAGINATION STRUCTURE
+  // =============================================================================
+  
+  .pagination {
+    @include ax-flex-center; // Use centralized flexbox pattern
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: ax-spacing(1);
+    
+    // Page items
+    .page-item {
+      .page-link {
+        @include ax-flex-center; // Use centralized flexbox pattern
+        min-width: ax-spacing(10);
+        height: ax-spacing(10);
+        padding: ax-spacing(2) ax-spacing(3);
+        color: $ax-blue;
+        text-decoration: none;
+        background-color: $ax-white;
+        border: 1px solid $ax-border-color;
+        border-radius: $ax-radius-base;
+        transition: all $ax-transition-fast;
+        font-size: $ax-text-sm;
+        font-weight: $ax-font-medium;
+        line-height: 1;
+        cursor: pointer;
+        user-select: none;
+        
+        &:hover {
+          background-color: $ax-gray-light;
+          border-color: $ax-gray;
+          color: $ax-blue-dark;
+          transform: translateY(-1px);
+        }
+        
+        &:focus {
+          @include ax-focus-ring();
+        }
+        
+        &:active {
+          transform: translateY(0);
+        }
+      }
+      
+      // Active page
+      &.active .page-link {
+        background-color: $ax-blue;
+        color: $ax-white;
+        border-color: $ax-blue;
+        cursor: default;
+        
+        &:hover {
+          background-color: $ax-blue-dark;
+          border-color: $ax-blue-dark;
+          transform: none;
+        }
+      }
+      
+      // Disabled page
+      &.disabled .page-link {
+        color: $ax-gray;
+        background-color: $ax-gray-light;
+        border-color: $ax-border-color;
+        cursor: not-allowed;
+        opacity: 0.6;
+        
+        &:hover {
+          background-color: $ax-gray-light;
+          border-color: $ax-border-color;
+          color: $ax-gray;
+          transform: none;
+        }
+      }
+    }
+    
+    // Ellipsis (dots) indicator
+    .page-ellipsis {
+      @include ax-flex-center; // Use centralized flexbox pattern
+      min-width: ax-spacing(10);
+      height: ax-spacing(10);
+      color: $ax-gray;
+      font-weight: $ax-font-bold;
+      cursor: default;
+      
+      &::after {
+        content: "...";
+      }
+    }
+  }
+
+  // =============================================================================
+  // SIZE VARIANTS
+  // =============================================================================
+  
+  .pagination.pagination-sm {
+    gap: ax-spacing(0.5);
+    
+    .page-item .page-link {
+      min-width: ax-spacing(8);
+      height: ax-spacing(8);
+      padding: ax-spacing(1.5) ax-spacing(2);
+      font-size: $ax-text-xs;
+      border-radius: $ax-radius-sm;
+    }
+    
+    .page-ellipsis {
+      min-width: ax-spacing(8);
+      height: ax-spacing(8);
+      font-size: $ax-text-xs;
+    }
+  }
+  
+  .pagination.pagination-lg {
+    gap: ax-spacing(1.5);
+    
+    .page-item .page-link {
+      min-width: ax-spacing(12);
+      height: ax-spacing(12);
+      padding: ax-spacing(3) ax-spacing(4);
+      font-size: $ax-text-base;
+      border-radius: $ax-radius-lg;
+    }
+    
+    .page-ellipsis {
+      min-width: ax-spacing(12);
+      height: ax-spacing(12);
+      font-size: $ax-text-base;
+    }
+  }
+  
+  .pagination.pagination-xl {
+    gap: ax-spacing(2);
+    
+    .page-item .page-link {
+      min-width: ax-spacing(14);
+      height: ax-spacing(14);
+      padding: ax-spacing(4) ax-spacing(5);
+      font-size: $ax-text-lg;
+      border-radius: $ax-radius-xl;
+    }
+    
+    .page-ellipsis {
+      min-width: ax-spacing(14);
+      height: ax-spacing(14);
+      font-size: $ax-text-lg;
+    }
+  }
+
+  // =============================================================================
+  // COLOR VARIANTS - Direct Color Naming
+  // =============================================================================
+  
+  .pagination.pagination-blue {
+    .page-item {
+      .page-link {
+        color: $ax-blue;
+        
+        &:hover {
+          color: $ax-blue-dark;
+          background-color: rgba($ax-blue, 0.1);
+          border-color: rgba($ax-blue, 0.3);
+        }
+      }
+      
+      &.active .page-link {
+        background-color: $ax-blue;
+        color: $ax-white;
+        border-color: $ax-blue;
+        
+        &:hover {
+          background-color: $ax-blue-dark;
+          border-color: $ax-blue-dark;
+        }
+      }
+    }
+  }
+  
+  .pagination.pagination-red {
+    .page-item {
+      .page-link {
+        color: $ax-red;
+        
+        &:hover {
+          color: $ax-red-dark;
+          background-color: rgba($ax-red, 0.1);
+          border-color: rgba($ax-red, 0.3);
+        }
+      }
+      
+      &.active .page-link {
+        background-color: $ax-red;
+        color: $ax-white;
+        border-color: $ax-red;
+        
+        &:hover {
+          background-color: $ax-red-dark;
+          border-color: $ax-red-dark;
+        }
+      }
+    }
+  }
+  
+  .pagination.pagination-green {
+    .page-item {
+      .page-link {
+        color: $ax-green;
+        
+        &:hover {
+          color: $ax-green-dark;
+          background-color: rgba($ax-green, 0.1);
+          border-color: rgba($ax-green, 0.3);
+        }
+      }
+      
+      &.active .page-link {
+        background-color: $ax-green;
+        color: $ax-white;
+        border-color: $ax-green;
+        
+        &:hover {
+          background-color: $ax-green-dark;
+          border-color: $ax-green-dark;
+        }
+      }
+    }
+  }
+  
+  .pagination.pagination-yellow {
+    .page-item {
+      .page-link {
+        color: $ax-yellow-dark;
+        
+        &:hover {
+          color: $ax-yellow-dark;
+          background-color: rgba($ax-yellow, 0.2);
+          border-color: rgba($ax-yellow, 0.5);
+        }
+      }
+      
+      &.active .page-link {
+        background-color: $ax-yellow;
+        color: $ax-gray-dark;
+        border-color: $ax-yellow;
+        
+        &:hover {
+          background-color: $ax-yellow-dark;
+          color: $ax-white;
+          border-color: $ax-yellow-dark;
+        }
+      }
+    }
+  }
+  
+  .pagination.pagination-purple {
+    .page-item {
+      .page-link {
+        color: $ax-purple;
+        
+        &:hover {
+          color: $ax-purple-dark;
+          background-color: rgba($ax-purple, 0.1);
+          border-color: rgba($ax-purple, 0.3);
+        }
+      }
+      
+      &.active .page-link {
+        background-color: $ax-purple;
+        color: $ax-white;
+        border-color: $ax-purple;
+        
+        &:hover {
+          background-color: $ax-purple-dark;
+          border-color: $ax-purple-dark;
+        }
+      }
+    }
+  }
+  
+  .pagination.pagination-pink {
+    .page-item {
+      .page-link {
+        color: $ax-pink;
+        
+        &:hover {
+          color: $ax-pink-dark;
+          background-color: rgba($ax-pink, 0.1);
+          border-color: rgba($ax-pink, 0.3);
+        }
+      }
+      
+      &.active .page-link {
+        background-color: $ax-pink;
+        color: $ax-white;
+        border-color: $ax-pink;
+        
+        &:hover {
+          background-color: $ax-pink-dark;
+          border-color: $ax-pink-dark;
+        }
+      }
+    }
+  }
+  
+  .pagination.pagination-orange {
+    .page-item {
+      .page-link {
+        color: $ax-orange;
+        
+        &:hover {
+          color: $ax-orange-dark;
+          background-color: rgba($ax-orange, 0.1);
+          border-color: rgba($ax-orange, 0.3);
+        }
+      }
+      
+      &.active .page-link {
+        background-color: $ax-orange;
+        color: $ax-white;
+        border-color: $ax-orange;
+        
+        &:hover {
+          background-color: $ax-orange-dark;
+          border-color: $ax-orange-dark;
+        }
+      }
+    }
+  }
+  
+  .pagination.pagination-teal {
+    .page-item {
+      .page-link {
+        color: $ax-teal;
+        
+        &:hover {
+          color: $ax-teal-dark;
+          background-color: rgba($ax-teal, 0.1);
+          border-color: rgba($ax-teal, 0.3);
+        }
+      }
+      
+      &.active .page-link {
+        background-color: $ax-teal;
+        color: $ax-white;
+        border-color: $ax-teal;
+        
+        &:hover {
+          background-color: $ax-teal-dark;
+          border-color: $ax-teal-dark;
+        }
+      }
+    }
+  }
+  
+  .pagination.pagination-cyan {
+    .page-item {
+      .page-link {
+        color: $ax-cyan;
+        
+        &:hover {
+          color: $ax-cyan-dark;
+          background-color: rgba($ax-cyan, 0.1);
+          border-color: rgba($ax-cyan, 0.3);
+        }
+      }
+      
+      &.active .page-link {
+        background-color: $ax-cyan;
+        color: $ax-white;
+        border-color: $ax-cyan;
+        
+        &:hover {
+          background-color: $ax-cyan-dark;
+          border-color: $ax-cyan-dark;
+        }
+      }
+    }
+  }
+  
+  .pagination.pagination-gray {
+    .page-item {
+      .page-link {
+        color: $ax-gray-dark;
+        
+        &:hover {
+          color: $ax-black;
+          background-color: $ax-gray-light;
+          border-color: $ax-gray;
+        }
+      }
+      
+      &.active .page-link {
+        background-color: $ax-gray-dark;
+        color: $ax-white;
+        border-color: $ax-gray-dark;
+        
+        &:hover {
+          background-color: $ax-black;
+          border-color: $ax-black;
+        }
+      }
+    }
+  }
+
+  // =============================================================================
+  // STYLE VARIANTS
+  // =============================================================================
+  
+  .pagination.pagination-rounded {
+    .page-item .page-link {
+      border-radius: $ax-radius-full;
+    }
+  }
+  
+  .pagination.pagination-square {
+    .page-item .page-link {
+      border-radius: 0;
+    }
+  }
+  
+  .pagination.pagination-minimal {
+    gap: ax-spacing(0.5);
+    
+    .page-item .page-link {
+      border: none;
+      background-color: transparent;
+      
+      &:hover {
+        background-color: $ax-gray-light;
+        transform: none;
+      }
+    }
+    
+    .page-item.active .page-link {
+      background-color: $ax-blue;
+      color: $ax-white;
+      
+      &:hover {
+        background-color: $ax-blue-dark;
+      }
+    }
+  }
+  
+  .pagination.pagination-outlined {
+    .page-item .page-link {
+      background-color: transparent;
+      border: 2px solid $ax-border-color;
+      
+      &:hover {
+        border-color: $ax-blue;
+        background-color: $ax-blue;
+        color: $ax-white;
+      }
+    }
+    
+    .page-item.active .page-link {
+      background-color: $ax-blue;
+      color: $ax-white;
+      border-color: $ax-blue;
+    }
+  }
+  
+  .pagination.pagination-pills {
+    gap: ax-spacing(2);
+    
+    .page-item .page-link {
+      border-radius: $ax-radius-full;
+      border: none;
+      background-color: $ax-gray-light;
+      color: $ax-gray-dark;
+      
+      &:hover {
+        background-color: $ax-gray;
+        color: $ax-white;
+      }
+    }
+    
+    .page-item.active .page-link {
+      background-color: $ax-blue;
+      color: $ax-white;
+      
+      &:hover {
+        background-color: $ax-blue-dark;
+      }
+    }
+  }
+
+  // =============================================================================
+  // PAGINATION LAYOUTS
+  // =============================================================================
+  
+  .pagination.pagination-left {
+    justify-content: flex-start;
+  }
+  
+  .pagination.pagination-right {
+    justify-content: flex-end;
+  }
+  
+  .pagination.pagination-center {
+    justify-content: center;
+  }
+  
+  .pagination.pagination-space-between {
+    justify-content: space-between;
+    
+    .page-item:not(:first-child):not(:last-child) {
+      display: none;
+    }
+  }
+
+  // =============================================================================
+  // PAGINATION WITH NAVIGATION
+  // =============================================================================
+  
+  .pagination-nav {
+    @include ax-flex-between;
+    margin-bottom: ax-spacing(4);
+    
+    .pagination-info {
+      font-size: $ax-text-sm;
+      color: $ax-gray;
+      
+      .pagination-current {
+        font-weight: $ax-font-semibold;
+        color: $ax-gray-dark;
+      }
+    }
+    
+    .pagination-per-page {
+      @include ax-flex-start;
+      gap: ax-spacing(2);
+      font-size: $ax-text-sm;
+      color: $ax-gray;
+      
+      select {
+        padding: ax-spacing(1) ax-spacing(2);
+        border: 1px solid $ax-border-color;
+        border-radius: $ax-radius-base;
+        background-color: $ax-white;
+        color: $ax-gray-dark;
+        font-size: $ax-text-sm;
+        
+        &:focus {
+          @include ax-focus-ring();
+        }
+      }
+    }
+  }
+  
+  // Simple pagination (prev/next only)
+  .pagination-simple {
+    @include ax-flex-between;
+    
+    .pagination-prev,
+    .pagination-next {
+      @include ax-flex-start;
+      gap: ax-spacing(2);
+      padding: ax-spacing(2) ax-spacing(4);
+      color: $ax-blue;
+      text-decoration: none;
+      border: 1px solid $ax-border-color;
+      border-radius: $ax-radius-base;
+      background-color: $ax-white;
+      transition: all $ax-transition-fast;
+      
+      &:hover {
+        background-color: $ax-blue;
+        color: $ax-white;
+        border-color: $ax-blue;
+      }
+      
+      &:focus {
+        @include ax-focus-ring();
+      }
+      
+      &.disabled {
+        color: $ax-gray;
+        cursor: not-allowed;
+        opacity: 0.6;
+        
+        &:hover {
+          background-color: $ax-white;
+          color: $ax-gray;
+          border-color: $ax-border-color;
+        }
+      }
+    }
+    
+    .pagination-prev::before {
+      content: "←";
+    }
+    
+    .pagination-next::after {
+      content: "→";
+    }
+    
+    .pagination-current {
+      font-size: $ax-text-sm;
+      color: $ax-gray;
+      
+      .current-page {
+        font-weight: $ax-font-semibold;
+        color: $ax-gray-dark;
+      }
+    }
+  }
+
+  // =============================================================================
+  // RESPONSIVE BEHAVIOR
+  // =============================================================================
+  
+  @include ax-responsive(md-down) {
+    .pagination {
+      gap: ax-spacing(0.5);
+      
+      .page-item .page-link {
+        min-width: ax-spacing(9);
+        height: ax-spacing(9);
+        padding: ax-spacing(2);
+        font-size: $ax-text-xs;
+      }
+      
+      // Hide middle page numbers on smaller screens
+      &.pagination-responsive {
+        .page-item:not(:first-child):not(:last-child):not(.active) {
+          display: none;
+          
+          &:nth-child(2),
+          &:nth-last-child(2) {
+            display: flex;
+          }
+        }
+      }
+    }
+    
+    .pagination-nav {
+      flex-direction: column;
+      gap: ax-spacing(3);
+      align-items: stretch;
+      
+      .pagination-info,
+      .pagination-per-page {
+        justify-content: center;
+      }
+    }
+  }
+  
+  @include ax-responsive(sm-down) {
+    .pagination {
+      // Show only prev/next and current on very small screens
+      &.pagination-mobile {
+        .page-item:not(.page-prev):not(.page-next):not(.active) {
+          display: none;
+        }
+      }
+    }
+    
+    .pagination-simple {
+      .pagination-prev,
+      .pagination-next {
+        padding: ax-spacing(2) ax-spacing(3);
+        font-size: $ax-text-sm;
+      }
+      
+      .pagination-current {
+        text-align: center;
+      }
+    }
+  }
+
+  // =============================================================================
+  // ACCESSIBILITY ENHANCEMENTS
+  // =============================================================================
+  
+  .pagination {
+    .page-item .page-link {
+      // Focus management
+      &:focus-visible {
+        @include ax-focus-ring();
+      }
+      
+      // Enhanced accessibility for screen readers
+      &[aria-current="page"] {
+        // Current page indicator
+        position: relative;
+        
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: -2px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 60%;
+          height: 2px;
+          background-color: currentColor;
+          border-radius: 1px;
+        }
+      }
+    }
+    
+    // High contrast mode support
+    @media (prefers-contrast: high) {
+      .page-item .page-link {
+        border-width: 2px;
+      }
+    }
+    
+    // Reduced motion support
+    @include ax-prefers-reduced-motion {
+      .page-item .page-link {
+        transition: none;
+        
+        &:hover {
+          transform: none;
+        }
+      }
+    }
+  }
+  
+  .pagination-simple {
+    .pagination-prev,
+    .pagination-next {
+      &:focus-visible {
+        @include ax-focus-ring();
+      }
+    }
+    
+    @include ax-prefers-reduced-motion {
+      .pagination-prev,
+      .pagination-next {
+        transition: none;
+      }
+    }
+  }
+}

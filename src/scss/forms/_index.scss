@@ -1,0 +1,150 @@
+/*!
+ * AxisUI Forms Index - Pure CSS Forms System
+ * Comprehensive forms module forwarding all form components
+ * Direct color naming with ax- prefixed variables only
+ */
+
+// =============================================================================
+// FORMS SYSTEM INDEX - COMPLETE FORM COMPONENTS COLLECTION
+// Container-scoped forms system with all form variants and patterns
+// =============================================================================
+
+// =============================================================================
+// NOTE: Form mixins are now consolidated in src/scss/abstracts/_mixins.scss
+// This provides better maintainability and avoids code duplication
+// =============================================================================
+
+// =============================================================================
+// CORE FORM COMPONENTS
+// Essential form building blocks and base styles
+// =============================================================================
+
+@forward 'forms';                  // Base form styles, inputs, labels, layouts
+@forward 'input-group';           // Input groups, addons, combinations
+@forward 'form-validation';       // Form validation
+@forward 'form-input-mask';       // Input mask styles
+
+// =============================================================================
+// ADVANCED FORM COMPONENTS  
+// Complex form patterns and specialized components
+// =============================================================================
+
+@forward 'advanced-forms';        // Complex layouts, form cards, sections, tabs
+
+// =============================================================================
+// FORMS SYSTEM OVERVIEW
+// Pure CSS forms solution with zero JavaScript dependencies
+//
+// BASE FORMS (_forms.scss):
+// - Form containers, groups, sections
+// - Input controls (text, email, password, textarea, select)
+// - Size variants (xs, sm, lg, xl) 
+// - Checkboxes and radio buttons
+// - Form layouts (horizontal, inline, grid)
+// - Fieldsets and form actions
+// - Validation base states (success, error, warning)
+//
+// ADVANCED FORMS (_advanced-forms.scss):
+// - Form grids and responsive layouts
+// - Form cards with headers/footers
+// - Form sections with tabs
+// - File upload areas with drag/drop
+// - Date range pickers
+// - Toggle switches and range sliders  
+// - Form repeater (add/remove fields)
+// - Conditional form fields
+// - Form wizard layouts
+//
+// INPUT GROUP (_input-group.scss):
+// - Base input grouping
+// - Text and button addons
+// - Size variants (sm, lg)
+// - Search input groups
+// - Currency input groups
+// - URL input groups
+// - Email input groups
+// - Password input groups
+// - Date range input groups
+// - Quantity input groups
+// - Multi-input groups
+// - Dropdown input groups
+// - Validation states for groups
+// - Responsive behavior
+//
+// =============================================================================
+// USAGE EXAMPLES:
+//
+// Basic Form:
+// <div class="axis-ui">
+//   <form class="form">
+//     <div class="form-group">
+//       <label class="form-label required">Email</label>
+//       <input type="email" class="form" required>
+//       <div class="form-text">We'll never share your email.</div>
+//     </div>
+//   </form>
+// </div>
+//
+// Advanced Form Card:
+// <div class="axis-ui">
+//   <div class="form-card">
+//     <div class="form-card-header">
+//       <h3 class="form-card-title">Contact Information</h3>
+//     </div>
+//     <div class="form-card-body">
+//       <div class="form-grid form-grid-2">
+//         <div class="form-group">
+//           <label class="form-label">First Name</label>
+//           <input type="text" class="form">
+//         </div>
+//         <div class="form-group">
+//           <label class="form-label">Last Name</label>
+//           <input type="text" class="form">
+//         </div>
+//       </div>
+//     </div>
+//   </div>
+// </div>
+//
+// Multi-Step Form:
+// <div class="axis-ui">
+//   <div class="multi-step-form">
+//     <div class="step-progress">
+//       <div class="step-progress-item active">
+//         <div class="step-number">1</div>
+//         <div class="step-title">Personal Info</div>
+//       </div>
+//       <div class="step-progress-item">
+//         <div class="step-number">2</div>
+//         <div class="step-title">Address</div>
+//       </div>
+//       <div class="step-progress-item">
+//         <div class="step-number">3</div>
+//         <div class="step-title">Payment</div>
+//       </div>
+//     </div>
+//     <div class="step-content">
+//       <div class="step-panel active">
+//         <!-- Step 1 content -->
+//       </div>
+//     </div>
+//     <div class="step-navigation">
+//       <button class="step-btn step-btn-prev">Previous</button>
+//       <button class="step-btn step-btn-next">Next</button>
+//     </div>
+//   </div>
+// </div>
+//
+// Input Group with Validation:
+// <div class="axis-ui">
+//   <div class="input-group valid">
+//     <div class="input-group-text">$</div>
+//     <input type="number" class="form" placeholder="0.00">
+//     <div class="input-group-btn">
+//       <button class="button btn-blue">Add</button>
+//     </div>
+//   </div>
+//   <div class="valid-feedback">Valid amount entered</div>
+// </div>
+//
+// =============================================================================

@@ -1,0 +1,280 @@
+// =============================================================================
+// COLORS - AxisUI Framework
+// Best 15 Colors - Professional, Simple, Direct Naming
+// Each color has 3 variants: light, normal, dark
+// =============================================================================
+
+// Base Colors (Essential - 3 colors)
+$ax-white: #ffffff !default;
+$ax-black: #000000 !default;
+$ax-transparent: transparent !default;
+
+// Text Colors (Semantic helpers)
+$ax-text-color: #374151 !default;  // Default text color
+$ax-text-light: #6b7280 !default;  // Light text color
+$ax-text-muted: #9ca3af !default;  // Muted text color
+
+// =============================================================================
+// CORE COLOR PALETTE - Best 15 Colors (12 colors + 3 base)
+// Common Standard Colors: Blue, Red, Green, Orange, Yellow, Gray
+// Professional Extended Colors: Purple, Pink, Teal, Cyan, Brown, Navy
+// =============================================================================
+
+// 1. Blue (Primary color - most used)
+$ax-blue-lighter: #e3f2fd !default;  // Very light tint for backgrounds
+$ax-blue-light: #64b5f6 !default;
+$ax-blue: #2196f3 !default;
+$ax-blue-dark: #1976d2 !default;
+$ax-blue-darker: #0d47a1 !default;  // Very dark for emphasis
+
+// 2. Red (Error, danger, delete actions)
+$ax-red-lighter: #ffebee !default;  // Very light tint for backgrounds
+$ax-red-light: #ef5350 !default;
+$ax-red: #f44336 !default;
+$ax-red-dark: #d32f2f !default;
+$ax-red-darker: #b71c1c !default;  // Very dark for emphasis
+
+// 3. Green (Success, confirmation, positive actions)
+$ax-green-lighter: #e8f5e9 !default;  // Very light tint for backgrounds
+$ax-green-light: #66bb6a !default;
+$ax-green: #4caf50 !default;
+$ax-green-dark: #388e3c !default;
+$ax-green-darker: #1b5e20 !default;  // Very dark for emphasis
+
+// 4. Orange (Warning, attention, medium priority)
+$ax-orange-lighter: #fff3e0 !default;  // Very light tint for backgrounds
+$ax-orange-light: #ffb74d !default;
+$ax-orange: #ff9800 !default;
+$ax-orange-dark: #f57c00 !default;
+$ax-orange-darker: #e65100 !default;  // Very dark for emphasis
+
+// 5. Yellow (Caution, info, highlights)
+$ax-yellow-lighter: #fffde7 !default;  // Very light tint for backgrounds
+$ax-yellow-light: #ffee58 !default;
+$ax-yellow: #ffeb3b !default;
+$ax-yellow-dark: #fbc02d !default;
+$ax-yellow-darker: #f57f17 !default;  // Very dark for emphasis
+
+// 6. Gray (Neutral, backgrounds, borders, dark mode support)
+$ax-gray-lighter: #fafafa !default;  // Very light - for backgrounds and dark mode text
+$ax-gray-light: #e5e7eb !default;    // Light - for backgrounds and borders
+$ax-gray: #9e9e9e !default;          // Normal - for borders and muted elements
+$ax-gray-dark: #52525b !default;     // Dark - for text and dark mode borders
+$ax-gray-darker: #27272a !default;   // Very dark - for dark mode backgrounds
+
+// 7. Purple (Premium, creative, brands)
+$ax-purple-lighter: #f3e5f5 !default;  // Very light tint for backgrounds
+$ax-purple-light: #ba68c8 !default;
+$ax-purple: #9c27b0 !default;
+$ax-purple-dark: #7b1fa2 !default;
+$ax-purple-darker: #4a148c !default;  // Very dark for emphasis
+
+// 8. Pink (Feminine, playful, highlights)
+$ax-pink-lighter: #fce4ec !default;  // Very light tint for backgrounds
+$ax-pink-light: #f48fb1 !default;
+$ax-pink: #e91e63 !default;
+$ax-pink-dark: #c2185b !default;
+$ax-pink-darker: #880e4f !default;  // Very dark for emphasis
+
+// 9. Teal (Medical, calm, professional)
+$ax-teal-lighter: #e0f2f1 !default;  // Very light tint for backgrounds
+$ax-teal-light: #4db6ac !default;
+$ax-teal: #009688 !default;
+$ax-teal-dark: #00796b !default;
+$ax-teal-darker: #004d40 !default;  // Very dark for emphasis
+
+// 10. Cyan (Tech, water, communication)
+$ax-cyan-lighter: #e0f7fa !default;  // Very light tint for backgrounds
+$ax-cyan-light: #4fc3f7 !default;
+$ax-cyan: #00bcd4 !default;
+$ax-cyan-dark: #0097a7 !default;
+$ax-cyan-darker: #006064 !default;  // Very dark for emphasis
+
+// 11. Brown (Earthy, natural, warm)
+$ax-brown-lighter: #efebe9 !default;  // Very light tint for backgrounds
+$ax-brown-light: #a1887f !default;
+$ax-brown: #795548 !default;
+$ax-brown-dark: #5d4037 !default;
+$ax-brown-darker: #3e2723 !default;  // Very dark for emphasis
+
+// 12. Navy (Corporate, trustworthy, professional)
+$ax-navy-lighter: #e8eaf6 !default;  // Very light tint for backgrounds
+$ax-navy-light: #5c6bc0 !default;
+$ax-navy: #3f51b5 !default;
+$ax-navy-dark: #303f9f !default;
+$ax-navy-darker: #1a237e !default;  // Very dark for emphasis
+
+// =============================================================================
+// COLOR MAPS FOR PROGRAMMATIC USAGE  
+// Best 15 Colors - All with 3 variants (light, normal, dark)
+// =============================================================================
+
+$ax-colors: (
+  // Base colors (3)
+  'white': $ax-white,
+  'black': $ax-black,
+  'transparent': $ax-transparent,
+  
+  // Blue (Primary)
+  'blue': $ax-blue,
+  'blue-light': $ax-blue-light,
+  'blue-dark': $ax-blue-dark,
+  
+  // Red (Error/Danger)
+  'red': $ax-red,
+  'red-light': $ax-red-light,
+  'red-dark': $ax-red-dark,
+  
+  // Green (Success)
+  'green': $ax-green,
+  'green-light': $ax-green-light,
+  'green-dark': $ax-green-dark,
+  
+  // Orange (Warning)
+  'orange': $ax-orange,
+  'orange-light': $ax-orange-light,
+  'orange-dark': $ax-orange-dark,
+  
+  // Yellow (Caution/Info)
+  'yellow': $ax-yellow,
+  'yellow-light': $ax-yellow-light,
+  'yellow-dark': $ax-yellow-dark,
+  
+  // Gray (Neutral)
+  'gray': $ax-gray,
+  'gray-lighter': $ax-gray-lighter,
+  'gray-light': $ax-gray-light,
+  'gray-dark': $ax-gray-dark,
+  'gray-darker': $ax-gray-darker,
+  
+  // Purple (Premium)
+  'purple': $ax-purple,
+  'purple-light': $ax-purple-light,
+  'purple-dark': $ax-purple-dark,
+  
+  // Pink (Playful)
+  'pink': $ax-pink,
+  'pink-light': $ax-pink-light,
+  'pink-dark': $ax-pink-dark,
+  
+  // Teal (Professional)
+  'teal': $ax-teal,
+  'teal-light': $ax-teal-light,
+  'teal-dark': $ax-teal-dark,
+  
+  // Cyan (Tech)
+  'cyan': $ax-cyan,
+  'cyan-light': $ax-cyan-light,
+  'cyan-dark': $ax-cyan-dark,
+  
+  // Brown (Earthy)
+  'brown': $ax-brown,
+  'brown-light': $ax-brown-light,
+  'brown-dark': $ax-brown-dark,
+  
+  // Navy (Corporate)
+  'navy': $ax-navy,
+  'navy-light': $ax-navy-light,
+  'navy-dark': $ax-navy-dark
+) !default;
+
+// =============================================================================
+// CSS CUSTOM PROPERTIES (CSS VARIABLES) FOR COLORS
+// Export all colors as CSS variables for runtime theming and dark mode
+// =============================================================================
+
+:root {
+  // Base colors
+  --ax-white: #{$ax-white};
+  --ax-black: #{$ax-black};
+  --ax-transparent: #{$ax-transparent};
+  
+  // Text colors
+  --ax-text-color: #{$ax-text-color};
+  --ax-text-light: #{$ax-text-light};
+  --ax-text-muted: #{$ax-text-muted};
+  
+  // Blue
+  --ax-blue-lighter: #{$ax-blue-lighter};
+  --ax-blue-light: #{$ax-blue-light};
+  --ax-blue: #{$ax-blue};
+  --ax-blue-dark: #{$ax-blue-dark};
+  --ax-blue-darker: #{$ax-blue-darker};
+  
+  // Red
+  --ax-red-lighter: #{$ax-red-lighter};
+  --ax-red-light: #{$ax-red-light};
+  --ax-red: #{$ax-red};
+  --ax-red-dark: #{$ax-red-dark};
+  --ax-red-darker: #{$ax-red-darker};
+  
+  // Green
+  --ax-green-lighter: #{$ax-green-lighter};
+  --ax-green-light: #{$ax-green-light};
+  --ax-green: #{$ax-green};
+  --ax-green-dark: #{$ax-green-dark};
+  --ax-green-darker: #{$ax-green-darker};
+  
+  // Orange
+  --ax-orange-lighter: #{$ax-orange-lighter};
+  --ax-orange-light: #{$ax-orange-light};
+  --ax-orange: #{$ax-orange};
+  --ax-orange-dark: #{$ax-orange-dark};
+  --ax-orange-darker: #{$ax-orange-darker};
+  
+  // Yellow
+  --ax-yellow-lighter: #{$ax-yellow-lighter};
+  --ax-yellow-light: #{$ax-yellow-light};
+  --ax-yellow: #{$ax-yellow};
+  --ax-yellow-dark: #{$ax-yellow-dark};
+  --ax-yellow-darker: #{$ax-yellow-darker};
+  
+  // Gray
+  --ax-gray-lighter: #{$ax-gray-lighter};
+  --ax-gray-light: #{$ax-gray-light};
+  --ax-gray: #{$ax-gray};
+  --ax-gray-dark: #{$ax-gray-dark};
+  --ax-gray-darker: #{$ax-gray-darker};
+  
+  // Purple
+  --ax-purple-lighter: #{$ax-purple-lighter};
+  --ax-purple-light: #{$ax-purple-light};
+  --ax-purple: #{$ax-purple};
+  --ax-purple-dark: #{$ax-purple-dark};
+  --ax-purple-darker: #{$ax-purple-darker};
+  
+  // Pink
+  --ax-pink-lighter: #{$ax-pink-lighter};
+  --ax-pink-light: #{$ax-pink-light};
+  --ax-pink: #{$ax-pink};
+  --ax-pink-dark: #{$ax-pink-dark};
+  --ax-pink-darker: #{$ax-pink-darker};
+  
+  // Teal
+  --ax-teal-lighter: #{$ax-teal-lighter};
+  --ax-teal-light: #{$ax-teal-light};
+  --ax-teal: #{$ax-teal};
+  --ax-teal-dark: #{$ax-teal-dark};
+  --ax-teal-darker: #{$ax-teal-darker};
+  
+  // Cyan
+  --ax-cyan-lighter: #{$ax-cyan-lighter};
+  --ax-cyan-light: #{$ax-cyan-light};
+  --ax-cyan: #{$ax-cyan};
+  --ax-cyan-dark: #{$ax-cyan-dark};
+  --ax-cyan-darker: #{$ax-cyan-darker};
+  
+  // Brown
+  --ax-brown-lighter: #{$ax-brown-lighter};
+  --ax-brown-light: #{$ax-brown-light};
+  --ax-brown: #{$ax-brown};
+  --ax-brown-dark: #{$ax-brown-dark};
+  --ax-brown-darker: #{$ax-brown-darker};
+  
+  // Navy
+  --ax-navy-lighter: #{$ax-navy-lighter};
+  --ax-navy-light: #{$ax-navy-light};
+  --ax-navy: #{$ax-navy};
+  --ax-navy-dark: #{$ax-navy-dark};
+  --ax-navy-darker: #{$ax-navy-darker};
+}

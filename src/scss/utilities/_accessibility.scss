@@ -1,0 +1,611 @@
+/*!
+ * AxisUI Accessibility and Performance Utilities - Pure CSS A11y & Performance
+ * Comprehensive accessibility support and performance optimizations
+ */
+
+// =============================================================================
+// ACCESSIBILITY AND PERFORMANCE UTILITIES SYSTEM
+// Container-scoped utilities for better UX without JavaScript
+// Includes: screen reader support, focus management, performance optimizations, print styles
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// AxisUI Container Scope
+.axis-ui {
+
+  // =============================================================================
+  // SCREEN READER UTILITIES
+  // =============================================================================
+
+  .sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+
+  .sr-only-focusable:focus,
+  .sr-only-focusable:active {
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+    clip: auto !important;
+    white-space: normal !important;
+  }
+
+  // Screen reader only text
+  .sr-text {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+
+  // Skip links for keyboard navigation
+  .skip-link {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+    z-index: 1000;
+
+    &:focus,
+    &:active {
+      position: fixed !important;
+      top: 1rem !important;
+      left: 1rem !important;
+      width: auto !important;
+      height: auto !important;
+      margin: 0 !important;
+      padding: 0.5rem 1rem !important;
+      overflow: visible !important;
+      clip: auto !important;
+      white-space: normal !important;
+      background-color: #{$ax-blue} !important;
+      color: #{$ax-white} !important;
+      border-radius: $ax-radius-base !important;
+      text-decoration: none !important;
+      font-weight: 600 !important;
+      box-shadow: #{$ax-shadow-lg} !important;
+    }
+  }
+
+  // =============================================================================
+  // FOCUS MANAGEMENT
+  // =============================================================================
+
+  // Focus ring utilities
+  .focus-ring:focus {
+    outline: 2px solid #{$ax-blue} !important;
+    outline-offset: 2px !important;
+  }
+
+  .focus-ring-inset:focus {
+    outline: 2px solid #{$ax-blue} !important;
+    outline-offset: -2px !important;
+  }
+
+  .focus-ring-blue:focus {
+    outline: 2px solid #{$ax-blue} !important;
+    outline-offset: 2px !important;
+  }
+
+  .focus-ring-red:focus {
+    outline: 2px solid #{$ax-red} !important;
+    outline-offset: 2px !important;
+  }
+
+  .focus-ring-green:focus {
+    outline: 2px solid #{$ax-green} !important;
+    outline-offset: 2px !important;
+  }
+
+  .focus-ring-yellow:focus {
+    outline: 2px solid #{$ax-yellow} !important;
+    outline-offset: 2px !important;
+  }
+
+  .focus-ring-purple:focus {
+    outline: 2px solid #{$ax-purple} !important;
+    outline-offset: 2px !important;
+  }
+
+  .focus-ring-white:focus {
+    outline: 2px solid #{$ax-white} !important;
+    outline-offset: 2px !important;
+  }
+
+  .focus-ring-black:focus {
+    outline: 2px solid #{$ax-black} !important;
+    outline-offset: 2px !important;
+  }
+
+  // Focus within for parent containers
+  .focus-within:focus-within {
+    outline: 2px solid #{$ax-blue} !important;
+    outline-offset: 2px !important;
+  }
+
+  // Remove focus styles (use with caution)
+  .focus-none:focus {
+    outline: none !important;
+  }
+
+  // =============================================================================
+  // HIGH CONTRAST AND REDUCED MOTION SUPPORT
+  // =============================================================================
+
+  // Reduced motion preferences
+  @media (prefers-reduced-motion: reduce) {
+    .motion-reduce {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  }
+
+  // High contrast mode support
+  @media (prefers-contrast: high) {
+    .high-contrast {
+      border: 2px solid currentColor !important;
+      background-color: #{$ax-white} !important;
+      color: #{$ax-black} !important;
+    }
+  }
+
+  // Dark mode preferences
+  @media (prefers-color-scheme: dark) {
+    .dark-mode-auto {
+      background-color: #{$ax-black} !important;
+      color: #{$ax-white} !important;
+    }
+  }
+
+  // =============================================================================
+  // KEYBOARD NAVIGATION HELPERS
+  // =============================================================================
+
+  // Focusable utilities (tabindex must be set in HTML)
+  .focusable {
+    outline: 0;
+  }
+
+  .unfocusable {
+    outline: 0;
+    pointer-events: none;
+  }
+
+  // Keyboard navigation indicators
+  .keyboard-only:focus:not(:focus-visible) {
+    outline: none !important;
+  }
+
+  .keyboard-only:focus-visible {
+    outline: 2px solid #{$ax-blue} !important;
+    outline-offset: 2px !important;
+  }
+
+  // =============================================================================
+  // ARIA AND SEMANTIC HELPERS
+  // =============================================================================
+
+  // Hidden from all users but assistive technology
+  .aria-hidden {
+    clip: rect(0 0 0 0) !important;
+    clip-path: inset(50%) !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    white-space: nowrap !important;
+    width: 1px !important;
+  }
+
+  // Visually hidden but announced by screen readers
+  .visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+
+  // Show on focus for skip links and important hidden content
+  .visually-hidden-focusable:focus,
+  .visually-hidden-focusable:active {
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    clip: auto !important;
+    white-space: normal !important;
+  }
+
+  // =============================================================================
+  // PERFORMANCE OPTIMIZATION UTILITIES
+  // =============================================================================
+
+  // Content loading optimization - content-visibility API
+  .lazy-render {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 400px;
+  }
+
+  .lazy-render-sm {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 200px;
+  }
+
+  .lazy-render-lg {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 600px;
+  }
+
+  // CSS containment for performance
+  .contain-layout {
+    contain: layout !important;
+  }
+
+  .contain-style {
+    contain: style !important;
+  }
+
+  .contain-paint {
+    contain: paint !important;
+  }
+
+  .contain-size {
+    contain: size !important;
+  }
+
+  .contain-strict {
+    contain: strict !important;
+  }
+
+  .contain-content {
+    contain: content !important;
+  }
+
+  // GPU hardware optimization
+  .gpu-opacity {
+    will-change: opacity !important;
+  }
+
+  .gpu-transform {
+    will-change: transform !important;
+  }
+
+  .gpu-scroll {
+    will-change: scroll-position !important;
+  }
+
+  // Optimize for animations
+  .optimized-animation {
+    will-change: transform, opacity !important;
+    backface-visibility: hidden !important;
+    perspective: 1000px !important;
+  }
+
+  // Reset will-change after animation
+  .optimized-complete {
+    will-change: auto !important;
+  }
+
+  // Smooth scrolling optimization
+  .scroll-smooth {
+    scroll-behavior: smooth !important;
+  }
+
+  .scroll-auto {
+    scroll-behavior: auto !important;
+  }
+
+  // Scroll snap utilities
+  .snap-none { scroll-snap-type: none !important; }
+  .snap-x { scroll-snap-type: x mandatory !important; }
+  .snap-y { scroll-snap-type: y mandatory !important; }
+  .snap-both { scroll-snap-type: both mandatory !important; }
+
+  .snap-mandatory { scroll-snap-type: both mandatory !important; }
+  .snap-proximity { scroll-snap-type: both proximity !important; }
+
+  .snap-start { scroll-snap-align: start !important; }
+  .snap-end { scroll-snap-align: end !important; }
+  .snap-center { scroll-snap-align: center !important; }
+
+  .snap-always { scroll-snap-stop: always !important; }
+  .snap-normal { scroll-snap-stop: normal !important; }
+
+  // Touch action for performance
+  .touch-auto { touch-action: auto !important; }
+  .touch-none { touch-action: none !important; }
+  .touch-pan-x { touch-action: pan-x !important; }
+  .touch-pan-left { touch-action: pan-left !important; }
+  .touch-pan-right { touch-action: pan-right !important; }
+  .touch-pan-y { touch-action: pan-y !important; }
+  .touch-pan-up { touch-action: pan-up !important; }
+  .touch-pan-down { touch-action: pan-down !important; }
+  .touch-pinch-zoom { touch-action: pinch-zoom !important; }
+  .touch-manipulation { touch-action: manipulation !important; }
+
+  // =============================================================================
+  // PRINT STYLES AND UTILITIES
+  // =============================================================================
+
+  // Print visibility
+  .print-hidden {
+    @media print {
+      display: none !important;
+    }
+  }
+
+  .print-visible {
+    display: none;
+    @media print {
+      display: block !important;
+    }
+  }
+
+  .print-inline {
+    display: none;
+    @media print {
+      display: inline !important;
+    }
+  }
+
+  .print-inline-block {
+    display: none;
+    @media print {
+      display: inline-block !important;
+    }
+  }
+
+  // Print-specific styles
+  @media print {
+    // Global print reset
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    .print-colors {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    .print-no-colors {
+      background: transparent !important;
+      color: #{$ax-black} !important;
+      box-shadow: none !important;
+      text-shadow: none !important;
+    }
+
+    // Link styles for print
+    .print-links a:not(.btn) {
+      text-decoration: underline;
+      
+      &[href^="http"]::after {
+        content: ' (' attr(href) ')';
+        font-size: 0.8em;
+        color: #{$ax-gray-dark};
+      }
+    }
+
+    // Abbreviation expansions
+    .print-abbr abbr[title]::after {
+      content: ' (' attr(title) ')';
+      font-size: 0.8em;
+      color: #{$ax-gray-dark};
+    }
+
+    // Page break utilities
+    .page-break-before {
+      page-break-before: always !important;
+    }
+
+    .page-break-after {
+      page-break-after: always !important;
+    }
+
+    .page-break-inside-avoid {
+      page-break-inside: avoid !important;
+    }
+
+    .page-break-inside-auto {
+      page-break-inside: auto !important;
+    }
+
+    // Typography for print
+    .print-typography {
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+
+      h1, h2, h3, h4, h5, h6 {
+        page-break-after: avoid;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+      }
+
+      h1 { font-size: 1.5rem; }
+      h2 { font-size: 1.3rem; }
+      h3 { font-size: 1.1rem; }
+      h4 { font-size: 1rem; }
+      h5 { font-size: 0.9rem; }
+      h6 { font-size: 0.8rem; }
+    }
+
+    // Table styles for print
+    .print-table table {
+      border-collapse: collapse !important;
+      width: 100% !important;
+      margin-bottom: 1rem;
+
+      th, td {
+        padding: 0.3rem 0.5rem !important;
+        border: 1px solid #{$ax-black} !important;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        background-color: #{$ax-gray-light} !important;
+        font-weight: bold;
+      }
+
+      thead {
+        display: table-header-group;
+      }
+
+      tfoot {
+        display: table-footer-group;
+      }
+
+      thead th {
+        border-bottom: 2px solid #{$ax-black} !important;
+      }
+
+      tfoot td, tfoot th {
+        border-top: 2px solid #{$ax-black} !important;
+      }
+
+      tr, img {
+        page-break-inside: avoid;
+      }
+    }
+
+    // Code blocks for print
+    .print-code {
+      pre {
+        white-space: pre-wrap !important;
+        border: 1px solid #{$ax-black};
+        page-break-inside: avoid;
+        padding: 0.5rem;
+        font-family: monospace;
+        background-color: #{$ax-gray-light} !important;
+      }
+
+      code {
+        background-color: #{$ax-gray-light} !important;
+        padding: 0.125rem 0.25rem;
+        border-radius: 0.125rem;
+        font-family: monospace;
+      }
+    }
+  }
+
+  // =============================================================================
+  // TEXT SELECTION AND INTERACTION
+  // =============================================================================
+
+  // Text selection styling
+  .select-blue::selection {
+    background-color: #{$ax-blue-light} !important;
+    color: #{$ax-white} !important;
+  }
+
+  .select-red::selection {
+    background-color: #{$ax-red-light} !important;
+    color: #{$ax-white} !important;
+  }
+
+  .select-green::selection {
+    background-color: #{$ax-green-light} !important;
+    color: #{$ax-white} !important;
+  }
+
+  .select-yellow::selection {
+    background-color: #{$ax-yellow-light} !important;
+    color: #{$ax-black} !important;
+  }
+
+  .select-purple::selection {
+    background-color: #{$ax-purple-light} !important;
+    color: #{$ax-white} !important;
+  }
+
+  // Reading aids
+  .reading-width {
+    max-width: 65ch !important;
+  }
+
+  .reading-height {
+    line-height: 1.6 !important;
+  }
+
+  .reading-spacing {
+    letter-spacing: 0.02em !important;
+  }
+
+  .reading-optimal {
+    max-width: 65ch !important;
+    line-height: 1.6 !important;
+    letter-spacing: 0.02em !important;
+    font-size: 1.125rem !important;
+  }
+
+  // =============================================================================
+  // CONTRAST AND COLOR ACCESSIBILITY
+  // =============================================================================
+
+  // High contrast text
+  .text-high-contrast {
+    color: #{$ax-black} !important;
+    text-shadow: 0 0 0 #{$ax-white}, 0 0 0 #{$ax-white} !important;
+  }
+
+  .text-high-contrast-reverse {
+    color: #{$ax-white} !important;
+    text-shadow: 0 0 0 #{$ax-black}, 0 0 0 #{$ax-black} !important;
+  }
+
+  // Underline for links (accessibility)
+  .links-underlined a {
+    text-decoration: underline !important;
+  }
+
+  .links-underlined a:hover {
+    text-decoration: none !important;
+  }
+
+  // Button accessibility helpers
+  .btn-accessible {
+    min-height: 44px !important;
+    min-width: 44px !important;
+    touch-action: manipulation !important;
+  }
+
+  .btn-accessible:focus {
+    outline: 2px solid #{$ax-blue} !important;
+    outline-offset: 2px !important;
+  }
+
+} // End .axis-ui container scope

@@ -1,0 +1,278 @@
+/*!
+ * AxisUI Transform Utilities - Pure CSS Transform System
+ * Complete 2D/3D transforms without JavaScript dependencies
+ */
+
+// =============================================================================
+// TRANSFORM UTILITIES SYSTEM
+// Container-scoped transform utilities
+// Includes: 2D/3D transforms, scale, rotate, translate, skew, and hover effects
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+
+// AxisUI Container Scope
+.axis-ui {
+
+  // =============================================================================
+  // BASIC TRANSFORM UTILITIES
+  // =============================================================================
+  
+  .transform { transform: translateZ(0) !important; }
+  .transform-none { transform: none !important; }
+  
+  // =============================================================================
+  // HOVER EFFECTS WITH TRANSFORMS
+  // =============================================================================
+  
+  .hover-scale:hover {
+    transform: scale(1.05) !important;
+  }
+  
+  .hover-shadow:hover {
+    box-shadow: $ax-shadow-lg !important;
+  }
+
+  // =============================================================================
+  // 2D TRANSFORM UTILITIES
+  // =============================================================================
+
+  // Scale transforms
+  .scale-0 { transform: scale(0) !important; }
+  .scale-50 { transform: scale(0.5) !important; }
+  .scale-75 { transform: scale(0.75) !important; }
+  .scale-90 { transform: scale(0.9) !important; }
+  .scale-95 { transform: scale(0.95) !important; }
+  .scale-100 { transform: scale(1) !important; }
+  .scale-105 { transform: scale(1.05) !important; }
+  .scale-110 { transform: scale(1.1) !important; }
+  .scale-125 { transform: scale(1.25) !important; }
+  .scale-150 { transform: scale(1.5) !important; }
+
+  // Scale X axis
+  .scale-x-0 { transform: scaleX(0) !important; }
+  .scale-x-50 { transform: scaleX(0.5) !important; }
+  .scale-x-75 { transform: scaleX(0.75) !important; }
+  .scale-x-90 { transform: scaleX(0.9) !important; }
+  .scale-x-95 { transform: scaleX(0.95) !important; }
+  .scale-x-100 { transform: scaleX(1) !important; }
+  .scale-x-105 { transform: scaleX(1.05) !important; }
+  .scale-x-110 { transform: scaleX(1.1) !important; }
+  .scale-x-125 { transform: scaleX(1.25) !important; }
+  .scale-x-150 { transform: scaleX(1.5) !important; }
+
+  // Scale Y axis
+  .scale-y-0 { transform: scaleY(0) !important; }
+  .scale-y-50 { transform: scaleY(0.5) !important; }
+  .scale-y-75 { transform: scaleY(0.75) !important; }
+  .scale-y-90 { transform: scaleY(0.9) !important; }
+  .scale-y-95 { transform: scaleY(0.95) !important; }
+  .scale-y-100 { transform: scaleY(1) !important; }
+  .scale-y-105 { transform: scaleY(1.05) !important; }
+  .scale-y-110 { transform: scaleY(1.1) !important; }
+  .scale-y-125 { transform: scaleY(1.25) !important; }
+  .scale-y-150 { transform: scaleY(1.5) !important; }
+
+  // Rotate transforms
+  .rotate-0 { transform: rotate(0deg) !important; }
+  .rotate-1 { transform: rotate(1deg) !important; }
+  .rotate-2 { transform: rotate(2deg) !important; }
+  .rotate-3 { transform: rotate(3deg) !important; }
+  .rotate-6 { transform: rotate(6deg) !important; }
+  .rotate-12 { transform: rotate(12deg) !important; }
+  .rotate-45 { transform: rotate(45deg) !important; }
+  .rotate-90 { transform: rotate(90deg) !important; }
+  .rotate-180 { transform: rotate(180deg) !important; }
+
+  // Negative rotates
+  .-rotate-1 { transform: rotate(-1deg) !important; }
+  .-rotate-2 { transform: rotate(-2deg) !important; }
+  .-rotate-3 { transform: rotate(-3deg) !important; }
+  .-rotate-6 { transform: rotate(-6deg) !important; }
+  .-rotate-12 { transform: rotate(-12deg) !important; }
+  .-rotate-45 { transform: rotate(-45deg) !important; }
+  .-rotate-90 { transform: rotate(-90deg) !important; }
+  .-rotate-180 { transform: rotate(-180deg) !important; }
+
+  // Translate transforms
+  .translate-x-0 { transform: translateX(0) !important; }
+  .translate-x-1 { transform: translateX(0.25rem) !important; }
+  .translate-x-2 { transform: translateX(0.5rem) !important; }
+  .translate-x-3 { transform: translateX(0.75rem) !important; }
+  .translate-x-4 { transform: translateX(1rem) !important; }
+  .translate-x-5 { transform: translateX(1.25rem) !important; }
+  .translate-x-6 { transform: translateX(1.5rem) !important; }
+  .translate-x-8 { transform: translateX(2rem) !important; }
+  .translate-x-10 { transform: translateX(2.5rem) !important; }
+  .translate-x-12 { transform: translateX(3rem) !important; }
+  .translate-x-16 { transform: translateX(4rem) !important; }
+  .translate-x-20 { transform: translateX(5rem) !important; }
+  .translate-x-24 { transform: translateX(6rem) !important; }
+  .translate-x-32 { transform: translateX(8rem) !important; }
+  .translate-x-40 { transform: translateX(10rem) !important; }
+  .translate-x-48 { transform: translateX(12rem) !important; }
+  .translate-x-56 { transform: translateX(14rem) !important; }
+  .translate-x-64 { transform: translateX(16rem) !important; }
+  .translate-x-1\/2 { transform: translateX(50%) !important; }
+  .translate-x-1\/3 { transform: translateX(33.333333%) !important; }
+  .translate-x-2\/3 { transform: translateX(66.666667%) !important; }
+  .translate-x-1\/4 { transform: translateX(25%) !important; }
+  .translate-x-2\/4 { transform: translateX(50%) !important; }
+  .translate-x-3\/4 { transform: translateX(75%) !important; }
+  .translate-x-full { transform: translateX(100%) !important; }
+
+  // Negative translate X
+  .-translate-x-1 { transform: translateX(-0.25rem) !important; }
+  .-translate-x-2 { transform: translateX(-0.5rem) !important; }
+  .-translate-x-3 { transform: translateX(-0.75rem) !important; }
+  .-translate-x-4 { transform: translateX(-1rem) !important; }
+  .-translate-x-5 { transform: translateX(-1.25rem) !important; }
+  .-translate-x-6 { transform: translateX(-1.5rem) !important; }
+  .-translate-x-8 { transform: translateX(-2rem) !important; }
+  .-translate-x-10 { transform: translateX(-2.5rem) !important; }
+  .-translate-x-12 { transform: translateX(-3rem) !important; }
+  .-translate-x-16 { transform: translateX(-4rem) !important; }
+  .-translate-x-20 { transform: translateX(-5rem) !important; }
+  .-translate-x-24 { transform: translateX(-6rem) !important; }
+  .-translate-x-32 { transform: translateX(-8rem) !important; }
+  .-translate-x-40 { transform: translateX(-10rem) !important; }
+  .-translate-x-48 { transform: translateX(-12rem) !important; }
+  .-translate-x-56 { transform: translateX(-14rem) !important; }
+  .-translate-x-64 { transform: translateX(-16rem) !important; }
+  .-translate-x-1\/2 { transform: translateX(-50%) !important; }
+  .-translate-x-1\/3 { transform: translateX(-33.333333%) !important; }
+  .-translate-x-2\/3 { transform: translateX(-66.666667%) !important; }
+  .-translate-x-1\/4 { transform: translateX(-25%) !important; }
+  .-translate-x-2\/4 { transform: translateX(-50%) !important; }
+  .-translate-x-3\/4 { transform: translateX(-75%) !important; }
+  .-translate-x-full { transform: translateX(-100%) !important; }
+
+  // Translate Y
+  .translate-y-0 { transform: translateY(0) !important; }
+  .translate-y-1 { transform: translateY(0.25rem) !important; }
+  .translate-y-2 { transform: translateY(0.5rem) !important; }
+  .translate-y-3 { transform: translateY(0.75rem) !important; }
+  .translate-y-4 { transform: translateY(1rem) !important; }
+  .translate-y-5 { transform: translateY(1.25rem) !important; }
+  .translate-y-6 { transform: translateY(1.5rem) !important; }
+  .translate-y-8 { transform: translateY(2rem) !important; }
+  .translate-y-10 { transform: translateY(2.5rem) !important; }
+  .translate-y-12 { transform: translateY(3rem) !important; }
+  .translate-y-16 { transform: translateY(4rem) !important; }
+  .translate-y-20 { transform: translateY(5rem) !important; }
+  .translate-y-24 { transform: translateY(6rem) !important; }
+  .translate-y-32 { transform: translateY(8rem) !important; }
+  .translate-y-40 { transform: translateY(10rem) !important; }
+  .translate-y-48 { transform: translateY(12rem) !important; }
+  .translate-y-56 { transform: translateY(14rem) !important; }
+  .translate-y-64 { transform: translateY(16rem) !important; }
+  .translate-y-1\/2 { transform: translateY(50%) !important; }
+  .translate-y-1\/3 { transform: translateY(33.333333%) !important; }
+  .translate-y-2\/3 { transform: translateY(66.666667%) !important; }
+  .translate-y-1\/4 { transform: translateY(25%) !important; }
+  .translate-y-2\/4 { transform: translateY(50%) !important; }
+  .translate-y-3\/4 { transform: translateY(75%) !important; }
+  .translate-y-full { transform: translateY(100%) !important; }
+
+  // Negative translate Y
+  .-translate-y-1 { transform: translateY(-0.25rem) !important; }
+  .-translate-y-2 { transform: translateY(-0.5rem) !important; }
+  .-translate-y-3 { transform: translateY(-0.75rem) !important; }
+  .-translate-y-4 { transform: translateY(-1rem) !important; }
+  .-translate-y-5 { transform: translateY(-1.25rem) !important; }
+  .-translate-y-6 { transform: translateY(-1.5rem) !important; }
+  .-translate-y-8 { transform: translateY(-2rem) !important; }
+  .-translate-y-10 { transform: translateY(-2.5rem) !important; }
+  .-translate-y-12 { transform: translateY(-3rem) !important; }
+  .-translate-y-16 { transform: translateY(-4rem) !important; }
+  .-translate-y-20 { transform: translateY(-5rem) !important; }
+  .-translate-y-24 { transform: translateY(-6rem) !important; }
+  .-translate-y-32 { transform: translateY(-8rem) !important; }
+  .-translate-y-40 { transform: translateY(-10rem) !important; }
+  .-translate-y-48 { transform: translateY(-12rem) !important; }
+  .-translate-y-56 { transform: translateY(-14rem) !important; }
+  .-translate-y-64 { transform: translateY(-16rem) !important; }
+  .-translate-y-1\/2 { transform: translateY(-50%) !important; }
+  .-translate-y-1\/3 { transform: translateY(-33.333333%) !important; }
+  .-translate-y-2\/3 { transform: translateY(-66.666667%) !important; }
+  .-translate-y-1\/4 { transform: translateY(-25%) !important; }
+  .-translate-y-2\/4 { transform: translateY(-50%) !important; }
+  .-translate-y-3\/4 { transform: translateY(-75%) !important; }
+  .-translate-y-full { transform: translateY(-100%) !important; }
+
+  // Skew transforms
+  .skew-x-0 { transform: skewX(0deg) !important; }
+  .skew-x-1 { transform: skewX(1deg) !important; }
+  .skew-x-2 { transform: skewX(2deg) !important; }
+  .skew-x-3 { transform: skewX(3deg) !important; }
+  .skew-x-6 { transform: skewX(6deg) !important; }
+  .skew-x-12 { transform: skewX(12deg) !important; }
+
+  .-skew-x-1 { transform: skewX(-1deg) !important; }
+  .-skew-x-2 { transform: skewX(-2deg) !important; }
+  .-skew-x-3 { transform: skewX(-3deg) !important; }
+  .-skew-x-6 { transform: skewX(-6deg) !important; }
+  .-skew-x-12 { transform: skewX(-12deg) !important; }
+
+  .skew-y-0 { transform: skewY(0deg) !important; }
+  .skew-y-1 { transform: skewY(1deg) !important; }
+  .skew-y-2 { transform: skewY(2deg) !important; }
+  .skew-y-3 { transform: skewY(3deg) !important; }
+  .skew-y-6 { transform: skewY(6deg) !important; }
+  .skew-y-12 { transform: skewY(12deg) !important; }
+
+  .-skew-y-1 { transform: skewY(-1deg) !important; }
+  .-skew-y-2 { transform: skewY(-2deg) !important; }
+  .-skew-y-3 { transform: skewY(-3deg) !important; }
+  .-skew-y-6 { transform: skewY(-6deg) !important; }
+  .-skew-y-12 { transform: skewY(-12deg) !important; }
+
+  // =============================================================================
+  // 3D TRANSFORM UTILITIES
+  // =============================================================================
+
+  // 3D Perspective
+  .perspective-none { perspective: none !important; }
+  .perspective-250 { perspective: 250px !important; }
+  .perspective-500 { perspective: 500px !important; }
+  .perspective-750 { perspective: 750px !important; }
+  .perspective-1000 { perspective: 1000px !important; }
+
+  // Transform style
+  .transform-flat { transform-style: flat !important; }
+  .transform-preserve-3d { transform-style: preserve-3d !important; }
+
+  // Backface visibility
+  .backface-visible { backface-visibility: visible !important; }
+  .backface-hidden { backface-visibility: hidden !important; }
+
+  // 3D Rotations
+  .rotate-x-0 { transform: rotateX(0deg) !important; }
+  .rotate-x-12 { transform: rotateX(12deg) !important; }
+  .rotate-x-45 { transform: rotateX(45deg) !important; }
+  .rotate-x-90 { transform: rotateX(90deg) !important; }
+  .rotate-x-180 { transform: rotateX(180deg) !important; }
+
+  .rotate-y-0 { transform: rotateY(0deg) !important; }
+  .rotate-y-12 { transform: rotateY(12deg) !important; }
+  .rotate-y-45 { transform: rotateY(45deg) !important; }
+  .rotate-y-90 { transform: rotateY(90deg) !important; }
+  .rotate-y-180 { transform: rotateY(180deg) !important; }
+
+  // 3D Translations
+  .translate-z-0 { transform: translateZ(0) !important; }
+  .translate-z-1 { transform: translateZ(0.25rem) !important; }
+  .translate-z-2 { transform: translateZ(0.5rem) !important; }
+  .translate-z-4 { transform: translateZ(1rem) !important; }
+  .translate-z-8 { transform: translateZ(2rem) !important; }
+  .translate-z-16 { transform: translateZ(4rem) !important; }
+
+  .-translate-z-1 { transform: translateZ(-0.25rem) !important; }
+  .-translate-z-2 { transform: translateZ(-0.5rem) !important; }
+  .-translate-z-4 { transform: translateZ(-1rem) !important; }
+  .-translate-z-8 { transform: translateZ(-2rem) !important; }
+  .-translate-z-16 { transform: translateZ(-4rem) !important; }
+
+
+
+} // End .axis-ui container scope

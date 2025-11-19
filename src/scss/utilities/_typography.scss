@@ -1,0 +1,451 @@
+// =============================================================================
+// TYPOGRAPHY UTILITIES - AxisUI Framework
+// Comprehensive typography utilities with text colors, headings, and styling
+// Direct color naming with ax- prefixed variables only
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/colors' as *;
+@use '../abstracts/functions' as *;
+@use '../abstracts/breakpoints' as *;
+
+.axis-ui {
+  // =============================================================================
+  // TEXT COLORS - All color variants (light, normal, dark)
+  // =============================================================================
+  
+  // Generate text color utilities from color map
+  @each $name, $color in $ax-colors {
+    .text-#{$name} { color: $color !important; }
+  }
+  
+  // Additional semantic text colors
+  .text-inherit { color: inherit !important; }
+  .text-current { color: currentColor !important; }
+  .text-transparent { color: transparent !important; }
+  
+  // =============================================================================
+  // FONT SIZES - Using font-sizes map with responsive variants
+  // =============================================================================
+  .text-xs { font-size: $ax-text-xs !important; }
+  .text-sm { font-size: $ax-text-sm !important; }
+  .text-base { font-size: $ax-text-base !important; }
+  .text-lg { font-size: $ax-text-lg !important; }
+  .text-xl { font-size: $ax-text-xl !important; }
+  .text-2xl { font-size: $ax-text-2xl !important; }
+  .text-3xl { font-size: $ax-text-3xl !important; }
+  .text-4xl { font-size: $ax-text-4xl !important; }
+  .text-5xl { font-size: $ax-text-5xl !important; }
+  
+  // =============================================================================
+  // FONT WEIGHTS - Using font-weights map
+  // =============================================================================
+  @each $name, $weight in $ax-font-weights {
+    .font-#{$name} { font-weight: $weight !important; }
+  }
+  
+  // =============================================================================
+  // LINE HEIGHTS - Using line-heights map
+  // =============================================================================
+  @each $name, $height in $ax-line-heights {
+    .leading-#{$name} { line-height: $height !important; }
+  }
+  
+  // =============================================================================
+  // HEADING UTILITIES - Utility classes for heading styles
+  // =============================================================================
+  
+  .h1 { 
+    font-size: $ax-text-4xl !important; 
+    font-weight: $ax-font-semibold !important;
+    line-height: $ax-leading-tight !important;
+    @include ax-media-down(sm) { font-size: $ax-text-3xl !important; }
+  }
+  
+  .h2 { 
+    font-size: $ax-text-3xl !important; 
+    font-weight: $ax-font-semibold !important;
+    line-height: $ax-leading-tight !important;
+    @include ax-media-down(sm) { font-size: $ax-text-xxl !important; }
+  }
+  
+  .h3 { 
+    font-size: $ax-text-xxl !important; 
+    font-weight: $ax-font-semibold !important;
+    line-height: $ax-leading-tight !important;
+    @include ax-media-down(sm) { font-size: $ax-text-xl !important; }
+  }
+  
+  .h4 { 
+    font-size: $ax-text-xl !important; 
+    font-weight: $ax-font-semibold !important;
+    line-height: $ax-leading-tight !important;
+    @include ax-media-down(sm) { font-size: $ax-text-lg !important; }
+  }
+  
+  .h5 { 
+    font-size: $ax-text-lg !important; 
+    font-weight: $ax-font-semibold !important;
+    line-height: $ax-leading-tight !important;
+  }
+  
+  .h6 { 
+    font-size: $ax-text-base !important; 
+    font-weight: $ax-font-medium !important;
+    line-height: $ax-leading-tight !important;
+  }
+  
+  // =============================================================================
+  // TYPOGRAPHY STYLES - Special text styles and typography components
+  // =============================================================================
+  
+  // Lead text for prominent paragraphs
+  .lead {
+    font-size: $ax-text-xl !important;
+    font-weight: $ax-font-light !important;
+    line-height: $ax-leading-relaxed !important;
+    color: $ax-gray-dark !important;
+    
+    @include ax-media-down(sm) {
+      font-size: $ax-text-lg !important;
+    }
+  }
+  
+  // Small text
+  .small {
+    font-size: $ax-text-sm !important;
+    line-height: $ax-leading-normal !important;
+  }
+  
+  // Muted text
+  .text-muted {
+    color: $ax-gray !important;
+  }
+  
+  // Body text variations
+  .text-body {
+    color: $ax-gray-dark !important;
+  }
+  
+  .text-light {
+    color: $ax-gray !important;
+  }
+  
+  // Font families
+  .font-sans {
+    font-family: $ax-font-family !important;
+  }
+  
+  .font-mono {
+    font-family: $ax-font-mono !important;
+  }
+  
+  // =============================================================================
+  // TEXT ALIGNMENT
+  // =============================================================================
+  .text-left { text-align: left !important; }
+  .text-center { text-align: center !important; }
+  .text-right { text-align: right !important; }
+  .text-justify { text-align: justify !important; }
+  
+  // Responsive text alignment
+  @include ax-media-up(sm) {
+    .text-sm-left { text-align: left !important; }
+    .text-sm-center { text-align: center !important; }
+    .text-sm-right { text-align: right !important; }
+  }
+  
+  @include ax-media-up(md) {
+    .text-md-left { text-align: left !important; }
+    .text-md-center { text-align: center !important; }
+    .text-md-right { text-align: right !important; }
+  }
+  
+  @include ax-media-up(lg) {
+    .text-lg-left { text-align: left !important; }
+    .text-lg-center { text-align: center !important; }
+    .text-lg-right { text-align: right !important; }
+  }
+  
+  // =============================================================================
+  // TEXT DECORATION
+  // =============================================================================
+  .underline { text-decoration: underline !important; }
+  .overline { text-decoration: overline !important; }
+  .line-through { text-decoration: line-through !important; }
+  .no-underline { text-decoration: none !important; }
+  
+  // Text decoration colors
+  .decoration-blue { text-decoration-color: $ax-blue !important; }
+  .decoration-red { text-decoration-color: $ax-red !important; }
+  .decoration-green { text-decoration-color: $ax-green !important; }
+  .decoration-yellow { text-decoration-color: $ax-yellow !important; }
+  .decoration-gray { text-decoration-color: $ax-gray !important; }
+  
+  // Text decoration styles
+  .decoration-solid { text-decoration-style: solid !important; }
+  .decoration-double { text-decoration-style: double !important; }
+  .decoration-dotted { text-decoration-style: dotted !important; }
+  .decoration-dashed { text-decoration-style: dashed !important; }
+  .decoration-wavy { text-decoration-style: wavy !important; }
+  
+  // =============================================================================
+  // TEXT TRANSFORM
+  // =============================================================================
+  .uppercase { text-transform: uppercase !important; }
+  .lowercase { text-transform: lowercase !important; }
+  .capitalize { text-transform: capitalize !important; }
+  .normal-case { text-transform: none !important; }
+  
+  // =============================================================================
+  // FONT STYLE
+  // =============================================================================
+  .italic { font-style: italic !important; }
+  .not-italic { font-style: normal !important; }
+  
+  // =============================================================================
+  // VERTICAL ALIGNMENT
+  // =============================================================================
+  .align-baseline { vertical-align: baseline !important; }
+  .align-top { vertical-align: top !important; }
+  .align-middle { vertical-align: middle !important; }
+  .align-bottom { vertical-align: bottom !important; }
+  .align-text-top { vertical-align: text-top !important; }
+  .align-text-bottom { vertical-align: text-bottom !important; }
+  
+  // =============================================================================
+  // LETTER SPACING
+  // =============================================================================
+  .tracking-tighter { letter-spacing: -0.05em !important; }
+  .tracking-tight { letter-spacing: -0.025em !important; }
+  .tracking-normal { letter-spacing: 0em !important; }
+  .tracking-wide { letter-spacing: 0.025em !important; }
+  .tracking-wider { letter-spacing: 0.05em !important; }
+  .tracking-widest { letter-spacing: 0.1em !important; }
+  
+  // =============================================================================
+  // TEXT INDENT
+  // =============================================================================
+  .indent-0 { text-indent: 0 !important; }
+  .indent-1 { text-indent: ax-spacing(1) !important; }
+  .indent-2 { text-indent: ax-spacing(2) !important; }
+  .indent-4 { text-indent: ax-spacing(4) !important; }
+  .indent-8 { text-indent: ax-spacing(8) !important; }
+  
+  // =============================================================================
+  // TYPOGRAPHY SCALES - Display text for hero sections
+  // =============================================================================
+  .display-1 {
+    font-size: $ax-text-6xl !important;
+    font-weight: $ax-font-bold !important;
+    line-height: $ax-leading-none !important;
+    
+    @include ax-media-down(lg) { font-size: $ax-text-5xl !important; }
+    @include ax-media-down(md) { font-size: $ax-text-4xl !important; }
+    @include ax-media-down(sm) { font-size: $ax-text-3xl !important; }
+  }
+  
+  .display-2 {
+    font-size: $ax-text-5xl !important;
+    font-weight: $ax-font-bold !important;
+    line-height: $ax-leading-none !important;
+    
+    @include ax-media-down(lg) { font-size: $ax-text-4xl !important; }
+    @include ax-media-down(md) { font-size: $ax-text-3xl !important; }
+    @include ax-media-down(sm) { font-size: $ax-text-xxl !important; }
+  }
+  
+  .display-3 {
+    font-size: $ax-text-4xl !important;
+    font-weight: $ax-font-semibold !important;
+    line-height: $ax-leading-tight !important;
+    
+    @include ax-media-down(lg) { font-size: $ax-text-3xl !important; }
+    @include ax-media-down(md) { font-size: $ax-text-xxl !important; }
+    @include ax-media-down(sm) { font-size: $ax-text-xl !important; }
+  }
+  
+  .display-4 {
+    font-size: $ax-text-3xl !important;
+    font-weight: $ax-font-semibold !important;
+    line-height: $ax-leading-tight !important;
+    
+    @include ax-media-down(md) { font-size: $ax-text-xxl !important; }
+    @include ax-media-down(sm) { font-size: $ax-text-lg !important; }
+  }
+  
+  // =============================================================================
+  // TEXT OVERFLOW
+  // =============================================================================
+  .truncate {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+  
+  .text-ellipsis { text-overflow: ellipsis !important; }
+  .text-clip { text-overflow: clip !important; }
+  
+  // Multi-line truncation
+  .line-clamp-1 {
+    overflow: hidden !important;
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 1 !important;
+    line-clamp: 1 !important;
+  }
+  
+  .line-clamp-2 {
+    overflow: hidden !important;
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 2 !important;
+    line-clamp: 2 !important;
+  }
+  
+  .line-clamp-3 {
+    overflow: hidden !important;
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 3 !important;
+    line-clamp: 3 !important;
+  }
+  
+  .line-clamp-none {
+    overflow: visible !important;
+    display: block !important;
+    -webkit-box-orient: horizontal !important;
+    -webkit-line-clamp: none !important;
+    line-clamp: none !important;
+  }
+  
+  // =============================================================================
+  // WHITE SPACE
+  // =============================================================================
+  .whitespace-normal { white-space: normal !important; }
+  .whitespace-nowrap { white-space: nowrap !important; }
+  .whitespace-pre { white-space: pre !important; }
+  .whitespace-pre-line { white-space: pre-line !important; }
+  .whitespace-pre-wrap { white-space: pre-wrap !important; }
+  .whitespace-break-spaces { white-space: break-spaces !important; }
+  
+  // =============================================================================
+  // WORD BREAK
+  // =============================================================================
+  .break-normal { 
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+  }
+  .break-words { overflow-wrap: break-word !important; }
+  .break-all { word-break: break-all !important; }
+  .break-keep { word-break: keep-all !important; }
+  
+  // =============================================================================
+  // PROSE STYLING - For rich text content
+  // =============================================================================
+  .prose {
+    color: $ax-gray-dark !important;
+    max-width: 65ch !important;
+    line-height: $ax-leading-relaxed !important;
+    
+    h1, h2, h3, h4, h5, h6 {
+      color: $ax-black !important;
+      font-weight: $ax-font-semibold !important;
+      line-height: $ax-leading-tight !important;
+      margin-top: ax-spacing(8) !important;
+      margin-bottom: ax-spacing(4) !important;
+      
+      &:first-child {
+        margin-top: 0 !important;
+      }
+    }
+    
+    h1 { font-size: $ax-text-3xl !important; }
+    h2 { font-size: $ax-text-xxl !important; }
+    h3 { font-size: $ax-text-xl !important; }
+    h4 { font-size: $ax-text-lg !important; }
+    
+    p {
+      margin-top: 0 !important;
+      margin-bottom: ax-spacing(4) !important;
+    }
+    
+    ul, ol {
+      margin-top: ax-spacing(4) !important;
+      margin-bottom: ax-spacing(4) !important;
+      padding-left: ax-spacing(6) !important;
+    }
+    
+    li {
+      margin-top: ax-spacing(1) !important;
+      margin-bottom: ax-spacing(1) !important;
+    }
+    
+    a {
+      color: $ax-blue !important;
+      text-decoration: underline !important;
+      font-weight: $ax-font-medium !important;
+      
+      &:hover {
+        color: $ax-blue-dark !important;
+      }
+    }
+    
+    blockquote {
+      font-weight: $ax-font-medium !important;
+      font-style: italic !important;
+      color: $ax-gray-dark !important;
+      border-left: 0.25rem solid $ax-gray-light !important;
+      quotes: "\201C""\201D""\2018""\2019" !important;
+      margin-top: ax-spacing(6) !important;
+      margin-bottom: ax-spacing(6) !important;
+      padding-left: ax-spacing(4) !important;
+    }
+    
+    code {
+      color: $ax-gray-dark !important;
+      font-family: $ax-font-mono !important;
+      font-size: 0.875em !important;
+      background-color: $ax-gray-light !important;
+      padding: 0.125rem 0.25rem !important;
+      border-radius: $ax-radius-sm !important;
+    }
+    
+    pre {
+      color: $ax-white !important;
+      background-color: $ax-gray-dark !important;
+      overflow-x: auto !important;
+      padding: ax-spacing(4) !important;
+      border-radius: $ax-radius-md !important;
+      margin-top: ax-spacing(6) !important;
+      margin-bottom: ax-spacing(6) !important;
+      
+      code {
+        background-color: transparent !important;
+        border-width: 0 !important;
+        border-radius: 0 !important;
+        padding: 0 !important;
+        color: inherit !important;
+        font-size: inherit !important;
+        font-family: inherit !important;
+        line-height: inherit !important;
+      }
+    }
+  }
+  
+  // Prose size variants
+  .prose-sm {
+    font-size: $ax-text-sm !important;
+    line-height: $ax-leading-relaxed !important;
+  }
+  
+  .prose-lg {
+    font-size: $ax-text-lg !important;
+    line-height: $ax-leading-relaxed !important;
+  }
+  
+  .prose-xl {
+    font-size: $ax-text-xl !important;
+    line-height: $ax-leading-relaxed !important;
+  }
+}

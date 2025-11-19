@@ -1,0 +1,434 @@
+// =============================================================================
+// COMPREHENSIVE RESET - AxisUI Framework
+// Modern CSS reset with container scoping support
+// Direct color naming with ax- prefixed variables
+// =============================================================================
+
+@use '../abstracts/colors' as *;
+@use '../abstracts/variables' as *;
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
+@use '../abstracts/breakpoints' as *;
+
+// Comprehensive reset mixin for container scoping
+@mixin ax-reset() {
+  // =============================================================================
+  // MODERN CSS RESET - COMPREHENSIVE FOUNDATION
+  // =============================================================================
+
+  // Universal box-sizing with inheritance
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  // Remove default margins and padding
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  // Root element optimizations
+  html {
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    tab-size: 4;
+    scroll-behavior: smooth;
+    
+    @include ax-prefers-reduced-motion {
+      scroll-behavior: auto;
+    }
+  }
+
+  // Body foundation with comprehensive defaults
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: $ax-font-family;
+    font-size: $ax-text-base;
+    font-weight: $ax-font-normal;
+    line-height: $ax-leading-normal;
+    color: $ax-gray-dark;
+    background-color: $ax-white;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    word-wrap: break-word;
+  }
+
+  // =============================================================================
+  // TYPOGRAPHY AND TEXT ELEMENTS
+  // =============================================================================
+
+  // Remove list styles on elements with list role for accessibility
+  ul[role='list'],
+  ol[role='list'] {
+    list-style: none;
+  }
+
+  // Improve link accessibility and rendering
+  a {
+    text-decoration-skip-ink: auto;
+    background-color: transparent;
+  }
+
+  // Typography elements baseline
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+
+  // Address styling for abbr elements
+  abbr[title] {
+    border-bottom: none;
+    text-decoration: underline;
+    text-decoration: underline dotted;
+  }
+
+  // Consistent styling for strong and bold
+  b,
+  strong {
+    font-weight: bolder;
+  }
+
+  // Consistent styling for code elements
+  code,
+  kbd,
+  samp {
+    font-family: $ax-font-mono;
+    font-size: 1em;
+  }
+
+  // Consistent small text
+  small {
+    font-size: 80%;
+  }
+
+  // Prevent sub and sup from affecting line height
+  sub,
+  sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+
+  sub {
+    bottom: -0.25em;
+  }
+
+  sup {
+    top: -0.5em;
+  }
+
+  // =============================================================================
+  // MEDIA ELEMENTS - COMPREHENSIVE HANDLING
+  // =============================================================================
+
+  // Responsive media with consistent display
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  // Specific image optimizations
+  img {
+    border-style: none;
+    vertical-align: middle;
+  }
+
+  // SVG optimizations
+  svg {
+    overflow: hidden;
+    vertical-align: middle;
+  }
+
+  // Audio and video consistency
+  audio,
+  video {
+    display: inline-block;
+  }
+
+  audio:not([controls]) {
+    display: none;
+    height: 0;
+  }
+
+  // =============================================================================
+  // ACCESSIBILITY AND MOTION PREFERENCES
+  // =============================================================================
+
+  // Respect user's motion preferences
+  @include ax-prefers-reduced-motion {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  // Focus management for better accessibility
+  html:focus-within {
+    scroll-behavior: smooth;
+    
+    @include ax-prefers-reduced-motion {
+      scroll-behavior: auto;
+    }
+  }
+
+  // Hidden content accessibility
+  [hidden] {
+    display: none !important;
+  }
+
+  // =============================================================================
+  // TABLE ELEMENTS - COMPREHENSIVE RESET
+  // =============================================================================
+
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    caption-side: bottom;
+  }
+
+  caption {
+    padding-top: ax-spacing(2);
+    padding-bottom: ax-spacing(2);
+    color: $ax-gray;
+    text-align: left;
+  }
+
+  th,
+  td {
+    text-align: left;
+    vertical-align: top;
+    border-color: inherit;
+  }
+
+  th {
+    font-weight: $ax-font-semibold;
+  }
+
+  // =============================================================================
+  // FORM ELEMENTS - COMPREHENSIVE RESET
+  // =============================================================================
+
+  // Inherit fonts for form controls
+  input,
+  button,
+  textarea,
+  select,
+  optgroup {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+  }
+
+  // Remove the inheritance of text transform in Edge and Firefox
+  button,
+  select {
+    text-transform: none;
+  }
+
+  // Set the cursor for clickable elements
+  button,
+  [type='button'],
+  [type='reset'],
+  [type='submit'] {
+    cursor: pointer;
+    -webkit-appearance: button;
+    appearance: button;
+  }
+
+  button:disabled,
+  [type='button']:disabled,
+  [type='reset']:disabled,
+  [type='submit']:disabled {
+    cursor: not-allowed;
+  }
+
+  // Remove inner border and padding in Firefox
+  button::-moz-focus-inner,
+  [type='button']::-moz-focus-inner,
+  [type='reset']::-moz-focus-inner,
+  [type='submit']::-moz-focus-inner {
+    border-style: none;
+    padding: 0;
+  }
+
+  // Restore focus styles unset by the previous rule
+  button:-moz-focusring,
+  [type='button']:-moz-focusring,
+  [type='reset']:-moz-focusring,
+  [type='submit']:-moz-focusring {
+    outline: 1px dotted ButtonText;
+  }
+
+  // Fieldset and legend normalization
+  fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    min-width: 0;
+  }
+
+  legend {
+    display: table;
+    max-width: 100%;
+    padding: 0;
+    color: inherit;
+    white-space: normal;
+    font-weight: $ax-font-semibold;
+  }
+
+  // Progress element normalization
+  progress {
+    vertical-align: baseline;
+    background-color: transparent;
+  }
+
+  // Textarea specific resets
+  textarea {
+    overflow: auto;
+    resize: vertical;
+  }
+
+  // Input type specific resets
+  [type='checkbox'],
+  [type='radio'] {
+    box-sizing: border-box;
+    padding: 0;
+  }
+
+  [type='number']::-webkit-inner-spin-button,
+  [type='number']::-webkit-outer-spin-button {
+    height: auto;
+  }
+
+  [type='search'] {
+    -webkit-appearance: textfield;
+    appearance: textfield;
+    outline-offset: -2px;
+  }
+
+  [type='search']::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+
+  // File upload button normalization
+  ::-webkit-file-upload-button {
+    -webkit-appearance: button;
+    font: inherit;
+  }
+
+  // =============================================================================
+  // ADDITIONAL MODERN RESETS
+  // =============================================================================
+
+  // Horizontal rule reset
+  hr {
+    border: 0;
+    border-top: 1px solid $ax-border-color;
+    margin: ax-spacing(4) 0;
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible;
+  }
+
+  // Details and summary elements
+  details {
+    display: block;
+  }
+
+  summary {
+    display: list-item;
+    cursor: pointer;
+  }
+
+  // Template element
+  template {
+    display: none;
+  }
+
+  // Dialog element
+  dialog {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: -moz-fit-content;
+    width: fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    margin: auto;
+    border: solid;
+    padding: 1em;
+    background: var(--ax-bg-card);
+    color: var(--ax-text-primary);
+  }
+
+  dialog:not([open]) {
+    display: none;
+  }
+
+  // =============================================================================
+  // BROWSER-SPECIFIC FIXES
+  // =============================================================================
+
+  // iOS Safari specific fixes
+  input[type='date'],
+  input[type='time'],
+  input[type='datetime-local'],
+  input[type='month'] {
+    -webkit-appearance: listbox;
+    appearance: listbox;
+  }
+
+  // Remove default button styling in Safari
+  button {
+    background: transparent;
+    border: 0;
+  }
+
+  // Prevent adjustments of font size after orientation changes in iOS
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  // Fix for webkit autofill background
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover, 
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    border: 1px solid $ax-border-color;
+    -webkit-text-fill-color: $ax-gray-dark;
+    -webkit-box-shadow: 0 0 0px 1000px $ax-white inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}
+
+// Default: scope reset within .axis-ui
+.axis-ui {
+  @include ax-reset();
+}
+
+// Optional: also emit global reset when enabled
+@if $ax-enable-global-basics == true {
+  @include ax-reset();
+}

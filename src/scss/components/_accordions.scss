@@ -1,0 +1,325 @@
+// =============================================================================
+// ACCORDIONS - AxisUI Framework Comprehensive Accordion Components
+// Pure CSS accordion with checkbox technique - Direct color naming
+// Comprehensive size, color, and state variants
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
+
+.axis-ui {
+  // =============================================================================
+  // BASE ACCORDION STYLES
+  // =============================================================================
+  
+  .accordion {
+    border-radius: $ax-radius-base;
+    overflow: hidden;
+    
+    .accordion-item {
+      border: 1px solid $ax-border-color;
+      border-bottom: none;
+      background-color: $ax-white;
+      
+      &:last-child {
+        border-bottom: 1px solid $ax-border-color;
+      }
+      
+      &:first-child {
+        border-top-left-radius: $ax-radius-base;
+        border-top-right-radius: $ax-radius-base;
+      }
+      
+      &:last-child {
+        border-bottom-left-radius: $ax-radius-base;
+        border-bottom-right-radius: $ax-radius-base;
+      }
+    }
+    
+    .accordion-toggle {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    .accordion-header {
+      @include ax-flex-between;
+      width: 100%;
+      padding: ax-spacing(4);
+      background-color: $ax-gray-light;
+      color: $ax-gray-dark;
+      cursor: pointer;
+      font-weight: $ax-font-medium;
+      font-size: $ax-text-base;
+      border: none;
+      text-align: left;
+      transition: all $ax-transition-base;
+      
+      &:hover {
+        background-color: $ax-gray;
+        color: $ax-white;
+      }
+      
+      &:focus {
+        @include ax-focus-ring($ax-blue);
+      }
+      
+      // Accordion icon
+      &::after {
+        content: '+';
+        font-size: $ax-text-lg;
+        font-weight: $ax-font-bold;
+        color: $ax-gray;
+        transition: transform $ax-transition-base, color $ax-transition-base;
+      }
+      
+      &:hover::after {
+        color: $ax-white;
+      }
+    }
+    
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height $ax-transition-slow ease-out;
+      background-color: $ax-white;
+      border-top: 1px solid transparent;
+      
+      .accordion-body {
+        padding: ax-spacing(4);
+        color: $ax-gray-dark;
+        line-height: $ax-leading-relaxed;
+      }
+    }
+    
+    // Open state
+    .accordion-toggle:checked + .accordion-header {
+      background-color: $ax-blue;
+      color: $ax-white;
+      
+      &::after {
+        content: '−';
+        transform: rotate(0deg);
+        color: $ax-white;
+      }
+    }
+    
+    .accordion-toggle:checked + .accordion-header + .accordion-content {
+      max-height: 1000px;
+      border-top-color: $ax-border-color;
+    }
+  }
+
+  // =============================================================================
+  // SIZE VARIANTS
+  // =============================================================================
+  
+  .accordion.accordion-sm {
+    .accordion-header {
+      padding: ax-spacing(2) ax-spacing(3);
+      font-size: $ax-text-sm;
+      
+      &::after {
+        font-size: $ax-text-base;
+      }
+    }
+    
+    .accordion-content .accordion-body {
+      padding: ax-spacing(3);
+      font-size: $ax-text-sm;
+    }
+  }
+  
+  .accordion.accordion-lg {
+    .accordion-header {
+      padding: ax-spacing(6);
+      font-size: $ax-text-lg;
+      
+      &::after {
+        font-size: $ax-text-xl;
+      }
+    }
+    
+    .accordion-content .accordion-body {
+      padding: ax-spacing(6);
+      font-size: $ax-text-base;
+    }
+  }
+
+  // =============================================================================
+  // COLOR VARIANTS - Direct Color Naming
+  // =============================================================================
+  
+  .accordion.accordion-blue {
+    .accordion-toggle:checked + .accordion-header {
+      background-color: $ax-blue;
+      color: $ax-white;
+    }
+    
+    .accordion-header:focus {
+      @include ax-focus-ring($ax-blue);
+    }
+  }
+  
+  .accordion.accordion-red {
+    .accordion-toggle:checked + .accordion-header {
+      background-color: $ax-red;
+      color: $ax-white;
+    }
+    
+    .accordion-header:focus {
+      @include ax-focus-ring($ax-red);
+    }
+  }
+  
+  .accordion.accordion-green {
+    .accordion-toggle:checked + .accordion-header {
+      background-color: $ax-green;
+      color: $ax-white;
+    }
+    
+    .accordion-header:focus {
+      @include ax-focus-ring($ax-green);
+    }
+  }
+  
+  .accordion.accordion-yellow {
+    .accordion-toggle:checked + .accordion-header {
+      background-color: $ax-yellow;
+      color: $ax-gray-dark;
+    }
+    
+    .accordion-header:focus {
+      @include ax-focus-ring($ax-yellow);
+    }
+  }
+  
+  .accordion.accordion-purple {
+    .accordion-toggle:checked + .accordion-header {
+      background-color: $ax-purple;
+      color: $ax-white;
+    }
+    
+    .accordion-header:focus {
+      @include ax-focus-ring($ax-purple);
+    }
+  }
+  
+  .accordion.accordion-pink {
+    .accordion-toggle:checked + .accordion-header {
+      background-color: $ax-pink;
+      color: $ax-white;
+    }
+    
+    .accordion-header:focus {
+      @include ax-focus-ring($ax-pink);
+    }
+  }
+  
+  .accordion.accordion-orange {
+    .accordion-toggle:checked + .accordion-header {
+      background-color: $ax-orange;
+      color: $ax-white;
+    }
+    
+    .accordion-header:focus {
+      @include ax-focus-ring($ax-orange);
+    }
+  }
+  
+  .accordion.accordion-teal {
+    .accordion-toggle:checked + .accordion-header {
+      background-color: $ax-teal;
+      color: $ax-white;
+    }
+    
+    .accordion-header:focus {
+      @include ax-focus-ring($ax-teal);
+    }
+  }
+  
+  .accordion.accordion-cyan {
+    .accordion-toggle:checked + .accordion-header {
+      background-color: $ax-cyan;
+      color: $ax-white;
+    }
+    
+    .accordion-header:focus {
+      @include ax-focus-ring($ax-cyan);
+    }
+  }
+
+  // =============================================================================
+  // STYLE VARIANTS
+  // =============================================================================
+  
+  .accordion.accordion-flush {
+    .accordion-item {
+      border-left: none;
+      border-right: none;
+      border-radius: 0;
+      
+      &:first-child {
+        border-top: none;
+        border-radius: 0;
+      }
+      
+      &:last-child {
+        border-radius: 0;
+      }
+    }
+  }
+  
+  .accordion.accordion-borderless {
+    .accordion-item {
+      border: none;
+      box-shadow: $ax-shadow-sm;
+      margin-bottom: ax-spacing(2);
+      border-radius: $ax-radius-base;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  // =============================================================================
+  // ACCESSIBILITY ENHANCEMENTS
+  // =============================================================================
+  
+  .accordion {
+    // Ensure proper focus management
+    .accordion-header {
+      &:focus-visible {
+        @include ax-focus-ring($ax-blue);
+      }
+    }
+    
+    // Reduced motion support
+    @include ax-prefers-reduced-motion {
+      .accordion-content {
+        transition: none;
+      }
+      
+      .accordion-header::after {
+        transition: none;
+      }
+    }
+  }
+
+  // =============================================================================
+  // MULTIPLE ACCORDIONS SUPPORT
+  // =============================================================================
+  
+  .accordion.accordion-multiple {
+    .accordion-item {
+      margin-bottom: ax-spacing(1);
+      border-radius: $ax-radius-base;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
